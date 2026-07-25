@@ -8,9 +8,9 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "npm run generate && npm run build -w @sketchicon/core && npm run build -w @sketchicon/react && npm run build -w sketchicon && npm run build -w playground",
+    "build": "npm run generate && npm run build -w @sketchicon/core && npm run build -w @sketchicon/react && npm run build -w sketchicon && npm run build -w website",
     "check": "npm run build && npm run typecheck && npm test && npm run verify:catalog && npm run verify:package && npm run verify:bundle",
-    "dev": "npm run generate && npm run build -w @sketchicon/core && npm run build -w @sketchicon/react && npm run build -w sketchicon && npm run dev -w playground",
+    "dev": "npm run generate && npm run build -w @sketchicon/core && npm run build -w @sketchicon/react && npm run build -w sketchicon && npm run dev -w website",
     "generate": "node scripts/generate-lucide.mjs",
     "test": "vitest run",
     "typecheck": "npm run typecheck --workspaces --if-present",

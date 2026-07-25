@@ -8,6 +8,8 @@ const iconsRoot = path.join(lucideRoot, "icons");
 const outputRoot = path.join(root, "packages", "lucide", "src");
 const outputIconsRoot = path.join(outputRoot, "icons");
 const reportPath = path.join(root, "packages", "lucide", "compatibility-report.json");
+const websiteCatalogRoot = path.join(root, "apps", "playground", "src", "generated");
+const websiteCatalogPath = path.join(websiteCatalogRoot, "catalog.ts");
 const supportedTags = new Set([
   "svg",
   "path",
@@ -139,6 +141,7 @@ async function readExports() {
 
 await rm(outputRoot, { recursive: true, force: true });
 await mkdir(outputIconsRoot, { recursive: true });
+await mkdir(websiteCatalogRoot, { recursive: true });
 
 const exportsByFile = await readExports();
 const files = (await readdir(iconsRoot))
@@ -146,6 +149,7 @@ const files = (await readdir(iconsRoot))
   .sort();
 const included = [];
 const excluded = [];
+const catalog = [];
 const indexLines = [
   "// Generated from lucide-static. Do not edit by hand.",
   'export { SketchIcon } from "./runtime.js";',
@@ -173,6 +177,12 @@ for (const file of files) {
     indexLines.push(
       `export { default as ${aliases.join(", default as ")} } from "./icons/${fileName}.js";`,
     );
+    const conventionalName = fileName
+      .split("-")
+      .map((part) => `${part.charAt(0).toUpperCase()}${part.slice(1)}`)
+      .join("");
+    const exportName = aliases.includes(conventionalName) ? conventionalName : aliases[0];
+    catalog.push({ aliases, exportName, fileName });
     included.push(fileName);
   } catch (error) {
     excluded.push({
@@ -208,6 +218,31 @@ await writeFile(
     null,
     2,
   )}\n`,
+);
+await writeFile(
+  websiteCatalogPath,
+  [
+    "// Generated from lucide-static. Do not edit by hand.",
+    'import type { SketchGeometry } from "sketchicon";',
+    ...catalog.map(
+      ({ exportName }) => `import { ${exportName} } from "sketchicon";`,
+    ),
+    "",
+    "export interface CatalogIcon {",
+    "  name: string;",
+    "  label: string;",
+    "  aliases: readonly string[];",
+    "  icon: SketchGeometry;",
+    "}",
+    "",
+    "export const iconCatalog: readonly CatalogIcon[] = [",
+    ...catalog.map(
+      ({ aliases, exportName, fileName }) =>
+        `  { name: ${JSON.stringify(exportName)}, label: ${JSON.stringify(fileName)}, aliases: ${JSON.stringify(aliases)}, icon: ${exportName} },`,
+    ),
+    "];",
+    "",
+  ].join("\n"),
 );
 
 console.log(`Generated ${included.length} icons; excluded ${excluded.length}.`);

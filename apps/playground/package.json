@@ -1,5 +1,5 @@
 {
-  "name": "playground",
+  "name": "website",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,9 +9,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "sketchicon": "*",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "roughjs": "^4.6.6",
+    "sketchicon": "*"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.0",
