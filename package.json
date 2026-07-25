@@ -1,0 +1,34 @@
+{
+  "name": "sketchicon-workspace",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run generate && npm run build -w @sketchicon/core && npm run build -w @sketchicon/react && npm run build -w sketchicon && npm run build -w playground",
+    "check": "npm run build && npm run typecheck && npm test && npm run verify:catalog && npm run verify:package && npm run verify:bundle",
+    "dev": "npm run generate && npm run build -w @sketchicon/core && npm run build -w @sketchicon/react && npm run build -w sketchicon && npm run dev -w playground",
+    "generate": "node scripts/generate-lucide.mjs",
+    "test": "vitest run",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "verify:catalog": "node scripts/verify-catalog.mjs",
+    "verify:package": "node scripts/verify-package.mjs",
+    "verify:bundle": "node scripts/verify-bundle.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "lucide-static": "^1.26.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.0",
+    "vite": "^7.0.0",
+    "vitest": "^4.0.0"
+  }
+}

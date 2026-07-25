@@ -1,0 +1,31 @@
+{
+  "name": "@sketchicon/react",
+  "version": "0.1.0",
+  "description": "React components for deterministic hand-drawn SVGs",
+  "type": "module",
+  "sideEffects": false,
+  "files": ["dist"],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean --external react --external @sketchicon/core",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sketchicon/core": "0.1.0"
+  },
+  "peerDependencies": {
+    "react": ">=18 <20"
+  },
+  "engines": {
+    "node": ">=20.11.1"
+  },
+  "license": "MIT"
+}

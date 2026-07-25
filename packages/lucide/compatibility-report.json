@@ -1,0 +1,46 @@
+{
+  "lucideVersion": "1.26.0",
+  "included": 1739,
+  "excluded": [
+    {
+      "icon": "chart-scatter",
+      "reason": "Unsupported filled <circle> element"
+    },
+    {
+      "icon": "images",
+      "reason": "Unsupported filled <circle> element"
+    },
+    {
+      "icon": "key-round",
+      "reason": "Unsupported filled <circle> element"
+    },
+    {
+      "icon": "palette",
+      "reason": "Unsupported filled <circle> element"
+    },
+    {
+      "icon": "podcast",
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "tag-plus",
+      "reason": "Unsupported filled <circle> element"
+    },
+    {
+      "icon": "tag-x",
+      "reason": "Unsupported filled <circle> element"
+    },
+    {
+      "icon": "tag",
+      "reason": "Unsupported filled <circle> element"
+    },
+    {
+      "icon": "tags",
+      "reason": "Unsupported filled <circle> element"
+    },
+    {
+      "icon": "vault",
+      "reason": "Unsupported filled <circle> element"
+    }
+  ]
+}
