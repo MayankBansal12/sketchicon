@@ -10,6 +10,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type CSSProperties,
   type Dispatch,
   type SetStateAction,
 } from "react";
@@ -19,7 +20,10 @@ import type { CatalogIconMetadata } from "../generated/catalog";
 import { catalogLoaders, type CatalogGeometryChunk } from "../generated/loaders";
 import { filterCatalog, filterCounts, filters } from "./catalog";
 
-const PAGE_SIZE = 72;
+const DEFAULT_COLUMNS = 6;
+const DEFAULT_ROW_HEIGHT = 134;
+const MOBILE_ROW_HEIGHT = 118;
+const OVERSCAN_ROWS = 3;
 const defaultColor = "#1f1f1f";
 const colors = [defaultColor, "#6965db", "#e03131", "#2f9e44", "#1971c2"];
 const chunkCache = new Map<number, Promise<CatalogGeometryChunk>>();
@@ -30,9 +34,87 @@ function loadChunk(chunkId: number) {
 
   const loader = catalogLoaders[chunkId];
   if (!loader) return Promise.reject(new Error(`Missing icon catalog chunk ${chunkId}`));
-  const promise = loader();
+  const promise = loader().catch((error) => {
+    if (chunkCache.get(chunkId) === promise) chunkCache.delete(chunkId);
+    throw error;
+  });
   chunkCache.set(chunkId, promise);
   return promise;
+}
+
+function useDebouncedValue<T>(value: T, delay: number) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setDebouncedValue(value), delay);
+    return () => window.clearTimeout(timeout);
+  }, [delay, value]);
+
+  return debouncedValue;
+}
+
+function columnCountForWidth(width: number) {
+  if (width <= 560) return 3;
+  if (width <= 820) return 4;
+  if (width <= 1060) return 5;
+  return DEFAULT_COLUMNS;
+}
+
+function useVirtualGrid(itemCount: number) {
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [windowState, setWindowState] = useState({
+    columns: DEFAULT_COLUMNS,
+    endRow: 8,
+    rowHeight: DEFAULT_ROW_HEIGHT,
+    startRow: 0,
+  });
+
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    const gridElement = grid;
+    let frame = 0;
+
+    function update() {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        const columns = columnCountForWidth(window.innerWidth);
+        const rowHeight = window.innerWidth <= 560 ? MOBILE_ROW_HEIGHT : DEFAULT_ROW_HEIGHT;
+        const rowCount = Math.ceil(itemCount / columns);
+        const bounds = gridElement.getBoundingClientRect();
+        const firstVisibleRow = Math.floor(Math.max(0, -bounds.top) / rowHeight);
+        const visibleBottom = Math.max(0, Math.min(bounds.height, window.innerHeight - bounds.top));
+        const lastVisibleRow = Math.ceil(visibleBottom / rowHeight);
+        const startRow = Math.max(0, Math.min(rowCount, firstVisibleRow - OVERSCAN_ROWS));
+        const endRow = Math.max(startRow, Math.min(rowCount, lastVisibleRow + OVERSCAN_ROWS));
+
+        setWindowState((current) => {
+          if (
+            current.columns === columns &&
+            current.endRow === endRow &&
+            current.rowHeight === rowHeight &&
+            current.startRow === startRow
+          ) return current;
+          return { columns, endRow, rowHeight, startRow };
+        });
+      });
+    }
+
+    const resizeObserver = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(update);
+    resizeObserver?.observe(gridElement);
+    window.addEventListener("resize", update);
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", update);
+      window.removeEventListener("scroll", update);
+    };
+  }, [itemCount]);
+
+  return { gridRef, ...windowState };
 }
 
 const IconCard = memo(function IconCard({
@@ -129,12 +211,13 @@ export default function IconLibrary() {
   const [size, setSize] = useState(32);
   const [strokeWidth, setStrokeWidth] = useState(2);
   const [color, setColor] = useState(defaultColor);
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [selectedIcon, setSelectedIcon] = useState<CatalogIconMetadata | null>(null);
   const [geometries, setGeometries] = useState<CatalogGeometryChunk>({});
-  const loadMoreRef = useRef<HTMLDivElement>(null);
+  const [loadAttempt, setLoadAttempt] = useState(0);
+  const [loadError, setLoadError] = useState(false);
+  const loadedChunkIds = useRef(new Set<number>());
   const deferredQuery = useDeferredValue(query.trim().toLowerCase());
-  const deferredRoughness = useDeferredValue(roughness);
+  const renderedRoughness = useDebouncedValue(roughness, 100);
   const deferredSize = useDeferredValue(size);
   const deferredStrokeWidth = useDeferredValue(strokeWidth);
 
@@ -142,40 +225,65 @@ export default function IconLibrary() {
     return filterCatalog(deferredQuery, activeFilter);
   }, [activeFilter, deferredQuery]);
 
-  const shownIcons = useMemo(
-    () => filteredIcons.slice(0, visibleCount),
-    [filteredIcons, visibleCount],
-  );
+  const { columns, endRow, gridRef, rowHeight, startRow } = useVirtualGrid(filteredIcons.length);
+  const visibleIcons = filteredIcons.slice(startRow * columns, endRow * columns);
+  const visibleChunkIds = [...new Set(visibleIcons.map((item) => item.chunkId))]
+    .filter((chunkId) => !loadedChunkIds.current.has(chunkId));
+  const visibleChunkKey = visibleChunkIds.join(",");
 
   useEffect(() => {
-    setVisibleCount(PAGE_SIZE);
-  }, [activeFilter, deferredQuery]);
-
-  useEffect(() => {
-    const chunkIds = [...new Set(shownIcons.map((item) => item.chunkId))];
+    if (visibleChunkIds.length === 0) return;
     let active = true;
-    Promise.all(chunkIds.map(loadChunk)).then((chunks) => {
-      if (active) setGeometries((current) => Object.assign({}, current, ...chunks));
+    setLoadError(false);
+
+    visibleChunkIds.forEach((chunkId) => {
+      loadChunk(chunkId).then((chunk) => {
+        if (!active) return;
+        loadedChunkIds.current.add(chunkId);
+        setGeometries((current) => Object.assign({}, current, chunk));
+      }).catch(() => {
+        if (active) setLoadError(true);
+      });
     });
+
     return () => {
       active = false;
     };
-  }, [shownIcons]);
+  }, [loadAttempt, visibleChunkKey]);
 
-  useEffect(() => {
-    const target = loadMoreRef.current;
-    if (!target || visibleCount >= filteredIcons.length) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setVisibleCount((count) => Math.min(count + PAGE_SIZE, filteredIcons.length));
-        }
-      },
-      { rootMargin: "500px" },
+  const rowCount = Math.ceil(filteredIcons.length / columns);
+  const virtualGridStyle = {
+    color,
+    height: rowCount * rowHeight,
+    "--virtual-columns": columns,
+    "--virtual-row-height": `${rowHeight}px`,
+  } as CSSProperties;
+  const visibleRows = [];
+  for (let rowIndex = startRow; rowIndex < endRow; rowIndex += 1) {
+    const rowIcons = filteredIcons.slice(rowIndex * columns, (rowIndex + 1) * columns);
+    visibleRows.push(
+      <div className="virtual-icon-row" key={rowIndex} style={{ transform: `translateY(${rowIndex * rowHeight}px)` }}>
+        {rowIcons.map((item) => {
+          const geometry = geometries[item.name];
+          return geometry ? (
+            <IconCard
+              geometry={geometry}
+              item={item}
+              key={item.name}
+              onSelect={setSelectedIcon}
+              roughness={renderedRoughness}
+              size={deferredSize}
+              strokeWidth={deferredStrokeWidth}
+            />
+          ) : (
+            <div className="icon-card icon-card-loading" key={item.name} aria-hidden="true">
+              <span>{item.label}</span>
+            </div>
+          );
+        })}
+      </div>,
     );
-    observer.observe(target);
-    return () => observer.disconnect();
-  }, [filteredIcons.length, visibleCount]);
+  }
 
   return (
     <>
@@ -245,27 +353,18 @@ export default function IconLibrary() {
             <p><strong>{filteredIcons.length}</strong> icons</p>
           </div>
 
-          {shownIcons.length > 0 ? (
-            <div className="icon-grid" style={{ color }}>
-              {shownIcons.map((item) => {
-                const geometry = geometries[item.name];
-                return geometry ? (
-                  <IconCard
-                    geometry={geometry}
-                    item={item}
-                    key={item.name}
-                    onSelect={setSelectedIcon}
-                    roughness={deferredRoughness}
-                    size={deferredSize}
-                    strokeWidth={deferredStrokeWidth}
-                  />
-                ) : (
-                  <div className="icon-card icon-card-loading" key={item.name} aria-hidden="true">
-                    <span>{item.label}</span>
-                  </div>
-                );
-              })}
-            </div>
+          {filteredIcons.length > 0 ? (
+            <>
+              <div className="icon-grid virtual-icon-grid" ref={gridRef} style={virtualGridStyle}>
+                {visibleRows}
+              </div>
+              {loadError ? (
+                <div className="catalog-load-error" role="status">
+                  Some icons could not be drawn.
+                  <button type="button" onClick={() => setLoadAttempt((attempt) => attempt + 1)}>Retry</button>
+                </div>
+              ) : null}
+            </>
           ) : (
             <div className="empty-state">
               <SketchIcon icon={Search} size={44} roughness={1.4} />
@@ -274,9 +373,6 @@ export default function IconLibrary() {
             </div>
           )}
 
-          <div className="load-sentinel" ref={loadMoreRef} aria-hidden="true">
-            {visibleCount < filteredIcons.length ? "drawing more..." : "that's the whole set."}
-          </div>
         </div>
       </div>
 

@@ -493,6 +493,21 @@ input[type="range"] {
   background: rgba(255, 255, 255, 0.48);
 }
 
+.virtual-icon-grid {
+  position: relative;
+  display: block;
+}
+
+.virtual-icon-row {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: grid;
+  height: var(--virtual-row-height);
+  grid-template-columns: repeat(var(--virtual-columns), minmax(0, 1fr));
+}
+
 .icon-card {
   display: grid;
   min-width: 0;
@@ -544,12 +559,23 @@ input[type="range"] {
   white-space: nowrap;
 }
 
-.load-sentinel {
-  display: grid;
-  min-height: 94px;
-  place-items: center;
-  color: #98958f;
-  font-size: 12px;
+.catalog-load-error {
+  display: flex;
+  min-height: 72px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--muted);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px;
+}
+
+.catalog-load-error button {
+  padding: 7px 12px;
+  border: 1px solid #c5c2bb;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
 }
 
 .empty-state {

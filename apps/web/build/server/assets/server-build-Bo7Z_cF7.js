@@ -386,7 +386,10 @@ function RoughBox({
     }
   );
 }
-const IconLibrary = lazy(() => import("./IconLibrary-B0PDLsAg.js"));
+const IconLibrary = lazy(async () => {
+  const [module] = await Promise.all([import("./IconLibrary-CqWjNVvr.js"), import("./catalog-000-BtY_Qk2A.js")]);
+  return module;
+});
 const meta = () => [{
   title: "SketchIcon: Hand-drawn icons for React"
 }, {
@@ -408,7 +411,7 @@ function IconLibraryBoundary() {
         observer.disconnect();
       }
     }, {
-      rootMargin: "600px"
+      rootMargin: "240px"
     });
     observer.observe(target);
     return () => observer.disconnect();
@@ -577,7 +580,7 @@ const route1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   default: home,
   meta
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-DzYnmmQh.js", "imports": ["/assets/jsx-runtime-CI2l1_DE.js", "/assets/errorBoundaries-Bibp0-YS.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasClientMiddleware": false, "hasDefaultExport": true, "hasErrorBoundary": true, "module": "/assets/root-PiNuEftV.js", "imports": ["/assets/jsx-runtime-CI2l1_DE.js", "/assets/errorBoundaries-Bibp0-YS.js"], "css": ["/assets/root-DRM_0BmJ.css"], "clientActionModule": void 0, "clientLoaderModule": void 0, "clientMiddlewareModule": void 0, "hydrateFallbackModule": void 0 }, "routes/home": { "id": "routes/home", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasClientMiddleware": false, "hasDefaultExport": true, "hasErrorBoundary": false, "module": "/assets/home-BycHILTA.js", "imports": ["/assets/home-CLPlnWv6.js", "/assets/jsx-runtime-CI2l1_DE.js"], "css": [], "clientActionModule": void 0, "clientLoaderModule": void 0, "clientMiddlewareModule": void 0, "hydrateFallbackModule": void 0 } }, "url": "/assets/manifest-eca57ea5.js", "version": "eca57ea5", "sri": void 0 };
+const serverManifest = { "entry": { "module": "/assets/entry.client-DzYnmmQh.js", "imports": ["/assets/jsx-runtime-CI2l1_DE.js", "/assets/errorBoundaries-Bibp0-YS.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasClientMiddleware": false, "hasDefaultExport": true, "hasErrorBoundary": true, "module": "/assets/root-BdDRlGKS.js", "imports": ["/assets/jsx-runtime-CI2l1_DE.js", "/assets/errorBoundaries-Bibp0-YS.js"], "css": ["/assets/root-CVyT_inv.css"], "clientActionModule": void 0, "clientLoaderModule": void 0, "clientMiddlewareModule": void 0, "hydrateFallbackModule": void 0 }, "routes/home": { "id": "routes/home", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasClientMiddleware": false, "hasDefaultExport": true, "hasErrorBoundary": false, "module": "/assets/home-BVGv042S.js", "imports": ["/assets/home-Cd9z0ntI.js", "/assets/jsx-runtime-CI2l1_DE.js"], "css": [], "clientActionModule": void 0, "clientLoaderModule": void 0, "clientMiddlewareModule": void 0, "hydrateFallbackModule": void 0 } }, "url": "/assets/manifest-f42fc9c6.js", "version": "f42fc9c6", "sri": void 0 };
 const assetsBuildDirectory = "build/client";
 const basename = "/";
 const future = { "unstable_enableNodeReadableStream": false, "unstable_optimizeDeps": false };

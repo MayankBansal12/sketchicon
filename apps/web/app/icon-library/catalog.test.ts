@@ -1,7 +1,10 @@
 import { describe, expect, it } from "vitest";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 
 import { iconCatalog } from "../generated/catalog";
 import { catalogLoaders } from "../generated/loaders";
+import IconLibrary from "./IconLibrary";
 import { filterCatalog, filterCounts } from "./catalog";
 
 describe("generated website catalog", () => {
@@ -21,6 +24,12 @@ describe("generated website catalog", () => {
     expect(names).toHaveLength(iconCatalog.length);
     expect(new Set(names).size).toBe(iconCatalog.length);
     expect(iconCatalog.every((icon) => chunks[icon.chunkId]?.[icon.name])).toBe(true);
+  });
+
+  it("renders a bounded initial catalog window", () => {
+    const markup = renderToStaticMarkup(createElement(IconLibrary));
+    expect(markup.match(/icon-card-loading/g)).toHaveLength(48);
+    expect(markup).toContain("height:38860px");
   });
 });
 

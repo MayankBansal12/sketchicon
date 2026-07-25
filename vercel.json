@@ -2,5 +2,16 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build -w @sketchicon/web",
   "framework": null,
-  "outputDirectory": "apps/web/build/client"
+  "outputDirectory": "apps/web/build/client",
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
 }

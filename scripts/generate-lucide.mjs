@@ -13,6 +13,7 @@ const websiteCatalogChunksRoot = path.join(websiteCatalogRoot, "chunks");
 const websiteCatalogPath = path.join(websiteCatalogRoot, "catalog.ts");
 const websiteCatalogLoadersPath = path.join(websiteCatalogRoot, "loaders.ts");
 const websiteCatalogChunkSize = 96;
+const webOnly = process.argv.includes("--web-only");
 const supportedTags = new Set([
   "svg",
   "path",
@@ -142,9 +143,9 @@ async function readExports() {
   return exportsByFile;
 }
 
-await rm(outputRoot, { recursive: true, force: true });
+if (!webOnly) await rm(outputRoot, { recursive: true, force: true });
 await rm(websiteCatalogRoot, { recursive: true, force: true });
-await mkdir(outputIconsRoot, { recursive: true });
+if (!webOnly) await mkdir(outputIconsRoot, { recursive: true });
 await mkdir(websiteCatalogChunksRoot, { recursive: true });
 
 const exportsByFile = await readExports();
@@ -177,10 +178,12 @@ for (const file of files) {
       "",
     ].join("\n");
 
-    await writeFile(path.join(outputIconsRoot, `${fileName}.ts`), moduleSource);
-    indexLines.push(
-      `export { default as ${aliases.join(", default as ")} } from "./icons/${fileName}.js";`,
-    );
+    if (!webOnly) {
+      await writeFile(path.join(outputIconsRoot, `${fileName}.ts`), moduleSource);
+      indexLines.push(
+        `export { default as ${aliases.join(", default as ")} } from "./icons/${fileName}.js";`,
+      );
+    }
     const conventionalName = fileName
       .split("-")
       .map((part) => `${part.charAt(0).toUpperCase()}${part.slice(1)}`)
@@ -196,33 +199,35 @@ for (const file of files) {
   }
 }
 
-await writeFile(path.join(outputRoot, "index.ts"), `${indexLines.join("\n")}\n`);
-await writeFile(
-  path.join(outputRoot, "core.ts"),
-  'export * from "@sketchicon/core";\n',
-);
-await writeFile(
-  path.join(outputRoot, "runtime.ts"),
-  [
-    'export { SketchIcon } from "@sketchicon/react";',
-    'export type { SketchIconProps } from "@sketchicon/react";',
-    "",
-  ].join("\n"),
-);
-await writeFile(
-  reportPath,
-  `${JSON.stringify(
-    {
-      lucideVersion: JSON.parse(
-        await readFile(path.join(lucideRoot, "package.json"), "utf8"),
-      ).version,
-      included: included.length,
-      excluded,
-    },
-    null,
-    2,
-  )}\n`,
-);
+if (!webOnly) {
+  await writeFile(path.join(outputRoot, "index.ts"), `${indexLines.join("\n")}\n`);
+  await writeFile(
+    path.join(outputRoot, "core.ts"),
+    'export * from "@sketchicon/core";\n',
+  );
+  await writeFile(
+    path.join(outputRoot, "runtime.ts"),
+    [
+      'export { SketchIcon } from "@sketchicon/react";',
+      'export type { SketchIconProps } from "@sketchicon/react";',
+      "",
+    ].join("\n"),
+  );
+  await writeFile(
+    reportPath,
+    `${JSON.stringify(
+      {
+        lucideVersion: JSON.parse(
+          await readFile(path.join(lucideRoot, "package.json"), "utf8"),
+        ).version,
+        included: included.length,
+        excluded,
+      },
+      null,
+      2,
+    )}\n`,
+  );
+}
 await writeFile(
   websiteCatalogPath,
   [
@@ -230,17 +235,27 @@ await writeFile(
     "export interface CatalogIconMetadata {",
     "  name: string;",
     "  label: string;",
-    "  aliases: readonly string[];",
     "  searchText: string;",
     "  chunkId: number;",
     "}",
     "",
-    "export const iconCatalog: readonly CatalogIconMetadata[] = [",
+    "type CatalogIconRecord = readonly [name: string, label: string, aliases: string, chunkId: number];",
+    "",
+    "const records: readonly CatalogIconRecord[] = [",
     ...catalog.map(
       ({ aliases, exportName, fileName }, index) =>
-        `  { name: ${JSON.stringify(exportName)}, label: ${JSON.stringify(fileName)}, aliases: ${JSON.stringify(aliases)}, searchText: ${JSON.stringify(`${fileName} ${exportName} ${aliases.join(" ")}`.toLowerCase())}, chunkId: ${Math.floor(index / websiteCatalogChunkSize)} },`,
+        `  [${JSON.stringify(exportName)}, ${JSON.stringify(fileName)}, ${JSON.stringify(aliases.filter((alias) => alias !== exportName).join(" ").toLowerCase())}, ${Math.floor(index / websiteCatalogChunkSize)}],`,
     ),
     "];",
+    "",
+    "export const iconCatalog: readonly CatalogIconMetadata[] = records.map(",
+    "  ([name, label, aliases, chunkId]) => ({",
+    "    name,",
+    "    label,",
+    "    searchText: `${label} ${name} ${aliases}`.toLowerCase(),",
+    "    chunkId,",
+    "  }),",
+    ");",
     "",
   ].join("\n"),
 );

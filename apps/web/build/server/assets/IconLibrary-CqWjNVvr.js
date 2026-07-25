@@ -1,14 +1,35 @@
-// Generated from lucide-static. Do not edit by hand.
-export interface CatalogIconMetadata {
-  name: string;
-  label: string;
-  searchText: string;
-  chunkId: number;
-}
-
-type CatalogIconRecord = readonly [name: string, label: string, aliases: string, chunkId: number];
-
-const records: readonly CatalogIconRecord[] = [
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
+import { R as RoughBox, S as SketchIcon, g as geometry$1, a as geometry$2 } from "./server-build-Bo7Z_cF7.js";
+import { useState, useRef, useDeferredValue, useMemo, useEffect, memo } from "react";
+import "node:stream";
+import "@react-router/node";
+import "react-router";
+import "isbot";
+import "react-dom/server";
+import "svg-pathdata";
+const geometry = { "viewBox": "0 0 24 24", "primitives": [{ "type": "path", "d": "m21 21-4.34-4.34" }, { "type": "circle", "cx": 11, "cy": 11, "r": 8 }] };
+const catalogLoaders = [
+  () => import("./catalog-000-BtY_Qk2A.js").then((module) => module.geometries),
+  () => import("./catalog-001-Bbn2FITX.js").then((module) => module.geometries),
+  () => import("./catalog-002-C3KDyH5C.js").then((module) => module.geometries),
+  () => import("./catalog-003-CiGE7b9n.js").then((module) => module.geometries),
+  () => import("./catalog-004-Bj8XR7-g.js").then((module) => module.geometries),
+  () => import("./catalog-005-MdRy5fwI.js").then((module) => module.geometries),
+  () => import("./catalog-006-DW2bqAqR.js").then((module) => module.geometries),
+  () => import("./catalog-007-DMURKdRF.js").then((module) => module.geometries),
+  () => import("./catalog-008-BcM3JtSZ.js").then((module) => module.geometries),
+  () => import("./catalog-009-DDsVTfiH.js").then((module) => module.geometries),
+  () => import("./catalog-010-BbkeLU6A.js").then((module) => module.geometries),
+  () => import("./catalog-011-CAZ6xdaN.js").then((module) => module.geometries),
+  () => import("./catalog-012-u2cewUtH.js").then((module) => module.geometries),
+  () => import("./catalog-013-EmX8BpeH.js").then((module) => module.geometries),
+  () => import("./catalog-014-DL_siY_g.js").then((module) => module.geometries),
+  () => import("./catalog-015-B0ZhH5gx.js").then((module) => module.geometries),
+  () => import("./catalog-016-BDSD626h.js").then((module) => module.geometries),
+  () => import("./catalog-017-BCxtuRh4.js").then((module) => module.geometries),
+  () => import("./catalog-018-C2zgC6j7.js").then((module) => module.geometries)
+];
+const records = [
   ["AArrowDown", "a-arrow-down", "", 0],
   ["AArrowUp", "a-arrow-up", "", 0],
   ["ALargeSmall", "a-large-small", "", 0],
@@ -1747,14 +1768,352 @@ const records: readonly CatalogIconRecord[] = [
   ["ZodiacTaurus", "zodiac-taurus", "", 18],
   ["ZodiacVirgo", "zodiac-virgo", "", 18],
   ["ZoomIn", "zoom-in", "", 18],
-  ["ZoomOut", "zoom-out", "", 18],
+  ["ZoomOut", "zoom-out", "", 18]
 ];
-
-export const iconCatalog: readonly CatalogIconMetadata[] = records.map(
+const iconCatalog = records.map(
   ([name, label, aliases, chunkId]) => ({
     name,
     label,
     searchText: `${label} ${name} ${aliases}`.toLowerCase(),
-    chunkId,
-  }),
+    chunkId
+  })
 );
+const filters = [
+  { id: "all", label: "All icons", pattern: null },
+  { id: "arrows", label: "Arrows", pattern: /arrow|chevron|corner|move|redo|undo/ },
+  { id: "communication", label: "Communication", pattern: /mail|message|phone|send|radio|rss/ },
+  { id: "files", label: "Files", pattern: /file|folder|archive|clipboard/ },
+  { id: "media", label: "Media", pattern: /play|pause|volume|music|video|camera|image/ },
+  { id: "shapes", label: "Shapes", pattern: /circle|square|triangle|diamond|octagon/ },
+  { id: "weather", label: "Weather", pattern: /sun|moon|cloud|rain|snow|wind|thermometer/ }
+];
+const filterCounts = Object.fromEntries(
+  filters.map((filter) => [
+    filter.id,
+    filter.pattern ? iconCatalog.filter((item) => filter.pattern.test(item.label)).length : iconCatalog.length
+  ])
+);
+function filterCatalog(query, activeFilter) {
+  const normalizedQuery = query.trim().toLowerCase();
+  const filter = filters.find((item) => item.id === activeFilter) ?? filters[0];
+  return iconCatalog.filter(
+    (item) => (!filter.pattern || filter.pattern.test(item.label)) && item.searchText.includes(normalizedQuery)
+  );
+}
+const DEFAULT_COLUMNS = 6;
+const DEFAULT_ROW_HEIGHT = 134;
+const MOBILE_ROW_HEIGHT = 118;
+const OVERSCAN_ROWS = 3;
+const defaultColor = "#1f1f1f";
+const colors = [defaultColor, "#6965db", "#e03131", "#2f9e44", "#1971c2"];
+const chunkCache = /* @__PURE__ */ new Map();
+function loadChunk(chunkId) {
+  const cached = chunkCache.get(chunkId);
+  if (cached) return cached;
+  const loader = catalogLoaders[chunkId];
+  if (!loader) return Promise.reject(new Error(`Missing icon catalog chunk ${chunkId}`));
+  const promise = loader().catch((error) => {
+    if (chunkCache.get(chunkId) === promise) chunkCache.delete(chunkId);
+    throw error;
+  });
+  chunkCache.set(chunkId, promise);
+  return promise;
+}
+function useDebouncedValue(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setDebouncedValue(value), delay);
+    return () => window.clearTimeout(timeout);
+  }, [delay, value]);
+  return debouncedValue;
+}
+function columnCountForWidth(width) {
+  if (width <= 560) return 3;
+  if (width <= 820) return 4;
+  if (width <= 1060) return 5;
+  return DEFAULT_COLUMNS;
+}
+function useVirtualGrid(itemCount) {
+  const gridRef = useRef(null);
+  const [windowState, setWindowState] = useState({
+    columns: DEFAULT_COLUMNS,
+    endRow: 8,
+    rowHeight: DEFAULT_ROW_HEIGHT,
+    startRow: 0
+  });
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    const gridElement = grid;
+    let frame = 0;
+    function update() {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        const columns = columnCountForWidth(window.innerWidth);
+        const rowHeight = window.innerWidth <= 560 ? MOBILE_ROW_HEIGHT : DEFAULT_ROW_HEIGHT;
+        const rowCount = Math.ceil(itemCount / columns);
+        const bounds = gridElement.getBoundingClientRect();
+        const firstVisibleRow = Math.floor(Math.max(0, -bounds.top) / rowHeight);
+        const visibleBottom = Math.max(0, Math.min(bounds.height, window.innerHeight - bounds.top));
+        const lastVisibleRow = Math.ceil(visibleBottom / rowHeight);
+        const startRow = Math.max(0, Math.min(rowCount, firstVisibleRow - OVERSCAN_ROWS));
+        const endRow = Math.max(startRow, Math.min(rowCount, lastVisibleRow + OVERSCAN_ROWS));
+        setWindowState((current) => {
+          if (current.columns === columns && current.endRow === endRow && current.rowHeight === rowHeight && current.startRow === startRow) return current;
+          return { columns, endRow, rowHeight, startRow };
+        });
+      });
+    }
+    const resizeObserver = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(update);
+    resizeObserver?.observe(gridElement);
+    window.addEventListener("resize", update);
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+    return () => {
+      window.cancelAnimationFrame(frame);
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", update);
+      window.removeEventListener("scroll", update);
+    };
+  }, [itemCount]);
+  return { gridRef, ...windowState };
+}
+const IconCard = memo(function IconCard2({
+  geometry: geometry2,
+  item,
+  onSelect,
+  roughness,
+  size,
+  strokeWidth
+}) {
+  return /* @__PURE__ */ jsxs(
+    "button",
+    {
+      className: "icon-card",
+      type: "button",
+      onClick: () => onSelect(item),
+      title: `View ${item.label} usage`,
+      children: [
+        /* @__PURE__ */ jsx(SketchIcon, { icon: geometry2, size, roughness, strokeWidth }),
+        /* @__PURE__ */ jsx("span", { children: item.label })
+      ]
+    }
+  );
+});
+function UsageDialog({
+  color,
+  geometry: geometry2,
+  icon,
+  onClose,
+  roughness,
+  size,
+  strokeWidth
+}) {
+  const dialogRef = useRef(null);
+  const [copied, setCopied] = useState(false);
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (icon && !dialog.open) dialog.showModal();
+    if (!icon && dialog.open) dialog.close();
+  }, [icon]);
+  if (!icon || !geometry2) return /* @__PURE__ */ jsx("dialog", { ref: dialogRef });
+  const snippet = `import { ${icon.name}, SketchIcon } from "sketchicon";
+
+<SketchIcon
+  icon={${icon.name}}
+  size={${size}}
+  roughness={${roughness.toFixed(1)}}
+  strokeWidth={${strokeWidth.toFixed(1)}}
+  color="${color}"
+/>`;
+  async function copySnippet() {
+    await navigator.clipboard.writeText(snippet);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1600);
+  }
+  return /* @__PURE__ */ jsx("dialog", { ref: dialogRef, className: "usage-dialog", onCancel: onClose, onClose, children: /* @__PURE__ */ jsxs("div", { className: "dialog-card", children: [
+    /* @__PURE__ */ jsx(RoughBox, { className: "dialog-outline", seed: 31, stroke: "#b8b5ad" }),
+    /* @__PURE__ */ jsx("button", { className: "dialog-close", type: "button", onClick: onClose, "aria-label": "Close usage dialog", children: "×" }),
+    /* @__PURE__ */ jsx("div", { className: "dialog-preview", style: { color }, children: /* @__PURE__ */ jsx(SketchIcon, { icon: geometry2, size: 96, roughness, strokeWidth, title: icon.label }) }),
+    /* @__PURE__ */ jsx("p", { className: "dialog-kicker", children: "Ready to use" }),
+    /* @__PURE__ */ jsx("h3", { children: icon.label }),
+    /* @__PURE__ */ jsxs("div", { className: "snippet-wrap", children: [
+      /* @__PURE__ */ jsx("pre", { children: /* @__PURE__ */ jsx("code", { children: snippet }) }),
+      /* @__PURE__ */ jsxs("button", { className: "copy-snippet", type: "button", onClick: copySnippet, children: [
+        /* @__PURE__ */ jsx(SketchIcon, { icon: copied ? geometry$1 : geometry$2, size: 16, roughness: 0.8 }),
+        copied ? "Copied" : "Copy code"
+      ] })
+    ] })
+  ] }) });
+}
+function IconLibrary() {
+  const [query, setQuery] = useState("");
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [roughness, setRoughness] = useState(1);
+  const [size, setSize] = useState(32);
+  const [strokeWidth, setStrokeWidth] = useState(2);
+  const [color, setColor] = useState(defaultColor);
+  const [selectedIcon, setSelectedIcon] = useState(null);
+  const [geometries, setGeometries] = useState({});
+  const [loadAttempt, setLoadAttempt] = useState(0);
+  const [loadError, setLoadError] = useState(false);
+  const loadedChunkIds = useRef(/* @__PURE__ */ new Set());
+  const deferredQuery = useDeferredValue(query.trim().toLowerCase());
+  const renderedRoughness = useDebouncedValue(roughness, 100);
+  const deferredSize = useDeferredValue(size);
+  const deferredStrokeWidth = useDeferredValue(strokeWidth);
+  const filteredIcons = useMemo(() => {
+    return filterCatalog(deferredQuery, activeFilter);
+  }, [activeFilter, deferredQuery]);
+  const { columns, endRow, gridRef, rowHeight, startRow } = useVirtualGrid(filteredIcons.length);
+  const visibleIcons = filteredIcons.slice(startRow * columns, endRow * columns);
+  const visibleChunkIds = [...new Set(visibleIcons.map((item) => item.chunkId))].filter((chunkId) => !loadedChunkIds.current.has(chunkId));
+  const visibleChunkKey = visibleChunkIds.join(",");
+  useEffect(() => {
+    if (visibleChunkIds.length === 0) return;
+    let active = true;
+    setLoadError(false);
+    visibleChunkIds.forEach((chunkId) => {
+      loadChunk(chunkId).then((chunk) => {
+        if (!active) return;
+        loadedChunkIds.current.add(chunkId);
+        setGeometries((current) => Object.assign({}, current, chunk));
+      }).catch(() => {
+        if (active) setLoadError(true);
+      });
+    });
+    return () => {
+      active = false;
+    };
+  }, [loadAttempt, visibleChunkKey]);
+  const rowCount = Math.ceil(filteredIcons.length / columns);
+  const virtualGridStyle = {
+    color,
+    height: rowCount * rowHeight,
+    "--virtual-columns": columns,
+    "--virtual-row-height": `${rowHeight}px`
+  };
+  const visibleRows = [];
+  for (let rowIndex = startRow; rowIndex < endRow; rowIndex += 1) {
+    const rowIcons = filteredIcons.slice(rowIndex * columns, (rowIndex + 1) * columns);
+    visibleRows.push(
+      /* @__PURE__ */ jsx("div", { className: "virtual-icon-row", style: { transform: `translateY(${rowIndex * rowHeight}px)` }, children: rowIcons.map((item) => {
+        const geometry2 = geometries[item.name];
+        return geometry2 ? /* @__PURE__ */ jsx(
+          IconCard,
+          {
+            geometry: geometry2,
+            item,
+            onSelect: setSelectedIcon,
+            roughness: renderedRoughness,
+            size: deferredSize,
+            strokeWidth: deferredStrokeWidth
+          },
+          item.name
+        ) : /* @__PURE__ */ jsx("div", { className: "icon-card icon-card-loading", "aria-hidden": "true", children: /* @__PURE__ */ jsx("span", { children: item.label }) }, item.name);
+      }) }, rowIndex)
+    );
+  }
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsxs("div", { className: "library-layout", children: [
+      /* @__PURE__ */ jsxs("aside", { className: "customizer", "aria-label": "Icon filters and customizer", children: [
+        /* @__PURE__ */ jsx(RoughBox, { className: "customizer-outline", seed: 23, stroke: "#cbc8c0" }),
+        /* @__PURE__ */ jsxs("div", { className: "control-section", children: [
+          /* @__PURE__ */ jsx("h3", { children: "Customize" }),
+          /* @__PURE__ */ jsxs("label", { className: "range-control", children: [
+            /* @__PURE__ */ jsx("span", { children: "Roughness" }),
+            /* @__PURE__ */ jsx("output", { children: roughness.toFixed(1) }),
+            /* @__PURE__ */ jsx("input", { type: "range", min: "0", max: "2", step: "0.1", value: roughness, onChange: (event) => setRoughness(Number(event.target.value)) })
+          ] }),
+          /* @__PURE__ */ jsxs("label", { className: "range-control", children: [
+            /* @__PURE__ */ jsx("span", { children: "Size" }),
+            /* @__PURE__ */ jsxs("output", { children: [
+              size,
+              "px"
+            ] }),
+            /* @__PURE__ */ jsx("input", { type: "range", min: "20", max: "48", step: "2", value: size, onChange: (event) => setSize(Number(event.target.value)) })
+          ] }),
+          /* @__PURE__ */ jsxs("label", { className: "range-control", children: [
+            /* @__PURE__ */ jsx("span", { children: "Stroke" }),
+            /* @__PURE__ */ jsxs("output", { children: [
+              strokeWidth.toFixed(1),
+              "px"
+            ] }),
+            /* @__PURE__ */ jsx("input", { type: "range", min: "1", max: "3", step: "0.25", value: strokeWidth, onChange: (event) => setStrokeWidth(Number(event.target.value)) })
+          ] }),
+          /* @__PURE__ */ jsxs("fieldset", { className: "color-control", children: [
+            /* @__PURE__ */ jsx("legend", { children: "Ink" }),
+            /* @__PURE__ */ jsx("div", { className: "color-options", children: colors.map((value) => /* @__PURE__ */ jsx(
+              "button",
+              {
+                className: value === color ? "selected" : "",
+                type: "button",
+                style: { backgroundColor: value },
+                onClick: () => setColor(value),
+                "aria-label": `Use ${value}`,
+                "aria-pressed": value === color
+              },
+              value
+            )) })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "control-section filter-section", children: [
+          /* @__PURE__ */ jsx("h3", { children: "Filter" }),
+          /* @__PURE__ */ jsx("div", { className: "filter-list", children: filters.map((filter) => /* @__PURE__ */ jsxs(
+            "button",
+            {
+              className: activeFilter === filter.id ? "active" : "",
+              type: "button",
+              onClick: () => setActiveFilter(filter.id),
+              children: [
+                /* @__PURE__ */ jsx("span", { children: filter.label }),
+                /* @__PURE__ */ jsx("span", { children: filterCounts[filter.id] })
+              ]
+            },
+            filter.id
+          )) })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: "catalog-panel", children: [
+        /* @__PURE__ */ jsxs("div", { className: "catalog-toolbar", children: [
+          /* @__PURE__ */ jsxs("label", { className: "search-field", children: [
+            /* @__PURE__ */ jsx(SketchIcon, { icon: geometry, size: 20, roughness: 0.8 }),
+            /* @__PURE__ */ jsx("span", { className: "visually-hidden", children: "Search icons" }),
+            /* @__PURE__ */ jsx("input", { type: "search", value: query, onChange: (event) => setQuery(event.target.value), placeholder: "Search icons..." })
+          ] }),
+          /* @__PURE__ */ jsxs("p", { children: [
+            /* @__PURE__ */ jsx("strong", { children: filteredIcons.length }),
+            " icons"
+          ] })
+        ] }),
+        filteredIcons.length > 0 ? /* @__PURE__ */ jsxs(Fragment, { children: [
+          /* @__PURE__ */ jsx("div", { className: "icon-grid virtual-icon-grid", ref: gridRef, style: virtualGridStyle, children: visibleRows }),
+          loadError ? /* @__PURE__ */ jsxs("div", { className: "catalog-load-error", role: "status", children: [
+            "Some icons could not be drawn.",
+            /* @__PURE__ */ jsx("button", { type: "button", onClick: () => setLoadAttempt((attempt) => attempt + 1), children: "Retry" })
+          ] }) : null
+        ] }) : /* @__PURE__ */ jsxs("div", { className: "empty-state", children: [
+          /* @__PURE__ */ jsx(SketchIcon, { icon: geometry, size: 44, roughness: 1.4 }),
+          /* @__PURE__ */ jsx("h3", { children: "No icon hiding here." }),
+          /* @__PURE__ */ jsx("p", { children: "Try another word or reset the filter." })
+        ] })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsx(
+      UsageDialog,
+      {
+        color,
+        geometry: selectedIcon ? geometries[selectedIcon.name] : void 0,
+        icon: selectedIcon,
+        onClose: () => setSelectedIcon(null),
+        roughness,
+        size,
+        strokeWidth
+      }
+    )
+  ] });
+}
+export {
+  IconLibrary as default
+};

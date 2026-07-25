@@ -40,10 +40,15 @@ if (catalogChunks.length < 10 || catalogChunks.length > 30) {
   throw new Error(`Expected 10-30 coarse catalog chunks; found ${catalogChunks.length}.`);
 }
 
-if (!assets.some((asset) => asset.startsWith("IconLibrary-") && asset.endsWith(".js"))) {
+const iconLibraryAsset = assets.find((asset) => asset.startsWith("IconLibrary-") && asset.endsWith(".js"));
+if (!iconLibraryAsset) {
   throw new Error("Icon library was not emitted as a lazy chunk.");
+}
+const iconLibraryGzip = gzipSync(await readFile(path.join(assetsRoot, iconLibraryAsset))).byteLength;
+if (iconLibraryGzip > 25_000) {
+  throw new Error(`Lazy icon library is ${iconLibraryGzip} bytes gzip; expected at most 25000.`);
 }
 
 console.log(
-  `Verified prerendered website: ${initialCode} initial JS bytes (${initialGzip} gzip), ${catalogChunks.length} catalog chunks.`,
+  `Verified prerendered website: ${initialCode} initial JS bytes (${initialGzip} gzip), ${iconLibraryGzip} gzip lazy library, ${catalogChunks.length} catalog chunks.`,
 );
