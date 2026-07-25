@@ -1,7 +1,23 @@
 import type { SketchGeometry } from "@sketchicon/core";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+const mocks = vi.hoisted(() => ({
+  renderSketch: vi.fn(),
+  useMemo: vi.fn(),
+}));
+
+vi.mock("@sketchicon/core", async (importOriginal) => {
+  const original = await importOriginal<typeof import("@sketchicon/core")>();
+  mocks.renderSketch.mockImplementation(original.renderSketch);
+  return { ...original, renderSketch: mocks.renderSketch };
+});
+
+vi.mock("react", async (importOriginal) => {
+  const original = await importOriginal<typeof import("react")>();
+  return { ...original, useMemo: mocks.useMemo };
+});
 
 import { SketchIcon } from "./index.js";
 
@@ -10,6 +26,11 @@ const geometry: SketchGeometry = {
 };
 
 describe("SketchIcon", () => {
+  beforeEach(() => {
+    mocks.renderSketch.mockClear();
+    mocks.useMemo.mockImplementation((factory) => factory());
+  });
+
   it("renders accessible deterministic SVG", () => {
     const props = { icon: geometry, title: "Divider", roughness: 1, seed: 4 };
     const first = renderToStaticMarkup(createElement(SketchIcon, props));
@@ -34,5 +55,48 @@ describe("SketchIcon", () => {
     );
 
     expect(defaultMarkup).toBe(explicitMarkup);
+  });
+
+  it("recalculates paths only when rendering inputs change", () => {
+    let cachedDependencies: readonly unknown[] | undefined;
+    let cachedValue: unknown;
+    mocks.useMemo.mockImplementation(
+      (factory: () => unknown, dependencies: readonly unknown[]) => {
+        if (
+          cachedDependencies === undefined ||
+          dependencies.some(
+            (dependency, index) => !Object.is(dependency, cachedDependencies?.[index]),
+          )
+        ) {
+          cachedValue = factory();
+          cachedDependencies = dependencies;
+        }
+        return cachedValue;
+      },
+    );
+
+    renderToStaticMarkup(createElement(SketchIcon, { icon: geometry }));
+    renderToStaticMarkup(
+      createElement(SketchIcon, {
+        icon: geometry,
+        size: 32,
+        strokeWidth: 1.5,
+        color: "red",
+        title: "Divider",
+        className: "icon",
+      }),
+    );
+    expect(mocks.renderSketch).toHaveBeenCalledTimes(1);
+
+    const nextGeometry: SketchGeometry = { ...geometry };
+    renderToStaticMarkup(createElement(SketchIcon, { icon: nextGeometry }));
+    renderToStaticMarkup(
+      createElement(SketchIcon, { icon: nextGeometry, roughness: 0.5 }),
+    );
+    renderToStaticMarkup(
+      createElement(SketchIcon, { icon: nextGeometry, roughness: 0.5, seed: 1 }),
+    );
+
+    expect(mocks.renderSketch).toHaveBeenCalledTimes(4);
   });
 });

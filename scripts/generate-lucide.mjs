@@ -8,8 +8,11 @@ const iconsRoot = path.join(lucideRoot, "icons");
 const outputRoot = path.join(root, "packages", "lucide", "src");
 const outputIconsRoot = path.join(outputRoot, "icons");
 const reportPath = path.join(root, "packages", "lucide", "compatibility-report.json");
-const websiteCatalogRoot = path.join(root, "apps", "playground", "src", "generated");
+const websiteCatalogRoot = path.join(root, "apps", "web", "app", "generated");
+const websiteCatalogChunksRoot = path.join(websiteCatalogRoot, "chunks");
 const websiteCatalogPath = path.join(websiteCatalogRoot, "catalog.ts");
+const websiteCatalogLoadersPath = path.join(websiteCatalogRoot, "loaders.ts");
+const websiteCatalogChunkSize = 96;
 const supportedTags = new Set([
   "svg",
   "path",
@@ -140,8 +143,9 @@ async function readExports() {
 }
 
 await rm(outputRoot, { recursive: true, force: true });
+await rm(websiteCatalogRoot, { recursive: true, force: true });
 await mkdir(outputIconsRoot, { recursive: true });
-await mkdir(websiteCatalogRoot, { recursive: true });
+await mkdir(websiteCatalogChunksRoot, { recursive: true });
 
 const exportsByFile = await readExports();
 const files = (await readdir(iconsRoot))
@@ -182,7 +186,7 @@ for (const file of files) {
       .map((part) => `${part.charAt(0).toUpperCase()}${part.slice(1)}`)
       .join("");
     const exportName = aliases.includes(conventionalName) ? conventionalName : aliases[0];
-    catalog.push({ aliases, exportName, fileName });
+    catalog.push({ aliases, exportName, fileName, geometry });
     included.push(fileName);
   } catch (error) {
     excluded.push({
@@ -223,23 +227,61 @@ await writeFile(
   websiteCatalogPath,
   [
     "// Generated from lucide-static. Do not edit by hand.",
-    'import type { SketchGeometry } from "sketchicon";',
-    ...catalog.map(
-      ({ exportName }) => `import { ${exportName} } from "sketchicon";`,
-    ),
-    "",
-    "export interface CatalogIcon {",
+    "export interface CatalogIconMetadata {",
     "  name: string;",
     "  label: string;",
     "  aliases: readonly string[];",
-    "  icon: SketchGeometry;",
+    "  searchText: string;",
+    "  chunkId: number;",
     "}",
     "",
-    "export const iconCatalog: readonly CatalogIcon[] = [",
+    "export const iconCatalog: readonly CatalogIconMetadata[] = [",
     ...catalog.map(
-      ({ aliases, exportName, fileName }) =>
-        `  { name: ${JSON.stringify(exportName)}, label: ${JSON.stringify(fileName)}, aliases: ${JSON.stringify(aliases)}, icon: ${exportName} },`,
+      ({ aliases, exportName, fileName }, index) =>
+        `  { name: ${JSON.stringify(exportName)}, label: ${JSON.stringify(fileName)}, aliases: ${JSON.stringify(aliases)}, searchText: ${JSON.stringify(`${fileName} ${exportName} ${aliases.join(" ")}`.toLowerCase())}, chunkId: ${Math.floor(index / websiteCatalogChunkSize)} },`,
     ),
+    "];",
+    "",
+  ].join("\n"),
+);
+
+const catalogChunks = Array.from(
+  { length: Math.ceil(catalog.length / websiteCatalogChunkSize) },
+  (_, index) => catalog.slice(index * websiteCatalogChunkSize, (index + 1) * websiteCatalogChunkSize),
+);
+
+for (const [index, chunk] of catalogChunks.entries()) {
+  const chunkName = `catalog-${String(index).padStart(3, "0")}`;
+  await writeFile(
+    path.join(websiteCatalogChunksRoot, `${chunkName}.ts`),
+    [
+      "// Generated from lucide-static. Do not edit by hand.",
+      'import type { SketchGeometry } from "@sketchicon/core";',
+      "",
+      "export const geometries: Readonly<Record<string, SketchGeometry>> = {",
+      ...chunk.map(
+        ({ exportName, geometry }) => `  ${JSON.stringify(exportName)}: ${JSON.stringify(geometry)},`,
+      ),
+      "};",
+      "",
+    ].join("\n"),
+  );
+}
+
+await writeFile(
+  websiteCatalogLoadersPath,
+  [
+    "// Generated from lucide-static. Do not edit by hand.",
+    'import type { SketchGeometry } from "@sketchicon/core";',
+    "",
+    "export type CatalogGeometryChunk = Readonly<Record<string, SketchGeometry>>;",
+    "export type CatalogGeometryLoader = () => Promise<CatalogGeometryChunk>;",
+    "",
+    "export const catalogLoaders: readonly CatalogGeometryLoader[] = [",
+    ...catalogChunks.map((_, index) => {
+      const chunkName = `catalog-${String(index).padStart(3, "0")}`;
+      return `  () => import("./chunks/${chunkName}.js").then((module) => module.geometries),`;
+    }),
     "];",
     "",
   ].join("\n"),

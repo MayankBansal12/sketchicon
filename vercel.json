@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build",
-  "framework": "vite",
-  "outputDirectory": "apps/playground/dist"
+  "buildCommand": "npm run build -w @sketchicon/web",
+  "framework": null,
+  "outputDirectory": "apps/web/build/client"
 }

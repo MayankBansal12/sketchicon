@@ -46,8 +46,7 @@ function normalizedCommands(path: string): SVGCommand[] {
     .aToC().commands;
 }
 
-function sketchPass(path: string, roughness: number, seed: number): string {
-  const commands = normalizedCommands(path);
+function sketchPass(commands: readonly SVGCommand[], roughness: number, seed: number): string {
   const random = createRandom(seed);
   const amount = BASE_DISPLACEMENT * roughness;
   const output: SVGCommand[] = [];
@@ -136,9 +135,10 @@ export function renderSketch(
     }
 
     const primitiveSeed = hashString(`${index}:${path}`, seed);
-    output.push({ d: sketchPass(path, roughness, primitiveSeed) });
+    const commands = normalizedCommands(path);
+    output.push({ d: sketchPass(commands, roughness, primitiveSeed) });
     output.push({
-      d: sketchPass(path, roughness * 0.72, primitiveSeed ^ 0x9e3779b9),
+      d: sketchPass(commands, roughness * 0.72, primitiveSeed ^ 0x9e3779b9),
       opacity: 0.72,
     });
   });
