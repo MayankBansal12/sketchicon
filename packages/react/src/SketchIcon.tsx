@@ -1,5 +1,5 @@
 import { renderSketch, type SketchGeometry } from "@sketchicon/core";
-import { forwardRef, type SVGProps } from "react";
+import { forwardRef, useMemo, type SVGProps } from "react";
 
 export interface SketchIconProps
   extends Omit<SVGProps<SVGSVGElement>, "children"> {
@@ -23,7 +23,10 @@ export const SketchIcon = forwardRef<SVGSVGElement, SketchIconProps>(
     },
     ref,
   ) {
-    const paths = renderSketch(icon, { roughness, seed });
+    const paths = useMemo(
+      () => renderSketch(icon, { roughness, seed }),
+      [icon, roughness, seed],
+    );
     const isLabeled = Boolean(
       title || svgProps["aria-label"] || svgProps["aria-labelledby"],
     );

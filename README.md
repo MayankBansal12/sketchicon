@@ -47,7 +47,7 @@ import { renderSketch } from "sketchicon/core";
 
 ## Development
 
-This repository uses npm workspaces and requires Node.js 20.11.1 or newer.
+This repository uses npm workspaces and requires Node.js 22.22.0 or newer for development. Published packages continue to support Node.js 20.11.1 or newer.
 
 ```sh
 npm install

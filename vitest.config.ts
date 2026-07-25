@@ -12,6 +12,10 @@ export default defineConfig({
     coverage: {
       include: ["packages/*/src/**/*.{ts,tsx}"],
     },
-    include: ["packages/*/src/**/*.test.{ts,tsx}", "*.test.{ts,tsx}"],
+    include: [
+      "packages/*/src/**/*.test.{ts,tsx}",
+      "apps/web/app/**/*.test.{ts,tsx}",
+      "*.test.{ts,tsx}",
+    ],
   },
 });

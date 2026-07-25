@@ -22,7 +22,7 @@ The first release serves React applications with a built-in icon catalog. It inc
 - A framework-independent TypeScript rendering engine.
 - A generic React `SketchIcon` component for custom geometry.
 - Generated, tree-shakeable geometry tokens for the complete compatible catalog.
-- A visual playground based on popular application icons.
+- A searchable icon library on the main website.
 - Build-time reporting for excluded icons.
 
 Filled SVG elements are not supported. Lucide icons containing fills are excluded during generation rather than rendered incorrectly or silently changed.
@@ -74,4 +74,5 @@ Sketch geometry does not regenerate on hover, click, or rerender. Animation is o
 - Modern Chrome, Safari, Firefox, and Edge.
 - React 18 and React 19.
 - Server rendering without hydration differences.
-- Node.js 20.11.1 or newer for package development and generation.
+- Node.js 22.22.0 or newer for repository development and generation.
+- Published packages support Node.js 20.11.1 or newer.
