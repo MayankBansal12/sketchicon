@@ -22,11 +22,13 @@
     "verify:bundle": "node scripts/verify-bundle.mjs",
     "verify:web": "node scripts/verify-web.mjs"
   },
+  "dependencies": {
+    "lucide-static": "^1.26.0"
+  },
   "devDependencies": {
     "@types/node": "^22.19.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
-    "lucide-static": "^1.26.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "tsup": "^8.5.0",
