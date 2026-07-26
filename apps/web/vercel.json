@@ -1,8 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build -w @sketchicon/web",
-  "framework": null,
-  "outputDirectory": "apps/web/build/client",
+  "outputDirectory": "build/client",
   "rewrites": [
     {
       "source": "/(.*)",
