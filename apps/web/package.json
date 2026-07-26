@@ -7,7 +7,7 @@
     "node": ">=22.22.0 <23"
   },
   "scripts": {
-    "build": "react-router build",
+    "build": "node ../../scripts/generate-lucide.mjs --web-only && react-router build",
     "dev": "react-router dev",
     "typecheck": "react-router typegen && tsc --noEmit"
   },

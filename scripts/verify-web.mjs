@@ -7,6 +7,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const clientRoot = path.join(root, "apps", "web", "build", "client");
 const assetsRoot = path.join(clientRoot, "assets");
 const html = await readFile(path.join(clientRoot, "index.html"), "utf8");
+const spaFallback = await readFile(path.join(clientRoot, "__spa-fallback.html"), "utf8");
+const vercelConfig = JSON.parse(await readFile(path.join(root, "vercel.json"), "utf8"));
 const assets = await readdir(assetsRoot);
 
 for (const expected of [
@@ -20,6 +22,14 @@ for (const expected of [
 
 if (html.includes('id="root"')) {
   throw new Error("Website output regressed to an empty client-only application root.");
+}
+
+if (!spaFallback.includes('"isSpaMode":true')) {
+  throw new Error("React Router SPA fallback was not generated correctly.");
+}
+
+if (!vercelConfig.rewrites?.some(({ destination }) => destination === "/__spa-fallback.html")) {
+  throw new Error("Vercel is not configured to serve the React Router SPA fallback.");
 }
 
 const preloadedScripts = [...html.matchAll(/(?:modulepreload|script[^>]+type="module")[^>]+(?:href|src)="\/assets\/([^"]+\.js)"/g)]
@@ -40,10 +50,15 @@ if (catalogChunks.length < 10 || catalogChunks.length > 30) {
   throw new Error(`Expected 10-30 coarse catalog chunks; found ${catalogChunks.length}.`);
 }
 
-if (!assets.some((asset) => asset.startsWith("IconLibrary-") && asset.endsWith(".js"))) {
+const iconLibraryAsset = assets.find((asset) => asset.startsWith("IconLibrary-") && asset.endsWith(".js"));
+if (!iconLibraryAsset) {
   throw new Error("Icon library was not emitted as a lazy chunk.");
+}
+const iconLibraryGzip = gzipSync(await readFile(path.join(assetsRoot, iconLibraryAsset))).byteLength;
+if (iconLibraryGzip > 25_000) {
+  throw new Error(`Lazy icon library is ${iconLibraryGzip} bytes gzip; expected at most 25000.`);
 }
 
 console.log(
-  `Verified prerendered website: ${initialCode} initial JS bytes (${initialGzip} gzip), ${catalogChunks.length} catalog chunks.`,
+  `Verified prerendered website: ${initialCode} initial JS bytes (${initialGzip} gzip), ${iconLibraryGzip} gzip lazy library, ${catalogChunks.length} catalog chunks.`,
 );

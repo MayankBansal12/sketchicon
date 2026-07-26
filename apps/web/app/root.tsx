@@ -13,7 +13,7 @@ import "./styles.css";
 export const links: Route.LinksFunction = () => [
   {
     rel: "preload",
-    href: "/fonts/Virgil.woff2",
+    href: "/fonts/Excalifont-Regular.woff2",
     as: "font",
     type: "font/woff2",
     crossOrigin: "anonymous",

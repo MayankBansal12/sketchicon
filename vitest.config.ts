@@ -2,11 +2,24 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   resolve: {
-    alias: {
-      "@sketchicon/core": new URL("./packages/core/src/index.ts", import.meta.url).pathname,
-      "@sketchicon/react": new URL("./packages/react/src/index.ts", import.meta.url).pathname,
-      sketchicon: new URL("./packages/lucide/src/index.ts", import.meta.url).pathname,
-    },
+    alias: [
+      {
+        find: /^sketchicon\/icons\/(.+)$/,
+        replacement: `${new URL("./packages/lucide/src/icons/", import.meta.url).pathname}$1.ts`,
+      },
+      {
+        find: "@sketchicon/core",
+        replacement: new URL("./packages/core/src/index.ts", import.meta.url).pathname,
+      },
+      {
+        find: "@sketchicon/react",
+        replacement: new URL("./packages/react/src/index.ts", import.meta.url).pathname,
+      },
+      {
+        find: "sketchicon",
+        replacement: new URL("./packages/lucide/src/index.ts", import.meta.url).pathname,
+      },
+    ],
   },
   test: {
     coverage: {

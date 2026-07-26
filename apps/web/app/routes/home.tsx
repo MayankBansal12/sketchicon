@@ -10,7 +10,13 @@ import Sparkles from "sketchicon/icons/sparkles";
 import { GithubMark, NpmMark } from "../components/BrandMarks";
 import { RoughBox } from "../components/RoughBox";
 
-const IconLibrary = lazy(() => import("../icon-library/IconLibrary"));
+const IconLibrary = lazy(async () => {
+  const [module] = await Promise.all([
+    import("../icon-library/IconLibrary"),
+    import("../generated/chunks/catalog-000"),
+  ]);
+  return module;
+});
 
 export const meta: MetaFunction = () => [
   { title: "SketchIcon: Hand-drawn icons for React" },
@@ -38,7 +44,7 @@ function IconLibraryBoundary() {
           observer.disconnect();
         }
       },
-      { rootMargin: "600px" },
+      { rootMargin: "240px" },
     );
     observer.observe(target);
     return () => observer.disconnect();
