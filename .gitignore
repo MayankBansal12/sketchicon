@@ -1,5 +1,16 @@
 node_modules/
+**/node_modules/
+
 dist/
+**/dist/
+build/
+**/build/
+
 .vite/
+**/.vite/
+.react-router/
+**/.react-router/
+
 coverage/
+**/coverage/
 *.tsbuildinfo

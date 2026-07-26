@@ -1,4 +1,4 @@
-Copyright (c) 2021 - Present, Ellinor Rapp, with Reserved Font Name Virgil.
+Copyright (c) 2024 by Excalidraw. All rights reserved.
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is copied below, and is also available with a FAQ at: [scripts.sil.org/OFL](https://scripts.sil.org/OFL).
 

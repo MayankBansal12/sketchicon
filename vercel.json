@@ -3,6 +3,12 @@
   "buildCommand": "npm run build -w @sketchicon/web",
   "framework": null,
   "outputDirectory": "apps/web/build/client",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/__spa-fallback.html"
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",

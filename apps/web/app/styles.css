@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "Excalidraw";
-  src: url("/fonts/Virgil.woff2") format("woff2");
+  font-family: "Excalifont";
+  src: url("/fonts/Excalifont-Regular.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 400;
@@ -9,7 +9,7 @@
 :root {
   color: #1f1f1f;
   background: #fbfaf7;
-  font-family: "Excalidraw", "Comic Sans MS", cursive;
+  font-family: "Excalifont", "Comic Sans MS", cursive;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   --accent: #6965db;
@@ -621,7 +621,7 @@ footer p {
 
 .footer-brand {
   color: #1f1f1f;
-  font-family: "Excalidraw", "Comic Sans MS", cursive;
+  font-family: "Excalifont", "Comic Sans MS", cursive;
   font-size: 15px;
 }
 
