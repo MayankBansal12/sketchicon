@@ -26,7 +26,7 @@ export function SearchButton() {
 
 Regular SVG props are supported. Named icon imports are tree-shakeable, so unused icon geometry is excluded from application bundles.
 
-Custom geometry can use the React package directly:
+The same component also accepts custom geometry:
 
 ```tsx
 import { SketchIcon } from "sketchicon";

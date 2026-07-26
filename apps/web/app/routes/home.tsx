@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import type { MetaFunction } from "react-router";
-import { SketchIcon } from "@sketchicon/react";
+import { SketchIcon } from "sketchicon/runtime";
 import Check from "sketchicon/icons/check";
 import Copy from "sketchicon/icons/copy";
 import Package from "sketchicon/icons/package";
@@ -10,13 +10,7 @@ import Sparkles from "sketchicon/icons/sparkles";
 import { GithubMark, NpmMark } from "../components/BrandMarks";
 import { RoughBox } from "../components/RoughBox";
 
-const IconLibrary = lazy(async () => {
-  const [module] = await Promise.all([
-    import("../icon-library/IconLibrary"),
-    import("../generated/chunks/catalog-000"),
-  ]);
-  return module;
-});
+const IconLibrary = lazy(() => import("../icon-library/IconLibrary"));
 
 export const meta: MetaFunction = () => [
   { title: "SketchIcon: Hand-drawn icons for React" },

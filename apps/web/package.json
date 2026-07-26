@@ -13,8 +13,6 @@
   },
   "dependencies": {
     "@react-router/node": "8.3.0",
-    "@sketchicon/core": "*",
-    "@sketchicon/react": "*",
     "isbot": "^5",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",

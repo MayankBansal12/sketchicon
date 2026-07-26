@@ -19,7 +19,7 @@ vi.mock("react", async (importOriginal) => {
   return { ...original, useMemo: mocks.useMemo };
 });
 
-import { SketchIcon } from "./index.js";
+import { SketchIcon } from "./SketchIcon.js";
 
 const geometry: SketchGeometry = {
   primitives: [{ type: "line", x1: 2, y1: 12, x2: 22, y2: 12 }],

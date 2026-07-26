@@ -8,8 +8,20 @@ const clientRoot = path.join(root, "apps", "web", "build", "client");
 const assetsRoot = path.join(clientRoot, "assets");
 const html = await readFile(path.join(clientRoot, "index.html"), "utf8");
 const spaFallback = await readFile(path.join(clientRoot, "__spa-fallback.html"), "utf8");
-const vercelConfig = JSON.parse(await readFile(path.join(root, "vercel.json"), "utf8"));
+const vercelConfig = JSON.parse(
+  await readFile(path.join(root, "apps", "web", "vercel.json"), "utf8"),
+);
 const assets = await readdir(assetsRoot);
+const runtimeSources = await Promise.all([
+  readFile(path.join(root, "apps", "web", "app", "routes", "home.tsx"), "utf8"),
+  readFile(path.join(root, "apps", "web", "app", "icon-library", "IconLibrary.tsx"), "utf8"),
+]);
+
+for (const source of runtimeSources) {
+  if (/^import\s+(?!type\b)[^;]*\bSketchIcon\b[^;]*from\s+["']sketchicon["']/m.test(source)) {
+    throw new Error("Web runtime imports SketchIcon from the 1,739-icon root barrel.");
+  }
+}
 
 for (const expected of [
   "Icons that feel",

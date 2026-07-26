@@ -143,7 +143,7 @@ async function readExports() {
   return exportsByFile;
 }
 
-if (!webOnly) await rm(outputRoot, { recursive: true, force: true });
+if (!webOnly) await rm(outputIconsRoot, { recursive: true, force: true });
 await rm(websiteCatalogRoot, { recursive: true, force: true });
 if (!webOnly) await mkdir(outputIconsRoot, { recursive: true });
 await mkdir(websiteCatalogChunksRoot, { recursive: true });
@@ -206,14 +206,6 @@ if (!webOnly) {
     'export * from "@sketchicon/core";\n',
   );
   await writeFile(
-    path.join(outputRoot, "runtime.ts"),
-    [
-      'export { SketchIcon } from "@sketchicon/react";',
-      'export type { SketchIconProps } from "@sketchicon/react";',
-      "",
-    ].join("\n"),
-  );
-  await writeFile(
     reportPath,
     `${JSON.stringify(
       {
@@ -271,7 +263,7 @@ for (const [index, chunk] of catalogChunks.entries()) {
     path.join(websiteCatalogChunksRoot, `${chunkName}.ts`),
     [
       "// Generated from lucide-static. Do not edit by hand.",
-      'import type { SketchGeometry } from "@sketchicon/core";',
+      'import type { SketchGeometry } from "sketchicon/core";',
       "",
       "export const geometries: Readonly<Record<string, SketchGeometry>> = {",
       ...chunk.map(
@@ -287,14 +279,17 @@ await writeFile(
   websiteCatalogLoadersPath,
   [
     "// Generated from lucide-static. Do not edit by hand.",
-    'import type { SketchGeometry } from "@sketchicon/core";',
+    'import type { SketchGeometry } from "sketchicon/core";',
+    'import { geometries as initialGeometries } from "./chunks/catalog-000.js";',
     "",
     "export type CatalogGeometryChunk = Readonly<Record<string, SketchGeometry>>;",
     "export type CatalogGeometryLoader = () => Promise<CatalogGeometryChunk>;",
+    "export { initialGeometries };",
     "",
     "export const catalogLoaders: readonly CatalogGeometryLoader[] = [",
     ...catalogChunks.map((_, index) => {
       const chunkName = `catalog-${String(index).padStart(3, "0")}`;
+      if (index === 0) return "  () => Promise.resolve(initialGeometries),";
       return `  () => import("./chunks/${chunkName}.js").then((module) => module.geometries),`;
     }),
     "];",

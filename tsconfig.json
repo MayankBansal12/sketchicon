@@ -14,8 +14,9 @@
     "resolveJsonModule": true,
     "paths": {
       "@sketchicon/core": ["packages/core/src/index.ts"],
-      "@sketchicon/react": ["packages/react/src/index.ts"],
-      "sketchicon": ["packages/lucide/src/index.ts"]
+      "sketchicon": ["packages/lucide/src/index.ts"],
+      "sketchicon/core": ["packages/lucide/src/core.ts"],
+      "sketchicon/runtime": ["packages/lucide/src/runtime.ts"]
     },
     "skipLibCheck": true,
     "strict": true,

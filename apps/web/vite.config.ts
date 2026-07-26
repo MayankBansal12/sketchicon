@@ -12,15 +12,19 @@ export default defineConfig({
         replacement: `${workspacePath("../../packages/lucide/src/icons/")}$1.ts`,
       },
       {
+        find: /^sketchicon\/runtime$/,
+        replacement: workspacePath("../../packages/lucide/src/runtime.ts"),
+      },
+      {
+        find: /^sketchicon\/core$/,
+        replacement: workspacePath("../../packages/lucide/src/core.ts"),
+      },
+      {
         find: "@sketchicon/core",
         replacement: workspacePath("../../packages/core/src/index.ts"),
       },
       {
-        find: "@sketchicon/react",
-        replacement: workspacePath("../../packages/react/src/index.ts"),
-      },
-      {
-        find: "sketchicon",
+        find: /^sketchicon$/,
         replacement: workspacePath("../../packages/lucide/src/index.ts"),
       },
     ],

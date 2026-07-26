@@ -1,5 +1,5 @@
 // Generated from lucide-static. Do not edit by hand.
-import type { SketchGeometry } from "@sketchicon/core";
+import type { SketchGeometry } from "sketchicon/core";
 
 export const geometries: Readonly<Record<string, SketchGeometry>> = {
   "SquareEqual": {"viewBox":"0 0 24 24","primitives":[{"type":"rect","x":3,"y":3,"width":18,"height":18,"rx":2},{"type":"path","d":"M7 10h10"},{"type":"path","d":"M7 14h10"}]},

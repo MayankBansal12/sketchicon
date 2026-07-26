@@ -1,11 +1,13 @@
 // Generated from lucide-static. Do not edit by hand.
-import type { SketchGeometry } from "@sketchicon/core";
+import type { SketchGeometry } from "sketchicon/core";
+import { geometries as initialGeometries } from "./chunks/catalog-000.js";
 
 export type CatalogGeometryChunk = Readonly<Record<string, SketchGeometry>>;
 export type CatalogGeometryLoader = () => Promise<CatalogGeometryChunk>;
+export { initialGeometries };
 
 export const catalogLoaders: readonly CatalogGeometryLoader[] = [
-  () => import("./chunks/catalog-000.js").then((module) => module.geometries),
+  () => Promise.resolve(initialGeometries),
   () => import("./chunks/catalog-001.js").then((module) => module.geometries),
   () => import("./chunks/catalog-002.js").then((module) => module.geometries),
   () => import("./chunks/catalog-003.js").then((module) => module.geometries),

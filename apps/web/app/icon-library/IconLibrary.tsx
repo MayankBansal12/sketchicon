@@ -1,5 +1,5 @@
-import type { SketchGeometry } from "@sketchicon/core";
-import { SketchIcon } from "@sketchicon/react";
+import type { SketchGeometry } from "sketchicon/core";
+import { SketchIcon } from "sketchicon/runtime";
 import Check from "sketchicon/icons/check";
 import Copy from "sketchicon/icons/copy";
 import Search from "sketchicon/icons/search";
@@ -17,7 +17,11 @@ import {
 
 import { RoughBox } from "../components/RoughBox";
 import type { CatalogIconMetadata } from "../generated/catalog";
-import { catalogLoaders, type CatalogGeometryChunk } from "../generated/loaders";
+import {
+  catalogLoaders,
+  initialGeometries,
+  type CatalogGeometryChunk,
+} from "../generated/loaders";
 import { filterCatalog, filterCounts, filters } from "./catalog";
 
 const DEFAULT_COLUMNS = 6;
@@ -212,10 +216,10 @@ export default function IconLibrary() {
   const [strokeWidth, setStrokeWidth] = useState(2);
   const [color, setColor] = useState(defaultColor);
   const [selectedIcon, setSelectedIcon] = useState<CatalogIconMetadata | null>(null);
-  const [geometries, setGeometries] = useState<CatalogGeometryChunk>({});
+  const [geometries, setGeometries] = useState<CatalogGeometryChunk>(initialGeometries);
   const [loadAttempt, setLoadAttempt] = useState(0);
   const [loadError, setLoadError] = useState(false);
-  const loadedChunkIds = useRef(new Set<number>());
+  const loadedChunkIds = useRef(new Set([0]));
   const deferredQuery = useDeferredValue(query.trim().toLowerCase());
   const renderedRoughness = useDebouncedValue(roughness, 100);
   const deferredSize = useDeferredValue(size);
