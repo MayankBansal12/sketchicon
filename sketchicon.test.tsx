@@ -3,6 +3,8 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
 import { Search, SketchIcon } from "sketchicon";
+import { renderSketch } from "sketchicon/core";
+import SearchDirect from "sketchicon/icons/search";
 
 describe("sketchicon package", () => {
   it("exports icon geometry for the universal renderer", () => {
@@ -25,5 +27,10 @@ describe("sketchicon package", () => {
     );
 
     expect(implicit).toBe(explicit);
+  });
+
+  it("supports the public core and per-icon subpaths", () => {
+    expect(SearchDirect).toEqual(Search);
+    expect(renderSketch(Search)).not.toHaveLength(0);
   });
 });

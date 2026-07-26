@@ -1,5 +1,5 @@
 // Generated from lucide-static. Do not edit by hand.
-import type { SketchGeometry } from "@sketchicon/core";
+import type { SketchGeometry } from "sketchicon/core";
 
 export const geometries: Readonly<Record<string, SketchGeometry>> = {
   "FlaskRound": {"viewBox":"0 0 24 24","primitives":[{"type":"path","d":"M10 2v6.292a7 7 0 1 0 4 0V2"},{"type":"path","d":"M5 15h14"},{"type":"path","d":"M8.5 2h7"}]},

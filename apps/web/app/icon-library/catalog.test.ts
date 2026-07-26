@@ -26,9 +26,10 @@ describe("generated website catalog", () => {
     expect(iconCatalog.every((icon) => chunks[icon.chunkId]?.[icon.name])).toBe(true);
   });
 
-  it("renders a bounded initial catalog window", () => {
+  it("renders the first bounded catalog window without loading placeholders", () => {
     const markup = renderToStaticMarkup(createElement(IconLibrary));
-    expect(markup.match(/icon-card-loading/g)).toHaveLength(48);
+    expect(markup.match(/<button class="icon-card"/g)).toHaveLength(48);
+    expect(markup).not.toContain("icon-card-loading");
     expect(markup).toContain("height:38860px");
   });
 });

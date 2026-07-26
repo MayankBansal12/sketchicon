@@ -5,7 +5,7 @@ import { pathToFileURL } from "node:url";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { SketchIcon } from "../packages/react/dist/index.js";
+import { SketchIcon } from "../packages/lucide/dist/runtime.js";
 
 const iconsRoot = path.resolve("packages/lucide/dist/icons");
 const files = (await readdir(iconsRoot)).filter((file) => file.endsWith(".js")).sort();

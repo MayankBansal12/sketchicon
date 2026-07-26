@@ -12,11 +12,15 @@ export default defineConfig({
         replacement: new URL("./packages/core/src/index.ts", import.meta.url).pathname,
       },
       {
-        find: "@sketchicon/react",
-        replacement: new URL("./packages/react/src/index.ts", import.meta.url).pathname,
+        find: "sketchicon/core",
+        replacement: new URL("./packages/lucide/src/core.ts", import.meta.url).pathname,
       },
       {
-        find: "sketchicon",
+        find: "sketchicon/runtime",
+        replacement: new URL("./packages/lucide/src/runtime.ts", import.meta.url).pathname,
+      },
+      {
+        find: /^sketchicon$/,
         replacement: new URL("./packages/lucide/src/index.ts", import.meta.url).pathname,
       },
     ],

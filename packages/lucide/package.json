@@ -18,14 +18,21 @@
       "types": "./dist/core.d.ts",
       "import": "./dist/core.js"
     },
+    "./runtime": {
+      "types": "./dist/runtime.d.ts",
+      "import": "./dist/runtime.js"
+    },
     "./icons/*": {
       "types": "./dist/icons/*.d.ts",
       "import": "./dist/icons/*.js"
     }
   },
   "scripts": {
-    "build": "node ../../scripts/clean-dist.mjs && tsc -p tsconfig.build.json && tsup src/runtime.ts src/core.ts --format esm --dts --splitting --out-dir dist --external react --external react/jsx-runtime",
+    "build": "node ../../scripts/clean-dist.mjs && tsc -p tsconfig.build.json && tsup src/runtime.ts src/core.ts --format esm --dts --splitting --out-dir dist --external react --external react/jsx-runtime --external @sketchicon/core",
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sketchicon/core": "0.1.0"
   },
   "peerDependencies": {
     "react": ">=18 <20"

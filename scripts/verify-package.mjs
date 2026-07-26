@@ -11,13 +11,18 @@ if (manifest.name !== "sketchicon" || manifest.version !== "0.1.0") {
   throw new Error(`Unexpected package identity: ${manifest.name}@${manifest.version}`);
 }
 
-if (manifest.dependencies && Object.keys(manifest.dependencies).length > 0) {
-  throw new Error(`Public package must be self-contained; found dependencies: ${Object.keys(manifest.dependencies).join(", ")}`);
+const expectedDependencies = { "@sketchicon/core": manifest.version };
+if (JSON.stringify(manifest.dependencies) !== JSON.stringify(expectedDependencies)) {
+  throw new Error(`Unexpected package dependencies: ${JSON.stringify(manifest.dependencies)}`);
 }
 
 const requiredFiles = ["index.js", "index.d.ts", "runtime.js", "runtime.d.ts", "core.js", "core.d.ts"];
 for (const file of requiredFiles) {
   await readFile(path.join(distRoot, file));
+}
+
+if (manifest.exports?.["./runtime"]?.import !== "./dist/runtime.js") {
+  throw new Error("The lightweight sketchicon/runtime entry is not exported.");
 }
 
 async function sourceFiles(directory) {
@@ -32,9 +37,13 @@ async function sourceFiles(directory) {
 for (const file of await sourceFiles(distRoot)) {
   if (!/\.(?:js|d\.ts)$/.test(file)) continue;
   const source = await readFile(file, "utf8");
-  if (source.includes("@sketchicon/")) {
-    throw new Error(`Internal workspace import leaked into ${path.relative(packageRoot, file)}`);
+  if (source.includes("@sketchicon/react")) {
+    throw new Error(`Removed React package import leaked into ${path.relative(packageRoot, file)}`);
+  }
+  const unexpectedWorkspaceImport = source.match(/@sketchicon\/(?!core\b)[\w-]+/);
+  if (unexpectedWorkspaceImport) {
+    throw new Error(`Unexpected workspace import ${unexpectedWorkspaceImport[0]} in ${path.relative(packageRoot, file)}`);
   }
 }
 
-console.log("Verified self-contained sketchicon package output.");
+console.log("Verified sketchicon package output and core dependency.");

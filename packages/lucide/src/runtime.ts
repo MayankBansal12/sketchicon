@@ -1,2 +1,2 @@
-export { SketchIcon } from "@sketchicon/react";
-export type { SketchIconProps } from "@sketchicon/react";
+export { SketchIcon } from "./SketchIcon.js";
+export type { SketchIconProps } from "./SketchIcon.js";
