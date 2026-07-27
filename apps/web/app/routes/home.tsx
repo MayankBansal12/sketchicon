@@ -62,12 +62,17 @@ function LibraryFallback() {
 }
 
 export default function Home() {
-  const [installCopied, setInstallCopied] = useState(false);
+  const [installCopyState, setInstallCopyState] = useState<"idle" | "copied" | "failed">("idle");
 
   async function copyInstall() {
-    await navigator.clipboard.writeText("npm install sketchicon");
-    setInstallCopied(true);
-    window.setTimeout(() => setInstallCopied(false), 1600);
+    try {
+      if (!navigator.clipboard) throw new Error("Clipboard access is unavailable.");
+      await navigator.clipboard.writeText("npm install sketchicon");
+      setInstallCopyState("copied");
+    } catch {
+      setInstallCopyState("failed");
+    }
+    window.setTimeout(() => setInstallCopyState("idle"), 1600);
   }
 
   return (
@@ -80,7 +85,7 @@ export default function Home() {
           SketchIcon
         </a>
         <nav className="social-links" aria-label="Project links">
-          <a href="https://github.com/mayank12" target="_blank" rel="noreferrer" aria-label="SketchIcon on GitHub">
+          <a href="https://github.com/MayankBansal12/sketchicon" target="_blank" rel="noreferrer" aria-label="SketchIcon on GitHub">
             <GithubMark />
           </a>
           <a href="https://www.npmjs.com/package/sketchicon" target="_blank" rel="noreferrer" aria-label="SketchIcon on npm">
@@ -109,9 +114,9 @@ export default function Home() {
             <RoughBox seed={19} fill="#6965db" stroke="#514dc5" />
             <span className="prompt">$</span>
             <code>npm install sketchicon</code>
-            <span className="install-copy-state">
-              <SketchIcon icon={installCopied ? Check : Copy} size={18} roughness={0.8} />
-              <span>{installCopied ? "Copied" : "Copy"}</span>
+            <span className="install-copy-state" aria-live="polite">
+              <SketchIcon icon={installCopyState === "copied" ? Check : Copy} size={18} roughness={0.8} />
+              <span>{installCopyState === "copied" ? "Copied" : installCopyState === "failed" ? "Try again" : "Copy"}</span>
             </span>
           </button>
           <a className="browse-link" href="#icons">

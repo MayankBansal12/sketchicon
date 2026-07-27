@@ -22,9 +22,10 @@ export const filterCounts = Object.fromEntries(
 ) as Record<FilterId, number>;
 
 export function filterCatalog(query: string, activeFilter: string) {
-  const normalizedQuery = query.trim().toLowerCase();
+  const queryTokens = query.trim().toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
   const filter = filters.find((item) => item.id === activeFilter) ?? filters[0];
   return iconCatalog.filter((item) =>
-    (!filter.pattern || filter.pattern.test(item.label)) && item.searchText.includes(normalizedQuery),
+    (!filter.pattern || filter.pattern.test(item.label)) &&
+    queryTokens.every((token) => item.searchText.includes(token)),
   );
 }

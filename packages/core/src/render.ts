@@ -51,6 +51,7 @@ function sketchPass(commands: readonly SVGCommand[], roughness: number, seed: nu
   const amount = BASE_DISPLACEMENT * roughness;
   const output: SVGCommand[] = [];
   let sourceCurrent: Point = { x: 0, y: 0 };
+  let sourceStart: Point = { x: 0, y: 0 };
   let outputCurrent: Point = { x: 0, y: 0 };
   let outputStart: Point = { x: 0, y: 0 };
 
@@ -60,6 +61,7 @@ function sketchPass(commands: readonly SVGCommand[], roughness: number, seed: nu
         const point = jitterPoint(command, random, amount * 0.65);
         output.push({ type: SVGPathData.MOVE_TO, relative: false, ...point });
         sourceCurrent = { x: command.x, y: command.y };
+        sourceStart = sourceCurrent;
         outputCurrent = point;
         outputStart = point;
         break;
@@ -107,6 +109,7 @@ function sketchPass(commands: readonly SVGCommand[], roughness: number, seed: nu
       }
       case SVGPathData.CLOSE_PATH:
         output.push(command);
+        sourceCurrent = sourceStart;
         outputCurrent = outputStart;
         break;
       default:

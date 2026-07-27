@@ -38,6 +38,7 @@ describe("catalog filtering", () => {
   it("searches labels, export names, and aliases", () => {
     expect(filterCatalog("search", "all").some((icon) => icon.name === "Search")).toBe(true);
     expect(filterCatalog("AlarmCheck", "all").some((icon) => icon.label === "alarm-clock-check")).toBe(true);
+    expect(filterCatalog("arrow left", "all").some((icon) => icon.label === "arrow-left")).toBe(true);
   });
 
   it("uses stable precomputed filter counts", () => {

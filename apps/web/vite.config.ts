@@ -13,7 +13,7 @@ export default defineConfig({
       },
       {
         find: /^sketchicon\/runtime$/,
-        replacement: workspacePath("../../packages/lucide/src/runtime.ts"),
+        replacement: workspacePath("../../packages/lucide/src/SketchIcon.tsx"),
       },
       {
         find: /^sketchicon\/core$/,

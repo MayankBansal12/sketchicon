@@ -63,6 +63,22 @@ describe("renderSketch", () => {
     expect(paths.every((path) => path.opacity === undefined)).toBe(true);
   });
 
+  it("continues drawing from the subpath start after closing a path", () => {
+    const closedPath: SketchGeometry = {
+      primitives: [{ type: "path", d: "m19 8 3 8a5 5 0 0 1-6 0zV7" }],
+    };
+
+    expect(renderSketch(closedPath)).toEqual([
+      {
+        d: "M18.811 7.951C19.817 10.649 20.936 13.304 22.167 15.916C20.028 17.667 17.897 17.114 16.098 15.989zC18.9 7.705 18.985 7.459 19.067 7.213",
+      },
+      {
+        d: "M19.085 8.007C20.055 10.729 21.058 13.439 22.092 16.138C20.229 17.423 17.994 17.263 15.973 16.026zC19.063 7.72 19.037 7.433 19.009 7.146",
+        opacity: 0.72,
+      },
+    ]);
+  });
+
   it("clamps roughness to the public range", () => {
     expect(renderSketch(geometry, { roughness: 3 })).toEqual(
       renderSketch(geometry, { roughness: 2 }),

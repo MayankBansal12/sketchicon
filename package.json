@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "packageManager": "npm@10.8.2",
   "engines": {
     "node": ">=22.22.0 <23"
   },
@@ -12,13 +13,14 @@
   ],
   "scripts": {
     "build": "npm run generate && npm run build -w @sketchicon/core && npm run build -w sketchicon && npm run build -w @sketchicon/web",
-    "check": "npm run build && npm run typecheck && npm test && npm run verify:catalog && npm run verify:package && npm run verify:bundle && npm run verify:web",
+    "check": "npm run build && npm run typecheck && npm test && npm run verify:catalog && npm run verify:package && npm run verify:consumer && npm run verify:bundle && npm run verify:web",
     "dev": "npm run dev -w @sketchicon/web",
     "generate": "node scripts/generate-lucide.mjs",
     "test": "vitest run",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "verify:catalog": "node scripts/verify-catalog.mjs",
     "verify:package": "node scripts/verify-package.mjs",
+    "verify:consumer": "node scripts/verify-consumer.mjs",
     "verify:bundle": "node scripts/verify-bundle.mjs",
     "verify:web": "node scripts/verify-web.mjs"
   },

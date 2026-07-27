@@ -12,6 +12,7 @@ import {
   useState,
   type CSSProperties,
   type Dispatch,
+  type KeyboardEvent,
   type SetStateAction,
 } from "react";
 
@@ -124,23 +125,33 @@ function useVirtualGrid(itemCount: number) {
 const IconCard = memo(function IconCard({
   geometry,
   item,
+  onFocus,
+  onKeyDown,
   onSelect,
   roughness,
   size,
   strokeWidth,
+  tabIndex,
 }: {
   geometry: SketchGeometry;
   item: CatalogIconMetadata;
+  onFocus: () => void;
+  onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => void;
   onSelect: Dispatch<SetStateAction<CatalogIconMetadata | null>>;
   roughness: number;
   size: number;
   strokeWidth: number;
+  tabIndex: number;
 }) {
   return (
     <button
       className="icon-card"
+      id={`icon-card-${item.name}`}
       type="button"
       onClick={() => onSelect(item)}
+      onFocus={onFocus}
+      onKeyDown={onKeyDown}
+      tabIndex={tabIndex}
       title={`View ${item.label} usage`}
     >
       <SketchIcon icon={geometry} size={size} roughness={roughness} strokeWidth={strokeWidth} />
@@ -167,7 +178,7 @@ function UsageDialog({
   strokeWidth: number;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const [copied, setCopied] = useState(false);
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -181,13 +192,24 @@ function UsageDialog({
   const snippet = `import { ${icon.name}, SketchIcon } from "sketchicon";\n\n<SketchIcon\n  icon={${icon.name}}\n  size={${size}}\n  roughness={${roughness.toFixed(1)}}\n  strokeWidth={${strokeWidth.toFixed(1)}}\n  color="${color}"\n/>`;
 
   async function copySnippet() {
-    await navigator.clipboard.writeText(snippet);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 1600);
+    try {
+      if (!navigator.clipboard) throw new Error("Clipboard access is unavailable.");
+      await navigator.clipboard.writeText(snippet);
+      setCopyState("copied");
+    } catch {
+      setCopyState("failed");
+    }
+    window.setTimeout(() => setCopyState("idle"), 1600);
   }
 
   return (
-    <dialog ref={dialogRef} className="usage-dialog" onCancel={onClose} onClose={onClose}>
+    <dialog
+      ref={dialogRef}
+      className="usage-dialog"
+      aria-labelledby="usage-dialog-title"
+      onCancel={onClose}
+      onClose={onClose}
+    >
       <div className="dialog-card">
         <RoughBox className="dialog-outline" seed={31} stroke="#b8b5ad" />
         <button className="dialog-close" type="button" onClick={onClose} aria-label="Close usage dialog">×</button>
@@ -195,12 +217,12 @@ function UsageDialog({
           <SketchIcon icon={geometry} size={96} roughness={roughness} strokeWidth={strokeWidth} title={icon.label} />
         </div>
         <p className="dialog-kicker">Ready to use</p>
-        <h3>{icon.label}</h3>
+        <h3 id="usage-dialog-title">{icon.label}</h3>
         <div className="snippet-wrap">
           <pre><code>{snippet}</code></pre>
-          <button className="copy-snippet" type="button" onClick={copySnippet}>
-            <SketchIcon icon={copied ? Check : Copy} size={16} roughness={0.8} />
-            {copied ? "Copied" : "Copy code"}
+          <button className="copy-snippet" type="button" onClick={copySnippet} aria-live="polite">
+            <SketchIcon icon={copyState === "copied" ? Check : Copy} size={16} roughness={0.8} />
+            {copyState === "copied" ? "Copied" : copyState === "failed" ? "Copy failed" : "Copy code"}
           </button>
         </div>
       </div>
@@ -216,10 +238,12 @@ export default function IconLibrary() {
   const [strokeWidth, setStrokeWidth] = useState(2);
   const [color, setColor] = useState(defaultColor);
   const [selectedIcon, setSelectedIcon] = useState<CatalogIconMetadata | null>(null);
+  const [activeIconIndex, setActiveIconIndex] = useState(0);
   const [geometries, setGeometries] = useState<CatalogGeometryChunk>(initialGeometries);
   const [loadAttempt, setLoadAttempt] = useState(0);
   const [loadError, setLoadError] = useState(false);
   const loadedChunkIds = useRef(new Set([0]));
+  const pendingFocusIndex = useRef<number | null>(null);
   const deferredQuery = useDeferredValue(query.trim().toLowerCase());
   const renderedRoughness = useDebouncedValue(roughness, 100);
   const deferredSize = useDeferredValue(size);
@@ -255,33 +279,115 @@ export default function IconLibrary() {
     };
   }, [loadAttempt, visibleChunkKey]);
 
+  useEffect(() => {
+    setActiveIconIndex(0);
+  }, [activeFilter, deferredQuery]);
+
+  useEffect(() => {
+    const pendingIndex = pendingFocusIndex.current;
+    if (pendingIndex === null) return;
+    const item = filteredIcons[pendingIndex];
+    const target = item ? document.getElementById(`icon-card-${item.name}`) : null;
+    if (target instanceof HTMLButtonElement) {
+      target.focus();
+      pendingFocusIndex.current = null;
+    }
+  }, [activeIconIndex, endRow, filteredIcons, geometries, startRow]);
+
+  function focusIcon(index: number) {
+    if (filteredIcons.length === 0) return;
+    const nextIndex = Math.max(0, Math.min(filteredIcons.length - 1, index));
+    const grid = gridRef.current;
+    pendingFocusIndex.current = nextIndex;
+    setActiveIconIndex(nextIndex);
+
+    if (grid) {
+      const targetRow = Math.floor(nextIndex / columns);
+      const targetTop = grid.getBoundingClientRect().top + window.scrollY + targetRow * rowHeight;
+      const viewportTop = window.scrollY;
+      const viewportBottom = viewportTop + window.innerHeight;
+      if (targetTop < viewportTop || targetTop + rowHeight > viewportBottom) {
+        window.scrollTo({ top: Math.max(0, targetTop - window.innerHeight / 2 + rowHeight / 2) });
+      }
+    }
+  }
+
+  function handleIconKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+    let nextIndex: number | undefined;
+    switch (event.key) {
+      case "ArrowRight":
+        nextIndex = index + 1;
+        break;
+      case "ArrowLeft":
+        nextIndex = index - 1;
+        break;
+      case "ArrowDown":
+        nextIndex = index + columns;
+        break;
+      case "ArrowUp":
+        nextIndex = index - columns;
+        break;
+      case "Home":
+        nextIndex = event.ctrlKey ? 0 : Math.floor(index / columns) * columns;
+        break;
+      case "End":
+        nextIndex = event.ctrlKey
+          ? filteredIcons.length - 1
+          : Math.min(filteredIcons.length - 1, Math.floor(index / columns) * columns + columns - 1);
+        break;
+      default:
+        return;
+    }
+    event.preventDefault();
+    focusIcon(nextIndex);
+  }
+
   const rowCount = Math.ceil(filteredIcons.length / columns);
+  const isShowingWholeSet = activeFilter === "all" && query.trim() === "";
   const virtualGridStyle = {
     color,
     height: rowCount * rowHeight,
     "--virtual-columns": columns,
     "--virtual-row-height": `${rowHeight}px`,
   } as CSSProperties;
+  const firstVisibleIconIndex = startRow * columns;
+  const lastVisibleIconIndex = Math.min(filteredIcons.length, endRow * columns) - 1;
+  const tabStopIndex = activeIconIndex >= firstVisibleIconIndex && activeIconIndex <= lastVisibleIconIndex
+    ? activeIconIndex
+    : firstVisibleIconIndex;
   const visibleRows = [];
   for (let rowIndex = startRow; rowIndex < endRow; rowIndex += 1) {
     const rowIcons = filteredIcons.slice(rowIndex * columns, (rowIndex + 1) * columns);
     visibleRows.push(
-      <div className="virtual-icon-row" key={rowIndex} style={{ transform: `translateY(${rowIndex * rowHeight}px)` }}>
-        {rowIcons.map((item) => {
+      <div
+        className="virtual-icon-row"
+        key={rowIndex}
+        role="row"
+        aria-rowindex={rowIndex + 1}
+        style={{ transform: `translateY(${rowIndex * rowHeight}px)` }}
+      >
+        {rowIcons.map((item, columnIndex) => {
+          const itemIndex = rowIndex * columns + columnIndex;
           const geometry = geometries[item.name];
-          return geometry ? (
-            <IconCard
-              geometry={geometry}
-              item={item}
-              key={item.name}
-              onSelect={setSelectedIcon}
-              roughness={renderedRoughness}
-              size={deferredSize}
-              strokeWidth={deferredStrokeWidth}
-            />
-          ) : (
-            <div className="icon-card icon-card-loading" key={item.name} aria-hidden="true">
-              <span>{item.label}</span>
+          return (
+            <div className="icon-card-cell" key={item.name} role="gridcell">
+              {geometry ? (
+                <IconCard
+                  geometry={geometry}
+                  item={item}
+                  onFocus={() => setActiveIconIndex(itemIndex)}
+                  onKeyDown={(event) => handleIconKeyDown(event, itemIndex)}
+                  onSelect={setSelectedIcon}
+                  roughness={renderedRoughness}
+                  size={deferredSize}
+                  strokeWidth={deferredStrokeWidth}
+                  tabIndex={itemIndex === tabStopIndex ? 0 : -1}
+                />
+              ) : (
+                <div className="icon-card icon-card-loading" aria-hidden="true">
+                  <span>{item.label}</span>
+                </div>
+              )}
             </div>
           );
         })}
@@ -359,9 +465,22 @@ export default function IconLibrary() {
 
           {filteredIcons.length > 0 ? (
             <>
-              <div className="icon-grid virtual-icon-grid" ref={gridRef} style={virtualGridStyle}>
+              <p className="visually-hidden" id="catalog-keyboard-help">
+                Use arrow keys to move through icons. Press Enter to open the selected icon.
+              </p>
+              <div
+                className="icon-grid virtual-icon-grid"
+                ref={gridRef}
+                style={virtualGridStyle}
+                role="grid"
+                aria-colcount={columns}
+                aria-describedby="catalog-keyboard-help"
+                aria-label="Icon catalog"
+                aria-rowcount={rowCount}
+              >
                 {visibleRows}
               </div>
+              {isShowingWholeSet ? <p className="catalog-complete-note">that's the whole set</p> : null}
               {loadError ? (
                 <div className="catalog-load-error" role="status">
                   Some icons could not be drawn.

@@ -508,6 +508,16 @@ input[type="range"] {
   grid-template-columns: repeat(var(--virtual-columns), minmax(0, 1fr));
 }
 
+.icon-card-cell {
+  min-width: 0;
+  height: 100%;
+}
+
+.icon-card-cell .icon-card {
+  width: 100%;
+  height: 100%;
+}
+
 .icon-card {
   display: grid;
   min-width: 0;
@@ -568,6 +578,13 @@ input[type="range"] {
   color: var(--muted);
   font-family: ui-sans-serif, system-ui, sans-serif;
   font-size: 13px;
+}
+
+.catalog-complete-note {
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
 }
 
 .catalog-load-error button {
