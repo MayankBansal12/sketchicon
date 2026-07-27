@@ -11,10 +11,9 @@ import {
   useRef,
   useState,
   type CSSProperties,
-  type Dispatch,
   type KeyboardEvent,
-  type SetStateAction,
 } from "react";
+import { useSearchParams } from "react-router";
 
 import { RoughBox } from "../components/RoughBox";
 import type { CatalogIconMetadata } from "../generated/catalog";
@@ -31,6 +30,7 @@ const MOBILE_ROW_HEIGHT = 118;
 const OVERSCAN_ROWS = 3;
 const defaultColor = "#1f1f1f";
 const colors = [defaultColor, "#6965db", "#e03131", "#2f9e44", "#1971c2"];
+const customColorInputId = "custom-ink-color";
 const chunkCache = new Map<number, Promise<CatalogGeometryChunk>>();
 
 function loadChunk(chunkId: number) {
@@ -129,6 +129,7 @@ const IconCard = memo(function IconCard({
   onKeyDown,
   onSelect,
   roughness,
+  selected,
   size,
   strokeWidth,
   tabIndex,
@@ -137,21 +138,23 @@ const IconCard = memo(function IconCard({
   item: CatalogIconMetadata;
   onFocus: () => void;
   onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => void;
-  onSelect: Dispatch<SetStateAction<CatalogIconMetadata | null>>;
+  onSelect: (item: CatalogIconMetadata) => void;
   roughness: number;
+  selected: boolean;
   size: number;
   strokeWidth: number;
   tabIndex: number;
 }) {
   return (
     <button
-      className="icon-card"
+      className={`icon-card${selected ? " selected" : ""}`}
       id={`icon-card-${item.name}`}
       type="button"
       onClick={() => onSelect(item)}
       onFocus={onFocus}
       onKeyDown={onKeyDown}
       tabIndex={tabIndex}
+      aria-pressed={selected}
       title={`View ${item.label} usage`}
     >
       <SketchIcon icon={geometry} size={size} roughness={roughness} strokeWidth={strokeWidth} />
@@ -160,7 +163,7 @@ const IconCard = memo(function IconCard({
   );
 });
 
-function UsageDialog({
+function UsageDrawer({
   color,
   geometry,
   icon,
@@ -177,17 +180,20 @@ function UsageDialog({
   size: number;
   strokeWidth: number;
 }) {
-  const dialogRef = useRef<HTMLDialogElement>(null);
   const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
 
   useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) return;
-    if (icon && !dialog.open) dialog.showModal();
-    if (!icon && dialog.open) dialog.close();
-  }, [icon]);
+    if (!icon) return;
 
-  if (!icon || !geometry) return <dialog ref={dialogRef} />;
+    function closeOnEscape(event: globalThis.KeyboardEvent) {
+      if (event.key === "Escape") onClose();
+    }
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [icon, onClose]);
+
+  if (!icon || !geometry) return null;
 
   const snippet = `import { ${icon.name}, SketchIcon } from "sketchicon";\n\n<SketchIcon\n  icon={${icon.name}}\n  size={${size}}\n  roughness={${roughness.toFixed(1)}}\n  strokeWidth={${strokeWidth.toFixed(1)}}\n  color="${color}"\n/>`;
 
@@ -203,21 +209,19 @@ function UsageDialog({
   }
 
   return (
-    <dialog
-      ref={dialogRef}
-      className="usage-dialog"
-      aria-labelledby="usage-dialog-title"
-      onCancel={onClose}
-      onClose={onClose}
-    >
-      <div className="dialog-card">
-        <RoughBox className="dialog-outline" seed={31} stroke="#b8b5ad" />
-        <button className="dialog-close" type="button" onClick={onClose} aria-label="Close usage dialog">×</button>
-        <div className="dialog-preview" style={{ color }}>
+    <aside className="usage-drawer" aria-labelledby="usage-drawer-title">
+      <RoughBox className="drawer-outline" seed={31} stroke="#b8b5ad" />
+      <button className="drawer-close" type="button" onClick={onClose} aria-label="Close usage drawer">×</button>
+      <div className="drawer-summary">
+        <div className="drawer-preview" style={{ color }}>
           <SketchIcon icon={geometry} size={96} roughness={roughness} strokeWidth={strokeWidth} title={icon.label} />
         </div>
-        <p className="dialog-kicker">Ready to use</p>
-        <h3 id="usage-dialog-title">{icon.label}</h3>
+        <div>
+          <p className="drawer-kicker">Ready to use</p>
+          <h3 id="usage-drawer-title">{icon.label}</h3>
+          <p className="drawer-import-name">Import name: <code>{icon.name}</code></p>
+        </div>
+      </div>
         <div className="snippet-wrap">
           <pre><code>{snippet}</code></pre>
           <button className="copy-snippet" type="button" onClick={copySnippet} aria-live="polite">
@@ -225,19 +229,18 @@ function UsageDialog({
             {copyState === "copied" ? "Copied" : copyState === "failed" ? "Copy failed" : "Copy code"}
           </button>
         </div>
-      </div>
-    </dialog>
+    </aside>
   );
 }
 
 export default function IconLibrary() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
   const [roughness, setRoughness] = useState(1);
   const [size, setSize] = useState(32);
   const [strokeWidth, setStrokeWidth] = useState(2);
   const [color, setColor] = useState(defaultColor);
-  const [selectedIcon, setSelectedIcon] = useState<CatalogIconMetadata | null>(null);
   const [activeIconIndex, setActiveIconIndex] = useState(0);
   const [geometries, setGeometries] = useState<CatalogGeometryChunk>(initialGeometries);
   const [loadAttempt, setLoadAttempt] = useState(0);
@@ -248,10 +251,16 @@ export default function IconLibrary() {
   const renderedRoughness = useDebouncedValue(roughness, 100);
   const deferredSize = useDeferredValue(size);
   const deferredStrokeWidth = useDeferredValue(strokeWidth);
+  const selectedIconSlug = searchParams.get("icon") ?? "";
 
   const filteredIcons = useMemo(() => {
     return filterCatalog(deferredQuery, activeFilter);
   }, [activeFilter, deferredQuery]);
+
+  const selectedIcon = useMemo(() => {
+    if (!selectedIconSlug) return null;
+    return filterCatalog("", "all").find((item) => item.label === selectedIconSlug) ?? null;
+  }, [selectedIconSlug]);
 
   const { columns, endRow, gridRef, rowHeight, startRow } = useVirtualGrid(filteredIcons.length);
   const visibleIcons = filteredIcons.slice(startRow * columns, endRow * columns);
@@ -278,6 +287,36 @@ export default function IconLibrary() {
       active = false;
     };
   }, [loadAttempt, visibleChunkKey]);
+
+  useEffect(() => {
+    if (!selectedIcon || loadedChunkIds.current.has(selectedIcon.chunkId)) return;
+    let active = true;
+    setLoadError(false);
+
+    loadChunk(selectedIcon.chunkId).then((chunk) => {
+      if (!active) return;
+      loadedChunkIds.current.add(selectedIcon.chunkId);
+      setGeometries((current) => Object.assign({}, current, chunk));
+    }).catch(() => {
+      if (active) setLoadError(true);
+    });
+
+    return () => {
+      active = false;
+    };
+  }, [loadAttempt, selectedIcon]);
+
+  function selectIcon(item: CatalogIconMetadata) {
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.set("icon", item.label);
+    setSearchParams(nextParams, { preventScrollReset: true });
+  }
+
+  function closeSelectedIcon() {
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.delete("icon");
+    setSearchParams(nextParams, { preventScrollReset: true });
+  }
 
   useEffect(() => {
     setActiveIconIndex(0);
@@ -377,8 +416,9 @@ export default function IconLibrary() {
                   item={item}
                   onFocus={() => setActiveIconIndex(itemIndex)}
                   onKeyDown={(event) => handleIconKeyDown(event, itemIndex)}
-                  onSelect={setSelectedIcon}
+                  onSelect={selectIcon}
                   roughness={renderedRoughness}
+                  selected={selectedIcon?.name === item.name}
                   size={deferredSize}
                   strokeWidth={deferredStrokeWidth}
                   tabIndex={itemIndex === tabStopIndex ? 0 : -1}
@@ -399,7 +439,6 @@ export default function IconLibrary() {
     <>
       <div className="library-layout">
         <aside className="customizer" aria-label="Icon filters and customizer">
-          <RoughBox className="customizer-outline" seed={23} stroke="#cbc8c0" />
           <div className="control-section">
             <h3>Customize</h3>
             <label className="range-control">
@@ -431,6 +470,16 @@ export default function IconLibrary() {
                     aria-pressed={value === color}
                   />
                 ))}
+                <label className="custom-color-option" htmlFor={customColorInputId} style={{ color }}>
+                  <span className="visually-hidden">Pick custom ink color</span>
+                  <input
+                    id={customColorInputId}
+                    type="color"
+                    value={color}
+                    onChange={(event) => setColor(event.target.value)}
+                    aria-label="Pick custom ink color"
+                  />
+                </label>
               </div>
             </fieldset>
           </div>
@@ -496,18 +545,18 @@ export default function IconLibrary() {
             </div>
           )}
 
+          <UsageDrawer
+            color={color}
+            geometry={selectedIcon ? geometries[selectedIcon.name] : undefined}
+            icon={selectedIcon}
+            onClose={closeSelectedIcon}
+            roughness={roughness}
+            size={size}
+            strokeWidth={strokeWidth}
+          />
         </div>
       </div>
 
-      <UsageDialog
-        color={color}
-        geometry={selectedIcon ? geometries[selectedIcon.name] : undefined}
-        icon={selectedIcon}
-        onClose={() => setSelectedIcon(null)}
-        roughness={roughness}
-        size={size}
-        strokeWidth={strokeWidth}
-      />
     </>
   );
 }

@@ -146,7 +146,7 @@ a {
 
 .hero-note,
 .section-number,
-.dialog-kicker {
+.drawer-kicker {
   margin: 0 0 20px;
   color: var(--accent);
   font-size: 13px;
@@ -332,18 +332,44 @@ h1 {
 .customizer {
   position: sticky;
   top: 20px;
+  display: grid;
+  max-height: calc(100svh - 40px);
+  grid-template-rows: auto minmax(0, 1fr);
   padding: 24px 22px 28px;
+  border: 1px solid #cbc8c0;
+  border-radius: 17px 14px 19px 15px;
   background: rgba(255, 255, 255, 0.66);
+  box-shadow: 2px 2px 0 rgba(31, 31, 31, 0.035);
 }
 
-.customizer-outline {
-  z-index: -1;
+.customizer::after {
+  position: absolute;
+  inset: 4px -3px -4px 3px;
+  border: 1px solid rgba(203, 200, 192, 0.64);
+  border-radius: 15px 18px 14px 19px;
+  content: "";
+  pointer-events: none;
+}
+
+.control-section {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
 }
 
 .control-section + .control-section {
-  margin-top: 30px;
-  padding-top: 24px;
+  position: relative;
+  margin-top: 24px;
+  padding-top: 28px;
+}
+
+.control-section + .control-section::before {
+  position: absolute;
+  top: 0;
+  right: -23px;
+  left: -23px;
   border-top: 1px dashed #bbb8b1;
+  content: "";
 }
 
 .control-section h3 {
@@ -352,11 +378,17 @@ h1 {
   font-weight: 400;
 }
 
+.filter-section {
+  display: grid;
+  min-height: 0;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
 .range-control {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 9px;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
   color: #4d4b47;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 12px;
@@ -377,6 +409,7 @@ input[type="range"] {
 }
 
 .color-control {
+  margin: 0;
   padding: 0;
   border: 0;
   color: #4d4b47;
@@ -387,11 +420,15 @@ input[type="range"] {
 
 .color-options {
   display: flex;
+  flex-wrap: wrap;
   gap: 9px;
   margin-top: 12px;
 }
 
-.color-options button {
+.color-options button,
+.custom-color-option {
+  position: relative;
+  display: grid;
   width: 26px;
   height: 26px;
   padding: 0;
@@ -399,7 +436,31 @@ input[type="range"] {
   border-radius: 50%;
   box-shadow: 0 0 0 1px #cac7c0;
   cursor: pointer;
+  place-items: center;
   transition: box-shadow 140ms ease, transform 140ms var(--ease-out);
+}
+
+.custom-color-option {
+  background:
+    conic-gradient(from 90deg, #e03131, #f08c00, #2f9e44, #1971c2, #6965db, #e03131);
+}
+
+.custom-color-option::after {
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(31, 31, 31, 0.16);
+  border-radius: 50%;
+  background: currentColor;
+  content: "";
+}
+
+.custom-color-option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
 }
 
 .color-options button.selected {
@@ -407,15 +468,38 @@ input[type="range"] {
   transform: scale(1.08);
 }
 
+.custom-color-option:focus-within {
+  outline: 3px solid rgba(105, 101, 219, 0.42);
+  outline-offset: 3px;
+}
+
 .filter-list {
   display: grid;
-  gap: 3px;
+  min-height: 0;
+  padding-right: 3px;
+  overflow: auto;
+  gap: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: #c4c1ba transparent;
+}
+
+.filter-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.filter-list::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #c4c1ba;
+}
+
+.filter-list::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .filter-list button {
   display: flex;
   width: 100%;
-  padding: 9px 10px;
+  padding: 8px 10px;
   align-items: center;
   justify-content: space-between;
   border: 0;
@@ -550,6 +634,13 @@ input[type="range"] {
   opacity: 0.48;
 }
 
+.icon-card.selected {
+  position: relative;
+  z-index: 1;
+  background: #eeecff;
+  box-shadow: inset 0 0 0 1px #918df0;
+}
+
 .icon-card-loading::before {
   width: 32px;
   height: 32px;
@@ -642,37 +733,46 @@ footer p {
   font-size: 15px;
 }
 
-.usage-dialog {
-  width: min(680px, calc(100% - 28px));
-  padding: 0;
-  border: 0;
-  overflow: visible;
-  background: transparent;
-}
-
-.usage-dialog::backdrop {
-  background: rgba(31, 31, 31, 0.38);
-  backdrop-filter: blur(3px);
-}
-
-.dialog-card {
-  position: relative;
-  padding: 42px;
-  background: #fffefa;
-}
-
-.dialog-outline {
-  z-index: -1;
-}
-
-.dialog-close {
-  position: absolute;
-  z-index: 1;
-  top: 18px;
-  right: 20px;
+.usage-drawer {
+  position: sticky;
+  z-index: 20;
+  bottom: 16px;
   display: grid;
-  width: 36px;
-  height: 36px;
+  margin-top: 20px;
+  padding: 20px 22px;
+  grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.15fr) auto;
+  gap: 24px;
+  align-items: center;
+  background: #fffefa;
+  border: 1px solid #c9c6be;
+  border-radius: 17px 14px 18px 15px;
+  box-shadow: 0 10px 30px rgba(31, 31, 31, 0.11);
+  animation: drawer-rise 220ms var(--ease-out) both;
+}
+
+@keyframes drawer-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.drawer-outline {
+  display: none;
+}
+
+.drawer-close {
+  z-index: 1;
+  display: grid;
+  order: 1;
+  width: 30px;
+  height: 30px;
+  align-self: start;
   padding: 0;
   place-items: center;
   border: 1px solid #d1cec6;
@@ -680,29 +780,49 @@ footer p {
   background: white;
   cursor: pointer;
   font-family: ui-sans-serif, system-ui, sans-serif;
-  font-size: 22px;
+  font-size: 18px;
+  line-height: 1;
   transition: background-color 140ms ease, transform 140ms var(--ease-out);
 }
 
-.dialog-preview {
+.drawer-summary {
   display: grid;
-  width: 150px;
-  height: 150px;
-  margin-bottom: 30px;
+  margin: 0;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+}
+
+.drawer-preview {
+  display: grid;
+  width: 92px;
+  height: 92px;
   place-items: center;
   border: 1px dashed #c8c5be;
   border-radius: 24px 20px 26px 21px;
   background: #fbfaf7;
 }
 
-.dialog-kicker {
-  margin-bottom: 8px;
+.drawer-kicker {
+  margin-bottom: 6px;
 }
 
-.dialog-card h3 {
-  margin-bottom: 24px;
-  font-size: 36px;
+.usage-drawer h3 {
+  margin-bottom: 8px;
+  font-size: 24px;
   font-weight: 400;
+}
+
+.drawer-import-name {
+  margin: 0;
+  color: var(--muted);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px;
+}
+
+.drawer-import-name code {
+  color: #1f1f1f;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
 .snippet-wrap {
@@ -713,8 +833,9 @@ footer p {
 }
 
 .snippet-wrap pre {
+  max-height: 176px;
   margin: 0;
-  padding: 22px 22px 72px;
+  padding: 18px 18px 52px;
   overflow: auto;
   color: #f1f0eb;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
@@ -780,7 +901,7 @@ input:focus-visible {
   }
 
   .filter-list button:hover,
-  .dialog-close:hover {
+  .drawer-close:hover {
     background: #f0efe9;
   }
 
@@ -843,11 +964,10 @@ input:focus-visible {
   }
 
   .customizer {
-    position: relative;
-    top: auto;
     display: grid;
     padding: 24px;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: minmax(0, 1fr);
     gap: 28px;
   }
 
@@ -855,6 +975,13 @@ input:focus-visible {
     margin-top: 0;
     padding-top: 0;
     padding-left: 28px;
+  }
+
+  .control-section + .control-section::before {
+    top: -24px;
+    bottom: -24px;
+    left: 0;
+    right: auto;
     border-top: 0;
     border-left: 1px dashed #bbb8b1;
   }
@@ -948,6 +1075,13 @@ input:focus-visible {
   }
 
   .customizer {
+    position: relative;
+    top: auto;
+    display: block;
+    max-height: none;
+  }
+
+  .filter-section {
     display: block;
   }
 
@@ -955,6 +1089,13 @@ input:focus-visible {
     margin-top: 28px;
     padding-top: 24px;
     padding-left: 0;
+  }
+
+  .control-section + .control-section::before {
+    top: 0;
+    right: -24px;
+    bottom: auto;
+    left: -24px;
     border-top: 1px dashed #bbb8b1;
     border-left: 0;
   }
@@ -979,17 +1120,45 @@ input:focus-visible {
     min-height: 118px;
   }
 
-  .dialog-card {
-    padding: 34px 22px 24px;
+  .usage-drawer {
+    display: block;
+    bottom: 12px;
+    padding: 18px 16px;
   }
 
-  .dialog-preview {
-    width: 120px;
-    height: 120px;
+  .drawer-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
   }
 
-  .dialog-card h3 {
-    font-size: 30px;
+  .drawer-summary {
+    margin-bottom: 18px;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .drawer-preview {
+    width: 76px;
+    height: 76px;
+  }
+
+  .drawer-preview > svg {
+    width: 56px;
+    height: 56px;
+  }
+
+  .usage-drawer h3 {
+    margin-right: 28px;
+    font-size: 21px;
+  }
+
+  .snippet-wrap pre {
+    max-height: 150px;
+  }
+
+  .drawer-import-name {
+    overflow-wrap: anywhere;
   }
 
   footer {

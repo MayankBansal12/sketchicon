@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import { MemoryRouter } from "react-router";
 
 import { iconCatalog } from "../generated/catalog";
 import { catalogLoaders } from "../generated/loaders";
@@ -27,7 +28,9 @@ describe("generated website catalog", () => {
   });
 
   it("renders the first bounded catalog window without loading placeholders", () => {
-    const markup = renderToStaticMarkup(createElement(IconLibrary));
+    const markup = renderToStaticMarkup(
+      createElement(MemoryRouter, null, createElement(IconLibrary)),
+    );
     expect(markup.match(/<button class="icon-card"/g)).toHaveLength(48);
     expect(markup).not.toContain("icon-card-loading");
     expect(markup).toContain("height:38860px");
