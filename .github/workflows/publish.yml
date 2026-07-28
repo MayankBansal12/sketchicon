@@ -1,0 +1,47 @@
+name: Publish packages
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify release version
+        run: npm run release:verify
+
+      - name: Check packages
+        run: npm run check
+
+      - name: Publish core
+        run: npm publish --workspace @sketchicon/core
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish sketchicon
+        run: npm publish --workspace sketchicon
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
