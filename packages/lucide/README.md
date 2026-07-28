@@ -18,13 +18,13 @@ export function SearchButton() {
 }
 ```
 
-`roughness` is optional, defaults to `1`, and accepts values from `0` to `2`.
+`roughness` is optional, defaults to `1.5`, and accepts values from `0` to `2`.
 
 ```tsx
-<SketchIcon icon={Search} roughness={1.5} />
+<SketchIcon icon={Search} roughness={0.8} />
 ```
 
-Standard SVG props such as `size`, `color`, `strokeWidth`, and accessibility attributes are supported. Named icon imports are tree-shakeable.
+Standard SVG props such as `size`, `color`, `strokeWidth` (defaults to `1.5`), and accessibility attributes are supported. Named icon imports are tree-shakeable.
 
 The framework-independent renderer is available from the same installation:
 

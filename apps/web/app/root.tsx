@@ -12,6 +12,11 @@ import "./styles.css";
 
 export const links: Route.LinksFunction = () => [
   {
+    rel: "icon",
+    href: "/logo.svg",
+    type: "image/svg+xml",
+  },
+  {
     rel: "preload",
     href: "/fonts/Excalifont-Regular.woff2",
     as: "font",

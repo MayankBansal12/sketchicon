@@ -1,14 +1,24 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import type { MetaFunction } from "react-router";
 import { SketchIcon } from "sketchicon/runtime";
+import ArrowDown from "sketchicon/icons/arrow-down";
 import Check from "sketchicon/icons/check";
 import Copy from "sketchicon/icons/copy";
-import Package from "sketchicon/icons/package";
-import PencilRuler from "sketchicon/icons/pencil-ruler";
-import Sparkles from "sketchicon/icons/sparkles";
+import Search from "sketchicon/icons/search";
+import SunMedium from "sketchicon/icons/sun-medium";
 
 import { GithubMark, NpmMark } from "../components/BrandMarks";
-import { RoughBox } from "../components/RoughBox";
+import { RoughBox, RoughTag } from "../components/RoughBox";
+import { palette } from "../theme";
+
+const packageManagers = [
+  { command: "pnpm add sketchicon", id: "pnpm", label: "pnpm" },
+  { command: "npm install sketchicon", id: "npm", label: "npm" },
+  { command: "yarn add sketchicon", id: "yarn", label: "yarn" },
+  { command: "bun add sketchicon", id: "bun", label: "bun" },
+] as const;
+
+type PackageManagerId = (typeof packageManagers)[number]["id"];
 
 const IconLibrary = lazy(() => import("../icon-library/IconLibrary"));
 
@@ -62,28 +72,39 @@ function LibraryFallback() {
 }
 
 export default function Home() {
-  const [installCopied, setInstallCopied] = useState(false);
+  const [installCopyState, setInstallCopyState] = useState<"idle" | "copied" | "failed">("idle");
+  const [packageManager, setPackageManager] = useState<PackageManagerId>("pnpm");
+  const activeCommand =
+    packageManagers.find((manager) => manager.id === packageManager) ?? packageManagers[0];
+
+  function selectPackageManager(id: PackageManagerId) {
+    setPackageManager(id);
+    setInstallCopyState("idle");
+  }
 
   async function copyInstall() {
-    await navigator.clipboard.writeText("npm install sketchicon");
-    setInstallCopied(true);
-    window.setTimeout(() => setInstallCopied(false), 1600);
+    try {
+      if (!navigator.clipboard) throw new Error("Clipboard access is unavailable.");
+      await navigator.clipboard.writeText(activeCommand.command);
+      setInstallCopyState("copied");
+    } catch {
+      setInstallCopyState("failed");
+    }
+    window.setTimeout(() => setInstallCopyState("idle"), 1600);
   }
 
   return (
     <div className="site-shell">
       <header className="topbar">
         <a className="brand" href="#top" aria-label="SketchIcon home">
-          <span className="brand-mark">
-            <SketchIcon icon={PencilRuler} size={20} roughness={1.2} />
-          </span>
+          <img src="/logo.svg" alt="" />
           SketchIcon
         </a>
         <nav className="social-links" aria-label="Project links">
-          <a href="https://github.com/mayank12" target="_blank" rel="noreferrer" aria-label="SketchIcon on GitHub">
+          <a href="https://github.com/MayankBansal12/sketchicon" target="_blank" rel="noreferrer" aria-label="View GitHub repo" data-tooltip="View GitHub repo">
             <GithubMark />
           </a>
-          <a href="https://www.npmjs.com/package/sketchicon" target="_blank" rel="noreferrer" aria-label="SketchIcon on npm">
+          <a href="https://www.npmjs.com/package/sketchicon" target="_blank" rel="noreferrer" aria-label="Visit npm package" data-tooltip="Visit npm package">
             <NpmMark />
           </a>
         </nav>
@@ -92,31 +113,59 @@ export default function Home() {
       <main id="top">
         <section className="hero" aria-labelledby="hero-heading">
           <div className="floating-card floating-card-left" aria-hidden="true">
-            <RoughBox seed={7} fill="#fff3bf" />
-            <SketchIcon icon={PencilRuler} size={64} roughness={1.4} />
+            <RoughBox seed={7} fill={palette.highlight} />
+            <SketchIcon icon={Search} size={64} roughness={1.4} />
           </div>
           <div className="floating-card floating-card-right" aria-hidden="true">
-            <RoughBox seed={13} fill="#e5dbff" />
-            <SketchIcon icon={Sparkles} size={64} roughness={1.4} />
+            <RoughBox seed={13} fill={palette.lilac} />
+            <SketchIcon icon={SunMedium} size={64} roughness={1.4} />
           </div>
 
-          <p className="hero-note">1,739 icons · React · SVG</p>
+          <p className="hero-note">1,739 icons · For React</p>
           <h1 id="hero-heading">Icons that feel<br />drawn, not generated.</h1>
           <p className="hero-copy">
-            Familiar interface icons with a loose, human line. Deterministic, accessible, and ready for React.
+            Familiar stroke icons with a loose, human line. Deterministic, accessible, and ready for React.
           </p>
-          <button className="install-command" type="button" onClick={copyInstall}>
-            <RoughBox seed={19} fill="#6965db" stroke="#514dc5" />
-            <span className="prompt">$</span>
-            <code>npm install sketchicon</code>
-            <span className="install-copy-state">
-              <SketchIcon icon={installCopied ? Check : Copy} size={18} roughness={0.8} />
-              <span>{installCopied ? "Copied" : "Copy"}</span>
-            </span>
-          </button>
+          <div className="install-block">
+            <div className="install-tabs" role="group" aria-label="Package manager">
+              {packageManagers.map((manager, index) => {
+                const active = manager.id === packageManager;
+                return (
+                  <button
+                    key={manager.id}
+                    className={`install-tab${active ? " active" : ""}`}
+                    type="button"
+                    onClick={() => selectPackageManager(manager.id)}
+                    aria-pressed={active}
+                  >
+                    <RoughTag
+                      seed={11 + index * 9}
+                      fill={active ? palette.accentWash : palette.surface}
+                      stroke={active ? palette.accent : palette.line}
+                    />
+                    <span>{manager.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <button
+              className="install-command"
+              type="button"
+              onClick={copyInstall}
+              aria-label={`Copy install command: ${activeCommand.command}`}
+            >
+              <RoughBox seed={19} fill={palette.accent} stroke={palette.accentStrong} />
+              <span className="prompt">$</span>
+              <code>{activeCommand.command}</code>
+              <span className="install-copy-state" aria-live="polite">
+                <SketchIcon icon={installCopyState === "copied" ? Check : Copy} size={18} roughness={0.8} />
+                <span>{installCopyState === "copied" ? "Copied" : installCopyState === "failed" ? "Try again" : "Copy"}</span>
+              </span>
+            </button>
+          </div>
           <a className="browse-link" href="#icons">
             Browse the whole set
-            <span aria-hidden="true">↓</span>
+            <SketchIcon icon={ArrowDown} size={16} roughness={1} />
           </a>
         </section>
 
@@ -124,7 +173,7 @@ export default function Home() {
           <div className="section-heading">
             <p className="section-number">01 / The library</p>
             <h2 id="icons-heading">Pick one. Make it yours.</h2>
-            <p>Search the complete set, tune the drawing, then click any icon for ready-to-paste React code.</p>
+            <p>Search the library, customize drawing, click icon for ready-to-paste React.</p>
           </div>
           <IconLibraryBoundary />
         </section>
@@ -132,11 +181,15 @@ export default function Home() {
 
       <footer>
         <div className="footer-brand">
-          <SketchIcon icon={Package} size={22} roughness={1} />
+          <img src="/logo.svg" alt="" />
           <span>SketchIcon</span>
         </div>
-        <p>Hand-drawn SVG icons for React.</p>
-        <p className="attribution">Geometry derived from Lucide, licensed under ISC.</p>
+        <p>
+          built by <a className="footer-link" href="https://mayank.fyi" target="_blank" rel="noreferrer">mayank</a>
+        </p>
+        <p className="attribution">
+          credit to <a className="footer-link" href="https://lucide.dev" target="_blank" rel="noreferrer">Lucide</a> and <a className="footer-link" href="https://feathericons.com" target="_blank" rel="noreferrer">Feather</a> for original icons
+        </p>
       </footer>
     </div>
   );

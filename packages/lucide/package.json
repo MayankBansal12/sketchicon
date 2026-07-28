@@ -43,5 +43,14 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MayankBansal12/sketchicon.git",
+    "directory": "packages/lucide"
+  },
+  "homepage": "https://github.com/MayankBansal12/sketchicon#readme",
+  "bugs": {
+    "url": "https://github.com/MayankBansal12/sketchicon/issues"
+  },
   "license": "MIT"
 }

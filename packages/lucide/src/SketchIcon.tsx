@@ -14,11 +14,11 @@ export const SketchIcon = forwardRef<SVGSVGElement, SketchIconProps>(
   function SketchIcon(
     {
       icon,
-      roughness = 1,
+      roughness = 1.5,
       seed = 0,
       size = 24,
       title,
-      strokeWidth = 2,
+      strokeWidth = 1.5,
       ...svgProps
     },
     ref,

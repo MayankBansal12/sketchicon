@@ -20,10 +20,10 @@ describe("sketchicon package", () => {
     expect(markup).not.toMatch(/NaN|Infinity/);
   });
 
-  it("defaults roughness to 1", () => {
+  it("defaults roughness to 1.5", () => {
     const implicit = renderToStaticMarkup(createElement(SketchIcon, { icon: Search }));
     const explicit = renderToStaticMarkup(
-      createElement(SketchIcon, { icon: Search, roughness: 1 }),
+      createElement(SketchIcon, { icon: Search, roughness: 1.5 }),
     );
 
     expect(implicit).toBe(explicit);

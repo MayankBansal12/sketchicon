@@ -1,8 +1,10 @@
+import { palette } from "../theme";
+
 export function RoughBox({
   className = "",
   fill = "none",
   seed,
-  stroke = "#1f1f1f",
+  stroke = palette.ink,
 }: {
   className?: string;
   fill?: string;
@@ -22,6 +24,47 @@ export function RoughBox({
     >
       <path d={outline} fill={fill} stroke={stroke} strokeWidth="1.25" />
       <path d={secondLine} fill="none" stroke={stroke} strokeWidth="0.7" opacity="0.55" />
+    </svg>
+  );
+}
+
+// RoughBox's wobble is tuned for large panels: shrink it to a chip and the
+// deviation lands under a pixel, so the outline flattens into a plain
+// rectangle. This variant keeps a short viewBox and exaggerated control points
+// so the line still reads as drawn at ~80x34px, and lets the strokes overshoot
+// the corners the way a pen does.
+export function RoughTag({
+  className = "",
+  fill = "none",
+  seed,
+  stroke = palette.ink,
+}: {
+  className?: string;
+  fill?: string;
+  seed: number;
+  stroke?: string;
+}) {
+  const drift = ((seed % 5) - 2) * 0.7;
+  const lift = ((seed % 3) - 1) * 0.8;
+  const outline = `M${5 + drift} ${6 - lift} C28 ${3.4 + lift} 64 ${7.6 + lift} ${95 - drift} 4.8 C97.4 14 95.8 27 96.4 ${34 + lift} C66 ${37.4 - lift} 32 ${33.2 + lift} ${5.6 + drift} 35.8 C3.2 26 5.4 15 ${5 + drift} ${6 - lift} Z`;
+  const secondLine = `M${7.5 + drift} ${4.4 + lift} C36 7.8 72 2.6 ${93 - drift} 6.4 C95.8 17 97.2 26 94.6 33 C62 36.4 38 37.2 ${3.4 + drift} 33.4`;
+
+  return (
+    <svg
+      className={`rough-box ${className}`}
+      viewBox="0 0 100 40"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path d={outline} fill={fill} stroke={stroke} strokeWidth="1.5" strokeLinecap="round" />
+      <path
+        d={secondLine}
+        fill="none"
+        stroke={stroke}
+        strokeWidth="0.9"
+        strokeLinecap="round"
+        opacity="0.5"
+      />
     </svg>
   );
 }
