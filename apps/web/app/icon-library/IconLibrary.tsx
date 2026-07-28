@@ -222,7 +222,6 @@ function UsageDrawer({
           <SketchIcon icon={geometry} size={96} roughness={roughness} strokeWidth={strokeWidth} title={icon.label} />
         </div>
         <div>
-          <p className="drawer-kicker">Ready to use</p>
           <h3 id="usage-drawer-title">{icon.label}</h3>
           <p className="drawer-import-name">Import name: <code>{icon.name}</code></p>
         </div>

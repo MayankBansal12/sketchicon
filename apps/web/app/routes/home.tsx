@@ -97,9 +97,7 @@ export default function Home() {
     <div className="site-shell">
       <header className="topbar">
         <a className="brand" href="#top" aria-label="SketchIcon home">
-          <span className="brand-mark">
-            <img src="/logo.svg" alt="" />
-          </span>
+          <img src="/logo.svg" alt="" />
           SketchIcon
         </a>
         <nav className="social-links" aria-label="Project links">
@@ -186,8 +184,12 @@ export default function Home() {
           <img src="/logo.svg" alt="" />
           <span>SketchIcon</span>
         </div>
-        <p>Hand-drawn SVG icons for React.</p>
-        <p className="attribution">Geometry derived from Lucide, licensed under ISC.</p>
+        <p>
+          built by <a className="footer-link" href="https://mayank.fyi" target="_blank" rel="noreferrer">mayank</a>
+        </p>
+        <p className="attribution">
+          credit to <a className="footer-link" href="https://lucide.dev" target="_blank" rel="noreferrer">Lucide</a> and <a className="footer-link" href="https://feathericons.com" target="_blank" rel="noreferrer">Feather</a> for original icons
+        </p>
       </footer>
     </div>
   );

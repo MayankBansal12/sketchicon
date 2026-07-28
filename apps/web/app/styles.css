@@ -51,6 +51,16 @@ body {
   background-size: 24px 24px;
 }
 
+::selection {
+  background: rgba(105, 101, 219, 0.28);
+  color: var(--ink);
+}
+
+::-moz-selection {
+  background: rgba(105, 101, 219, 0.28);
+  color: var(--ink);
+}
+
 button,
 input {
   font: inherit;
@@ -91,20 +101,9 @@ a {
   text-decoration: none;
 }
 
-.brand-mark {
-  display: grid;
-  width: 34px;
-  height: 34px;
-  place-items: center;
-  border: 1px solid #d5d2ca;
-  border-radius: 10px 8px 11px 9px;
-  background: rgba(255, 255, 255, 0.72);
-  transform: rotate(-2deg);
-}
-
-.brand-mark img {
-  width: 20px;
-  height: 20px;
+.brand img {
+  width: 22px;
+  height: 22px;
 }
 
 .social-links {
@@ -120,7 +119,6 @@ a {
   place-items: center;
   border: 1px solid #d8d5ce;
   border-radius: 11px 9px 12px 9px;
-  background: rgba(255, 255, 255, 0.76);
   transition: border-color 160ms ease, transform 160ms var(--ease-out), background-color 160ms ease;
 }
 
@@ -905,6 +903,20 @@ footer p {
   margin: 0;
 }
 
+.footer-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(105, 101, 219, 0.4);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 140ms ease;
+}
+
+.footer-link:hover,
+.footer-link:focus-visible {
+  text-decoration-color: var(--accent);
+}
+
 .footer-brand {
   color: #1f1f1f;
   font-family: "Excalifont", "Comic Sans MS", cursive;
@@ -996,7 +1008,7 @@ footer p {
 
 .drawer-import-name {
   margin: 0;
-  color: var(--muted);
+  color: var(--accent);
   font-family: ui-sans-serif, system-ui, sans-serif;
   font-size: 13px;
 }
@@ -1065,7 +1077,6 @@ input:focus-visible {
 @media (hover: hover) and (pointer: fine) {
   .social-links a:hover {
     border-color: #aaa7a0;
-    background: white;
     transform: translateY(-2px) rotate(-1deg);
   }
 
