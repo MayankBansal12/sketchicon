@@ -3,9 +3,8 @@ import type { MetaFunction } from "react-router";
 import { SketchIcon } from "sketchicon/runtime";
 import Check from "sketchicon/icons/check";
 import Copy from "sketchicon/icons/copy";
-import Package from "sketchicon/icons/package";
-import PencilRuler from "sketchicon/icons/pencil-ruler";
-import Sparkles from "sketchicon/icons/sparkles";
+import Search from "sketchicon/icons/search";
+import SunMedium from "sketchicon/icons/sun-medium";
 
 import { GithubMark, NpmMark } from "../components/BrandMarks";
 import { RoughBox } from "../components/RoughBox";
@@ -80,15 +79,15 @@ export default function Home() {
       <header className="topbar">
         <a className="brand" href="#top" aria-label="SketchIcon home">
           <span className="brand-mark">
-            <SketchIcon icon={PencilRuler} size={20} roughness={1.2} />
+            <img src="/logo.svg" alt="" />
           </span>
           SketchIcon
         </a>
         <nav className="social-links" aria-label="Project links">
-          <a href="https://github.com/MayankBansal12/sketchicon" target="_blank" rel="noreferrer" aria-label="SketchIcon on GitHub">
+          <a href="https://github.com/MayankBansal12/sketchicon" target="_blank" rel="noreferrer" aria-label="View GitHub repo" data-tooltip="View GitHub repo">
             <GithubMark />
           </a>
-          <a href="https://www.npmjs.com/package/sketchicon" target="_blank" rel="noreferrer" aria-label="SketchIcon on npm">
+          <a href="https://www.npmjs.com/package/sketchicon" target="_blank" rel="noreferrer" aria-label="Visit npm package" data-tooltip="Visit npm package">
             <NpmMark />
           </a>
         </nav>
@@ -98,17 +97,17 @@ export default function Home() {
         <section className="hero" aria-labelledby="hero-heading">
           <div className="floating-card floating-card-left" aria-hidden="true">
             <RoughBox seed={7} fill="#fff3bf" />
-            <SketchIcon icon={PencilRuler} size={64} roughness={1.4} />
+            <SketchIcon icon={Search} size={64} roughness={1.4} />
           </div>
           <div className="floating-card floating-card-right" aria-hidden="true">
             <RoughBox seed={13} fill="#e5dbff" />
-            <SketchIcon icon={Sparkles} size={64} roughness={1.4} />
+            <SketchIcon icon={SunMedium} size={64} roughness={1.4} />
           </div>
 
-          <p className="hero-note">1,739 icons · React · SVG</p>
+          <p className="hero-note">1,739 icons · For React</p>
           <h1 id="hero-heading">Icons that feel<br />drawn, not generated.</h1>
           <p className="hero-copy">
-            Familiar interface icons with a loose, human line. Deterministic, accessible, and ready for React.
+            Familiar stroke icons with a loose, human line. Deterministic, accessible, and ready for React.
           </p>
           <button className="install-command" type="button" onClick={copyInstall}>
             <RoughBox seed={19} fill="#6965db" stroke="#514dc5" />
@@ -129,7 +128,7 @@ export default function Home() {
           <div className="section-heading">
             <p className="section-number">01 / The library</p>
             <h2 id="icons-heading">Pick one. Make it yours.</h2>
-            <p>Search the complete set, tune the drawing, then click any icon for ready-to-paste React code.</p>
+            <p>Search the library, customize drawing, click icon for ready-to-paste React.</p>
           </div>
           <IconLibraryBoundary />
         </section>
@@ -137,7 +136,7 @@ export default function Home() {
 
       <footer>
         <div className="footer-brand">
-          <SketchIcon icon={Package} size={22} roughness={1} />
+          <img src="/logo.svg" alt="" />
           <span>SketchIcon</span>
         </div>
         <p>Hand-drawn SVG icons for React.</p>

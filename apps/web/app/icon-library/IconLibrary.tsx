@@ -155,7 +155,8 @@ const IconCard = memo(function IconCard({
       onKeyDown={onKeyDown}
       tabIndex={tabIndex}
       aria-pressed={selected}
-      title={`View ${item.label} usage`}
+      aria-label={`View code for ${item.label}`}
+      data-tooltip="View code for icon"
     >
       <SketchIcon icon={geometry} size={size} roughness={roughness} strokeWidth={strokeWidth} />
       <span>{item.label}</span>
@@ -238,8 +239,8 @@ export default function IconLibrary() {
   const [query, setQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
   const [roughness, setRoughness] = useState(1);
-  const [size, setSize] = useState(32);
-  const [strokeWidth, setStrokeWidth] = useState(2);
+  const [size, setSize] = useState(42);
+  const [strokeWidth, setStrokeWidth] = useState(1.5);
   const [color, setColor] = useState(defaultColor);
   const [activeIconIndex, setActiveIconIndex] = useState(0);
   const [geometries, setGeometries] = useState<CatalogGeometryChunk>(initialGeometries);
