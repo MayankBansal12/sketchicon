@@ -8,6 +8,8 @@ Hand-drawn sketch icons for React, rendered as deterministic inline SVG.
 npm install sketchicon
 ```
 
+SketchIcon is currently in beta. API is stable but be careful while using in production setups. Report any issues to [mayankbansal125@gmail.com](mailto:mayankbansal125@gmail.com) or open a [GitHub issue](https://github.com/MayankBansal12/sketchicon/issues).
+
 ## Use
 
 ```tsx

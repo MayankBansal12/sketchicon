@@ -13,7 +13,7 @@ import "./styles.css";
 export const links: Route.LinksFunction = () => [
   {
     rel: "icon",
-    href: "/logo.svg",
+    href: "/favicon.svg",
     type: "image/svg+xml",
   },
   {

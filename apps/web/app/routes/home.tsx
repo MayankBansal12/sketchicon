@@ -121,7 +121,7 @@ export default function Home() {
             <SketchIcon icon={SunMedium} size={64} roughness={1.4} />
           </div>
 
-          <p className="hero-note">1,739 icons · For React</p>
+          <p className="hero-note">1,739 icons · For React · in beta</p>
           <h1 id="hero-heading">Icons that feel<br />drawn, not generated.</h1>
           <p className="hero-copy">
             Familiar stroke icons with a loose, human line. Deterministic, accessible, and ready for React.
@@ -185,10 +185,10 @@ export default function Home() {
           <span>SketchIcon</span>
         </div>
         <p>
-          built by <a className="footer-link" href="https://mayank.fyi" target="_blank" rel="noreferrer">mayank</a>
+            built by <a className="footer-link" href="https://mayank.fyi" target="_blank" rel="noreferrer">mayank</a> · currently in beta
         </p>
         <p className="attribution">
-          credit to <a className="footer-link" href="https://lucide.dev" target="_blank" rel="noreferrer">Lucide</a> and <a className="footer-link" href="https://feathericons.com" target="_blank" rel="noreferrer">Feather</a> for original icons
+          credit to <a className="footer-link" href="https://lucide.dev" target="_blank" rel="noreferrer">Lucide</a> and <a className="footer-link" href="https://feathericons.com" target="_blank" rel="noreferrer">Feather</a> for original icons · inspired from <a className="footer-link" href="https://excalidraw.com/" target="_blank" rel="noreferrer">excalidraw</a>
         </p>
       </footer>
     </div>
