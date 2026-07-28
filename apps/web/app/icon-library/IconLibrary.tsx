@@ -3,6 +3,7 @@ import { SketchIcon } from "sketchicon/runtime";
 import Check from "sketchicon/icons/check";
 import Copy from "sketchicon/icons/copy";
 import Search from "sketchicon/icons/search";
+import X from "sketchicon/icons/x";
 import {
   memo,
   useDeferredValue,
@@ -16,6 +17,7 @@ import {
 import { useSearchParams } from "react-router";
 
 import { RoughBox } from "../components/RoughBox";
+import { inkColors, palette } from "../theme";
 import type { CatalogIconMetadata } from "../generated/catalog";
 import {
   catalogLoaders,
@@ -28,8 +30,8 @@ const DEFAULT_COLUMNS = 6;
 const DEFAULT_ROW_HEIGHT = 134;
 const MOBILE_ROW_HEIGHT = 118;
 const OVERSCAN_ROWS = 3;
-const defaultColor = "#1f1f1f";
-const colors = [defaultColor, "#6965db", "#e03131", "#2f9e44", "#1971c2"];
+const defaultColor = palette.ink;
+const colors = inkColors;
 const customColorInputId = "custom-ink-color";
 const chunkCache = new Map<number, Promise<CatalogGeometryChunk>>();
 
@@ -211,8 +213,10 @@ function UsageDrawer({
 
   return (
     <aside className="usage-drawer" aria-labelledby="usage-drawer-title">
-      <RoughBox className="drawer-outline" seed={31} stroke="#b8b5ad" />
-      <button className="drawer-close" type="button" onClick={onClose} aria-label="Close usage drawer">×</button>
+      <RoughBox className="drawer-outline" seed={31} stroke={palette.line} />
+      <button className="drawer-close" type="button" onClick={onClose} aria-label="Close usage drawer">
+        <SketchIcon icon={X} size={15} />
+      </button>
       <div className="drawer-summary">
         <div className="drawer-preview" style={{ color }}>
           <SketchIcon icon={geometry} size={96} roughness={roughness} strokeWidth={strokeWidth} title={icon.label} />
@@ -238,7 +242,7 @@ export default function IconLibrary() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
-  const [roughness, setRoughness] = useState(1);
+  const [roughness, setRoughness] = useState(1.5);
   const [size, setSize] = useState(42);
   const [strokeWidth, setStrokeWidth] = useState(1.5);
   const [color, setColor] = useState(defaultColor);

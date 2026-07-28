@@ -1,13 +1,24 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import type { MetaFunction } from "react-router";
 import { SketchIcon } from "sketchicon/runtime";
+import ArrowDown from "sketchicon/icons/arrow-down";
 import Check from "sketchicon/icons/check";
 import Copy from "sketchicon/icons/copy";
 import Search from "sketchicon/icons/search";
 import SunMedium from "sketchicon/icons/sun-medium";
 
 import { GithubMark, NpmMark } from "../components/BrandMarks";
-import { RoughBox } from "../components/RoughBox";
+import { RoughBox, RoughTag } from "../components/RoughBox";
+import { palette } from "../theme";
+
+const packageManagers = [
+  { command: "pnpm add sketchicon", id: "pnpm", label: "pnpm" },
+  { command: "npm install sketchicon", id: "npm", label: "npm" },
+  { command: "yarn add sketchicon", id: "yarn", label: "yarn" },
+  { command: "bun add sketchicon", id: "bun", label: "bun" },
+] as const;
+
+type PackageManagerId = (typeof packageManagers)[number]["id"];
 
 const IconLibrary = lazy(() => import("../icon-library/IconLibrary"));
 
@@ -62,11 +73,19 @@ function LibraryFallback() {
 
 export default function Home() {
   const [installCopyState, setInstallCopyState] = useState<"idle" | "copied" | "failed">("idle");
+  const [packageManager, setPackageManager] = useState<PackageManagerId>("pnpm");
+  const activeCommand =
+    packageManagers.find((manager) => manager.id === packageManager) ?? packageManagers[0];
+
+  function selectPackageManager(id: PackageManagerId) {
+    setPackageManager(id);
+    setInstallCopyState("idle");
+  }
 
   async function copyInstall() {
     try {
       if (!navigator.clipboard) throw new Error("Clipboard access is unavailable.");
-      await navigator.clipboard.writeText("npm install sketchicon");
+      await navigator.clipboard.writeText(activeCommand.command);
       setInstallCopyState("copied");
     } catch {
       setInstallCopyState("failed");
@@ -96,11 +115,11 @@ export default function Home() {
       <main id="top">
         <section className="hero" aria-labelledby="hero-heading">
           <div className="floating-card floating-card-left" aria-hidden="true">
-            <RoughBox seed={7} fill="#fff3bf" />
+            <RoughBox seed={7} fill={palette.highlight} />
             <SketchIcon icon={Search} size={64} roughness={1.4} />
           </div>
           <div className="floating-card floating-card-right" aria-hidden="true">
-            <RoughBox seed={13} fill="#e5dbff" />
+            <RoughBox seed={13} fill={palette.lilac} />
             <SketchIcon icon={SunMedium} size={64} roughness={1.4} />
           </div>
 
@@ -109,18 +128,46 @@ export default function Home() {
           <p className="hero-copy">
             Familiar stroke icons with a loose, human line. Deterministic, accessible, and ready for React.
           </p>
-          <button className="install-command" type="button" onClick={copyInstall}>
-            <RoughBox seed={19} fill="#6965db" stroke="#514dc5" />
-            <span className="prompt">$</span>
-            <code>npm install sketchicon</code>
-            <span className="install-copy-state" aria-live="polite">
-              <SketchIcon icon={installCopyState === "copied" ? Check : Copy} size={18} roughness={0.8} />
-              <span>{installCopyState === "copied" ? "Copied" : installCopyState === "failed" ? "Try again" : "Copy"}</span>
-            </span>
-          </button>
+          <div className="install-block">
+            <div className="install-tabs" role="group" aria-label="Package manager">
+              {packageManagers.map((manager, index) => {
+                const active = manager.id === packageManager;
+                return (
+                  <button
+                    key={manager.id}
+                    className={`install-tab${active ? " active" : ""}`}
+                    type="button"
+                    onClick={() => selectPackageManager(manager.id)}
+                    aria-pressed={active}
+                  >
+                    <RoughTag
+                      seed={11 + index * 9}
+                      fill={active ? palette.accentWash : palette.surface}
+                      stroke={active ? palette.accent : palette.line}
+                    />
+                    <span>{manager.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <button
+              className="install-command"
+              type="button"
+              onClick={copyInstall}
+              aria-label={`Copy install command: ${activeCommand.command}`}
+            >
+              <RoughBox seed={19} fill={palette.accent} stroke={palette.accentStrong} />
+              <span className="prompt">$</span>
+              <code>{activeCommand.command}</code>
+              <span className="install-copy-state" aria-live="polite">
+                <SketchIcon icon={installCopyState === "copied" ? Check : Copy} size={18} roughness={0.8} />
+                <span>{installCopyState === "copied" ? "Copied" : installCopyState === "failed" ? "Try again" : "Copy"}</span>
+              </span>
+            </button>
+          </div>
           <a className="browse-link" href="#icons">
             Browse the whole set
-            <span aria-hidden="true">↓</span>
+            <SketchIcon icon={ArrowDown} size={16} roughness={1} />
           </a>
         </section>
 

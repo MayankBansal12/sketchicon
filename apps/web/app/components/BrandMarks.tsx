@@ -15,10 +15,22 @@ export function GithubMark() {
   return <SketchIcon icon={githubGeometry} roughness={0.8} seed={37} strokeWidth={1.45} />;
 }
 
+// The npm wordmark redrawn as monoline strokes: the filled logo turns to mud
+// once it is sketched, so the letters are simplified to stay legible at 24px.
+const npmGeometry = {
+  viewBox: "0 0 24 24",
+  primitives: [
+    { type: "path", d: "M2.6 7.2 H21.4 V16.8 H2.6 Z" },
+    { type: "path", d: "M5.6 14.6 V10.6" },
+    { type: "path", d: "M5.6 11.3 H7.7 V14.6" },
+    { type: "path", d: "M10.6 16.4 V10.6" },
+    { type: "path", d: "M10.6 10.6 H12.9 V13.4 H10.6" },
+    { type: "path", d: "M15.5 14.6 V10.6" },
+    { type: "path", d: "M15.5 11.3 H17.3 V14.6" },
+    { type: "path", d: "M17.3 11.3 H19.1 V14.6" },
+  ],
+} satisfies SketchGeometry;
+
 export function NpmMark() {
-  return (
-    <svg className="npm-mark" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M0 7.33v8h6.67v1.34H12v-1.34h12v-8H0Zm6.67 6.67H4v-4h2.67v4Zm4 0H8V8.67h5.33V14H12v-4h-1.33v4Zm10.66 0H20v-4h-1.33v4h-1.34v-4H16v4h-1.33V8.67h6.66V14Z" />
-    </svg>
-  );
+  return <SketchIcon className="npm-mark" icon={npmGeometry} roughness={0.7} seed={53} strokeWidth={1.2} />;
 }

@@ -4,7 +4,7 @@ import { primitiveToPath } from "./primitives.js";
 import { createRandom, hashString } from "./random.js";
 import type { SketchGeometry, SketchOptions, SketchPath } from "./types.js";
 
-const DEFAULT_ROUGHNESS = 1;
+const DEFAULT_ROUGHNESS = 1.5;
 const DEFAULT_SEED = 0;
 const BASE_DISPLACEMENT = 0.4;
 const PATH_PRECISION = 1000;

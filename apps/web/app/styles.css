@@ -12,10 +12,24 @@
   font-family: "Excalifont", "Comic Sans MS", cursive;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  --ink: #1f1f1f;
   --accent: #6965db;
+  --accent-strong: #514dc5;
+  --accent-wash: #eeecff;
+  --accent-wash-strong: #f0efff;
+  --accent-edge: #aaa6ee;
   --muted: #6f6d68;
   --line: #dedbd3;
+  --line-strong: #cbc8c0;
   --paper: #fbfaf7;
+  --surface: rgba(255, 255, 255, 0.72);
+  /* Inverted surfaces stay in the warm ink family so code blocks and
+     tooltips read as the same paper-and-ink system as everything else. */
+  --ink-surface: #26251f;
+  --ink-surface-raised: #36342c;
+  --ink-surface-hover: #45423a;
+  --ink-surface-line: #524f45;
+  --ink-surface-text: #f3f1e8;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -150,7 +164,7 @@ a {
 
 .social-links .npm-mark {
   width: 24px;
-  fill: currentColor;
+  height: 24px;
 }
 
 .social-links a:active,
@@ -239,10 +253,59 @@ p {
   line-height: 1.65;
 }
 
+.install-block {
+  display: grid;
+  width: min(460px, 100%);
+  justify-items: center;
+  gap: 12px;
+}
+
+.install-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Outlines come from RoughBox rather than CSS borders, so the tabs sit in the
+   same drawn-by-hand family as the install bar and the floating cards. */
+.install-tab {
+  position: relative;
+  padding: 7px 15px;
+  border: 0;
+  color: #4d4b47;
+  background: transparent;
+  cursor: pointer;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+  line-height: 1.4;
+  transition: color 140ms ease, transform 140ms var(--ease-out);
+}
+
+.install-tab span {
+  position: relative;
+}
+
+.install-tab:nth-child(even) {
+  rotate: -0.7deg;
+}
+
+.install-tab:nth-child(odd) {
+  rotate: 0.6deg;
+}
+
+.install-tab.active {
+  color: var(--accent-strong);
+}
+
+.install-tab:active {
+  transform: scale(0.96);
+}
+
 .install-command {
   position: relative;
   display: grid;
-  width: min(440px, 100%);
+  width: 100%;
   min-height: 64px;
   padding: 0 22px;
   grid-template-columns: auto 1fr auto;
@@ -298,8 +361,8 @@ p {
   text-underline-offset: 5px;
 }
 
-.browse-link span {
-  font-family: ui-sans-serif, system-ui, sans-serif;
+.browse-link svg {
+  transition: transform 160ms var(--ease-out);
 }
 
 .floating-card {
@@ -375,7 +438,7 @@ p {
   max-height: calc(100svh - 40px);
   grid-template-rows: auto minmax(0, 1fr);
   padding: 24px 22px 28px;
-  border: 1px solid #cbc8c0;
+  border: 1px solid var(--line-strong);
   border-radius: 17px 14px 19px 15px;
   background: rgba(255, 255, 255, 0.66);
   box-shadow: 2px 2px 0 rgba(31, 31, 31, 0.035);
@@ -557,8 +620,8 @@ input[type="range"] {
 }
 
 .filter-list button.active {
-  color: #514dc5;
-  background: #eeecff;
+  color: var(--accent-strong);
+  background: var(--accent-wash);
 }
 
 .catalog-panel {
@@ -689,7 +752,7 @@ input[type="range"] {
   padding: 6px 9px;
   border-radius: 7px 6px 8px 6px;
   color: white;
-  background: rgba(54, 54, 58, 0.94);
+  background: var(--ink-surface-raised);
   box-shadow: 0 4px 12px rgba(31, 31, 31, 0.12);
   content: attr(data-tooltip);
   font-family: ui-sans-serif, system-ui, sans-serif;
@@ -710,7 +773,7 @@ input[type="range"] {
   width: 8px;
   height: 8px;
   border-radius: 1px;
-  background: rgba(54, 54, 58, 0.94);
+  background: var(--ink-surface-raised);
   content: "";
   opacity: 0;
   pointer-events: none;
@@ -747,15 +810,15 @@ input[type="range"] {
 .icon-card.selected {
   position: relative;
   z-index: 1;
-  background: #eeecff;
-  box-shadow: inset 0 0 0 1px #918df0;
+  background: var(--accent-wash);
+  box-shadow: inset 0 0 0 1px var(--accent-edge);
 }
 
 .icon-card-loading::before {
   position: static;
   width: 32px;
   height: 32px;
-  border: 1px dashed #cbc8c0;
+  border: 1px dashed var(--line-strong);
   border-radius: 8px;
   background: transparent;
   content: "";
@@ -899,8 +962,6 @@ footer p {
   border-radius: 50%;
   background: white;
   cursor: pointer;
-  font-family: ui-sans-serif, system-ui, sans-serif;
-  font-size: 18px;
   line-height: 1;
   transition: background-color 140ms ease, transform 140ms var(--ease-out);
 }
@@ -949,7 +1010,7 @@ footer p {
   position: relative;
   overflow: hidden;
   border-radius: 10px 8px 11px 9px;
-  background: #242427;
+  background: var(--ink-surface);
 }
 
 .snippet-wrap pre {
@@ -957,7 +1018,7 @@ footer p {
   margin: 0;
   padding: 18px 18px 52px;
   overflow: auto;
-  color: #f1f0eb;
+  color: var(--ink-surface-text);
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   font-size: 12px;
   line-height: 1.65;
@@ -973,10 +1034,10 @@ footer p {
   align-items: center;
   justify-content: center;
   gap: 7px;
-  border: 1px solid #57575c;
-  border-radius: 7px;
-  color: white;
-  background: #36363a;
+  border: 1px solid var(--ink-surface-line);
+  border-radius: 8px 7px 9px 7px;
+  color: var(--ink-surface-text);
+  background: var(--ink-surface-raised);
   cursor: pointer;
   font-family: ui-sans-serif, system-ui, sans-serif;
   font-size: 11px;
@@ -1015,8 +1076,8 @@ input:focus-visible {
   .icon-card:hover {
     position: relative;
     z-index: 1;
-    background: #f0efff;
-    box-shadow: inset 0 0 0 1px #aaa6ee;
+    background: var(--accent-wash-strong);
+    box-shadow: inset 0 0 0 1px var(--accent-edge);
     transform: translateY(-2px) rotate(-0.25deg);
   }
 
@@ -1025,8 +1086,17 @@ input:focus-visible {
     background: #f0efe9;
   }
 
+  .install-tab:hover {
+    color: var(--accent-strong);
+    transform: translateY(-2px);
+  }
+
+  .browse-link:hover svg {
+    transform: translateY(2px);
+  }
+
   .copy-snippet:hover {
-    background: #47474d;
+    background: var(--ink-surface-hover);
   }
 }
 

@@ -48,10 +48,10 @@ describe("SketchIcon", () => {
     expect(markup).toContain('aria-hidden="true"');
   });
 
-  it("uses roughness 1 by default", () => {
+  it("uses roughness 1.5 by default", () => {
     const defaultMarkup = renderToStaticMarkup(createElement(SketchIcon, { icon: geometry }));
     const explicitMarkup = renderToStaticMarkup(
-      createElement(SketchIcon, { icon: geometry, roughness: 1 }),
+      createElement(SketchIcon, { icon: geometry, roughness: 1.5 }),
     );
 
     expect(defaultMarkup).toBe(explicitMarkup);
