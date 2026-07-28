@@ -1,6 +1,6 @@
 {
   "name": "sketchicon",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "description": "Hand-drawn sketch icons for React",
   "keywords": ["icons", "react", "sketch", "hand-drawn", "svg"],
   "type": "module",
@@ -32,7 +32,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@sketchicon/core": "0.1.0"
+    "@sketchicon/core": "0.1.5"
   },
   "peerDependencies": {
     "react": ">=18 <20"
@@ -41,7 +41,9 @@
     "node": ">=20.11.1"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org",
+    "provenance": true
   },
   "repository": {
     "type": "git",

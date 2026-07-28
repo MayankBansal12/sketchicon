@@ -1,6 +1,6 @@
 {
   "name": "@sketchicon/core",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "description": "Deterministic hand-drawn SVG geometry renderer",
   "type": "module",
   "sideEffects": false,
@@ -25,7 +25,9 @@
     "node": ">=20.11.1"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org",
+    "provenance": true
   },
   "repository": {
     "type": "git",

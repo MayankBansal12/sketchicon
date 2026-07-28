@@ -16,6 +16,7 @@
     "check": "npm run build && npm run typecheck && npm test && npm run verify:catalog && npm run verify:package && npm run verify:consumer && npm run verify:bundle && npm run verify:web",
     "dev": "npm run dev -w @sketchicon/web",
     "generate": "node scripts/generate-lucide.mjs",
+    "release:verify": "node scripts/verify-release.mjs",
     "test": "vitest run",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "verify:catalog": "node scripts/verify-catalog.mjs",
