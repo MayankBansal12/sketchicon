@@ -1,0 +1,75 @@
+# SketchIcon Catalog: R
+
+Each entry shows the canonical React export and direct-import slug. Import a slug from `sketchicon/icons/<slug>`. Aliases refer to the same icon geometry.
+
+- [Rabbit](/?icon=rabbit) - `rabbit`
+- [Radar](/?icon=radar) - `radar`
+- [Radiation](/?icon=radiation) - `radiation`
+- [Radical](/?icon=radical) - `radical`
+- [RadioOff](/?icon=radio-off) - `radio-off`
+- [RadioReceiver](/?icon=radio-receiver) - `radio-receiver`
+- [RadioTower](/?icon=radio-tower) - `radio-tower`
+- [Radio](/?icon=radio) - `radio`
+- [Radius](/?icon=radius) - `radius`
+- [Rainbow](/?icon=rainbow) - `rainbow`
+- [Rat](/?icon=rat) - `rat`
+- [Ratio](/?icon=ratio) - `ratio`
+- [ReceiptCent](/?icon=receipt-cent) - `receipt-cent`
+- [ReceiptEuro](/?icon=receipt-euro) - `receipt-euro`
+- [ReceiptIndianRupee](/?icon=receipt-indian-rupee) - `receipt-indian-rupee`
+- [ReceiptJapaneseYen](/?icon=receipt-japanese-yen) - `receipt-japanese-yen`
+- [ReceiptPoundSterling](/?icon=receipt-pound-sterling) - `receipt-pound-sterling`
+- [ReceiptRussianRuble](/?icon=receipt-russian-ruble) - `receipt-russian-ruble`
+- [ReceiptSwissFranc](/?icon=receipt-swiss-franc) - `receipt-swiss-franc`
+- [ReceiptText](/?icon=receipt-text) - `receipt-text`
+- [ReceiptTurkishLira](/?icon=receipt-turkish-lira) - `receipt-turkish-lira`
+- [Receipt](/?icon=receipt) - `receipt`
+- [RectangleCircle](/?icon=rectangle-circle) - `rectangle-circle`
+- [RectangleEllipsis](/?icon=rectangle-ellipsis) - `rectangle-ellipsis`; aliases: `FormInput`
+- [RectangleGoggles](/?icon=rectangle-goggles) - `rectangle-goggles`
+- [RectangleHorizontal](/?icon=rectangle-horizontal) - `rectangle-horizontal`
+- [RectangleVertical](/?icon=rectangle-vertical) - `rectangle-vertical`
+- [Recycle](/?icon=recycle) - `recycle`
+- [Redo2](/?icon=redo-2) - `redo-2`
+- [RedoDot](/?icon=redo-dot) - `redo-dot`
+- [Redo](/?icon=redo) - `redo`
+- [RefreshCcwDot](/?icon=refresh-ccw-dot) - `refresh-ccw-dot`
+- [RefreshCcw](/?icon=refresh-ccw) - `refresh-ccw`
+- [RefreshCwOff](/?icon=refresh-cw-off) - `refresh-cw-off`
+- [RefreshCw](/?icon=refresh-cw) - `refresh-cw`
+- [Refrigerator](/?icon=refrigerator) - `refrigerator`
+- [Regex](/?icon=regex) - `regex`
+- [RemoveFormatting](/?icon=remove-formatting) - `remove-formatting`
+- [Repeat1](/?icon=repeat-1) - `repeat-1`
+- [Repeat2](/?icon=repeat-2) - `repeat-2`
+- [RepeatOff](/?icon=repeat-off) - `repeat-off`
+- [Repeat](/?icon=repeat) - `repeat`
+- [ReplaceAll](/?icon=replace-all) - `replace-all`
+- [Replace](/?icon=replace) - `replace`
+- [ReplyAll](/?icon=reply-all) - `reply-all`
+- [Reply](/?icon=reply) - `reply`
+- [Rewind](/?icon=rewind) - `rewind`
+- [Ribbon](/?icon=ribbon) - `ribbon`
+- [Road](/?icon=road) - `road`
+- [Rocket](/?icon=rocket) - `rocket`
+- [RockingChair](/?icon=rocking-chair) - `rocking-chair`
+- [RollerCoaster](/?icon=roller-coaster) - `roller-coaster`
+- [Rose](/?icon=rose) - `rose`
+- [Rotate3d](/?icon=rotate-3d) - `rotate-3d`; aliases: `Rotate3D`
+- [RotateCcwKey](/?icon=rotate-ccw-key) - `rotate-ccw-key`
+- [RotateCcwSquare](/?icon=rotate-ccw-square) - `rotate-ccw-square`
+- [RotateCcw](/?icon=rotate-ccw) - `rotate-ccw`
+- [RotateCwSquare](/?icon=rotate-cw-square) - `rotate-cw-square`
+- [RotateCw](/?icon=rotate-cw) - `rotate-cw`
+- [RouteOff](/?icon=route-off) - `route-off`
+- [Route](/?icon=route) - `route`
+- [Router](/?icon=router) - `router`
+- [Rows2](/?icon=rows-2) - `rows-2`; aliases: `Rows`
+- [Rows3](/?icon=rows-3) - `rows-3`; aliases: `PanelsTopBottom`
+- [Rows4](/?icon=rows-4) - `rows-4`
+- [Rss](/?icon=rss) - `rss`
+- [RulerDimensionLine](/?icon=ruler-dimension-line) - `ruler-dimension-line`
+- [Ruler](/?icon=ruler) - `ruler`
+- [RussianRuble](/?icon=russian-ruble) - `russian-ruble`
+
+[Back to the catalog index](../catalog.md)

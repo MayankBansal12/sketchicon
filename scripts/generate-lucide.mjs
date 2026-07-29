@@ -12,6 +12,9 @@ const websiteCatalogRoot = path.join(root, "apps", "web", "app", "generated");
 const websiteCatalogChunksRoot = path.join(websiteCatalogRoot, "chunks");
 const websiteCatalogPath = path.join(websiteCatalogRoot, "catalog.ts");
 const websiteCatalogLoadersPath = path.join(websiteCatalogRoot, "loaders.ts");
+const websitePublicIconsRoot = path.join(root, "apps", "web", "public", "icons");
+const websiteMarkdownCatalogRoot = path.join(websitePublicIconsRoot, "catalog");
+const websiteMarkdownCatalogPath = path.join(websitePublicIconsRoot, "catalog.md");
 const websiteCatalogChunkSize = 96;
 const webOnly = process.argv.includes("--web-only");
 const supportedTags = new Set([
@@ -145,8 +148,10 @@ async function readExports() {
 
 if (!webOnly) await rm(outputIconsRoot, { recursive: true, force: true });
 await rm(websiteCatalogRoot, { recursive: true, force: true });
+await rm(websiteMarkdownCatalogRoot, { recursive: true, force: true });
 if (!webOnly) await mkdir(outputIconsRoot, { recursive: true });
 await mkdir(websiteCatalogChunksRoot, { recursive: true });
+await mkdir(websiteMarkdownCatalogRoot, { recursive: true });
 
 const exportsByFile = await readExports();
 const files = (await readdir(iconsRoot))
@@ -293,6 +298,54 @@ await writeFile(
       return `  () => import("./chunks/${chunkName}.js").then((module) => module.geometries),`;
     }),
     "];",
+    "",
+  ].join("\n"),
+);
+
+const markdownCatalogGroups = Map.groupBy(catalog, ({ fileName }) => {
+  const initial = fileName.charAt(0).toLowerCase();
+  return /[a-z]/.test(initial) ? initial : "other";
+});
+const markdownCatalogLinks = [];
+
+for (const [initial, icons] of [...markdownCatalogGroups].sort(([a], [b]) => a.localeCompare(b))) {
+  const title = initial === "other" ? "Other" : initial.toUpperCase();
+  const fileName = `${initial}.md`;
+  markdownCatalogLinks.push(`- [${title}](./catalog/${fileName}) (${icons.length} icons)`);
+
+  await writeFile(
+    path.join(websiteMarkdownCatalogRoot, fileName),
+    [
+      `# SketchIcon Catalog: ${title}`,
+      "",
+      "Each entry shows the canonical React export and direct-import slug. Import a slug from `sketchicon/icons/<slug>`. Aliases refer to the same icon geometry.",
+      "",
+      ...icons.map(({ aliases, exportName, fileName: slug }) => {
+        const alternateAliases = aliases.filter((alias) => alias !== exportName);
+        const aliasText = alternateAliases.length
+          ? `; aliases: ${alternateAliases.map((alias) => `\`${alias}\``).join(", ")}`
+          : "";
+        return `- [${exportName}](/?icon=${slug}) - \`${slug}\`${aliasText}`;
+      }),
+      "",
+      "[Back to the catalog index](../catalog.md)",
+      "",
+    ].join("\n"),
+  );
+}
+
+await writeFile(
+  websiteMarkdownCatalogPath,
+  [
+    "# SketchIcon Catalog",
+    "",
+    `SketchIcon includes ${catalog.length.toLocaleString("en-US")} compatible icons. Open only the alphabetical section needed to avoid loading the complete catalog into context.`,
+    "",
+    "Each icon entry provides its canonical React export, direct-import slug, aliases, and a link to its interactive preview. See [usage documentation](./usage.md) for installation and rendering examples.",
+    "",
+    "## Alphabetical Index",
+    "",
+    ...markdownCatalogLinks,
     "",
   ].join("\n"),
 );

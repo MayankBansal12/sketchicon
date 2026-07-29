@@ -1,0 +1,61 @@
+# SketchIcon Catalog: H
+
+Each entry shows the canonical React export and direct-import slug. Import a slug from `sketchicon/icons/<slug>`. Aliases refer to the same icon geometry.
+
+- [Ham](/?icon=ham) - `ham`
+- [Hamburger](/?icon=hamburger) - `hamburger`
+- [Hammer](/?icon=hammer) - `hammer`
+- [HandCoins](/?icon=hand-coins) - `hand-coins`
+- [HandFist](/?icon=hand-fist) - `hand-fist`
+- [HandGrab](/?icon=hand-grab) - `hand-grab`; aliases: `Grab`
+- [HandHeart](/?icon=hand-heart) - `hand-heart`
+- [HandHelping](/?icon=hand-helping) - `hand-helping`; aliases: `HelpingHand`
+- [HandMetal](/?icon=hand-metal) - `hand-metal`
+- [HandPlatter](/?icon=hand-platter) - `hand-platter`
+- [Hand](/?icon=hand) - `hand`
+- [Handbag](/?icon=handbag) - `handbag`
+- [Handshake](/?icon=handshake) - `handshake`
+- [HardDriveDownload](/?icon=hard-drive-download) - `hard-drive-download`
+- [HardDriveUpload](/?icon=hard-drive-upload) - `hard-drive-upload`
+- [HardDrive](/?icon=hard-drive) - `hard-drive`
+- [HardHat](/?icon=hard-hat) - `hard-hat`
+- [Hash](/?icon=hash) - `hash`
+- [HatGlasses](/?icon=hat-glasses) - `hat-glasses`
+- [Haze](/?icon=haze) - `haze`
+- [Hd](/?icon=hd) - `hd`
+- [HdmiPort](/?icon=hdmi-port) - `hdmi-port`
+- [Heading1](/?icon=heading-1) - `heading-1`
+- [Heading2](/?icon=heading-2) - `heading-2`
+- [Heading3](/?icon=heading-3) - `heading-3`
+- [Heading4](/?icon=heading-4) - `heading-4`
+- [Heading5](/?icon=heading-5) - `heading-5`
+- [Heading6](/?icon=heading-6) - `heading-6`
+- [Heading](/?icon=heading) - `heading`
+- [HeadphoneOff](/?icon=headphone-off) - `headphone-off`
+- [Headphones](/?icon=headphones) - `headphones`
+- [Headset](/?icon=headset) - `headset`
+- [HeartCrack](/?icon=heart-crack) - `heart-crack`
+- [HeartHandshake](/?icon=heart-handshake) - `heart-handshake`
+- [HeartMinus](/?icon=heart-minus) - `heart-minus`
+- [HeartOff](/?icon=heart-off) - `heart-off`
+- [HeartPlus](/?icon=heart-plus) - `heart-plus`
+- [HeartPulse](/?icon=heart-pulse) - `heart-pulse`
+- [HeartX](/?icon=heart-x) - `heart-x`
+- [Heart](/?icon=heart) - `heart`
+- [Heater](/?icon=heater) - `heater`
+- [Helicopter](/?icon=helicopter) - `helicopter`
+- [Hexagon](/?icon=hexagon) - `hexagon`
+- [Highlighter](/?icon=highlighter) - `highlighter`
+- [History](/?icon=history) - `history`
+- [HopOff](/?icon=hop-off) - `hop-off`
+- [Hop](/?icon=hop) - `hop`
+- [Hospital](/?icon=hospital) - `hospital`
+- [Hotel](/?icon=hotel) - `hotel`
+- [Hourglass](/?icon=hourglass) - `hourglass`
+- [HouseHeart](/?icon=house-heart) - `house-heart`
+- [HousePlug](/?icon=house-plug) - `house-plug`
+- [HousePlus](/?icon=house-plus) - `house-plus`
+- [HouseWifi](/?icon=house-wifi) - `house-wifi`
+- [House](/?icon=house) - `house`; aliases: `Home`
+
+[Back to the catalog index](../catalog.md)
