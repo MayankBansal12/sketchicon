@@ -1,6 +1,12 @@
-# SketchIcon
+# sketchicon
 
-SketchIcon renders familiar interface icons with a deterministic, hand-drawn double stroke. Icons remain standard inline SVG and work with server rendering.
+sketchicon renders familiar interface icons with a deterministic hand-drawn stroke. Icons stay standard inline SVG, work with server rendering, and tree-shake like normal React exports.
+
+![sketchicon hero](https://5kas5z928t.ufs.sh/f/wBHVA4PQTleALc26TYKCdjLUTKgwotXfG6krNbqJVaWev8Op)
+
+![sketchicon icon library](https://5kas5z928t.ufs.sh/f/wBHVA4PQTleArhaGpaVZjTaS0yoe3bIXmLQzpq8wHCrskA5K)
+
+<video src="https://5kas5z928t.ufs.sh/f/wBHVA4PQTleAgDzSdhqapQ7thT9Hr0VY6i482SsRAvoCykEF" controls muted playsinline width="100%"></video>
 
 ## Installation
 
@@ -8,7 +14,13 @@ SketchIcon renders familiar interface icons with a deterministic, hand-drawn dou
 npm install sketchicon
 ```
 
-SketchIcon is currently in beta. API is stable but be careful while using in production setups. Report any issues to [mayankbansal125@gmail.com](mailto:mayankbansal125@gmail.com) or open a [GitHub issue](https://github.com/MayankBansal12/sketchicon/issues).
+```sh
+pnpm add sketchicon
+yarn add sketchicon
+bun add sketchicon
+```
+
+Use `sketchicon` for React. Use `@sketchicon/core` only when you need the framework-independent renderer directly.
 
 ## Usage
 
@@ -30,6 +42,13 @@ export function SearchButton() {
 
 Regular SVG props are supported. Named icon imports are tree-shakeable, so unused icon geometry is excluded from application bundles.
 
+Direct icon imports are also available:
+
+```tsx
+import Search from "sketchicon/icons/search";
+import { SketchIcon } from "sketchicon/runtime";
+```
+
 The same component also accepts custom geometry:
 
 ```tsx
@@ -48,6 +67,23 @@ The framework-independent renderer is available from the package subpath:
 ```ts
 import { renderSketch } from "sketchicon/core";
 ```
+
+## Agents and LLMs
+
+sketchicon publishes agent-readable docs at `/llms.txt` on the docs site.
+
+Use it when asking an agent to work with sketchicon. It points to:
+
+- installation and usage docs
+- icon catalog with export names and slugs
+- the interactive icon browser
+
+Agent guidance:
+
+- Prefer named imports from `sketchicon`.
+- Use `sketchicon/icons/<slug>` for direct per-icon imports.
+- Do not copy SVG path data into your app.
+- Give meaningful icons an accessible label. Hide decorative icons with `aria-hidden="true"`.
 
 ## Development
 
