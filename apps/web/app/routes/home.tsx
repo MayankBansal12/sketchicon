@@ -96,9 +96,9 @@ export default function Home() {
   return (
     <div className="site-shell">
       <header className="topbar">
-        <a className="brand" href="#top" aria-label="SketchIcon home">
+        <a className="brand" href="#top" aria-label="sketchicon home">
           <img src="/logo.svg" alt="" />
-          SketchIcon
+          sketchicon
         </a>
         <nav className="social-links" aria-label="Project links">
           <a href="https://github.com/MayankBansal12/sketchicon" target="_blank" rel="noreferrer" aria-label="View GitHub repo" data-tooltip="View GitHub repo">
@@ -182,7 +182,7 @@ export default function Home() {
       <footer>
         <div className="footer-brand">
           <img src="/logo.svg" alt="" />
-          <span>SketchIcon</span>
+          <span>sketchicon</span>
         </div>
         <p>
             built by <a className="footer-link" href="https://mayank.fyi" target="_blank" rel="noreferrer">mayank</a> · currently in beta

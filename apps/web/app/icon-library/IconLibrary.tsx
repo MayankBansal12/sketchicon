@@ -1,8 +1,10 @@
 import type { SketchGeometry } from "sketchicon/core";
 import { SketchIcon } from "sketchicon/runtime";
 import Check from "sketchicon/icons/check";
+import ChevronDown from "sketchicon/icons/chevron-down";
 import Copy from "sketchicon/icons/copy";
 import Search from "sketchicon/icons/search";
+import SlidersHorizontal from "sketchicon/icons/sliders-horizontal";
 import X from "sketchicon/icons/x";
 import {
   memo,
@@ -219,7 +221,7 @@ function UsageDrawer({
       </button>
       <div className="drawer-summary">
         <div className="drawer-preview" style={{ color }}>
-          <SketchIcon icon={geometry} size={96} roughness={roughness} strokeWidth={strokeWidth} title={icon.label} />
+          <SketchIcon icon={geometry} size={size} roughness={roughness} strokeWidth={strokeWidth} title={icon.label} />
         </div>
         <div>
           <h3 id="usage-drawer-title">{icon.label}</h3>
@@ -245,6 +247,7 @@ export default function IconLibrary() {
   const [size, setSize] = useState(42);
   const [strokeWidth, setStrokeWidth] = useState(1.5);
   const [color, setColor] = useState(defaultColor);
+  const [controlsOpen, setControlsOpen] = useState(false);
   const [activeIconIndex, setActiveIconIndex] = useState(0);
   const [geometries, setGeometries] = useState<CatalogGeometryChunk>(initialGeometries);
   const [loadAttempt, setLoadAttempt] = useState(0);
@@ -442,7 +445,26 @@ export default function IconLibrary() {
   return (
     <>
       <div className="library-layout">
-        <aside className="customizer" aria-label="Icon filters and customizer">
+        <aside
+          className={`customizer${controlsOpen ? " is-open" : ""}`}
+          aria-label="Icon filters and customizer"
+        >
+          <button
+            className="customizer-toggle"
+            type="button"
+            aria-expanded={controlsOpen}
+            aria-controls="customizer-body"
+            onClick={() => setControlsOpen((open) => !open)}
+          >
+            <span className="customizer-toggle-label">
+              <SketchIcon icon={SlidersHorizontal} size={17} roughness={0.8} />
+              Customize &amp; filter
+            </span>
+            <span className="customizer-toggle-chevron" aria-hidden="true">
+              <SketchIcon icon={ChevronDown} size={16} roughness={0.8} />
+            </span>
+          </button>
+          <div className="customizer-body" id="customizer-body">
           <div className="control-section">
             <h3>Customize</h3>
             <label className="range-control">
@@ -503,6 +525,7 @@ export default function IconLibrary() {
                 </button>
               ))}
             </div>
+          </div>
           </div>
         </aside>
 
