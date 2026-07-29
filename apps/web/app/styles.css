@@ -251,6 +251,39 @@ p {
   line-height: 1.65;
 }
 
+.hero-links {
+  display: grid;
+  width: min(460px, 100%);
+  margin-top: 14px;
+  justify-items: center;
+  gap: 24px;
+}
+
+.agent-note {
+  margin: 0;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px 7px 9px 7px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.46);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.agent-note a {
+  color: var(--accent-strong);
+  text-decoration-color: var(--accent-edge);
+  text-underline-offset: 3px;
+  transition: color 140ms ease, text-decoration-color 140ms ease;
+}
+
+.agent-note a:hover,
+.agent-note a:focus-visible {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
 .install-block {
   display: grid;
   width: min(460px, 100%);
@@ -351,7 +384,7 @@ p {
 
 .browse-link {
   display: inline-flex;
-  margin-top: 26px;
+  margin: 0;
   align-items: center;
   gap: 8px;
   color: var(--muted);

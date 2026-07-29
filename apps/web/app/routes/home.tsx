@@ -163,10 +163,15 @@ export default function Home() {
               </span>
             </button>
           </div>
-          <a className="browse-link" href="#icons">
-            Browse the whole set
-            <SketchIcon icon={ArrowDown} size={16} roughness={1} />
-          </a>
+          <div className="hero-links">
+            <p className="agent-note">
+              For Agents, use <a href="/llms.txt">llms.txt</a>
+            </p>
+            <a className="browse-link" href="#icons">
+              Browse the whole set
+              <SketchIcon icon={ArrowDown} size={16} roughness={1} />
+            </a>
+          </div>
         </section>
 
         <section className="icon-library" id="icons" aria-labelledby="icons-heading">
