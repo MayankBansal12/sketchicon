@@ -49,6 +49,11 @@ import Search from "sketchicon/icons/search";
 import { SketchIcon } from "sketchicon/runtime";
 ```
 
+Prefer direct icon and runtime imports for SSR, tests, command-line tools, serverless
+cold starts, and other startup-sensitive environments. Application bundlers can
+tree-shake named imports from `sketchicon`, but native ESM loads the complete root
+export graph before it can use a single icon.
+
 The same component also accepts custom geometry:
 
 ```tsx

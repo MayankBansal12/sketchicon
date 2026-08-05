@@ -15,7 +15,7 @@ const websiteCatalogLoadersPath = path.join(websiteCatalogRoot, "loaders.ts");
 const websitePublicIconsRoot = path.join(root, "apps", "web", "public", "icons");
 const websiteMarkdownCatalogRoot = path.join(websitePublicIconsRoot, "catalog");
 const websiteMarkdownCatalogPath = path.join(websitePublicIconsRoot, "catalog.md");
-const websiteCatalogChunkSize = 96;
+const websiteCatalogChunkSize = 72;
 const webOnly = process.argv.includes("--web-only");
 const supportedTags = new Set([
   "svg",

@@ -26,4 +26,10 @@ export const catalogLoaders: readonly CatalogGeometryLoader[] = [
   () => import("./chunks/catalog-016.js").then((module) => module.geometries),
   () => import("./chunks/catalog-017.js").then((module) => module.geometries),
   () => import("./chunks/catalog-018.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-019.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-020.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-021.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-022.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-023.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-024.js").then((module) => module.geometries),
 ];

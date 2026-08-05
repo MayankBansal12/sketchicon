@@ -28,7 +28,7 @@
     }
   },
   "scripts": {
-    "build": "node ../../scripts/clean-dist.mjs && tsc -p tsconfig.build.json && tsup src/runtime.ts src/core.ts --format esm --dts --splitting --out-dir dist --external react --external react/jsx-runtime --external @sketchicon/core",
+    "build": "node ../../scripts/clean-dist.mjs && tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

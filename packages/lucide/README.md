@@ -28,6 +28,17 @@ export function SearchButton() {
 
 Standard SVG props such as `size`, `color`, `strokeWidth` (defaults to `1.5`), and accessibility attributes are supported. Named icon imports are tree-shakeable.
 
+For SSR, tests, command-line tools, serverless cold starts, and other
+startup-sensitive environments, import icons and the runtime directly:
+
+```tsx
+import Search from "sketchicon/icons/search";
+import { SketchIcon } from "sketchicon/runtime";
+```
+
+Application bundlers can tree-shake named imports from `sketchicon`, but native
+ESM loads the complete root export graph before it can use a single icon.
+
 The framework-independent renderer is available from the same installation:
 
 ```ts
