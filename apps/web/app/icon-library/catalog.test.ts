@@ -3,28 +3,34 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { MemoryRouter } from "react-router";
 
-import { iconCatalog } from "../generated/catalog";
+import { lucideCatalog } from "../generated/catalog";
+import { hugeiconsCatalog } from "../generated/hugeicons-catalog";
 import { catalogLoaders } from "../generated/loaders";
+import { iconCount, providerCounts } from "../generated/stats";
 import IconLibrary from "./IconLibrary";
-import { filterCatalog, filterCounts } from "./catalog";
+import { filterCatalog, getFilterCounts } from "./catalog";
+
+const iconCatalog = [...lucideCatalog, ...hugeiconsCatalog];
 
 describe("generated website catalog", () => {
   it("contains unique searchable metadata for every compatible icon", () => {
-    expect(iconCatalog).toHaveLength(1739);
-    expect(new Set(iconCatalog.map((icon) => icon.name)).size).toBe(iconCatalog.length);
-    expect(new Set(iconCatalog.map((icon) => icon.label)).size).toBe(iconCatalog.length);
+    expect(iconCatalog).toHaveLength(iconCount);
+    expect(providerCounts).toEqual({ lucide: 1739, hugeicons: 5303 });
+    expect(new Set(iconCatalog.map((icon) => icon.id)).size).toBe(iconCatalog.length);
     expect(iconCatalog.every((icon) => icon.searchText === icon.searchText.toLowerCase())).toBe(true);
+    expect(hugeiconsCatalog.some((icon) => icon.name === "Bedug02Icon")).toBe(false);
+    expect(hugeiconsCatalog.some((icon) => icon.name === "Menu10Icon")).toBe(false);
   });
 
   it("loads every geometry exactly once from coarse chunks", async () => {
     expect(catalogLoaders.length).toBeGreaterThan(1);
-    expect(catalogLoaders.length).toBeLessThan(30);
+    expect(catalogLoaders.length).toBeLessThan(60);
 
     const chunks = await Promise.all(catalogLoaders.map((loader) => loader()));
-    const names = chunks.flatMap((chunk) => Object.keys(chunk));
-    expect(names).toHaveLength(iconCatalog.length);
-    expect(new Set(names).size).toBe(iconCatalog.length);
-    expect(iconCatalog.every((icon) => chunks[icon.chunkId]?.[icon.name])).toBe(true);
+    const ids = chunks.flatMap((chunk) => Object.keys(chunk));
+    expect(ids).toHaveLength(iconCatalog.length);
+    expect(new Set(ids).size).toBe(iconCatalog.length);
+    expect(iconCatalog.every((icon) => chunks[icon.chunkId]?.[icon.id])).toBe(true);
   });
 
   it("renders the first bounded catalog window without loading placeholders", () => {
@@ -33,19 +39,23 @@ describe("generated website catalog", () => {
     );
     expect(markup.match(/<button class="icon-card"/g)).toHaveLength(48);
     expect(markup).not.toContain("icon-card-loading");
-    expect(markup).toContain("height:38860px");
+    expect(markup).toContain(`height:${Math.ceil(lucideCatalog.length / 6) * 134}px`);
+    expect(markup).toContain("Hugeicons");
   });
 });
 
 describe("catalog filtering", () => {
   it("searches labels, export names, and aliases", () => {
-    expect(filterCatalog("search", "all").some((icon) => icon.name === "Search")).toBe(true);
-    expect(filterCatalog("AlarmCheck", "all").some((icon) => icon.label === "alarm-clock-check")).toBe(true);
-    expect(filterCatalog("arrow left", "all").some((icon) => icon.label === "arrow-left")).toBe(true);
+    expect(filterCatalog(iconCatalog, "search", "all").some((icon) => icon.name === "Search")).toBe(true);
+    expect(filterCatalog(iconCatalog, "AlarmCheck", "all").some((icon) => icon.label === "alarm-clock-check")).toBe(true);
+    expect(filterCatalog(iconCatalog, "arrow left", "all").some((icon) => icon.label === "arrow-left")).toBe(true);
+    expect(filterCatalog(iconCatalog, "home 01", "all", "hugeicons").some((icon) => icon.name === "Home01Icon")).toBe(true);
+    expect(filterCatalog(iconCatalog, "", "all", "lucide").every((icon) => icon.provider === "lucide")).toBe(true);
   });
 
   it("uses stable precomputed filter counts", () => {
+    const filterCounts = getFilterCounts(iconCatalog, "all");
     expect(filterCounts.all).toBe(iconCatalog.length);
-    expect(filterCatalog("", "files")).toHaveLength(filterCounts.files);
+    expect(filterCatalog(iconCatalog, "", "files")).toHaveLength(filterCounts.files);
   });
 });

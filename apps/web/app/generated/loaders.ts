@@ -1,4 +1,4 @@
-// Generated from lucide-static. Do not edit by hand.
+// Generated from Lucide and Hugeicons. Do not edit by hand.
 import type { SketchGeometry } from "sketchicon/core";
 import { geometries as initialGeometries } from "./chunks/catalog-000.js";
 
@@ -26,4 +26,24 @@ export const catalogLoaders: readonly CatalogGeometryLoader[] = [
   () => import("./chunks/catalog-016.js").then((module) => module.geometries),
   () => import("./chunks/catalog-017.js").then((module) => module.geometries),
   () => import("./chunks/catalog-018.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-019.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-020.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-021.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-022.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-023.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-024.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-025.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-026.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-027.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-028.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-029.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-030.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-031.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-032.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-033.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-034.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-035.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-036.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-037.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-038.js").then((module) => module.geometries),
 ];

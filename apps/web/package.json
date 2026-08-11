@@ -7,7 +7,7 @@
     "node": ">=22.22.0 <23"
   },
   "scripts": {
-    "build": "node ../../scripts/generate-lucide.mjs --web-only && react-router build",
+    "build": "node ../../scripts/generate-icons.mjs && react-router build",
     "dev": "react-router dev",
     "typecheck": "react-router typegen && tsc --noEmit"
   },
@@ -18,6 +18,7 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router": "8.3.0",
+    "@sketchicon/lucide": "*",
     "sketchicon": "*"
   },
   "devDependencies": {

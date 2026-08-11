@@ -1,137 +1,428 @@
 # SketchIcon Catalog: F
 
-Each entry shows the canonical React export and direct-import slug. Import a slug from `sketchicon/icons/<slug>`. Aliases refer to the same icon geometry.
+Each entry shows its provider, canonical React export, and direct-import slug.
 
-- [Factory](/?icon=factory) - `factory`
-- [Fan](/?icon=fan) - `fan`
-- [FastForward](/?icon=fast-forward) - `fast-forward`
-- [Feather](/?icon=feather) - `feather`
-- [Fence](/?icon=fence) - `fence`
-- [FerrisWheel](/?icon=ferris-wheel) - `ferris-wheel`
-- [FileArchive](/?icon=file-archive) - `file-archive`
-- [FileAxis3d](/?icon=file-axis-3d) - `file-axis-3d`; aliases: `FileAxis3D`
-- [FileBadge](/?icon=file-badge) - `file-badge`; aliases: `FileBadge2`
-- [FileBox](/?icon=file-box) - `file-box`
-- [FileBracesCorner](/?icon=file-braces-corner) - `file-braces-corner`; aliases: `FileJson2`
-- [FileBraces](/?icon=file-braces) - `file-braces`; aliases: `FileJson`
-- [FileChartColumnIncreasing](/?icon=file-chart-column-increasing) - `file-chart-column-increasing`; aliases: `FileBarChart`
-- [FileChartColumn](/?icon=file-chart-column) - `file-chart-column`; aliases: `FileBarChart2`
-- [FileChartLine](/?icon=file-chart-line) - `file-chart-line`; aliases: `FileLineChart`
-- [FileChartPie](/?icon=file-chart-pie) - `file-chart-pie`; aliases: `FilePieChart`
-- [FileCheckCorner](/?icon=file-check-corner) - `file-check-corner`; aliases: `FileCheck2`
-- [FileCheck](/?icon=file-check) - `file-check`
-- [FileClock](/?icon=file-clock) - `file-clock`
-- [FileCodeCorner](/?icon=file-code-corner) - `file-code-corner`; aliases: `FileCode2`
-- [FileCode](/?icon=file-code) - `file-code`
-- [FileCog](/?icon=file-cog) - `file-cog`; aliases: `FileCog2`
-- [FileDiff](/?icon=file-diff) - `file-diff`
-- [FileDigit](/?icon=file-digit) - `file-digit`
-- [FileDown](/?icon=file-down) - `file-down`
-- [FileExclamationPoint](/?icon=file-exclamation-point) - `file-exclamation-point`; aliases: `FileWarning`
-- [FileHeadphone](/?icon=file-headphone) - `file-headphone`; aliases: `FileAudio`, `FileAudio2`
-- [FileHeart](/?icon=file-heart) - `file-heart`
-- [FileImage](/?icon=file-image) - `file-image`
-- [FileInput](/?icon=file-input) - `file-input`
-- [FileKey](/?icon=file-key) - `file-key`; aliases: `FileKey2`
-- [FileLock](/?icon=file-lock) - `file-lock`; aliases: `FileLock2`
-- [FileMinusCorner](/?icon=file-minus-corner) - `file-minus-corner`; aliases: `FileMinus2`
-- [FileMinus](/?icon=file-minus) - `file-minus`
-- [FileMusic](/?icon=file-music) - `file-music`
-- [FileOutput](/?icon=file-output) - `file-output`
-- [FilePenLine](/?icon=file-pen-line) - `file-pen-line`; aliases: `FileSignature`
-- [FilePen](/?icon=file-pen) - `file-pen`; aliases: `FileEdit`
-- [FilePlay](/?icon=file-play) - `file-play`; aliases: `FileVideo`
-- [FilePlusCorner](/?icon=file-plus-corner) - `file-plus-corner`; aliases: `FilePlus2`
-- [FilePlus](/?icon=file-plus) - `file-plus`
-- [FileQuestionMark](/?icon=file-question-mark) - `file-question-mark`; aliases: `FileQuestion`
-- [FileScan](/?icon=file-scan) - `file-scan`
-- [FileSearchCorner](/?icon=file-search-corner) - `file-search-corner`; aliases: `FileSearch2`
-- [FileSearch](/?icon=file-search) - `file-search`
-- [FileSignal](/?icon=file-signal) - `file-signal`; aliases: `FileVolume2`
-- [FileSliders](/?icon=file-sliders) - `file-sliders`
-- [FileSpreadsheet](/?icon=file-spreadsheet) - `file-spreadsheet`
-- [FileStack](/?icon=file-stack) - `file-stack`
-- [FileSymlink](/?icon=file-symlink) - `file-symlink`
-- [FileTerminal](/?icon=file-terminal) - `file-terminal`
-- [FileText](/?icon=file-text) - `file-text`
-- [FileTypeCorner](/?icon=file-type-corner) - `file-type-corner`; aliases: `FileType2`
-- [FileType](/?icon=file-type) - `file-type`
-- [FileUp](/?icon=file-up) - `file-up`
-- [FileUser](/?icon=file-user) - `file-user`
-- [FileVideoCamera](/?icon=file-video-camera) - `file-video-camera`; aliases: `FileVideo2`
-- [FileVolume](/?icon=file-volume) - `file-volume`
-- [FileXCorner](/?icon=file-x-corner) - `file-x-corner`; aliases: `FileX2`
-- [FileX](/?icon=file-x) - `file-x`
-- [File](/?icon=file) - `file`
-- [Files](/?icon=files) - `files`
-- [Film](/?icon=film) - `film`
-- [FingerprintPattern](/?icon=fingerprint-pattern) - `fingerprint-pattern`; aliases: `Fingerprint`
-- [FireExtinguisher](/?icon=fire-extinguisher) - `fire-extinguisher`
-- [FishOff](/?icon=fish-off) - `fish-off`
-- [FishSymbol](/?icon=fish-symbol) - `fish-symbol`
-- [Fish](/?icon=fish) - `fish`
-- [FishingHook](/?icon=fishing-hook) - `fishing-hook`
-- [FishingRod](/?icon=fishing-rod) - `fishing-rod`
-- [FlagOff](/?icon=flag-off) - `flag-off`
-- [FlagTriangleLeft](/?icon=flag-triangle-left) - `flag-triangle-left`
-- [FlagTriangleRight](/?icon=flag-triangle-right) - `flag-triangle-right`
-- [Flag](/?icon=flag) - `flag`
-- [FlameKindling](/?icon=flame-kindling) - `flame-kindling`
-- [Flame](/?icon=flame) - `flame`
-- [FlashlightOff](/?icon=flashlight-off) - `flashlight-off`
-- [Flashlight](/?icon=flashlight) - `flashlight`
-- [FlaskConicalOff](/?icon=flask-conical-off) - `flask-conical-off`
-- [FlaskConical](/?icon=flask-conical) - `flask-conical`
-- [FlaskRound](/?icon=flask-round) - `flask-round`
-- [FlipHorizontal2](/?icon=flip-horizontal-2) - `flip-horizontal-2`
-- [FlipVertical2](/?icon=flip-vertical-2) - `flip-vertical-2`
-- [Flower2](/?icon=flower-2) - `flower-2`
-- [Flower](/?icon=flower) - `flower`
-- [Focus](/?icon=focus) - `focus`
-- [FoldHorizontal](/?icon=fold-horizontal) - `fold-horizontal`
-- [FoldVertical](/?icon=fold-vertical) - `fold-vertical`
-- [FolderArchive](/?icon=folder-archive) - `folder-archive`
-- [FolderBookmark](/?icon=folder-bookmark) - `folder-bookmark`
-- [FolderCheck](/?icon=folder-check) - `folder-check`
-- [FolderClock](/?icon=folder-clock) - `folder-clock`
-- [FolderClosed](/?icon=folder-closed) - `folder-closed`
-- [FolderCode](/?icon=folder-code) - `folder-code`
-- [FolderCog](/?icon=folder-cog) - `folder-cog`; aliases: `FolderCog2`
-- [FolderDot](/?icon=folder-dot) - `folder-dot`
-- [FolderDown](/?icon=folder-down) - `folder-down`
-- [FolderGit2](/?icon=folder-git-2) - `folder-git-2`
-- [FolderGit](/?icon=folder-git) - `folder-git`
-- [FolderHeart](/?icon=folder-heart) - `folder-heart`
-- [FolderInput](/?icon=folder-input) - `folder-input`
-- [FolderKanban](/?icon=folder-kanban) - `folder-kanban`
-- [FolderKey](/?icon=folder-key) - `folder-key`
-- [FolderLock](/?icon=folder-lock) - `folder-lock`
-- [FolderMinus](/?icon=folder-minus) - `folder-minus`
-- [FolderOpenDot](/?icon=folder-open-dot) - `folder-open-dot`
-- [FolderOpen](/?icon=folder-open) - `folder-open`
-- [FolderOutput](/?icon=folder-output) - `folder-output`
-- [FolderPen](/?icon=folder-pen) - `folder-pen`; aliases: `FolderEdit`
-- [FolderPlus](/?icon=folder-plus) - `folder-plus`
-- [FolderRoot](/?icon=folder-root) - `folder-root`
-- [FolderSearch2](/?icon=folder-search-2) - `folder-search-2`
-- [FolderSearch](/?icon=folder-search) - `folder-search`
-- [FolderSymlink](/?icon=folder-symlink) - `folder-symlink`
-- [FolderSync](/?icon=folder-sync) - `folder-sync`
-- [FolderTree](/?icon=folder-tree) - `folder-tree`
-- [FolderUp](/?icon=folder-up) - `folder-up`
-- [FolderX](/?icon=folder-x) - `folder-x`
-- [Folder](/?icon=folder) - `folder`
-- [Folders](/?icon=folders) - `folders`
-- [Footprints](/?icon=footprints) - `footprints`
-- [Forklift](/?icon=forklift) - `forklift`
-- [Form](/?icon=form) - `form`
-- [Forward](/?icon=forward) - `forward`
-- [Frame](/?icon=frame) - `frame`
-- [Frown](/?icon=frown) - `frown`
-- [Fuel](/?icon=fuel) - `fuel`
-- [Fullscreen](/?icon=fullscreen) - `fullscreen`
-- [FunnelPlus](/?icon=funnel-plus) - `funnel-plus`
-- [FunnelX](/?icon=funnel-x) - `funnel-x`; aliases: `FilterX`
-- [Funnel](/?icon=funnel) - `funnel`; aliases: `Filter`
+- [FaceIdIcon](/?provider=hugeicons&icon=face-id) - hugeicons; `@sketchicon/hugeicons/icons/face-id`
+- [Facebook01Icon](/?provider=hugeicons&icon=facebook-01) - hugeicons; `@sketchicon/hugeicons/icons/facebook-01`; aliases: `FacebookIcon`
+- [Facebook02Icon](/?provider=hugeicons&icon=facebook-02) - hugeicons; `@sketchicon/hugeicons/icons/facebook-02`
+- [FactoryIcon](/?provider=hugeicons&icon=factory) - hugeicons; `@sketchicon/hugeicons/icons/factory`
+- [Factory](/?provider=lucide&icon=factory) - lucide; `@sketchicon/lucide/icons/factory`
+- [Factory01Icon](/?provider=hugeicons&icon=factory-01) - hugeicons; `@sketchicon/hugeicons/icons/factory-01`
+- [Factory02Icon](/?provider=hugeicons&icon=factory-02) - hugeicons; `@sketchicon/hugeicons/icons/factory-02`
+- [FahrenheitIcon](/?provider=hugeicons&icon=fahrenheit) - hugeicons; `@sketchicon/hugeicons/icons/fahrenheit`
+- [FallingStarIcon](/?provider=hugeicons&icon=falling-star) - hugeicons; `@sketchicon/hugeicons/icons/falling-star`
+- [Fan](/?provider=lucide&icon=fan) - lucide; `@sketchicon/lucide/icons/fan`
+- [Fan01Icon](/?provider=hugeicons&icon=fan-01) - hugeicons; `@sketchicon/hugeicons/icons/fan-01`; aliases: `FanIcon`
+- [Fan02Icon](/?provider=hugeicons&icon=fan-02) - hugeicons; `@sketchicon/hugeicons/icons/fan-02`
+- [FastForwardIcon](/?provider=hugeicons&icon=fast-forward) - hugeicons; `@sketchicon/hugeicons/icons/fast-forward`
+- [FastForward](/?provider=lucide&icon=fast-forward) - lucide; `@sketchicon/lucide/icons/fast-forward`
+- [FastWindIcon](/?provider=hugeicons&icon=fast-wind) - hugeicons; `@sketchicon/hugeicons/icons/fast-wind`
+- [FavouriteIcon](/?provider=hugeicons&icon=favourite) - hugeicons; `@sketchicon/hugeicons/icons/favourite`
+- [FavouriteCircleIcon](/?provider=hugeicons&icon=favourite-circle) - hugeicons; `@sketchicon/hugeicons/icons/favourite-circle`
+- [FavouriteSquareIcon](/?provider=hugeicons&icon=favourite-square) - hugeicons; `@sketchicon/hugeicons/icons/favourite-square`
+- [FeatherIcon](/?provider=hugeicons&icon=feather) - hugeicons; `@sketchicon/hugeicons/icons/feather`
+- [Feather](/?provider=lucide&icon=feather) - lucide; `@sketchicon/lucide/icons/feather`
+- [Female02Icon](/?provider=hugeicons&icon=female-02) - hugeicons; `@sketchicon/hugeicons/icons/female-02`
+- [FemaleSymbolIcon](/?provider=hugeicons&icon=female-symbol) - hugeicons; `@sketchicon/hugeicons/icons/female-symbol`
+- [Fence](/?provider=lucide&icon=fence) - lucide; `@sketchicon/lucide/icons/fence`
+- [FencingIcon](/?provider=hugeicons&icon=fencing) - hugeicons; `@sketchicon/hugeicons/icons/fencing`
+- [FencingMaskIcon](/?provider=hugeicons&icon=fencing-mask) - hugeicons; `@sketchicon/hugeicons/icons/fencing-mask`
+- [FerrisWheelIcon](/?provider=hugeicons&icon=ferris-wheel) - hugeicons; `@sketchicon/hugeicons/icons/ferris-wheel`
+- [FerrisWheel](/?provider=lucide&icon=ferris-wheel) - lucide; `@sketchicon/lucide/icons/ferris-wheel`
+- [FerryBoatIcon](/?provider=hugeicons&icon=ferry-boat) - hugeicons; `@sketchicon/hugeicons/icons/ferry-boat`
+- [FigmaIcon](/?provider=hugeicons&icon=figma) - hugeicons; `@sketchicon/hugeicons/icons/figma`
+- [File](/?provider=lucide&icon=file) - lucide; `@sketchicon/lucide/icons/file`
+- [File01Icon](/?provider=hugeicons&icon=file-01) - hugeicons; `@sketchicon/hugeicons/icons/file-01`; aliases: `FileIcon`
+- [File02Icon](/?provider=hugeicons&icon=file-02) - hugeicons; `@sketchicon/hugeicons/icons/file-02`
+- [FileAddIcon](/?provider=hugeicons&icon=file-add) - hugeicons; `@sketchicon/hugeicons/icons/file-add`
+- [FileArchiveIcon](/?provider=hugeicons&icon=file-archive) - hugeicons; `@sketchicon/hugeicons/icons/file-archive`
+- [FileArchive](/?provider=lucide&icon=file-archive) - lucide; `@sketchicon/lucide/icons/file-archive`
+- [FileAttachmentIcon](/?provider=hugeicons&icon=file-attachment) - hugeicons; `@sketchicon/hugeicons/icons/file-attachment`
+- [FileAudioIcon](/?provider=hugeicons&icon=file-audio) - hugeicons; `@sketchicon/hugeicons/icons/file-audio`
+- [FileAxis3d](/?provider=lucide&icon=file-axis-3d) - lucide; `@sketchicon/lucide/icons/file-axis-3d`; aliases: `FileAxis3D`
+- [FileAxisThreeDIcon](/?provider=hugeicons&icon=file-axis-three-d) - hugeicons; `@sketchicon/hugeicons/icons/file-axis-three-d`
+- [FileBadgeIcon](/?provider=hugeicons&icon=file-badge) - hugeicons; `@sketchicon/hugeicons/icons/file-badge`
+- [FileBadge](/?provider=lucide&icon=file-badge) - lucide; `@sketchicon/lucide/icons/file-badge`; aliases: `FileBadge2`
+- [FileBitcoinIcon](/?provider=hugeicons&icon=file-bitcoin) - hugeicons; `@sketchicon/hugeicons/icons/file-bitcoin`
+- [FileBlockIcon](/?provider=hugeicons&icon=file-block) - hugeicons; `@sketchicon/hugeicons/icons/file-block`
+- [FileBookmarkIcon](/?provider=hugeicons&icon=file-bookmark) - hugeicons; `@sketchicon/hugeicons/icons/file-bookmark`
+- [FileBoxIcon](/?provider=hugeicons&icon=file-box) - hugeicons; `@sketchicon/hugeicons/icons/file-box`
+- [FileBox](/?provider=lucide&icon=file-box) - lucide; `@sketchicon/lucide/icons/file-box`
+- [FileBracesIcon](/?provider=hugeicons&icon=file-braces) - hugeicons; `@sketchicon/hugeicons/icons/file-braces`
+- [FileBraces](/?provider=lucide&icon=file-braces) - lucide; `@sketchicon/lucide/icons/file-braces`; aliases: `FileJson`
+- [FileBracesCorner](/?provider=lucide&icon=file-braces-corner) - lucide; `@sketchicon/lucide/icons/file-braces-corner`; aliases: `FileJson2`
+- [FileChartColumnIcon](/?provider=hugeicons&icon=file-chart-column) - hugeicons; `@sketchicon/hugeicons/icons/file-chart-column`
+- [FileChartColumn](/?provider=lucide&icon=file-chart-column) - lucide; `@sketchicon/lucide/icons/file-chart-column`; aliases: `FileBarChart2`
+- [FileChartColumnIncreasingIcon](/?provider=hugeicons&icon=file-chart-column-increasing) - hugeicons; `@sketchicon/hugeicons/icons/file-chart-column-increasing`
+- [FileChartColumnIncreasing](/?provider=lucide&icon=file-chart-column-increasing) - lucide; `@sketchicon/lucide/icons/file-chart-column-increasing`; aliases: `FileBarChart`
+- [FileChartLineIcon](/?provider=hugeicons&icon=file-chart-line) - hugeicons; `@sketchicon/hugeicons/icons/file-chart-line`
+- [FileChartLine](/?provider=lucide&icon=file-chart-line) - lucide; `@sketchicon/lucide/icons/file-chart-line`; aliases: `FileLineChart`
+- [FileChartPieIcon](/?provider=hugeicons&icon=file-chart-pie) - hugeicons; `@sketchicon/hugeicons/icons/file-chart-pie`
+- [FileChartPie](/?provider=lucide&icon=file-chart-pie) - lucide; `@sketchicon/lucide/icons/file-chart-pie`; aliases: `FilePieChart`
+- [FileCheckIcon](/?provider=hugeicons&icon=file-check) - hugeicons; `@sketchicon/hugeicons/icons/file-check`
+- [FileCheck](/?provider=lucide&icon=file-check) - lucide; `@sketchicon/lucide/icons/file-check`
+- [FileCheckCornerIcon](/?provider=hugeicons&icon=file-check-corner) - hugeicons; `@sketchicon/hugeicons/icons/file-check-corner`
+- [FileCheckCorner](/?provider=lucide&icon=file-check-corner) - lucide; `@sketchicon/lucide/icons/file-check-corner`; aliases: `FileCheck2`
+- [FileClockIcon](/?provider=hugeicons&icon=file-clock) - hugeicons; `@sketchicon/hugeicons/icons/file-clock`
+- [FileClock](/?provider=lucide&icon=file-clock) - lucide; `@sketchicon/lucide/icons/file-clock`
+- [FileCloudIcon](/?provider=hugeicons&icon=file-cloud) - hugeicons; `@sketchicon/hugeicons/icons/file-cloud`
+- [FileCodeIcon](/?provider=hugeicons&icon=file-code) - hugeicons; `@sketchicon/hugeicons/icons/file-code`
+- [FileCode](/?provider=lucide&icon=file-code) - lucide; `@sketchicon/lucide/icons/file-code`
+- [FileCodeCornerIcon](/?provider=hugeicons&icon=file-code-corner) - hugeicons; `@sketchicon/hugeicons/icons/file-code-corner`
+- [FileCodeCorner](/?provider=lucide&icon=file-code-corner) - lucide; `@sketchicon/lucide/icons/file-code-corner`; aliases: `FileCode2`
+- [FileCogIcon](/?provider=hugeicons&icon=file-cog) - hugeicons; `@sketchicon/hugeicons/icons/file-cog`
+- [FileCog](/?provider=lucide&icon=file-cog) - lucide; `@sketchicon/lucide/icons/file-cog`; aliases: `FileCog2`
+- [FileCorruptIcon](/?provider=hugeicons&icon=file-corrupt) - hugeicons; `@sketchicon/hugeicons/icons/file-corrupt`
+- [FileDatabaseIcon](/?provider=hugeicons&icon=file-database) - hugeicons; `@sketchicon/hugeicons/icons/file-database`
+- [FileDiffIcon](/?provider=hugeicons&icon=file-diff) - hugeicons; `@sketchicon/hugeicons/icons/file-diff`
+- [FileDiff](/?provider=lucide&icon=file-diff) - lucide; `@sketchicon/lucide/icons/file-diff`
+- [FileDigitIcon](/?provider=hugeicons&icon=file-digit) - hugeicons; `@sketchicon/hugeicons/icons/file-digit`
+- [FileDigit](/?provider=lucide&icon=file-digit) - lucide; `@sketchicon/lucide/icons/file-digit`
+- [FileDollarIcon](/?provider=hugeicons&icon=file-dollar) - hugeicons; `@sketchicon/hugeicons/icons/file-dollar`
+- [FileDownIcon](/?provider=hugeicons&icon=file-down) - hugeicons; `@sketchicon/hugeicons/icons/file-down`
+- [FileDown](/?provider=lucide&icon=file-down) - lucide; `@sketchicon/lucide/icons/file-down`
+- [FileDownloadIcon](/?provider=hugeicons&icon=file-download) - hugeicons; `@sketchicon/hugeicons/icons/file-download`
+- [FileEditIcon](/?provider=hugeicons&icon=file-edit) - hugeicons; `@sketchicon/hugeicons/icons/file-edit`
+- [FileEmpty01Icon](/?provider=hugeicons&icon=file-empty-01) - hugeicons; `@sketchicon/hugeicons/icons/file-empty-01`; aliases: `FileEmptyIcon`
+- [FileEmpty02Icon](/?provider=hugeicons&icon=file-empty-02) - hugeicons; `@sketchicon/hugeicons/icons/file-empty-02`
+- [FileEuroIcon](/?provider=hugeicons&icon=file-euro) - hugeicons; `@sketchicon/hugeicons/icons/file-euro`
+- [FileExclamationPointIcon](/?provider=hugeicons&icon=file-exclamation-point) - hugeicons; `@sketchicon/hugeicons/icons/file-exclamation-point`
+- [FileExclamationPoint](/?provider=lucide&icon=file-exclamation-point) - lucide; `@sketchicon/lucide/icons/file-exclamation-point`; aliases: `FileWarning`
+- [FileExportIcon](/?provider=hugeicons&icon=file-export) - hugeicons; `@sketchicon/hugeicons/icons/file-export`
+- [FileFavouriteIcon](/?provider=hugeicons&icon=file-favourite) - hugeicons; `@sketchicon/hugeicons/icons/file-favourite`
+- [FileHeadphoneIcon](/?provider=hugeicons&icon=file-headphone) - hugeicons; `@sketchicon/hugeicons/icons/file-headphone`
+- [FileHeadphone](/?provider=lucide&icon=file-headphone) - lucide; `@sketchicon/lucide/icons/file-headphone`; aliases: `FileAudio`, `FileAudio2`
+- [FileHeartIcon](/?provider=hugeicons&icon=file-heart) - hugeicons; `@sketchicon/hugeicons/icons/file-heart`
+- [FileHeart](/?provider=lucide&icon=file-heart) - lucide; `@sketchicon/lucide/icons/file-heart`
+- [FileImageIcon](/?provider=hugeicons&icon=file-image) - hugeicons; `@sketchicon/hugeicons/icons/file-image`
+- [FileImage](/?provider=lucide&icon=file-image) - lucide; `@sketchicon/lucide/icons/file-image`
+- [FileImportIcon](/?provider=hugeicons&icon=file-import) - hugeicons; `@sketchicon/hugeicons/icons/file-import`
+- [FileInputIcon](/?provider=hugeicons&icon=file-input) - hugeicons; `@sketchicon/hugeicons/icons/file-input`
+- [FileInput](/?provider=lucide&icon=file-input) - lucide; `@sketchicon/lucide/icons/file-input`
+- [FileKeyIcon](/?provider=hugeicons&icon=file-key) - hugeicons; `@sketchicon/hugeicons/icons/file-key`
+- [FileKey](/?provider=lucide&icon=file-key) - lucide; `@sketchicon/lucide/icons/file-key`; aliases: `FileKey2`
+- [FileLinkIcon](/?provider=hugeicons&icon=file-link) - hugeicons; `@sketchicon/hugeicons/icons/file-link`
+- [FileLockIcon](/?provider=hugeicons&icon=file-lock) - hugeicons; `@sketchicon/hugeicons/icons/file-lock`
+- [FileLock](/?provider=lucide&icon=file-lock) - lucide; `@sketchicon/lucide/icons/file-lock`; aliases: `FileLock2`
+- [FileLockedIcon](/?provider=hugeicons&icon=file-locked) - hugeicons; `@sketchicon/hugeicons/icons/file-locked`
+- [FileManagementIcon](/?provider=hugeicons&icon=file-management) - hugeicons; `@sketchicon/hugeicons/icons/file-management`
+- [FileMinusIcon](/?provider=hugeicons&icon=file-minus) - hugeicons; `@sketchicon/hugeicons/icons/file-minus`
+- [FileMinus](/?provider=lucide&icon=file-minus) - lucide; `@sketchicon/lucide/icons/file-minus`
+- [FileMinusCorner](/?provider=lucide&icon=file-minus-corner) - lucide; `@sketchicon/lucide/icons/file-minus-corner`; aliases: `FileMinus2`
+- [FileMusicIcon](/?provider=hugeicons&icon=file-music) - hugeicons; `@sketchicon/hugeicons/icons/file-music`
+- [FileMusic](/?provider=lucide&icon=file-music) - lucide; `@sketchicon/lucide/icons/file-music`
+- [FileNotFoundIcon](/?provider=hugeicons&icon=file-not-found) - hugeicons; `@sketchicon/hugeicons/icons/file-not-found`
+- [FileOutput](/?provider=lucide&icon=file-output) - lucide; `@sketchicon/lucide/icons/file-output`
+- [FilePasteIcon](/?provider=hugeicons&icon=file-paste) - hugeicons; `@sketchicon/hugeicons/icons/file-paste`
+- [FilePenIcon](/?provider=hugeicons&icon=file-pen) - hugeicons; `@sketchicon/hugeicons/icons/file-pen`
+- [FilePen](/?provider=lucide&icon=file-pen) - lucide; `@sketchicon/lucide/icons/file-pen`; aliases: `FileEdit`
+- [FilePenLine](/?provider=lucide&icon=file-pen-line) - lucide; `@sketchicon/lucide/icons/file-pen-line`; aliases: `FileSignature`
+- [FilePinIcon](/?provider=hugeicons&icon=file-pin) - hugeicons; `@sketchicon/hugeicons/icons/file-pin`
+- [FilePlayIcon](/?provider=hugeicons&icon=file-play) - hugeicons; `@sketchicon/hugeicons/icons/file-play`
+- [FilePlay](/?provider=lucide&icon=file-play) - lucide; `@sketchicon/lucide/icons/file-play`; aliases: `FileVideo`
+- [FilePlusIcon](/?provider=hugeicons&icon=file-plus) - hugeicons; `@sketchicon/hugeicons/icons/file-plus`
+- [FilePlus](/?provider=lucide&icon=file-plus) - lucide; `@sketchicon/lucide/icons/file-plus`
+- [FilePlusCorner](/?provider=lucide&icon=file-plus-corner) - lucide; `@sketchicon/lucide/icons/file-plus-corner`; aliases: `FilePlus2`
+- [FilePoundIcon](/?provider=hugeicons&icon=file-pound) - hugeicons; `@sketchicon/hugeicons/icons/file-pound`
+- [FileQuestionMarkIcon](/?provider=hugeicons&icon=file-question-mark) - hugeicons; `@sketchicon/hugeicons/icons/file-question-mark`
+- [FileQuestionMark](/?provider=lucide&icon=file-question-mark) - lucide; `@sketchicon/lucide/icons/file-question-mark`; aliases: `FileQuestion`
+- [FileRemoveIcon](/?provider=hugeicons&icon=file-remove) - hugeicons; `@sketchicon/hugeicons/icons/file-remove`
+- [FileScanIcon](/?provider=hugeicons&icon=file-scan) - hugeicons; `@sketchicon/hugeicons/icons/file-scan`
+- [FileScan](/?provider=lucide&icon=file-scan) - lucide; `@sketchicon/lucide/icons/file-scan`
+- [FileScriptIcon](/?provider=hugeicons&icon=file-script) - hugeicons; `@sketchicon/hugeicons/icons/file-script`
+- [FileSearchIcon](/?provider=hugeicons&icon=file-search) - hugeicons; `@sketchicon/hugeicons/icons/file-search`
+- [FileSearch](/?provider=lucide&icon=file-search) - lucide; `@sketchicon/lucide/icons/file-search`
+- [FileSearchCorner](/?provider=lucide&icon=file-search-corner) - lucide; `@sketchicon/lucide/icons/file-search-corner`; aliases: `FileSearch2`
+- [FileSecurityIcon](/?provider=hugeicons&icon=file-security) - hugeicons; `@sketchicon/hugeicons/icons/file-security`
+- [FileShredderIcon](/?provider=hugeicons&icon=file-shredder) - hugeicons; `@sketchicon/hugeicons/icons/file-shredder`
+- [FileSignalIcon](/?provider=hugeicons&icon=file-signal) - hugeicons; `@sketchicon/hugeicons/icons/file-signal`
+- [FileSignal](/?provider=lucide&icon=file-signal) - lucide; `@sketchicon/lucide/icons/file-signal`; aliases: `FileVolume2`
+- [FileSlidersIcon](/?provider=hugeicons&icon=file-sliders) - hugeicons; `@sketchicon/hugeicons/icons/file-sliders`
+- [FileSliders](/?provider=lucide&icon=file-sliders) - lucide; `@sketchicon/lucide/icons/file-sliders`
+- [FileSpreadsheetIcon](/?provider=hugeicons&icon=file-spreadsheet) - hugeicons; `@sketchicon/hugeicons/icons/file-spreadsheet`
+- [FileSpreadsheet](/?provider=lucide&icon=file-spreadsheet) - lucide; `@sketchicon/lucide/icons/file-spreadsheet`
+- [FileStackIcon](/?provider=hugeicons&icon=file-stack) - hugeicons; `@sketchicon/hugeicons/icons/file-stack`
+- [FileStack](/?provider=lucide&icon=file-stack) - lucide; `@sketchicon/lucide/icons/file-stack`
+- [FileStarIcon](/?provider=hugeicons&icon=file-star) - hugeicons; `@sketchicon/hugeicons/icons/file-star`
+- [FileSymlink](/?provider=lucide&icon=file-symlink) - lucide; `@sketchicon/lucide/icons/file-symlink`
+- [FileSyncIcon](/?provider=hugeicons&icon=file-sync) - hugeicons; `@sketchicon/hugeicons/icons/file-sync`
+- [FileTerminalIcon](/?provider=hugeicons&icon=file-terminal) - hugeicons; `@sketchicon/hugeicons/icons/file-terminal`
+- [FileTerminal](/?provider=lucide&icon=file-terminal) - lucide; `@sketchicon/lucide/icons/file-terminal`
+- [FileText](/?provider=lucide&icon=file-text) - lucide; `@sketchicon/lucide/icons/file-text`
+- [FileTypeIcon](/?provider=hugeicons&icon=file-type) - hugeicons; `@sketchicon/hugeicons/icons/file-type`
+- [FileType](/?provider=lucide&icon=file-type) - lucide; `@sketchicon/lucide/icons/file-type`
+- [FileTypeCorner](/?provider=lucide&icon=file-type-corner) - lucide; `@sketchicon/lucide/icons/file-type-corner`; aliases: `FileType2`
+- [FileUnknownIcon](/?provider=hugeicons&icon=file-unknown) - hugeicons; `@sketchicon/hugeicons/icons/file-unknown`
+- [FileUnlockedIcon](/?provider=hugeicons&icon=file-unlocked) - hugeicons; `@sketchicon/hugeicons/icons/file-unlocked`
+- [FileUpIcon](/?provider=hugeicons&icon=file-up) - hugeicons; `@sketchicon/hugeicons/icons/file-up`
+- [FileUp](/?provider=lucide&icon=file-up) - lucide; `@sketchicon/lucide/icons/file-up`
+- [FileUploadIcon](/?provider=hugeicons&icon=file-upload) - hugeicons; `@sketchicon/hugeicons/icons/file-upload`
+- [FileUserIcon](/?provider=hugeicons&icon=file-user) - hugeicons; `@sketchicon/hugeicons/icons/file-user`
+- [FileUser](/?provider=lucide&icon=file-user) - lucide; `@sketchicon/lucide/icons/file-user`
+- [FileValidationIcon](/?provider=hugeicons&icon=file-validation) - hugeicons; `@sketchicon/hugeicons/icons/file-validation`
+- [FileVerifiedIcon](/?provider=hugeicons&icon=file-verified) - hugeicons; `@sketchicon/hugeicons/icons/file-verified`
+- [FileVideoIcon](/?provider=hugeicons&icon=file-video) - hugeicons; `@sketchicon/hugeicons/icons/file-video`
+- [FileVideoCameraIcon](/?provider=hugeicons&icon=file-video-camera) - hugeicons; `@sketchicon/hugeicons/icons/file-video-camera`
+- [FileVideoCamera](/?provider=lucide&icon=file-video-camera) - lucide; `@sketchicon/lucide/icons/file-video-camera`; aliases: `FileVideo2`
+- [FileVolumeIcon](/?provider=hugeicons&icon=file-volume) - hugeicons; `@sketchicon/hugeicons/icons/file-volume`
+- [FileVolume](/?provider=lucide&icon=file-volume) - lucide; `@sketchicon/lucide/icons/file-volume`
+- [FileXIcon](/?provider=hugeicons&icon=file-x) - hugeicons; `@sketchicon/hugeicons/icons/file-x`
+- [FileX](/?provider=lucide&icon=file-x) - lucide; `@sketchicon/lucide/icons/file-x`
+- [FileXCornerIcon](/?provider=hugeicons&icon=file-x-corner) - hugeicons; `@sketchicon/hugeicons/icons/file-x-corner`
+- [FileXCorner](/?provider=lucide&icon=file-x-corner) - lucide; `@sketchicon/lucide/icons/file-x-corner`; aliases: `FileX2`
+- [FileYenIcon](/?provider=hugeicons&icon=file-yen) - hugeicons; `@sketchicon/hugeicons/icons/file-yen`
+- [FileZipIcon](/?provider=hugeicons&icon=file-zip) - hugeicons; `@sketchicon/hugeicons/icons/file-zip`
+- [Files](/?provider=lucide&icon=files) - lucide; `@sketchicon/lucide/icons/files`
+- [Files01Icon](/?provider=hugeicons&icon=files-01) - hugeicons; `@sketchicon/hugeicons/icons/files-01`; aliases: `FilesIcon`
+- [Files02Icon](/?provider=hugeicons&icon=files-02) - hugeicons; `@sketchicon/hugeicons/icons/files-02`
+- [Film](/?provider=lucide&icon=film) - lucide; `@sketchicon/lucide/icons/film`
+- [Film01Icon](/?provider=hugeicons&icon=film-01) - hugeicons; `@sketchicon/hugeicons/icons/film-01`; aliases: `FilmIcon`
+- [Film02Icon](/?provider=hugeicons&icon=film-02) - hugeicons; `@sketchicon/hugeicons/icons/film-02`
+- [FilmRoll01Icon](/?provider=hugeicons&icon=film-roll-01) - hugeicons; `@sketchicon/hugeicons/icons/film-roll-01`; aliases: `FilmRollIcon`
+- [FilmRoll02Icon](/?provider=hugeicons&icon=film-roll-02) - hugeicons; `@sketchicon/hugeicons/icons/film-roll-02`
+- [FilterIcon](/?provider=hugeicons&icon=filter) - hugeicons; `@sketchicon/hugeicons/icons/filter`
+- [FilterAddIcon](/?provider=hugeicons&icon=filter-add) - hugeicons; `@sketchicon/hugeicons/icons/filter-add`
+- [FilterEditIcon](/?provider=hugeicons&icon=filter-edit) - hugeicons; `@sketchicon/hugeicons/icons/filter-edit`
+- [FilterHorizontalIcon](/?provider=hugeicons&icon=filter-horizontal) - hugeicons; `@sketchicon/hugeicons/icons/filter-horizontal`
+- [FilterMailIcon](/?provider=hugeicons&icon=filter-mail) - hugeicons; `@sketchicon/hugeicons/icons/filter-mail`
+- [FilterMailCircleIcon](/?provider=hugeicons&icon=filter-mail-circle) - hugeicons; `@sketchicon/hugeicons/icons/filter-mail-circle`
+- [FilterMailEditIcon](/?provider=hugeicons&icon=filter-mail-edit) - hugeicons; `@sketchicon/hugeicons/icons/filter-mail-edit`
+- [FilterMailRemoveIcon](/?provider=hugeicons&icon=filter-mail-remove) - hugeicons; `@sketchicon/hugeicons/icons/filter-mail-remove`
+- [FilterMailSquareIcon](/?provider=hugeicons&icon=filter-mail-square) - hugeicons; `@sketchicon/hugeicons/icons/filter-mail-square`
+- [FilterRemoveIcon](/?provider=hugeicons&icon=filter-remove) - hugeicons; `@sketchicon/hugeicons/icons/filter-remove`
+- [FilterResetIcon](/?provider=hugeicons&icon=filter-reset) - hugeicons; `@sketchicon/hugeicons/icons/filter-reset`
+- [FilterVerticalIcon](/?provider=hugeicons&icon=filter-vertical) - hugeicons; `@sketchicon/hugeicons/icons/filter-vertical`
+- [FingerAccessIcon](/?provider=hugeicons&icon=finger-access) - hugeicons; `@sketchicon/hugeicons/icons/finger-access`
+- [FingerPrintIcon](/?provider=hugeicons&icon=finger-print) - hugeicons; `@sketchicon/hugeicons/icons/finger-print`
+- [FingerPrintAddIcon](/?provider=hugeicons&icon=finger-print-add) - hugeicons; `@sketchicon/hugeicons/icons/finger-print-add`
+- [FingerPrintCheckIcon](/?provider=hugeicons&icon=finger-print-check) - hugeicons; `@sketchicon/hugeicons/icons/finger-print-check`
+- [FingerPrintMinusIcon](/?provider=hugeicons&icon=finger-print-minus) - hugeicons; `@sketchicon/hugeicons/icons/finger-print-minus`
+- [FingerPrintRemoveIcon](/?provider=hugeicons&icon=finger-print-remove) - hugeicons; `@sketchicon/hugeicons/icons/finger-print-remove`
+- [FingerPrintScanIcon](/?provider=hugeicons&icon=finger-print-scan) - hugeicons; `@sketchicon/hugeicons/icons/finger-print-scan`
+- [FingerprintPatternIcon](/?provider=hugeicons&icon=fingerprint-pattern) - hugeicons; `@sketchicon/hugeicons/icons/fingerprint-pattern`
+- [FingerprintPattern](/?provider=lucide&icon=fingerprint-pattern) - lucide; `@sketchicon/lucide/icons/fingerprint-pattern`; aliases: `Fingerprint`
+- [FinsIcon](/?provider=hugeicons&icon=fins) - hugeicons; `@sketchicon/hugeicons/icons/fins`
+- [FireIcon](/?provider=hugeicons&icon=fire) - hugeicons; `@sketchicon/hugeicons/icons/fire`
+- [Fire02Icon](/?provider=hugeicons&icon=fire-02) - hugeicons; `@sketchicon/hugeicons/icons/fire-02`
+- [Fire03Icon](/?provider=hugeicons&icon=fire-03) - hugeicons; `@sketchicon/hugeicons/icons/fire-03`
+- [FireExtinguisherIcon](/?provider=hugeicons&icon=fire-extinguisher) - hugeicons; `@sketchicon/hugeicons/icons/fire-extinguisher`
+- [FireExtinguisher](/?provider=lucide&icon=fire-extinguisher) - lucide; `@sketchicon/lucide/icons/fire-extinguisher`
+- [FirePitIcon](/?provider=hugeicons&icon=fire-pit) - hugeicons; `@sketchicon/hugeicons/icons/fire-pit`
+- [FireSecurityIcon](/?provider=hugeicons&icon=fire-security) - hugeicons; `@sketchicon/hugeicons/icons/fire-security`
+- [FirewallIcon](/?provider=hugeicons&icon=firewall) - hugeicons; `@sketchicon/hugeicons/icons/firewall`
+- [FireworksIcon](/?provider=hugeicons&icon=fireworks) - hugeicons; `@sketchicon/hugeicons/icons/fireworks`
+- [FirstAidKitIcon](/?provider=hugeicons&icon=first-aid-kit) - hugeicons; `@sketchicon/hugeicons/icons/first-aid-kit`
+- [FirstBracketIcon](/?provider=hugeicons&icon=first-bracket) - hugeicons; `@sketchicon/hugeicons/icons/first-bracket`
+- [FirstBracketCircleIcon](/?provider=hugeicons&icon=first-bracket-circle) - hugeicons; `@sketchicon/hugeicons/icons/first-bracket-circle`
+- [FirstBracketSquareIcon](/?provider=hugeicons&icon=first-bracket-square) - hugeicons; `@sketchicon/hugeicons/icons/first-bracket-square`
+- [FishIcon](/?provider=hugeicons&icon=fish) - hugeicons; `@sketchicon/hugeicons/icons/fish`
+- [Fish](/?provider=lucide&icon=fish) - lucide; `@sketchicon/lucide/icons/fish`
+- [FishFoodIcon](/?provider=hugeicons&icon=fish-food) - hugeicons; `@sketchicon/hugeicons/icons/fish-food`
+- [FishOffIcon](/?provider=hugeicons&icon=fish-off) - hugeicons; `@sketchicon/hugeicons/icons/fish-off`
+- [FishOff](/?provider=lucide&icon=fish-off) - lucide; `@sketchicon/lucide/icons/fish-off`
+- [FishSymbolIcon](/?provider=hugeicons&icon=fish-symbol) - hugeicons; `@sketchicon/hugeicons/icons/fish-symbol`
+- [FishSymbol](/?provider=lucide&icon=fish-symbol) - lucide; `@sketchicon/lucide/icons/fish-symbol`
+- [FishingHookIcon](/?provider=hugeicons&icon=fishing-hook) - hugeicons; `@sketchicon/hugeicons/icons/fishing-hook`
+- [FishingHook](/?provider=lucide&icon=fishing-hook) - lucide; `@sketchicon/lucide/icons/fishing-hook`
+- [FishingRodIcon](/?provider=hugeicons&icon=fishing-rod) - hugeicons; `@sketchicon/hugeicons/icons/fishing-rod`
+- [FishingRod](/?provider=lucide&icon=fishing-rod) - lucide; `@sketchicon/lucide/icons/fishing-rod`
+- [FitToScreenIcon](/?provider=hugeicons&icon=fit-to-screen) - hugeicons; `@sketchicon/hugeicons/icons/fit-to-screen`
+- [FiveCircleIcon](/?provider=hugeicons&icon=five-circle) - hugeicons; `@sketchicon/hugeicons/icons/five-circle`
+- [FiveSquareIcon](/?provider=hugeicons&icon=five-square) - hugeicons; `@sketchicon/hugeicons/icons/five-square`
+- [FiverrIcon](/?provider=hugeicons&icon=fiverr) - hugeicons; `@sketchicon/hugeicons/icons/fiverr`
+- [Flag](/?provider=lucide&icon=flag) - lucide; `@sketchicon/lucide/icons/flag`
+- [Flag01Icon](/?provider=hugeicons&icon=flag-01) - hugeicons; `@sketchicon/hugeicons/icons/flag-01`; aliases: `FlagIcon`
+- [Flag02Icon](/?provider=hugeicons&icon=flag-02) - hugeicons; `@sketchicon/hugeicons/icons/flag-02`
+- [Flag03Icon](/?provider=hugeicons&icon=flag-03) - hugeicons; `@sketchicon/hugeicons/icons/flag-03`
+- [FlagOffIcon](/?provider=hugeicons&icon=flag-off) - hugeicons; `@sketchicon/hugeicons/icons/flag-off`
+- [FlagOff](/?provider=lucide&icon=flag-off) - lucide; `@sketchicon/lucide/icons/flag-off`
+- [FlagTriangleLeftIcon](/?provider=hugeicons&icon=flag-triangle-left) - hugeicons; `@sketchicon/hugeicons/icons/flag-triangle-left`
+- [FlagTriangleLeft](/?provider=lucide&icon=flag-triangle-left) - lucide; `@sketchicon/lucide/icons/flag-triangle-left`
+- [FlagTriangleRight](/?provider=lucide&icon=flag-triangle-right) - lucide; `@sketchicon/lucide/icons/flag-triangle-right`
+- [FlameIcon](/?provider=hugeicons&icon=flame) - hugeicons; `@sketchicon/hugeicons/icons/flame`
+- [Flame](/?provider=lucide&icon=flame) - lucide; `@sketchicon/lucide/icons/flame`
+- [FlameKindlingIcon](/?provider=hugeicons&icon=flame-kindling) - hugeicons; `@sketchicon/hugeicons/icons/flame-kindling`
+- [FlameKindling](/?provider=lucide&icon=flame-kindling) - lucide; `@sketchicon/lucide/icons/flame-kindling`
+- [FlashIcon](/?provider=hugeicons&icon=flash) - hugeicons; `@sketchicon/hugeicons/icons/flash`
+- [FlashOffIcon](/?provider=hugeicons&icon=flash-off) - hugeicons; `@sketchicon/hugeicons/icons/flash-off`
+- [FlashlightIcon](/?provider=hugeicons&icon=flashlight) - hugeicons; `@sketchicon/hugeicons/icons/flashlight`
+- [Flashlight](/?provider=lucide&icon=flashlight) - lucide; `@sketchicon/lucide/icons/flashlight`
+- [FlashlightOffIcon](/?provider=hugeicons&icon=flashlight-off) - hugeicons; `@sketchicon/hugeicons/icons/flashlight-off`
+- [FlashlightOff](/?provider=lucide&icon=flashlight-off) - lucide; `@sketchicon/lucide/icons/flashlight-off`
+- [FlaskConicalIcon](/?provider=hugeicons&icon=flask-conical) - hugeicons; `@sketchicon/hugeicons/icons/flask-conical`
+- [FlaskConical](/?provider=lucide&icon=flask-conical) - lucide; `@sketchicon/lucide/icons/flask-conical`
+- [FlaskConicalOffIcon](/?provider=hugeicons&icon=flask-conical-off) - hugeicons; `@sketchicon/hugeicons/icons/flask-conical-off`
+- [FlaskConicalOff](/?provider=lucide&icon=flask-conical-off) - lucide; `@sketchicon/lucide/icons/flask-conical-off`
+- [FlaskRoundIcon](/?provider=hugeicons&icon=flask-round) - hugeicons; `@sketchicon/hugeicons/icons/flask-round`
+- [FlaskRound](/?provider=lucide&icon=flask-round) - lucide; `@sketchicon/lucide/icons/flask-round`
+- [FlaticonIcon](/?provider=hugeicons&icon=flaticon) - hugeicons; `@sketchicon/hugeicons/icons/flaticon`
+- [FlickrIcon](/?provider=hugeicons&icon=flickr) - hugeicons; `@sketchicon/hugeicons/icons/flickr`
+- [FlimSlateIcon](/?provider=hugeicons&icon=flim-slate) - hugeicons; `@sketchicon/hugeicons/icons/flim-slate`
+- [FlipBottomIcon](/?provider=hugeicons&icon=flip-bottom) - hugeicons; `@sketchicon/hugeicons/icons/flip-bottom`
+- [FlipHorizontalIcon](/?provider=hugeicons&icon=flip-horizontal) - hugeicons; `@sketchicon/hugeicons/icons/flip-horizontal`
+- [FlipHorizontal2](/?provider=lucide&icon=flip-horizontal-2) - lucide; `@sketchicon/lucide/icons/flip-horizontal-2`
+- [FlipLeftIcon](/?provider=hugeicons&icon=flip-left) - hugeicons; `@sketchicon/hugeicons/icons/flip-left`
+- [FlipPhoneIcon](/?provider=hugeicons&icon=flip-phone) - hugeicons; `@sketchicon/hugeicons/icons/flip-phone`
+- [FlipRightIcon](/?provider=hugeicons&icon=flip-right) - hugeicons; `@sketchicon/hugeicons/icons/flip-right`
+- [FlipTopIcon](/?provider=hugeicons&icon=flip-top) - hugeicons; `@sketchicon/hugeicons/icons/flip-top`
+- [FlipVerticalIcon](/?provider=hugeicons&icon=flip-vertical) - hugeicons; `@sketchicon/hugeicons/icons/flip-vertical`
+- [FlipVertical2](/?provider=lucide&icon=flip-vertical-2) - lucide; `@sketchicon/lucide/icons/flip-vertical-2`
+- [FloorPlanIcon](/?provider=hugeicons&icon=floor-plan) - hugeicons; `@sketchicon/hugeicons/icons/floor-plan`
+- [FloppyDiskIcon](/?provider=hugeicons&icon=floppy-disk) - hugeicons; `@sketchicon/hugeicons/icons/floppy-disk`
+- [FlowIcon](/?provider=hugeicons&icon=flow) - hugeicons; `@sketchicon/hugeicons/icons/flow`
+- [FlowCircleIcon](/?provider=hugeicons&icon=flow-circle) - hugeicons; `@sketchicon/hugeicons/icons/flow-circle`
+- [FlowConnectionIcon](/?provider=hugeicons&icon=flow-connection) - hugeicons; `@sketchicon/hugeicons/icons/flow-connection`
+- [FlowSquareIcon](/?provider=hugeicons&icon=flow-square) - hugeicons; `@sketchicon/hugeicons/icons/flow-square`
+- [Flowchart01Icon](/?provider=hugeicons&icon=flowchart-01) - hugeicons; `@sketchicon/hugeicons/icons/flowchart-01`; aliases: `FlowchartIcon`
+- [Flowchart02Icon](/?provider=hugeicons&icon=flowchart-02) - hugeicons; `@sketchicon/hugeicons/icons/flowchart-02`
+- [FlowerIcon](/?provider=hugeicons&icon=flower) - hugeicons; `@sketchicon/hugeicons/icons/flower`
+- [Flower](/?provider=lucide&icon=flower) - lucide; `@sketchicon/lucide/icons/flower`
+- [Flower2](/?provider=lucide&icon=flower-2) - lucide; `@sketchicon/lucide/icons/flower-2`
+- [FlowerPotIcon](/?provider=hugeicons&icon=flower-pot) - hugeicons; `@sketchicon/hugeicons/icons/flower-pot`
+- [FlushedIcon](/?provider=hugeicons&icon=flushed) - hugeicons; `@sketchicon/hugeicons/icons/flushed`
+- [FlyingHumanIcon](/?provider=hugeicons&icon=flying-human) - hugeicons; `@sketchicon/hugeicons/icons/flying-human`
+- [FocusIcon](/?provider=hugeicons&icon=focus) - hugeicons; `@sketchicon/hugeicons/icons/focus`
+- [Focus](/?provider=lucide&icon=focus) - lucide; `@sketchicon/lucide/icons/focus`
+- [FocusPointIcon](/?provider=hugeicons&icon=focus-point) - hugeicons; `@sketchicon/hugeicons/icons/focus-point`
+- [FoldHorizontalIcon](/?provider=hugeicons&icon=fold-horizontal) - hugeicons; `@sketchicon/hugeicons/icons/fold-horizontal`
+- [FoldHorizontal](/?provider=lucide&icon=fold-horizontal) - lucide; `@sketchicon/lucide/icons/fold-horizontal`
+- [FoldVertical](/?provider=lucide&icon=fold-vertical) - lucide; `@sketchicon/lucide/icons/fold-vertical`
+- [Folder](/?provider=lucide&icon=folder) - lucide; `@sketchicon/lucide/icons/folder`
+- [Folder01Icon](/?provider=hugeicons&icon=folder-01) - hugeicons; `@sketchicon/hugeicons/icons/folder-01`; aliases: `FolderIcon`
+- [Folder02Icon](/?provider=hugeicons&icon=folder-02) - hugeicons; `@sketchicon/hugeicons/icons/folder-02`
+- [Folder03Icon](/?provider=hugeicons&icon=folder-03) - hugeicons; `@sketchicon/hugeicons/icons/folder-03`
+- [FolderAddIcon](/?provider=hugeicons&icon=folder-add) - hugeicons; `@sketchicon/hugeicons/icons/folder-add`
+- [FolderArchiveIcon](/?provider=hugeicons&icon=folder-archive) - hugeicons; `@sketchicon/hugeicons/icons/folder-archive`
+- [FolderArchive](/?provider=lucide&icon=folder-archive) - lucide; `@sketchicon/lucide/icons/folder-archive`
+- [FolderAttachmentIcon](/?provider=hugeicons&icon=folder-attachment) - hugeicons; `@sketchicon/hugeicons/icons/folder-attachment`
+- [FolderAudioIcon](/?provider=hugeicons&icon=folder-audio) - hugeicons; `@sketchicon/hugeicons/icons/folder-audio`
+- [FolderBlockIcon](/?provider=hugeicons&icon=folder-block) - hugeicons; `@sketchicon/hugeicons/icons/folder-block`
+- [FolderBookmark](/?provider=lucide&icon=folder-bookmark) - lucide; `@sketchicon/lucide/icons/folder-bookmark`
+- [FolderCheckIcon](/?provider=hugeicons&icon=folder-check) - hugeicons; `@sketchicon/hugeicons/icons/folder-check`
+- [FolderCheck](/?provider=lucide&icon=folder-check) - lucide; `@sketchicon/lucide/icons/folder-check`
+- [FolderClockIcon](/?provider=hugeicons&icon=folder-clock) - hugeicons; `@sketchicon/hugeicons/icons/folder-clock`
+- [FolderClock](/?provider=lucide&icon=folder-clock) - lucide; `@sketchicon/lucide/icons/folder-clock`
+- [FolderClosed](/?provider=lucide&icon=folder-closed) - lucide; `@sketchicon/lucide/icons/folder-closed`
+- [FolderCloudIcon](/?provider=hugeicons&icon=folder-cloud) - hugeicons; `@sketchicon/hugeicons/icons/folder-cloud`
+- [FolderCodeIcon](/?provider=hugeicons&icon=folder-code) - hugeicons; `@sketchicon/hugeicons/icons/folder-code`
+- [FolderCode](/?provider=lucide&icon=folder-code) - lucide; `@sketchicon/lucide/icons/folder-code`
+- [FolderCogIcon](/?provider=hugeicons&icon=folder-cog) - hugeicons; `@sketchicon/hugeicons/icons/folder-cog`
+- [FolderCog](/?provider=lucide&icon=folder-cog) - lucide; `@sketchicon/lucide/icons/folder-cog`; aliases: `FolderCog2`
+- [FolderDetailsIcon](/?provider=hugeicons&icon=folder-details) - hugeicons; `@sketchicon/hugeicons/icons/folder-details`
+- [FolderDetailsReferenceIcon](/?provider=hugeicons&icon=folder-details-reference) - hugeicons; `@sketchicon/hugeicons/icons/folder-details-reference`
+- [FolderDotIcon](/?provider=hugeicons&icon=folder-dot) - hugeicons; `@sketchicon/hugeicons/icons/folder-dot`
+- [FolderDot](/?provider=lucide&icon=folder-dot) - lucide; `@sketchicon/lucide/icons/folder-dot`
+- [FolderDown](/?provider=lucide&icon=folder-down) - lucide; `@sketchicon/lucide/icons/folder-down`
+- [FolderDownloadIcon](/?provider=hugeicons&icon=folder-download) - hugeicons; `@sketchicon/hugeicons/icons/folder-download`
+- [FolderEditIcon](/?provider=hugeicons&icon=folder-edit) - hugeicons; `@sketchicon/hugeicons/icons/folder-edit`
+- [FolderExportIcon](/?provider=hugeicons&icon=folder-export) - hugeicons; `@sketchicon/hugeicons/icons/folder-export`
+- [FolderFavouriteIcon](/?provider=hugeicons&icon=folder-favourite) - hugeicons; `@sketchicon/hugeicons/icons/folder-favourite`
+- [FolderFileStorageIcon](/?provider=hugeicons&icon=folder-file-storage) - hugeicons; `@sketchicon/hugeicons/icons/folder-file-storage`
+- [FolderGitIcon](/?provider=hugeicons&icon=folder-git) - hugeicons; `@sketchicon/hugeicons/icons/folder-git`
+- [FolderGit](/?provider=lucide&icon=folder-git) - lucide; `@sketchicon/lucide/icons/folder-git`
+- [FolderGit2](/?provider=lucide&icon=folder-git-2) - lucide; `@sketchicon/lucide/icons/folder-git-2`
+- [FolderGitTwoIcon](/?provider=hugeicons&icon=folder-git-two) - hugeicons; `@sketchicon/hugeicons/icons/folder-git-two`
+- [FolderHeartIcon](/?provider=hugeicons&icon=folder-heart) - hugeicons; `@sketchicon/hugeicons/icons/folder-heart`
+- [FolderHeart](/?provider=lucide&icon=folder-heart) - lucide; `@sketchicon/lucide/icons/folder-heart`
+- [FolderImportIcon](/?provider=hugeicons&icon=folder-import) - hugeicons; `@sketchicon/hugeicons/icons/folder-import`
+- [FolderInputIcon](/?provider=hugeicons&icon=folder-input) - hugeicons; `@sketchicon/hugeicons/icons/folder-input`
+- [FolderInput](/?provider=lucide&icon=folder-input) - lucide; `@sketchicon/lucide/icons/folder-input`
+- [FolderKanbanIcon](/?provider=hugeicons&icon=folder-kanban) - hugeicons; `@sketchicon/hugeicons/icons/folder-kanban`
+- [FolderKanban](/?provider=lucide&icon=folder-kanban) - lucide; `@sketchicon/lucide/icons/folder-kanban`
+- [FolderKeyIcon](/?provider=hugeicons&icon=folder-key) - hugeicons; `@sketchicon/hugeicons/icons/folder-key`
+- [FolderKey](/?provider=lucide&icon=folder-key) - lucide; `@sketchicon/lucide/icons/folder-key`
+- [FolderLinksIcon](/?provider=hugeicons&icon=folder-links) - hugeicons; `@sketchicon/hugeicons/icons/folder-links`
+- [FolderLock](/?provider=lucide&icon=folder-lock) - lucide; `@sketchicon/lucide/icons/folder-lock`
+- [FolderLockedIcon](/?provider=hugeicons&icon=folder-locked) - hugeicons; `@sketchicon/hugeicons/icons/folder-locked`
+- [FolderManagementIcon](/?provider=hugeicons&icon=folder-management) - hugeicons; `@sketchicon/hugeicons/icons/folder-management`
+- [FolderMinusIcon](/?provider=hugeicons&icon=folder-minus) - hugeicons; `@sketchicon/hugeicons/icons/folder-minus`
+- [FolderMinus](/?provider=lucide&icon=folder-minus) - lucide; `@sketchicon/lucide/icons/folder-minus`
+- [FolderMusicIcon](/?provider=hugeicons&icon=folder-music) - hugeicons; `@sketchicon/hugeicons/icons/folder-music`
+- [FolderOffIcon](/?provider=hugeicons&icon=folder-off) - hugeicons; `@sketchicon/hugeicons/icons/folder-off`
+- [FolderOpenIcon](/?provider=hugeicons&icon=folder-open) - hugeicons; `@sketchicon/hugeicons/icons/folder-open`
+- [FolderOpen](/?provider=lucide&icon=folder-open) - lucide; `@sketchicon/lucide/icons/folder-open`
+- [FolderOpenDot](/?provider=lucide&icon=folder-open-dot) - lucide; `@sketchicon/lucide/icons/folder-open-dot`
+- [FolderOutputIcon](/?provider=hugeicons&icon=folder-output) - hugeicons; `@sketchicon/hugeicons/icons/folder-output`
+- [FolderOutput](/?provider=lucide&icon=folder-output) - lucide; `@sketchicon/lucide/icons/folder-output`
+- [FolderPenIcon](/?provider=hugeicons&icon=folder-pen) - hugeicons; `@sketchicon/hugeicons/icons/folder-pen`
+- [FolderPen](/?provider=lucide&icon=folder-pen) - lucide; `@sketchicon/lucide/icons/folder-pen`; aliases: `FolderEdit`
+- [FolderPinIcon](/?provider=hugeicons&icon=folder-pin) - hugeicons; `@sketchicon/hugeicons/icons/folder-pin`
+- [FolderPlus](/?provider=lucide&icon=folder-plus) - lucide; `@sketchicon/lucide/icons/folder-plus`
+- [FolderRemoveIcon](/?provider=hugeicons&icon=folder-remove) - hugeicons; `@sketchicon/hugeicons/icons/folder-remove`
+- [FolderRootIcon](/?provider=hugeicons&icon=folder-root) - hugeicons; `@sketchicon/hugeicons/icons/folder-root`
+- [FolderRoot](/?provider=lucide&icon=folder-root) - lucide; `@sketchicon/lucide/icons/folder-root`
+- [FolderSearchIcon](/?provider=hugeicons&icon=folder-search) - hugeicons; `@sketchicon/hugeicons/icons/folder-search`
+- [FolderSearch](/?provider=lucide&icon=folder-search) - lucide; `@sketchicon/lucide/icons/folder-search`
+- [FolderSearch2](/?provider=lucide&icon=folder-search-2) - lucide; `@sketchicon/lucide/icons/folder-search-2`
+- [FolderSearchTwoIcon](/?provider=hugeicons&icon=folder-search-two) - hugeicons; `@sketchicon/hugeicons/icons/folder-search-two`
+- [FolderSecurityIcon](/?provider=hugeicons&icon=folder-security) - hugeicons; `@sketchicon/hugeicons/icons/folder-security`
+- [FolderShared01Icon](/?provider=hugeicons&icon=folder-shared-01) - hugeicons; `@sketchicon/hugeicons/icons/folder-shared-01`; aliases: `FolderSharedIcon`
+- [FolderShared02Icon](/?provider=hugeicons&icon=folder-shared-02) - hugeicons; `@sketchicon/hugeicons/icons/folder-shared-02`
+- [FolderShared03Icon](/?provider=hugeicons&icon=folder-shared-03) - hugeicons; `@sketchicon/hugeicons/icons/folder-shared-03`
+- [FolderSymlinkIcon](/?provider=hugeicons&icon=folder-symlink) - hugeicons; `@sketchicon/hugeicons/icons/folder-symlink`
+- [FolderSymlink](/?provider=lucide&icon=folder-symlink) - lucide; `@sketchicon/lucide/icons/folder-symlink`
+- [FolderSyncIcon](/?provider=hugeicons&icon=folder-sync) - hugeicons; `@sketchicon/hugeicons/icons/folder-sync`
+- [FolderSync](/?provider=lucide&icon=folder-sync) - lucide; `@sketchicon/lucide/icons/folder-sync`
+- [FolderTransferIcon](/?provider=hugeicons&icon=folder-transfer) - hugeicons; `@sketchicon/hugeicons/icons/folder-transfer`
+- [FolderTreeIcon](/?provider=hugeicons&icon=folder-tree) - hugeicons; `@sketchicon/hugeicons/icons/folder-tree`
+- [FolderTree](/?provider=lucide&icon=folder-tree) - lucide; `@sketchicon/lucide/icons/folder-tree`
+- [FolderUnknownIcon](/?provider=hugeicons&icon=folder-unknown) - hugeicons; `@sketchicon/hugeicons/icons/folder-unknown`
+- [FolderUnlockedIcon](/?provider=hugeicons&icon=folder-unlocked) - hugeicons; `@sketchicon/hugeicons/icons/folder-unlocked`
+- [FolderUp](/?provider=lucide&icon=folder-up) - lucide; `@sketchicon/lucide/icons/folder-up`
+- [FolderUploadIcon](/?provider=hugeicons&icon=folder-upload) - hugeicons; `@sketchicon/hugeicons/icons/folder-upload`
+- [FolderVideoIcon](/?provider=hugeicons&icon=folder-video) - hugeicons; `@sketchicon/hugeicons/icons/folder-video`
+- [FolderViewIcon](/?provider=hugeicons&icon=folder-view) - hugeicons; `@sketchicon/hugeicons/icons/folder-view`
+- [FolderX](/?provider=lucide&icon=folder-x) - lucide; `@sketchicon/lucide/icons/folder-x`
+- [FolderZipIcon](/?provider=hugeicons&icon=folder-zip) - hugeicons; `@sketchicon/hugeicons/icons/folder-zip`
+- [FoldersIcon](/?provider=hugeicons&icon=folders) - hugeicons; `@sketchicon/hugeicons/icons/folders`
+- [Folders](/?provider=lucide&icon=folders) - lucide; `@sketchicon/lucide/icons/folders`
+- [FootballIcon](/?provider=hugeicons&icon=football) - hugeicons; `@sketchicon/hugeicons/icons/football`
+- [FootballPitchIcon](/?provider=hugeicons&icon=football-pitch) - hugeicons; `@sketchicon/hugeicons/icons/football-pitch`
+- [FootprintsIcon](/?provider=hugeicons&icon=footprints) - hugeicons; `@sketchicon/hugeicons/icons/footprints`
+- [Footprints](/?provider=lucide&icon=footprints) - lucide; `@sketchicon/lucide/icons/footprints`
+- [ForgotPasswordIcon](/?provider=hugeicons&icon=forgot-password) - hugeicons; `@sketchicon/hugeicons/icons/forgot-password`
+- [ForkIcon](/?provider=hugeicons&icon=fork) - hugeicons; `@sketchicon/hugeicons/icons/fork`
+- [ForkliftIcon](/?provider=hugeicons&icon=forklift) - hugeicons; `@sketchicon/hugeicons/icons/forklift`
+- [Forklift](/?provider=lucide&icon=forklift) - lucide; `@sketchicon/lucide/icons/forklift`
+- [FormIcon](/?provider=hugeicons&icon=form) - hugeicons; `@sketchicon/hugeicons/icons/form`
+- [Form](/?provider=lucide&icon=form) - lucide; `@sketchicon/lucide/icons/form`
+- [ForrstIcon](/?provider=hugeicons&icon=forrst) - hugeicons; `@sketchicon/hugeicons/icons/forrst`
+- [FortressIcon](/?provider=hugeicons&icon=fortress) - hugeicons; `@sketchicon/hugeicons/icons/fortress`
+- [Forward](/?provider=lucide&icon=forward) - lucide; `@sketchicon/lucide/icons/forward`
+- [Forward01Icon](/?provider=hugeicons&icon=forward-01) - hugeicons; `@sketchicon/hugeicons/icons/forward-01`; aliases: `ForwardIcon`
+- [Forward02Icon](/?provider=hugeicons&icon=forward-02) - hugeicons; `@sketchicon/hugeicons/icons/forward-02`
+- [FourCircleIcon](/?provider=hugeicons&icon=four-circle) - hugeicons; `@sketchicon/hugeicons/icons/four-circle`
+- [FourFinger02Icon](/?provider=hugeicons&icon=four-finger-02) - hugeicons; `@sketchicon/hugeicons/icons/four-finger-02`
+- [FourFinger03Icon](/?provider=hugeicons&icon=four-finger-03) - hugeicons; `@sketchicon/hugeicons/icons/four-finger-03`
+- [FourKIcon](/?provider=hugeicons&icon=four-k) - hugeicons; `@sketchicon/hugeicons/icons/four-k`
+- [FourSquareIcon](/?provider=hugeicons&icon=four-square) - hugeicons; `@sketchicon/hugeicons/icons/four-square`
+- [FrameIcon](/?provider=hugeicons&icon=frame) - hugeicons; `@sketchicon/hugeicons/icons/frame`
+- [Frame](/?provider=lucide&icon=frame) - lucide; `@sketchicon/lucide/icons/frame`
+- [FramerIcon](/?provider=hugeicons&icon=framer) - hugeicons; `@sketchicon/hugeicons/icons/framer`
+- [FrameworksIcon](/?provider=hugeicons&icon=frameworks) - hugeicons; `@sketchicon/hugeicons/icons/frameworks`
+- [FrenchFries01Icon](/?provider=hugeicons&icon=french-fries-01) - hugeicons; `@sketchicon/hugeicons/icons/french-fries-01`; aliases: `FrenchFriesIcon`
+- [FrenchFries02Icon](/?provider=hugeicons&icon=french-fries-02) - hugeicons; `@sketchicon/hugeicons/icons/french-fries-02`
+- [FridgeIcon](/?provider=hugeicons&icon=fridge) - hugeicons; `@sketchicon/hugeicons/icons/fridge`
+- [FrisbeeIcon](/?provider=hugeicons&icon=frisbee) - hugeicons; `@sketchicon/hugeicons/icons/frisbee`
+- [FrownIcon](/?provider=hugeicons&icon=frown) - hugeicons; `@sketchicon/hugeicons/icons/frown`; aliases: `Sad01Icon`, `SadIcon`
+- [Frown](/?provider=lucide&icon=frown) - lucide; `@sketchicon/lucide/icons/frown`
+- [FryIcon](/?provider=hugeicons&icon=fry) - hugeicons; `@sketchicon/hugeicons/icons/fry`
+- [FuelIcon](/?provider=hugeicons&icon=fuel) - hugeicons; `@sketchicon/hugeicons/icons/fuel`
+- [Fuel](/?provider=lucide&icon=fuel) - lucide; `@sketchicon/lucide/icons/fuel`
+- [Fuel01Icon](/?provider=hugeicons&icon=fuel-01) - hugeicons; `@sketchicon/hugeicons/icons/fuel-01`; aliases: `Fuel02Icon`
+- [FuelStationIcon](/?provider=hugeicons&icon=fuel-station) - hugeicons; `@sketchicon/hugeicons/icons/fuel-station`
+- [FullScreenIcon](/?provider=hugeicons&icon=full-screen) - hugeicons; `@sketchicon/hugeicons/icons/full-screen`
+- [FullSignalIcon](/?provider=hugeicons&icon=full-signal) - hugeicons; `@sketchicon/hugeicons/icons/full-signal`
+- [Fullscreen](/?provider=lucide&icon=fullscreen) - lucide; `@sketchicon/lucide/icons/fullscreen`
+- [FunctionIcon](/?provider=hugeicons&icon=function) - hugeicons; `@sketchicon/hugeicons/icons/function`
+- [FunctionCircleIcon](/?provider=hugeicons&icon=function-circle) - hugeicons; `@sketchicon/hugeicons/icons/function-circle`
+- [FunctionOfXIcon](/?provider=hugeicons&icon=function-of-x) - hugeicons; `@sketchicon/hugeicons/icons/function-of-x`
+- [FunctionSquareIcon](/?provider=hugeicons&icon=function-square) - hugeicons; `@sketchicon/hugeicons/icons/function-square`
+- [FunnelIcon](/?provider=hugeicons&icon=funnel) - hugeicons; `@sketchicon/hugeicons/icons/funnel`
+- [Funnel](/?provider=lucide&icon=funnel) - lucide; `@sketchicon/lucide/icons/funnel`; aliases: `Filter`
+- [FunnelPlusIcon](/?provider=hugeicons&icon=funnel-plus) - hugeicons; `@sketchicon/hugeicons/icons/funnel-plus`
+- [FunnelPlus](/?provider=lucide&icon=funnel-plus) - lucide; `@sketchicon/lucide/icons/funnel-plus`
+- [FunnelXIcon](/?provider=hugeicons&icon=funnel-x) - hugeicons; `@sketchicon/hugeicons/icons/funnel-x`
+- [FunnelX](/?provider=lucide&icon=funnel-x) - lucide; `@sketchicon/lucide/icons/funnel-x`; aliases: `FilterX`
 
 [Back to the catalog index](../catalog.md)

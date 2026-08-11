@@ -1,0 +1,48 @@
+{
+  "name": "@sketchicon/hugeicons",
+  "version": "0.2.0",
+  "description": "Hugeicons Core Free geometry for SketchIcon",
+  "keywords": ["icons", "hugeicons", "sketch", "hand-drawn", "svg"],
+  "type": "module",
+  "sideEffects": false,
+  "files": ["dist", "compatibility-report.json", "THIRD_PARTY_NOTICES.md"],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./icons/*": {
+      "types": "./dist/icons/*.d.ts",
+      "import": "./dist/icons/*.js"
+    }
+  },
+  "scripts": {
+    "prebuild": "node ../../scripts/ensure-generated.mjs",
+    "build": "node ../../scripts/clean-dist.mjs && tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sketchicon/core": "0.2.0"
+  },
+  "engines": {
+    "node": ">=20.11.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org",
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MayankBansal12/sketchicon.git",
+    "directory": "packages/hugeicons"
+  },
+  "homepage": "https://github.com/MayankBansal12/sketchicon#readme",
+  "bugs": {
+    "url": "https://github.com/MayankBansal12/sketchicon/issues"
+  },
+  "license": "MIT"
+}

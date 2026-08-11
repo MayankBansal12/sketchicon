@@ -8,16 +8,24 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: /^sketchicon\/icons\/(.+)$/,
+        find: /^@sketchicon\/hugeicons\/icons\/(.+)$/,
+        replacement: `${workspacePath("../../packages/hugeicons/src/icons/")}$1.ts`,
+      },
+      {
+        find: /^@sketchicon\/hugeicons$/,
+        replacement: workspacePath("../../packages/hugeicons/src/index.ts"),
+      },
+      {
+        find: /^@sketchicon\/lucide\/icons\/(.+)$/,
         replacement: `${workspacePath("../../packages/lucide/src/icons/")}$1.ts`,
       },
       {
         find: /^sketchicon\/runtime$/,
-        replacement: workspacePath("../../packages/lucide/src/SketchIcon.tsx"),
+        replacement: workspacePath("../../packages/runtime/src/SketchIcon.tsx"),
       },
       {
         find: /^sketchicon\/core$/,
-        replacement: workspacePath("../../packages/lucide/src/core.ts"),
+        replacement: workspacePath("../../packages/runtime/src/core.ts"),
       },
       {
         find: "@sketchicon/core",
@@ -25,7 +33,7 @@ export default defineConfig({
       },
       {
         find: /^sketchicon$/,
-        replacement: workspacePath("../../packages/lucide/src/index.ts"),
+        replacement: workspacePath("../../packages/runtime/src/index.ts"),
       },
     ],
   },

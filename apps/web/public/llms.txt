@@ -1,6 +1,6 @@
 # SketchIcon
 
-> Deterministic, customizable hand-drawn SVG icons for React, based on Lucide icon geometry.
+> Deterministic, customizable hand-drawn SVG icons for React, based on Lucide and Hugeicons Core Free geometry.
 
 SketchIcon provides tree-shakeable React icons rendered as accessible inline SVG. Use the documentation below to install the package, render icons, and find canonical icon export names and slugs.
 
@@ -17,7 +17,8 @@ SketchIcon provides tree-shakeable React icons rendered as accessible inline SVG
 
 ## Notes
 
-- Prefer named imports from `sketchicon` for normal React usage.
-- Use `sketchicon/icons/<slug>` when a direct per-icon import is preferable.
+- Import the renderer from `sketchicon`.
+- Import Lucide icons from `@sketchicon/lucide` or `@sketchicon/lucide/icons/<slug>`.
+- Import Hugeicons from `@sketchicon/hugeicons` or `@sketchicon/hugeicons/icons/<slug>`.
 - Do not reproduce SVG path data. Import the icon geometry supplied by the package.
 - Give meaningful icons an accessible name with `aria-label` or `title`. Hide decorative icons with `aria-hidden="true"`.

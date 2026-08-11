@@ -1,112 +1,529 @@
 # SketchIcon Catalog: A
 
-Each entry shows the canonical React export and direct-import slug. Import a slug from `sketchicon/icons/<slug>`. Aliases refer to the same icon geometry.
+Each entry shows its provider, canonical React export, and direct-import slug.
 
-- [AArrowDown](/?icon=a-arrow-down) - `a-arrow-down`
-- [AArrowUp](/?icon=a-arrow-up) - `a-arrow-up`
-- [ALargeSmall](/?icon=a-large-small) - `a-large-small`
-- [Accessibility](/?icon=accessibility) - `accessibility`
-- [Activity](/?icon=activity) - `activity`
-- [Ad](/?icon=ad) - `ad`
-- [AirVent](/?icon=air-vent) - `air-vent`
-- [Airplay](/?icon=airplay) - `airplay`
-- [AlarmClockCheck](/?icon=alarm-clock-check) - `alarm-clock-check`; aliases: `AlarmCheck`
-- [AlarmClockMinus](/?icon=alarm-clock-minus) - `alarm-clock-minus`; aliases: `AlarmMinus`
-- [AlarmClockOff](/?icon=alarm-clock-off) - `alarm-clock-off`
-- [AlarmClockPlus](/?icon=alarm-clock-plus) - `alarm-clock-plus`; aliases: `AlarmPlus`
-- [AlarmClock](/?icon=alarm-clock) - `alarm-clock`
-- [AlarmSmoke](/?icon=alarm-smoke) - `alarm-smoke`
-- [Album](/?icon=album) - `album`
-- [AlignCenterHorizontal](/?icon=align-center-horizontal) - `align-center-horizontal`
-- [AlignCenterVertical](/?icon=align-center-vertical) - `align-center-vertical`
-- [AlignEndHorizontal](/?icon=align-end-horizontal) - `align-end-horizontal`
-- [AlignEndVertical](/?icon=align-end-vertical) - `align-end-vertical`
-- [AlignHorizontalDistributeCenter](/?icon=align-horizontal-distribute-center) - `align-horizontal-distribute-center`
-- [AlignHorizontalDistributeEnd](/?icon=align-horizontal-distribute-end) - `align-horizontal-distribute-end`
-- [AlignHorizontalDistributeStart](/?icon=align-horizontal-distribute-start) - `align-horizontal-distribute-start`
-- [AlignHorizontalJustifyCenter](/?icon=align-horizontal-justify-center) - `align-horizontal-justify-center`
-- [AlignHorizontalJustifyEnd](/?icon=align-horizontal-justify-end) - `align-horizontal-justify-end`
-- [AlignHorizontalJustifyStart](/?icon=align-horizontal-justify-start) - `align-horizontal-justify-start`
-- [AlignHorizontalSpaceAround](/?icon=align-horizontal-space-around) - `align-horizontal-space-around`
-- [AlignHorizontalSpaceBetween](/?icon=align-horizontal-space-between) - `align-horizontal-space-between`
-- [AlignStartHorizontal](/?icon=align-start-horizontal) - `align-start-horizontal`
-- [AlignStartVertical](/?icon=align-start-vertical) - `align-start-vertical`
-- [AlignVerticalDistributeCenter](/?icon=align-vertical-distribute-center) - `align-vertical-distribute-center`
-- [AlignVerticalDistributeEnd](/?icon=align-vertical-distribute-end) - `align-vertical-distribute-end`
-- [AlignVerticalDistributeStart](/?icon=align-vertical-distribute-start) - `align-vertical-distribute-start`
-- [AlignVerticalJustifyCenter](/?icon=align-vertical-justify-center) - `align-vertical-justify-center`
-- [AlignVerticalJustifyEnd](/?icon=align-vertical-justify-end) - `align-vertical-justify-end`
-- [AlignVerticalJustifyStart](/?icon=align-vertical-justify-start) - `align-vertical-justify-start`
-- [AlignVerticalSpaceAround](/?icon=align-vertical-space-around) - `align-vertical-space-around`
-- [AlignVerticalSpaceBetween](/?icon=align-vertical-space-between) - `align-vertical-space-between`
-- [Ambulance](/?icon=ambulance) - `ambulance`
-- [Ampersand](/?icon=ampersand) - `ampersand`
-- [Ampersands](/?icon=ampersands) - `ampersands`
-- [Amphora](/?icon=amphora) - `amphora`
-- [Anchor](/?icon=anchor) - `anchor`
-- [Angry](/?icon=angry) - `angry`
-- [Annoyed](/?icon=annoyed) - `annoyed`
-- [Antenna](/?icon=antenna) - `antenna`
-- [Anvil](/?icon=anvil) - `anvil`
-- [Aperture](/?icon=aperture) - `aperture`
-- [AppWindowMac](/?icon=app-window-mac) - `app-window-mac`
-- [AppWindow](/?icon=app-window) - `app-window`
-- [Apple](/?icon=apple) - `apple`
-- [ArchiveRestore](/?icon=archive-restore) - `archive-restore`
-- [ArchiveX](/?icon=archive-x) - `archive-x`
-- [Archive](/?icon=archive) - `archive`
-- [Armchair](/?icon=armchair) - `armchair`
-- [ArrowBigDownDash](/?icon=arrow-big-down-dash) - `arrow-big-down-dash`
-- [ArrowBigDown](/?icon=arrow-big-down) - `arrow-big-down`
-- [ArrowBigLeftDash](/?icon=arrow-big-left-dash) - `arrow-big-left-dash`
-- [ArrowBigLeft](/?icon=arrow-big-left) - `arrow-big-left`
-- [ArrowBigRightDash](/?icon=arrow-big-right-dash) - `arrow-big-right-dash`
-- [ArrowBigRight](/?icon=arrow-big-right) - `arrow-big-right`
-- [ArrowBigUpDash](/?icon=arrow-big-up-dash) - `arrow-big-up-dash`
-- [ArrowBigUp](/?icon=arrow-big-up) - `arrow-big-up`
-- [ArrowDown01](/?icon=arrow-down-0-1) - `arrow-down-0-1`
-- [ArrowDown10](/?icon=arrow-down-1-0) - `arrow-down-1-0`
-- [ArrowDownAZ](/?icon=arrow-down-a-z) - `arrow-down-a-z`; aliases: `ArrowDownAz`
-- [ArrowDownFromLine](/?icon=arrow-down-from-line) - `arrow-down-from-line`
-- [ArrowDownLeft](/?icon=arrow-down-left) - `arrow-down-left`
-- [ArrowDownNarrowWide](/?icon=arrow-down-narrow-wide) - `arrow-down-narrow-wide`
-- [ArrowDownRight](/?icon=arrow-down-right) - `arrow-down-right`
-- [ArrowDownToDot](/?icon=arrow-down-to-dot) - `arrow-down-to-dot`
-- [ArrowDownToLine](/?icon=arrow-down-to-line) - `arrow-down-to-line`
-- [ArrowDownUp](/?icon=arrow-down-up) - `arrow-down-up`
-- [ArrowDownWideNarrow](/?icon=arrow-down-wide-narrow) - `arrow-down-wide-narrow`; aliases: `SortDesc`
-- [ArrowDownZA](/?icon=arrow-down-z-a) - `arrow-down-z-a`; aliases: `ArrowDownZa`
-- [ArrowDown](/?icon=arrow-down) - `arrow-down`
-- [ArrowLeftFromLine](/?icon=arrow-left-from-line) - `arrow-left-from-line`
-- [ArrowLeftRight](/?icon=arrow-left-right) - `arrow-left-right`
-- [ArrowLeftToLine](/?icon=arrow-left-to-line) - `arrow-left-to-line`
-- [ArrowLeft](/?icon=arrow-left) - `arrow-left`
-- [ArrowRightFromLine](/?icon=arrow-right-from-line) - `arrow-right-from-line`
-- [ArrowRightLeft](/?icon=arrow-right-left) - `arrow-right-left`
-- [ArrowRightToLine](/?icon=arrow-right-to-line) - `arrow-right-to-line`
-- [ArrowRight](/?icon=arrow-right) - `arrow-right`
-- [ArrowUp01](/?icon=arrow-up-0-1) - `arrow-up-0-1`
-- [ArrowUp10](/?icon=arrow-up-1-0) - `arrow-up-1-0`
-- [ArrowUpAZ](/?icon=arrow-up-a-z) - `arrow-up-a-z`; aliases: `ArrowUpAz`
-- [ArrowUpDown](/?icon=arrow-up-down) - `arrow-up-down`
-- [ArrowUpFromDot](/?icon=arrow-up-from-dot) - `arrow-up-from-dot`
-- [ArrowUpFromLine](/?icon=arrow-up-from-line) - `arrow-up-from-line`
-- [ArrowUpLeft](/?icon=arrow-up-left) - `arrow-up-left`
-- [ArrowUpNarrowWide](/?icon=arrow-up-narrow-wide) - `arrow-up-narrow-wide`; aliases: `SortAsc`
-- [ArrowUpRight](/?icon=arrow-up-right) - `arrow-up-right`
-- [ArrowUpToLine](/?icon=arrow-up-to-line) - `arrow-up-to-line`
-- [ArrowUpWideNarrow](/?icon=arrow-up-wide-narrow) - `arrow-up-wide-narrow`
-- [ArrowUpZA](/?icon=arrow-up-z-a) - `arrow-up-z-a`; aliases: `ArrowUpZa`
-- [ArrowUp](/?icon=arrow-up) - `arrow-up`
-- [ArrowsUpFromLine](/?icon=arrows-up-from-line) - `arrows-up-from-line`
-- [Asterisk](/?icon=asterisk) - `asterisk`
-- [Astroid](/?icon=astroid) - `astroid`
-- [AtSign](/?icon=at-sign) - `at-sign`
-- [Atom](/?icon=atom) - `atom`
-- [AudioLines](/?icon=audio-lines) - `audio-lines`
-- [AudioWaveform](/?icon=audio-waveform) - `audio-waveform`
-- [Award](/?icon=award) - `award`
-- [Axe](/?icon=axe) - `axe`
-- [Axis3d](/?icon=axis-3d) - `axis-3d`; aliases: `Axis3D`
+- [AArrowDownIcon](/?provider=hugeicons&icon=a-arrow-down) - hugeicons; `@sketchicon/hugeicons/icons/a-arrow-down`
+- [AArrowDown](/?provider=lucide&icon=a-arrow-down) - lucide; `@sketchicon/lucide/icons/a-arrow-down`
+- [AArrowUpIcon](/?provider=hugeicons&icon=a-arrow-up) - hugeicons; `@sketchicon/hugeicons/icons/a-arrow-up`
+- [AArrowUp](/?provider=lucide&icon=a-arrow-up) - lucide; `@sketchicon/lucide/icons/a-arrow-up`
+- [ALargeSmallIcon](/?provider=hugeicons&icon=a-large-small) - hugeicons; `@sketchicon/hugeicons/icons/a-large-small`
+- [ALargeSmall](/?provider=lucide&icon=a-large-small) - lucide; `@sketchicon/lucide/icons/a-large-small`
+- [AbacusIcon](/?provider=hugeicons&icon=abacus) - hugeicons; `@sketchicon/hugeicons/icons/abacus`
+- [AbsoluteIcon](/?provider=hugeicons&icon=absolute) - hugeicons; `@sketchicon/hugeicons/icons/absolute`
+- [AccelerationIcon](/?provider=hugeicons&icon=acceleration) - hugeicons; `@sketchicon/hugeicons/icons/acceleration`
+- [AccessibilityIcon](/?provider=hugeicons&icon=accessibility) - hugeicons; `@sketchicon/hugeicons/icons/accessibility`
+- [Accessibility](/?provider=lucide&icon=accessibility) - lucide; `@sketchicon/lucide/icons/accessibility`
+- [AccidentIcon](/?provider=hugeicons&icon=accident) - hugeicons; `@sketchicon/hugeicons/icons/accident`
+- [AccountRecoveryIcon](/?provider=hugeicons&icon=account-recovery) - hugeicons; `@sketchicon/hugeicons/icons/account-recovery`
+- [AccountSetting01Icon](/?provider=hugeicons&icon=account-setting-01) - hugeicons; `@sketchicon/hugeicons/icons/account-setting-01`; aliases: `AccountSettingIcon`
+- [AccountSetting02Icon](/?provider=hugeicons&icon=account-setting-02) - hugeicons; `@sketchicon/hugeicons/icons/account-setting-02`
+- [AccountSetting03Icon](/?provider=hugeicons&icon=account-setting-03) - hugeicons; `@sketchicon/hugeicons/icons/account-setting-03`
+- [Activity](/?provider=lucide&icon=activity) - lucide; `@sketchicon/lucide/icons/activity`
+- [Activity01Icon](/?provider=hugeicons&icon=activity-01) - hugeicons; `@sketchicon/hugeicons/icons/activity-01`; aliases: `ActivityIcon`
+- [Activity02Icon](/?provider=hugeicons&icon=activity-02) - hugeicons; `@sketchicon/hugeicons/icons/activity-02`
+- [Activity03Icon](/?provider=hugeicons&icon=activity-03) - hugeicons; `@sketchicon/hugeicons/icons/activity-03`
+- [Activity04Icon](/?provider=hugeicons&icon=activity-04) - hugeicons; `@sketchicon/hugeicons/icons/activity-04`
+- [Activity05Icon](/?provider=hugeicons&icon=activity-05) - hugeicons; `@sketchicon/hugeicons/icons/activity-05`
+- [ActivityCircleIcon](/?provider=hugeicons&icon=activity-circle) - hugeicons; `@sketchicon/hugeicons/icons/activity-circle`
+- [ActivitySparkIcon](/?provider=hugeicons&icon=activity-spark) - hugeicons; `@sketchicon/hugeicons/icons/activity-spark`
+- [Ad](/?provider=lucide&icon=ad) - lucide; `@sketchicon/lucide/icons/ad`
+- [Add01Icon](/?provider=hugeicons&icon=add-01) - hugeicons; `@sketchicon/hugeicons/icons/add-01`; aliases: `AddIcon`
+- [Add02Icon](/?provider=hugeicons&icon=add-02) - hugeicons; `@sketchicon/hugeicons/icons/add-02`
+- [AddCircleIcon](/?provider=hugeicons&icon=add-circle) - hugeicons; `@sketchicon/hugeicons/icons/add-circle`
+- [AddCircleHalfDotIcon](/?provider=hugeicons&icon=add-circle-half-dot) - hugeicons; `@sketchicon/hugeicons/icons/add-circle-half-dot`
+- [AddFemaleIcon](/?provider=hugeicons&icon=add-female) - hugeicons; `@sketchicon/hugeicons/icons/add-female`
+- [AddInvoiceIcon](/?provider=hugeicons&icon=add-invoice) - hugeicons; `@sketchicon/hugeicons/icons/add-invoice`
+- [AddMaleIcon](/?provider=hugeicons&icon=add-male) - hugeicons; `@sketchicon/hugeicons/icons/add-male`
+- [AddMoneyCircleIcon](/?provider=hugeicons&icon=add-money-circle) - hugeicons; `@sketchicon/hugeicons/icons/add-money-circle`
+- [AddSquareIcon](/?provider=hugeicons&icon=add-square) - hugeicons; `@sketchicon/hugeicons/icons/add-square`
+- [AddTeamIcon](/?provider=hugeicons&icon=add-team) - hugeicons; `@sketchicon/hugeicons/icons/add-team`
+- [AddTeam02Icon](/?provider=hugeicons&icon=add-team-02) - hugeicons; `@sketchicon/hugeicons/icons/add-team-02`
+- [AddToListIcon](/?provider=hugeicons&icon=add-to-list) - hugeicons; `@sketchicon/hugeicons/icons/add-to-list`
+- [AddressBookIcon](/?provider=hugeicons&icon=address-book) - hugeicons; `@sketchicon/hugeicons/icons/address-book`
+- [AdjustPositionIcon](/?provider=hugeicons&icon=adjust-position) - hugeicons; `@sketchicon/hugeicons/icons/adjust-position`
+- [AdobeAfterEffectIcon](/?provider=hugeicons&icon=adobe-after-effect) - hugeicons; `@sketchicon/hugeicons/icons/adobe-after-effect`
+- [AdobeIllustratorIcon](/?provider=hugeicons&icon=adobe-illustrator) - hugeicons; `@sketchicon/hugeicons/icons/adobe-illustrator`
+- [AdobeIndesignIcon](/?provider=hugeicons&icon=adobe-indesign) - hugeicons; `@sketchicon/hugeicons/icons/adobe-indesign`
+- [AdobePhotoshopIcon](/?provider=hugeicons&icon=adobe-photoshop) - hugeicons; `@sketchicon/hugeicons/icons/adobe-photoshop`
+- [AdobePremierIcon](/?provider=hugeicons&icon=adobe-premier) - hugeicons; `@sketchicon/hugeicons/icons/adobe-premier`
+- [AdobeXdIcon](/?provider=hugeicons&icon=adobe-xd) - hugeicons; `@sketchicon/hugeicons/icons/adobe-xd`
+- [AdventureIcon](/?provider=hugeicons&icon=adventure) - hugeicons; `@sketchicon/hugeicons/icons/adventure`
+- [AdvertisimentIcon](/?provider=hugeicons&icon=advertisiment) - hugeicons; `@sketchicon/hugeicons/icons/advertisiment`
+- [AdzanIcon](/?provider=hugeicons&icon=adzan) - hugeicons; `@sketchicon/hugeicons/icons/adzan`
+- [AffiliateIcon](/?provider=hugeicons&icon=affiliate) - hugeicons; `@sketchicon/hugeicons/icons/affiliate`
+- [Agreement01Icon](/?provider=hugeicons&icon=agreement-01) - hugeicons; `@sketchicon/hugeicons/icons/agreement-01`; aliases: `AgreementIcon`
+- [Agreement02Icon](/?provider=hugeicons&icon=agreement-02) - hugeicons; `@sketchicon/hugeicons/icons/agreement-02`
+- [Agreement03Icon](/?provider=hugeicons&icon=agreement-03) - hugeicons; `@sketchicon/hugeicons/icons/agreement-03`
+- [AiAudioIcon](/?provider=hugeicons&icon=ai-audio) - hugeicons; `@sketchicon/hugeicons/icons/ai-audio`
+- [AiBeautifyIcon](/?provider=hugeicons&icon=ai-beautify) - hugeicons; `@sketchicon/hugeicons/icons/ai-beautify`
+- [AiBookIcon](/?provider=hugeicons&icon=ai-book) - hugeicons; `@sketchicon/hugeicons/icons/ai-book`
+- [AiBrain01Icon](/?provider=hugeicons&icon=ai-brain-01) - hugeicons; `@sketchicon/hugeicons/icons/ai-brain-01`; aliases: `AiBrainIcon`
+- [AiBrain02Icon](/?provider=hugeicons&icon=ai-brain-02) - hugeicons; `@sketchicon/hugeicons/icons/ai-brain-02`
+- [AiBrain03Icon](/?provider=hugeicons&icon=ai-brain-03) - hugeicons; `@sketchicon/hugeicons/icons/ai-brain-03`
+- [AiBrain04Icon](/?provider=hugeicons&icon=ai-brain-04) - hugeicons; `@sketchicon/hugeicons/icons/ai-brain-04`
+- [AiBrain05Icon](/?provider=hugeicons&icon=ai-brain-05) - hugeicons; `@sketchicon/hugeicons/icons/ai-brain-05`
+- [AiBrowserIcon](/?provider=hugeicons&icon=ai-browser) - hugeicons; `@sketchicon/hugeicons/icons/ai-browser`
+- [AiChat01Icon](/?provider=hugeicons&icon=ai-chat-01) - hugeicons; `@sketchicon/hugeicons/icons/ai-chat-01`; aliases: `AiChatIcon`
+- [AiChat02Icon](/?provider=hugeicons&icon=ai-chat-02) - hugeicons; `@sketchicon/hugeicons/icons/ai-chat-02`
+- [AiChemistry01Icon](/?provider=hugeicons&icon=ai-chemistry-01) - hugeicons; `@sketchicon/hugeicons/icons/ai-chemistry-01`; aliases: `AiChemistryIcon`
+- [AiChemistry02Icon](/?provider=hugeicons&icon=ai-chemistry-02) - hugeicons; `@sketchicon/hugeicons/icons/ai-chemistry-02`
+- [AiChemistry03Icon](/?provider=hugeicons&icon=ai-chemistry-03) - hugeicons; `@sketchicon/hugeicons/icons/ai-chemistry-03`
+- [AiChipIcon](/?provider=hugeicons&icon=ai-chip) - hugeicons; `@sketchicon/hugeicons/icons/ai-chip`
+- [AiCloudIcon](/?provider=hugeicons&icon=ai-cloud) - hugeicons; `@sketchicon/hugeicons/icons/ai-cloud`
+- [AiCloud01Icon](/?provider=hugeicons&icon=ai-cloud-01) - hugeicons; `@sketchicon/hugeicons/icons/ai-cloud-01`
+- [AiCloud02Icon](/?provider=hugeicons&icon=ai-cloud-02) - hugeicons; `@sketchicon/hugeicons/icons/ai-cloud-02`
+- [AiComputerIcon](/?provider=hugeicons&icon=ai-computer) - hugeicons; `@sketchicon/hugeicons/icons/ai-computer`
+- [AiContentGenerator01Icon](/?provider=hugeicons&icon=ai-content-generator-01) - hugeicons; `@sketchicon/hugeicons/icons/ai-content-generator-01`; aliases: `AiContentGeneratorIcon`
+- [AiContentGenerator02Icon](/?provider=hugeicons&icon=ai-content-generator-02) - hugeicons; `@sketchicon/hugeicons/icons/ai-content-generator-02`
+- [AiDnaIcon](/?provider=hugeicons&icon=ai-dna) - hugeicons; `@sketchicon/hugeicons/icons/ai-dna`
+- [AiEditingIcon](/?provider=hugeicons&icon=ai-editing) - hugeicons; `@sketchicon/hugeicons/icons/ai-editing`
+- [AiEraserIcon](/?provider=hugeicons&icon=ai-eraser) - hugeicons; `@sketchicon/hugeicons/icons/ai-eraser`
+- [AiFileIcon](/?provider=hugeicons&icon=ai-file) - hugeicons; `@sketchicon/hugeicons/icons/ai-file`
+- [AiFolder01Icon](/?provider=hugeicons&icon=ai-folder-01) - hugeicons; `@sketchicon/hugeicons/icons/ai-folder-01`; aliases: `AiFolderIcon`
+- [AiFolder02Icon](/?provider=hugeicons&icon=ai-folder-02) - hugeicons; `@sketchicon/hugeicons/icons/ai-folder-02`
+- [AiGameIcon](/?provider=hugeicons&icon=ai-game) - hugeicons; `@sketchicon/hugeicons/icons/ai-game`
+- [AiGenerativeIcon](/?provider=hugeicons&icon=ai-generative) - hugeicons; `@sketchicon/hugeicons/icons/ai-generative`
+- [AiIdeaIcon](/?provider=hugeicons&icon=ai-idea) - hugeicons; `@sketchicon/hugeicons/icons/ai-idea`
+- [AiImageIcon](/?provider=hugeicons&icon=ai-image) - hugeicons; `@sketchicon/hugeicons/icons/ai-image`
+- [AiInnovation01Icon](/?provider=hugeicons&icon=ai-innovation-01) - hugeicons; `@sketchicon/hugeicons/icons/ai-innovation-01`; aliases: `AiInnovationIcon`
+- [AiInnovation02Icon](/?provider=hugeicons&icon=ai-innovation-02) - hugeicons; `@sketchicon/hugeicons/icons/ai-innovation-02`
+- [AiInnovation03Icon](/?provider=hugeicons&icon=ai-innovation-03) - hugeicons; `@sketchicon/hugeicons/icons/ai-innovation-03`
+- [AiLaptopIcon](/?provider=hugeicons&icon=ai-laptop) - hugeicons; `@sketchicon/hugeicons/icons/ai-laptop`
+- [AiLockIcon](/?provider=hugeicons&icon=ai-lock) - hugeicons; `@sketchicon/hugeicons/icons/ai-lock`
+- [AiMagicIcon](/?provider=hugeicons&icon=ai-magic) - hugeicons; `@sketchicon/hugeicons/icons/ai-magic`
+- [AiMailIcon](/?provider=hugeicons&icon=ai-mail) - hugeicons; `@sketchicon/hugeicons/icons/ai-mail`
+- [AiMail01Icon](/?provider=hugeicons&icon=ai-mail-01) - hugeicons; `@sketchicon/hugeicons/icons/ai-mail-01`
+- [AiMail02Icon](/?provider=hugeicons&icon=ai-mail-02) - hugeicons; `@sketchicon/hugeicons/icons/ai-mail-02`
+- [AiMicIcon](/?provider=hugeicons&icon=ai-mic) - hugeicons; `@sketchicon/hugeicons/icons/ai-mic`
+- [AiNetworkIcon](/?provider=hugeicons&icon=ai-network) - hugeicons; `@sketchicon/hugeicons/icons/ai-network`
+- [AiPhone01Icon](/?provider=hugeicons&icon=ai-phone-01) - hugeicons; `@sketchicon/hugeicons/icons/ai-phone-01`; aliases: `AiPhoneIcon`
+- [AiPhone02Icon](/?provider=hugeicons&icon=ai-phone-02) - hugeicons; `@sketchicon/hugeicons/icons/ai-phone-02`
+- [AiProgrammingIcon](/?provider=hugeicons&icon=ai-programming) - hugeicons; `@sketchicon/hugeicons/icons/ai-programming`
+- [AiScanIcon](/?provider=hugeicons&icon=ai-scan) - hugeicons; `@sketchicon/hugeicons/icons/ai-scan`
+- [AiSchedulingIcon](/?provider=hugeicons&icon=ai-scheduling) - hugeicons; `@sketchicon/hugeicons/icons/ai-scheduling`
+- [AiSearchIcon](/?provider=hugeicons&icon=ai-search) - hugeicons; `@sketchicon/hugeicons/icons/ai-search`
+- [AiSearch02Icon](/?provider=hugeicons&icon=ai-search-02) - hugeicons; `@sketchicon/hugeicons/icons/ai-search-02`
+- [AiSecurity01Icon](/?provider=hugeicons&icon=ai-security-01) - hugeicons; `@sketchicon/hugeicons/icons/ai-security-01`; aliases: `AiSecurityIcon`
+- [AiSecurity02Icon](/?provider=hugeicons&icon=ai-security-02) - hugeicons; `@sketchicon/hugeicons/icons/ai-security-02`
+- [AiSecurity03Icon](/?provider=hugeicons&icon=ai-security-03) - hugeicons; `@sketchicon/hugeicons/icons/ai-security-03`
+- [AiSettingIcon](/?provider=hugeicons&icon=ai-setting) - hugeicons; `@sketchicon/hugeicons/icons/ai-setting`
+- [AiSheetsIcon](/?provider=hugeicons&icon=ai-sheets) - hugeicons; `@sketchicon/hugeicons/icons/ai-sheets`
+- [AiSmartwatchIcon](/?provider=hugeicons&icon=ai-smartwatch) - hugeicons; `@sketchicon/hugeicons/icons/ai-smartwatch`
+- [AiUserIcon](/?provider=hugeicons&icon=ai-user) - hugeicons; `@sketchicon/hugeicons/icons/ai-user`
+- [AiVideoIcon](/?provider=hugeicons&icon=ai-video) - hugeicons; `@sketchicon/hugeicons/icons/ai-video`
+- [AiViewIcon](/?provider=hugeicons&icon=ai-view) - hugeicons; `@sketchicon/hugeicons/icons/ai-view`
+- [AiVisionRecognitionIcon](/?provider=hugeicons&icon=ai-vision-recognition) - hugeicons; `@sketchicon/hugeicons/icons/ai-vision-recognition`
+- [AiVoiceIcon](/?provider=hugeicons&icon=ai-voice) - hugeicons; `@sketchicon/hugeicons/icons/ai-voice`
+- [AiVoiceGeneratorIcon](/?provider=hugeicons&icon=ai-voice-generator) - hugeicons; `@sketchicon/hugeicons/icons/ai-voice-generator`
+- [AiWebBrowsingIcon](/?provider=hugeicons&icon=ai-web-browsing) - hugeicons; `@sketchicon/hugeicons/icons/ai-web-browsing`
+- [AidsIcon](/?provider=hugeicons&icon=aids) - hugeicons; `@sketchicon/hugeicons/icons/aids`
+- [AirVentIcon](/?provider=hugeicons&icon=air-vent) - hugeicons; `@sketchicon/hugeicons/icons/air-vent`
+- [AirVent](/?provider=lucide&icon=air-vent) - lucide; `@sketchicon/lucide/icons/air-vent`
+- [AirbnbIcon](/?provider=hugeicons&icon=airbnb) - hugeicons; `@sketchicon/hugeicons/icons/airbnb`
+- [AircraftGameIcon](/?provider=hugeicons&icon=aircraft-game) - hugeicons; `@sketchicon/hugeicons/icons/aircraft-game`
+- [AirdropIcon](/?provider=hugeicons&icon=airdrop) - hugeicons; `@sketchicon/hugeicons/icons/airdrop`
+- [Airplane01Icon](/?provider=hugeicons&icon=airplane-01) - hugeicons; `@sketchicon/hugeicons/icons/airplane-01`; aliases: `AirplaneIcon`
+- [Airplane02Icon](/?provider=hugeicons&icon=airplane-02) - hugeicons; `@sketchicon/hugeicons/icons/airplane-02`
+- [AirplaneLanding01Icon](/?provider=hugeicons&icon=airplane-landing-01) - hugeicons; `@sketchicon/hugeicons/icons/airplane-landing-01`; aliases: `AirplaneLandingIcon`
+- [AirplaneLanding02Icon](/?provider=hugeicons&icon=airplane-landing-02) - hugeicons; `@sketchicon/hugeicons/icons/airplane-landing-02`
+- [AirplaneModeIcon](/?provider=hugeicons&icon=airplane-mode) - hugeicons; `@sketchicon/hugeicons/icons/airplane-mode`
+- [AirplaneModeOffIcon](/?provider=hugeicons&icon=airplane-mode-off) - hugeicons; `@sketchicon/hugeicons/icons/airplane-mode-off`
+- [AirplaneSeatIcon](/?provider=hugeicons&icon=airplane-seat) - hugeicons; `@sketchicon/hugeicons/icons/airplane-seat`
+- [AirplaneSeat02Icon](/?provider=hugeicons&icon=airplane-seat-02) - hugeicons; `@sketchicon/hugeicons/icons/airplane-seat-02`
+- [AirplaneTakeOff01Icon](/?provider=hugeicons&icon=airplane-take-off-01) - hugeicons; `@sketchicon/hugeicons/icons/airplane-take-off-01`; aliases: `AirplaneTakeOffIcon`
+- [AirplaneTakeOff02Icon](/?provider=hugeicons&icon=airplane-take-off-02) - hugeicons; `@sketchicon/hugeicons/icons/airplane-take-off-02`
+- [AirplayIcon](/?provider=hugeicons&icon=airplay) - hugeicons; `@sketchicon/hugeicons/icons/airplay`
+- [Airplay](/?provider=lucide&icon=airplay) - lucide; `@sketchicon/lucide/icons/airplay`
+- [AirplayLineIcon](/?provider=hugeicons&icon=airplay-line) - hugeicons; `@sketchicon/hugeicons/icons/airplay-line`
+- [Airpod01Icon](/?provider=hugeicons&icon=airpod-01) - hugeicons; `@sketchicon/hugeicons/icons/airpod-01`; aliases: `AirpodIcon`
+- [Airpod02Icon](/?provider=hugeicons&icon=airpod-02) - hugeicons; `@sketchicon/hugeicons/icons/airpod-02`
+- [Airpod03Icon](/?provider=hugeicons&icon=airpod-03) - hugeicons; `@sketchicon/hugeicons/icons/airpod-03`
+- [AirportIcon](/?provider=hugeicons&icon=airport) - hugeicons; `@sketchicon/hugeicons/icons/airport`
+- [Airport02Icon](/?provider=hugeicons&icon=airport-02) - hugeicons; `@sketchicon/hugeicons/icons/airport-02`
+- [AirportTowerIcon](/?provider=hugeicons&icon=airport-tower) - hugeicons; `@sketchicon/hugeicons/icons/airport-tower`
+- [AlAqsaMosqueIcon](/?provider=hugeicons&icon=al-aqsa-mosque) - hugeicons; `@sketchicon/hugeicons/icons/al-aqsa-mosque`
+- [AlarmClockIcon](/?provider=hugeicons&icon=alarm-clock) - hugeicons; `@sketchicon/hugeicons/icons/alarm-clock`
+- [AlarmClock](/?provider=lucide&icon=alarm-clock) - lucide; `@sketchicon/lucide/icons/alarm-clock`
+- [AlarmClockCheckIcon](/?provider=hugeicons&icon=alarm-clock-check) - hugeicons; `@sketchicon/hugeicons/icons/alarm-clock-check`
+- [AlarmClockCheck](/?provider=lucide&icon=alarm-clock-check) - lucide; `@sketchicon/lucide/icons/alarm-clock-check`; aliases: `AlarmCheck`
+- [AlarmClockMinusIcon](/?provider=hugeicons&icon=alarm-clock-minus) - hugeicons; `@sketchicon/hugeicons/icons/alarm-clock-minus`
+- [AlarmClockMinus](/?provider=lucide&icon=alarm-clock-minus) - lucide; `@sketchicon/lucide/icons/alarm-clock-minus`; aliases: `AlarmMinus`
+- [AlarmClockOffIcon](/?provider=hugeicons&icon=alarm-clock-off) - hugeicons; `@sketchicon/hugeicons/icons/alarm-clock-off`
+- [AlarmClockOff](/?provider=lucide&icon=alarm-clock-off) - lucide; `@sketchicon/lucide/icons/alarm-clock-off`
+- [AlarmClockPlusIcon](/?provider=hugeicons&icon=alarm-clock-plus) - hugeicons; `@sketchicon/hugeicons/icons/alarm-clock-plus`
+- [AlarmClockPlus](/?provider=lucide&icon=alarm-clock-plus) - lucide; `@sketchicon/lucide/icons/alarm-clock-plus`; aliases: `AlarmPlus`
+- [AlarmSmokeIcon](/?provider=hugeicons&icon=alarm-smoke) - hugeicons; `@sketchicon/hugeicons/icons/alarm-smoke`
+- [AlarmSmoke](/?provider=lucide&icon=alarm-smoke) - lucide; `@sketchicon/lucide/icons/alarm-smoke`
+- [AlbumIcon](/?provider=hugeicons&icon=album) - hugeicons; `@sketchicon/hugeicons/icons/album`
+- [Album](/?provider=lucide&icon=album) - lucide; `@sketchicon/lucide/icons/album`
+- [Album01Icon](/?provider=hugeicons&icon=album-01) - hugeicons; `@sketchicon/hugeicons/icons/album-01`
+- [Album02Icon](/?provider=hugeicons&icon=album-02) - hugeicons; `@sketchicon/hugeicons/icons/album-02`
+- [AlbumNotFound01Icon](/?provider=hugeicons&icon=album-not-found-01) - hugeicons; `@sketchicon/hugeicons/icons/album-not-found-01`; aliases: `AlbumNotFoundIcon`
+- [AlbumNotFound02Icon](/?provider=hugeicons&icon=album-not-found-02) - hugeicons; `@sketchicon/hugeicons/icons/album-not-found-02`
+- [Alert01Icon](/?provider=hugeicons&icon=alert-01) - hugeicons; `@sketchicon/hugeicons/icons/alert-01`; aliases: `AlertIcon`
+- [Alert02Icon](/?provider=hugeicons&icon=alert-02) - hugeicons; `@sketchicon/hugeicons/icons/alert-02`
+- [AlertCircleIcon](/?provider=hugeicons&icon=alert-circle) - hugeicons; `@sketchicon/hugeicons/icons/alert-circle`
+- [AlertDiamondIcon](/?provider=hugeicons&icon=alert-diamond) - hugeicons; `@sketchicon/hugeicons/icons/alert-diamond`
+- [AlertSquareIcon](/?provider=hugeicons&icon=alert-square) - hugeicons; `@sketchicon/hugeicons/icons/alert-square`
+- [AlgorithmIcon](/?provider=hugeicons&icon=algorithm) - hugeicons; `@sketchicon/hugeicons/icons/algorithm`
+- [Alien01Icon](/?provider=hugeicons&icon=alien-01) - hugeicons; `@sketchicon/hugeicons/icons/alien-01`; aliases: `AlienIcon`
+- [Alien02Icon](/?provider=hugeicons&icon=alien-02) - hugeicons; `@sketchicon/hugeicons/icons/alien-02`
+- [AlignBottomIcon](/?provider=hugeicons&icon=align-bottom) - hugeicons; `@sketchicon/hugeicons/icons/align-bottom`
+- [AlignBoxBottomCenterIcon](/?provider=hugeicons&icon=align-box-bottom-center) - hugeicons; `@sketchicon/hugeicons/icons/align-box-bottom-center`
+- [AlignBoxBottomLeftIcon](/?provider=hugeicons&icon=align-box-bottom-left) - hugeicons; `@sketchicon/hugeicons/icons/align-box-bottom-left`
+- [AlignBoxBottomRightIcon](/?provider=hugeicons&icon=align-box-bottom-right) - hugeicons; `@sketchicon/hugeicons/icons/align-box-bottom-right`
+- [AlignBoxMiddleCenterIcon](/?provider=hugeicons&icon=align-box-middle-center) - hugeicons; `@sketchicon/hugeicons/icons/align-box-middle-center`
+- [AlignBoxMiddleLeftIcon](/?provider=hugeicons&icon=align-box-middle-left) - hugeicons; `@sketchicon/hugeicons/icons/align-box-middle-left`; aliases: `BorderFullIcon`
+- [AlignBoxMiddleRightIcon](/?provider=hugeicons&icon=align-box-middle-right) - hugeicons; `@sketchicon/hugeicons/icons/align-box-middle-right`
+- [AlignBoxTopCenterIcon](/?provider=hugeicons&icon=align-box-top-center) - hugeicons; `@sketchicon/hugeicons/icons/align-box-top-center`
+- [AlignBoxTopLeftIcon](/?provider=hugeicons&icon=align-box-top-left) - hugeicons; `@sketchicon/hugeicons/icons/align-box-top-left`
+- [AlignBoxTopRightIcon](/?provider=hugeicons&icon=align-box-top-right) - hugeicons; `@sketchicon/hugeicons/icons/align-box-top-right`
+- [AlignCenterHorizontal](/?provider=lucide&icon=align-center-horizontal) - lucide; `@sketchicon/lucide/icons/align-center-horizontal`
+- [AlignCenterVertical](/?provider=lucide&icon=align-center-vertical) - lucide; `@sketchicon/lucide/icons/align-center-vertical`
+- [AlignEndHorizontalIcon](/?provider=hugeicons&icon=align-end-horizontal) - hugeicons; `@sketchicon/hugeicons/icons/align-end-horizontal`
+- [AlignEndHorizontal](/?provider=lucide&icon=align-end-horizontal) - lucide; `@sketchicon/lucide/icons/align-end-horizontal`
+- [AlignEndVerticalIcon](/?provider=hugeicons&icon=align-end-vertical) - hugeicons; `@sketchicon/hugeicons/icons/align-end-vertical`
+- [AlignEndVertical](/?provider=lucide&icon=align-end-vertical) - lucide; `@sketchicon/lucide/icons/align-end-vertical`
+- [AlignHorizontalCenterIcon](/?provider=hugeicons&icon=align-horizontal-center) - hugeicons; `@sketchicon/hugeicons/icons/align-horizontal-center`
+- [AlignHorizontalDistributeCenterIcon](/?provider=hugeicons&icon=align-horizontal-distribute-center) - hugeicons; `@sketchicon/hugeicons/icons/align-horizontal-distribute-center`
+- [AlignHorizontalDistributeCenter](/?provider=lucide&icon=align-horizontal-distribute-center) - lucide; `@sketchicon/lucide/icons/align-horizontal-distribute-center`
+- [AlignHorizontalDistributeEndIcon](/?provider=hugeicons&icon=align-horizontal-distribute-end) - hugeicons; `@sketchicon/hugeicons/icons/align-horizontal-distribute-end`
+- [AlignHorizontalDistributeEnd](/?provider=lucide&icon=align-horizontal-distribute-end) - lucide; `@sketchicon/lucide/icons/align-horizontal-distribute-end`
+- [AlignHorizontalDistributeStartIcon](/?provider=hugeicons&icon=align-horizontal-distribute-start) - hugeicons; `@sketchicon/hugeicons/icons/align-horizontal-distribute-start`
+- [AlignHorizontalDistributeStart](/?provider=lucide&icon=align-horizontal-distribute-start) - lucide; `@sketchicon/lucide/icons/align-horizontal-distribute-start`
+- [AlignHorizontalJustifyCenterIcon](/?provider=hugeicons&icon=align-horizontal-justify-center) - hugeicons; `@sketchicon/hugeicons/icons/align-horizontal-justify-center`
+- [AlignHorizontalJustifyCenter](/?provider=lucide&icon=align-horizontal-justify-center) - lucide; `@sketchicon/lucide/icons/align-horizontal-justify-center`
+- [AlignHorizontalJustifyEndIcon](/?provider=hugeicons&icon=align-horizontal-justify-end) - hugeicons; `@sketchicon/hugeicons/icons/align-horizontal-justify-end`
+- [AlignHorizontalJustifyEnd](/?provider=lucide&icon=align-horizontal-justify-end) - lucide; `@sketchicon/lucide/icons/align-horizontal-justify-end`
+- [AlignHorizontalJustifyStartIcon](/?provider=hugeicons&icon=align-horizontal-justify-start) - hugeicons; `@sketchicon/hugeicons/icons/align-horizontal-justify-start`
+- [AlignHorizontalJustifyStart](/?provider=lucide&icon=align-horizontal-justify-start) - lucide; `@sketchicon/lucide/icons/align-horizontal-justify-start`
+- [AlignHorizontalSpaceAroundIcon](/?provider=hugeicons&icon=align-horizontal-space-around) - hugeicons; `@sketchicon/hugeicons/icons/align-horizontal-space-around`
+- [AlignHorizontalSpaceAround](/?provider=lucide&icon=align-horizontal-space-around) - lucide; `@sketchicon/lucide/icons/align-horizontal-space-around`
+- [AlignHorizontalSpaceBetweenIcon](/?provider=hugeicons&icon=align-horizontal-space-between) - hugeicons; `@sketchicon/hugeicons/icons/align-horizontal-space-between`
+- [AlignHorizontalSpaceBetween](/?provider=lucide&icon=align-horizontal-space-between) - lucide; `@sketchicon/lucide/icons/align-horizontal-space-between`
+- [AlignKeyObjectIcon](/?provider=hugeicons&icon=align-key-object) - hugeicons; `@sketchicon/hugeicons/icons/align-key-object`
+- [AlignLeftIcon](/?provider=hugeicons&icon=align-left) - hugeicons; `@sketchicon/hugeicons/icons/align-left`
+- [AlignRightIcon](/?provider=hugeicons&icon=align-right) - hugeicons; `@sketchicon/hugeicons/icons/align-right`
+- [AlignSelectionIcon](/?provider=hugeicons&icon=align-selection) - hugeicons; `@sketchicon/hugeicons/icons/align-selection`
+- [AlignStartHorizontalIcon](/?provider=hugeicons&icon=align-start-horizontal) - hugeicons; `@sketchicon/hugeicons/icons/align-start-horizontal`
+- [AlignStartHorizontal](/?provider=lucide&icon=align-start-horizontal) - lucide; `@sketchicon/lucide/icons/align-start-horizontal`
+- [AlignStartVerticalIcon](/?provider=hugeicons&icon=align-start-vertical) - hugeicons; `@sketchicon/hugeicons/icons/align-start-vertical`
+- [AlignStartVertical](/?provider=lucide&icon=align-start-vertical) - lucide; `@sketchicon/lucide/icons/align-start-vertical`
+- [AlignTopIcon](/?provider=hugeicons&icon=align-top) - hugeicons; `@sketchicon/hugeicons/icons/align-top`
+- [AlignVerticalCenterIcon](/?provider=hugeicons&icon=align-vertical-center) - hugeicons; `@sketchicon/hugeicons/icons/align-vertical-center`
+- [AlignVerticalDistributeCenterIcon](/?provider=hugeicons&icon=align-vertical-distribute-center) - hugeicons; `@sketchicon/hugeicons/icons/align-vertical-distribute-center`
+- [AlignVerticalDistributeCenter](/?provider=lucide&icon=align-vertical-distribute-center) - lucide; `@sketchicon/lucide/icons/align-vertical-distribute-center`
+- [AlignVerticalDistributeEndIcon](/?provider=hugeicons&icon=align-vertical-distribute-end) - hugeicons; `@sketchicon/hugeicons/icons/align-vertical-distribute-end`
+- [AlignVerticalDistributeEnd](/?provider=lucide&icon=align-vertical-distribute-end) - lucide; `@sketchicon/lucide/icons/align-vertical-distribute-end`
+- [AlignVerticalDistributeStartIcon](/?provider=hugeicons&icon=align-vertical-distribute-start) - hugeicons; `@sketchicon/hugeicons/icons/align-vertical-distribute-start`
+- [AlignVerticalDistributeStart](/?provider=lucide&icon=align-vertical-distribute-start) - lucide; `@sketchicon/lucide/icons/align-vertical-distribute-start`
+- [AlignVerticalJustifyCenterIcon](/?provider=hugeicons&icon=align-vertical-justify-center) - hugeicons; `@sketchicon/hugeicons/icons/align-vertical-justify-center`
+- [AlignVerticalJustifyCenter](/?provider=lucide&icon=align-vertical-justify-center) - lucide; `@sketchicon/lucide/icons/align-vertical-justify-center`
+- [AlignVerticalJustifyEndIcon](/?provider=hugeicons&icon=align-vertical-justify-end) - hugeicons; `@sketchicon/hugeicons/icons/align-vertical-justify-end`
+- [AlignVerticalJustifyEnd](/?provider=lucide&icon=align-vertical-justify-end) - lucide; `@sketchicon/lucide/icons/align-vertical-justify-end`
+- [AlignVerticalJustifyStartIcon](/?provider=hugeicons&icon=align-vertical-justify-start) - hugeicons; `@sketchicon/hugeicons/icons/align-vertical-justify-start`
+- [AlignVerticalJustifyStart](/?provider=lucide&icon=align-vertical-justify-start) - lucide; `@sketchicon/lucide/icons/align-vertical-justify-start`
+- [AlignVerticalSpaceAroundIcon](/?provider=hugeicons&icon=align-vertical-space-around) - hugeicons; `@sketchicon/hugeicons/icons/align-vertical-space-around`
+- [AlignVerticalSpaceAround](/?provider=lucide&icon=align-vertical-space-around) - lucide; `@sketchicon/lucide/icons/align-vertical-space-around`
+- [AlignVerticalSpaceBetweenIcon](/?provider=hugeicons&icon=align-vertical-space-between) - hugeicons; `@sketchicon/hugeicons/icons/align-vertical-space-between`
+- [AlignVerticalSpaceBetween](/?provider=lucide&icon=align-vertical-space-between) - lucide; `@sketchicon/lucide/icons/align-vertical-space-between`
+- [AllBookmarkIcon](/?provider=hugeicons&icon=all-bookmark) - hugeicons; `@sketchicon/hugeicons/icons/all-bookmark`
+- [AllahIcon](/?provider=hugeicons&icon=allah) - hugeicons; `@sketchicon/hugeicons/icons/allah`
+- [AlmsIcon](/?provider=hugeicons&icon=alms) - hugeicons; `@sketchicon/hugeicons/icons/alms`
+- [AlphaIcon](/?provider=hugeicons&icon=alpha) - hugeicons; `@sketchicon/hugeicons/icons/alpha`
+- [AlphaCircleIcon](/?provider=hugeicons&icon=alpha-circle) - hugeicons; `@sketchicon/hugeicons/icons/alpha-circle`
+- [AlphaSquareIcon](/?provider=hugeicons&icon=alpha-square) - hugeicons; `@sketchicon/hugeicons/icons/alpha-square`
+- [AlphabetArabicIcon](/?provider=hugeicons&icon=alphabet-arabic) - hugeicons; `@sketchicon/hugeicons/icons/alphabet-arabic`
+- [AlphabetBanglaIcon](/?provider=hugeicons&icon=alphabet-bangla) - hugeicons; `@sketchicon/hugeicons/icons/alphabet-bangla`
+- [AlphabetChineseIcon](/?provider=hugeicons&icon=alphabet-chinese) - hugeicons; `@sketchicon/hugeicons/icons/alphabet-chinese`
+- [AlphabetGreekIcon](/?provider=hugeicons&icon=alphabet-greek) - hugeicons; `@sketchicon/hugeicons/icons/alphabet-greek`
+- [AlphabetHebrewIcon](/?provider=hugeicons&icon=alphabet-hebrew) - hugeicons; `@sketchicon/hugeicons/icons/alphabet-hebrew`
+- [AlphabetHindiIcon](/?provider=hugeicons&icon=alphabet-hindi) - hugeicons; `@sketchicon/hugeicons/icons/alphabet-hindi`
+- [AlphabetJapaneseIcon](/?provider=hugeicons&icon=alphabet-japanese) - hugeicons; `@sketchicon/hugeicons/icons/alphabet-japanese`
+- [AlphabetKoreanIcon](/?provider=hugeicons&icon=alphabet-korean) - hugeicons; `@sketchicon/hugeicons/icons/alphabet-korean`
+- [AlphabetThaiIcon](/?provider=hugeicons&icon=alphabet-thai) - hugeicons; `@sketchicon/hugeicons/icons/alphabet-thai`
+- [AmazonIcon](/?provider=hugeicons&icon=amazon) - hugeicons; `@sketchicon/hugeicons/icons/amazon`
+- [AmbulanceIcon](/?provider=hugeicons&icon=ambulance) - hugeicons; `@sketchicon/hugeicons/icons/ambulance`
+- [Ambulance](/?provider=lucide&icon=ambulance) - lucide; `@sketchicon/lucide/icons/ambulance`
+- [AmericanFootballIcon](/?provider=hugeicons&icon=american-football) - hugeicons; `@sketchicon/hugeicons/icons/american-football`
+- [AmieIcon](/?provider=hugeicons&icon=amie) - hugeicons; `@sketchicon/hugeicons/icons/amie`
+- [AmmoIcon](/?provider=hugeicons&icon=ammo) - hugeicons; `@sketchicon/hugeicons/icons/ammo`
+- [AmpersandIcon](/?provider=hugeicons&icon=ampersand) - hugeicons; `@sketchicon/hugeicons/icons/ampersand`
+- [Ampersand](/?provider=lucide&icon=ampersand) - lucide; `@sketchicon/lucide/icons/ampersand`
+- [Ampersands](/?provider=lucide&icon=ampersands) - lucide; `@sketchicon/lucide/icons/ampersands`
+- [AmphoraIcon](/?provider=hugeicons&icon=amphora) - hugeicons; `@sketchicon/hugeicons/icons/amphora`
+- [Amphora](/?provider=lucide&icon=amphora) - lucide; `@sketchicon/lucide/icons/amphora`
+- [AmpouleIcon](/?provider=hugeicons&icon=ampoule) - hugeicons; `@sketchicon/hugeicons/icons/ampoule`
+- [AnalysisTextLinkIcon](/?provider=hugeicons&icon=analysis-text-link) - hugeicons; `@sketchicon/hugeicons/icons/analysis-text-link`
+- [Analytics01Icon](/?provider=hugeicons&icon=analytics-01) - hugeicons; `@sketchicon/hugeicons/icons/analytics-01`; aliases: `AnalyticsIcon`
+- [Analytics02Icon](/?provider=hugeicons&icon=analytics-02) - hugeicons; `@sketchicon/hugeicons/icons/analytics-02`
+- [Analytics03Icon](/?provider=hugeicons&icon=analytics-03) - hugeicons; `@sketchicon/hugeicons/icons/analytics-03`
+- [AnalyticsDownIcon](/?provider=hugeicons&icon=analytics-down) - hugeicons; `@sketchicon/hugeicons/icons/analytics-down`
+- [AnalyticsUpIcon](/?provider=hugeicons&icon=analytics-up) - hugeicons; `@sketchicon/hugeicons/icons/analytics-up`
+- [AnchorIcon](/?provider=hugeicons&icon=anchor) - hugeicons; `@sketchicon/hugeicons/icons/anchor`
+- [Anchor](/?provider=lucide&icon=anchor) - lucide; `@sketchicon/lucide/icons/anchor`
+- [AnchorPointIcon](/?provider=hugeicons&icon=anchor-point) - hugeicons; `@sketchicon/hugeicons/icons/anchor-point`
+- [AndroidIcon](/?provider=hugeicons&icon=android) - hugeicons; `@sketchicon/hugeicons/icons/android`
+- [AngelIcon](/?provider=hugeicons&icon=angel) - hugeicons; `@sketchicon/hugeicons/icons/angel`
+- [AngleIcon](/?provider=hugeicons&icon=angle) - hugeicons; `@sketchicon/hugeicons/icons/angle`
+- [Angle01Icon](/?provider=hugeicons&icon=angle-01) - hugeicons; `@sketchicon/hugeicons/icons/angle-01`
+- [AngryIcon](/?provider=hugeicons&icon=angry) - hugeicons; `@sketchicon/hugeicons/icons/angry`
+- [Angry](/?provider=lucide&icon=angry) - lucide; `@sketchicon/lucide/icons/angry`
+- [AngryBirdIcon](/?provider=hugeicons&icon=angry-bird) - hugeicons; `@sketchicon/hugeicons/icons/angry-bird`
+- [AnnoyedIcon](/?provider=hugeicons&icon=annoyed) - hugeicons; `@sketchicon/hugeicons/icons/annoyed`
+- [Annoyed](/?provider=lucide&icon=annoyed) - lucide; `@sketchicon/lucide/icons/annoyed`
+- [AnonymousIcon](/?provider=hugeicons&icon=anonymous) - hugeicons; `@sketchicon/hugeicons/icons/anonymous`
+- [AntennaIcon](/?provider=hugeicons&icon=antenna) - hugeicons; `@sketchicon/hugeicons/icons/antenna`
+- [Antenna](/?provider=lucide&icon=antenna) - lucide; `@sketchicon/lucide/icons/antenna`
+- [AnvilIcon](/?provider=hugeicons&icon=anvil) - hugeicons; `@sketchicon/hugeicons/icons/anvil`
+- [Anvil](/?provider=lucide&icon=anvil) - lucide; `@sketchicon/lucide/icons/anvil`
+- [ApartmentIcon](/?provider=hugeicons&icon=apartment) - hugeicons; `@sketchicon/hugeicons/icons/apartment`
+- [ApertureIcon](/?provider=hugeicons&icon=aperture) - hugeicons; `@sketchicon/hugeicons/icons/aperture`
+- [Aperture](/?provider=lucide&icon=aperture) - lucide; `@sketchicon/lucide/icons/aperture`
+- [ApiIcon](/?provider=hugeicons&icon=api) - hugeicons; `@sketchicon/hugeicons/icons/api`
+- [ApiGatewayIcon](/?provider=hugeicons&icon=api-gateway) - hugeicons; `@sketchicon/hugeicons/icons/api-gateway`
+- [AppStoreIcon](/?provider=hugeicons&icon=app-store) - hugeicons; `@sketchicon/hugeicons/icons/app-store`
+- [AppWindowIcon](/?provider=hugeicons&icon=app-window) - hugeicons; `@sketchicon/hugeicons/icons/app-window`
+- [AppWindow](/?provider=lucide&icon=app-window) - lucide; `@sketchicon/lucide/icons/app-window`
+- [AppWindowMacIcon](/?provider=hugeicons&icon=app-window-mac) - hugeicons; `@sketchicon/hugeicons/icons/app-window-mac`
+- [AppWindowMac](/?provider=lucide&icon=app-window-mac) - lucide; `@sketchicon/lucide/icons/app-window-mac`
+- [AppleIcon](/?provider=hugeicons&icon=apple) - hugeicons; `@sketchicon/hugeicons/icons/apple`
+- [Apple](/?provider=lucide&icon=apple) - lucide; `@sketchicon/lucide/icons/apple`
+- [Apple01Icon](/?provider=hugeicons&icon=apple-01) - hugeicons; `@sketchicon/hugeicons/icons/apple-01`
+- [AppleFinderIcon](/?provider=hugeicons&icon=apple-finder) - hugeicons; `@sketchicon/hugeicons/icons/apple-finder`
+- [AppleIntelligenceIcon](/?provider=hugeicons&icon=apple-intelligence) - hugeicons; `@sketchicon/hugeicons/icons/apple-intelligence`
+- [AppleMusicIcon](/?provider=hugeicons&icon=apple-music) - hugeicons; `@sketchicon/hugeicons/icons/apple-music`
+- [AppleNewsIcon](/?provider=hugeicons&icon=apple-news) - hugeicons; `@sketchicon/hugeicons/icons/apple-news`
+- [ApplePieIcon](/?provider=hugeicons&icon=apple-pie) - hugeicons; `@sketchicon/hugeicons/icons/apple-pie`
+- [AppleReminderIcon](/?provider=hugeicons&icon=apple-reminder) - hugeicons; `@sketchicon/hugeicons/icons/apple-reminder`
+- [AppleStocksIcon](/?provider=hugeicons&icon=apple-stocks) - hugeicons; `@sketchicon/hugeicons/icons/apple-stocks`
+- [AppleVisionProIcon](/?provider=hugeicons&icon=apple-vision-pro) - hugeicons; `@sketchicon/hugeicons/icons/apple-vision-pro`
+- [Appointment01Icon](/?provider=hugeicons&icon=appointment-01) - hugeicons; `@sketchicon/hugeicons/icons/appointment-01`; aliases: `AppointmentIcon`
+- [Appointment02Icon](/?provider=hugeicons&icon=appointment-02) - hugeicons; `@sketchicon/hugeicons/icons/appointment-02`
+- [ApproximatelyEqualIcon](/?provider=hugeicons&icon=approximately-equal) - hugeicons; `@sketchicon/hugeicons/icons/approximately-equal`
+- [ApproximatelyEqualCircleIcon](/?provider=hugeicons&icon=approximately-equal-circle) - hugeicons; `@sketchicon/hugeicons/icons/approximately-equal-circle`
+- [ApproximatelyEqualSquareIcon](/?provider=hugeicons&icon=approximately-equal-square) - hugeicons; `@sketchicon/hugeicons/icons/approximately-equal-square`
+- [ApricotIcon](/?provider=hugeicons&icon=apricot) - hugeicons; `@sketchicon/hugeicons/icons/apricot`
+- [ApronIcon](/?provider=hugeicons&icon=apron) - hugeicons; `@sketchicon/hugeicons/icons/apron`
+- [ArcBrowserIcon](/?provider=hugeicons&icon=arc-browser) - hugeicons; `@sketchicon/hugeicons/icons/arc-browser`
+- [ArcherIcon](/?provider=hugeicons&icon=archer) - hugeicons; `@sketchicon/hugeicons/icons/archer`
+- [ArchiveIcon](/?provider=hugeicons&icon=archive) - hugeicons; `@sketchicon/hugeicons/icons/archive`
+- [Archive](/?provider=lucide&icon=archive) - lucide; `@sketchicon/lucide/icons/archive`
+- [Archive01Icon](/?provider=hugeicons&icon=archive-01) - hugeicons; `@sketchicon/hugeicons/icons/archive-01`
+- [Archive02Icon](/?provider=hugeicons&icon=archive-02) - hugeicons; `@sketchicon/hugeicons/icons/archive-02`
+- [Archive03Icon](/?provider=hugeicons&icon=archive-03) - hugeicons; `@sketchicon/hugeicons/icons/archive-03`
+- [Archive04Icon](/?provider=hugeicons&icon=archive-04) - hugeicons; `@sketchicon/hugeicons/icons/archive-04`
+- [ArchiveArrowDownIcon](/?provider=hugeicons&icon=archive-arrow-down) - hugeicons; `@sketchicon/hugeicons/icons/archive-arrow-down`
+- [ArchiveArrowUpIcon](/?provider=hugeicons&icon=archive-arrow-up) - hugeicons; `@sketchicon/hugeicons/icons/archive-arrow-up`
+- [ArchiveOff03Icon](/?provider=hugeicons&icon=archive-off-03) - hugeicons; `@sketchicon/hugeicons/icons/archive-off-03`
+- [ArchiveOff04Icon](/?provider=hugeicons&icon=archive-off-04) - hugeicons; `@sketchicon/hugeicons/icons/archive-off-04`
+- [ArchiveRestoreIcon](/?provider=hugeicons&icon=archive-restore) - hugeicons; `@sketchicon/hugeicons/icons/archive-restore`
+- [ArchiveRestore](/?provider=lucide&icon=archive-restore) - lucide; `@sketchicon/lucide/icons/archive-restore`
+- [ArchiveXIcon](/?provider=hugeicons&icon=archive-x) - hugeicons; `@sketchicon/hugeicons/icons/archive-x`
+- [ArchiveX](/?provider=lucide&icon=archive-x) - lucide; `@sketchicon/lucide/icons/archive-x`
+- [ArmchairIcon](/?provider=hugeicons&icon=armchair) - hugeicons; `@sketchicon/hugeicons/icons/armchair`
+- [Armchair](/?provider=lucide&icon=armchair) - lucide; `@sketchicon/lucide/icons/armchair`
+- [ArmoredBootIcon](/?provider=hugeicons&icon=armored-boot) - hugeicons; `@sketchicon/hugeicons/icons/armored-boot`
+- [ArrangeIcon](/?provider=hugeicons&icon=arrange) - hugeicons; `@sketchicon/hugeicons/icons/arrange`
+- [ArrangeByLettersAZIcon](/?provider=hugeicons&icon=arrange-by-letters-az) - hugeicons; `@sketchicon/hugeicons/icons/arrange-by-letters-az`; aliases: `SortingAZ02Icon`
+- [ArrangeByLettersZAIcon](/?provider=hugeicons&icon=arrange-by-letters-za) - hugeicons; `@sketchicon/hugeicons/icons/arrange-by-letters-za`
+- [ArrangeByNumbersNineOneIcon](/?provider=hugeicons&icon=arrange-by-numbers-nine-one) - hugeicons; `@sketchicon/hugeicons/icons/arrange-by-numbers-nine-one`
+- [ArrangeByNumbersOneNineIcon](/?provider=hugeicons&icon=arrange-by-numbers-one-nine) - hugeicons; `@sketchicon/hugeicons/icons/arrange-by-numbers-one-nine`
+- [ArrowAllDirectionIcon](/?provider=hugeicons&icon=arrow-all-direction) - hugeicons; `@sketchicon/hugeicons/icons/arrow-all-direction`
+- [ArrowBigDown](/?provider=lucide&icon=arrow-big-down) - lucide; `@sketchicon/lucide/icons/arrow-big-down`
+- [ArrowBigDownDashIcon](/?provider=hugeicons&icon=arrow-big-down-dash) - hugeicons; `@sketchicon/hugeicons/icons/arrow-big-down-dash`
+- [ArrowBigDownDash](/?provider=lucide&icon=arrow-big-down-dash) - lucide; `@sketchicon/lucide/icons/arrow-big-down-dash`
+- [ArrowBigLeft](/?provider=lucide&icon=arrow-big-left) - lucide; `@sketchicon/lucide/icons/arrow-big-left`
+- [ArrowBigLeftDashIcon](/?provider=hugeicons&icon=arrow-big-left-dash) - hugeicons; `@sketchicon/hugeicons/icons/arrow-big-left-dash`
+- [ArrowBigLeftDash](/?provider=lucide&icon=arrow-big-left-dash) - lucide; `@sketchicon/lucide/icons/arrow-big-left-dash`
+- [ArrowBigRight](/?provider=lucide&icon=arrow-big-right) - lucide; `@sketchicon/lucide/icons/arrow-big-right`
+- [ArrowBigRightDash](/?provider=lucide&icon=arrow-big-right-dash) - lucide; `@sketchicon/lucide/icons/arrow-big-right-dash`
+- [ArrowBigUp](/?provider=lucide&icon=arrow-big-up) - lucide; `@sketchicon/lucide/icons/arrow-big-up`
+- [ArrowBigUpDashIcon](/?provider=hugeicons&icon=arrow-big-up-dash) - hugeicons; `@sketchicon/hugeicons/icons/arrow-big-up-dash`
+- [ArrowBigUpDash](/?provider=lucide&icon=arrow-big-up-dash) - lucide; `@sketchicon/lucide/icons/arrow-big-up-dash`
+- [ArrowDataTransferDiagonalIcon](/?provider=hugeicons&icon=arrow-data-transfer-diagonal) - hugeicons; `@sketchicon/hugeicons/icons/arrow-data-transfer-diagonal`
+- [ArrowDataTransferHorizontalIcon](/?provider=hugeicons&icon=arrow-data-transfer-horizontal) - hugeicons; `@sketchicon/hugeicons/icons/arrow-data-transfer-horizontal`
+- [ArrowDataTransferVerticalIcon](/?provider=hugeicons&icon=arrow-data-transfer-vertical) - hugeicons; `@sketchicon/hugeicons/icons/arrow-data-transfer-vertical`
+- [ArrowDiagonalIcon](/?provider=hugeicons&icon=arrow-diagonal) - hugeicons; `@sketchicon/hugeicons/icons/arrow-diagonal`
+- [ArrowDown](/?provider=lucide&icon=arrow-down) - lucide; `@sketchicon/lucide/icons/arrow-down`
+- [ArrowDown01](/?provider=lucide&icon=arrow-down-0-1) - lucide; `@sketchicon/lucide/icons/arrow-down-0-1`
+- [ArrowDown01Icon](/?provider=hugeicons&icon=arrow-down-01) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-01`; aliases: `ArrowDownIcon`, `ChevronDownIcon`
+- [ArrowDown02Icon](/?provider=hugeicons&icon=arrow-down-02) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-02`
+- [ArrowDown03Icon](/?provider=hugeicons&icon=arrow-down-03) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-03`
+- [ArrowDown04Icon](/?provider=hugeicons&icon=arrow-down-04) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-04`
+- [ArrowDown05Icon](/?provider=hugeicons&icon=arrow-down-05) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-05`
+- [ArrowDown10](/?provider=lucide&icon=arrow-down-1-0) - lucide; `@sketchicon/lucide/icons/arrow-down-1-0`
+- [ArrowDownAZ](/?provider=lucide&icon=arrow-down-a-z) - lucide; `@sketchicon/lucide/icons/arrow-down-a-z`; aliases: `ArrowDownAz`
+- [ArrowDownBigIcon](/?provider=hugeicons&icon=arrow-down-big) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-big`
+- [ArrowDownDoubleIcon](/?provider=hugeicons&icon=arrow-down-double) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-double`
+- [ArrowDownFromLineIcon](/?provider=hugeicons&icon=arrow-down-from-line) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-from-line`
+- [ArrowDownFromLine](/?provider=lucide&icon=arrow-down-from-line) - lucide; `@sketchicon/lucide/icons/arrow-down-from-line`
+- [ArrowDownLeft](/?provider=lucide&icon=arrow-down-left) - lucide; `@sketchicon/lucide/icons/arrow-down-left`
+- [ArrowDownLeft01Icon](/?provider=hugeicons&icon=arrow-down-left-01) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-left-01`; aliases: `ArrowDownLeftIcon`
+- [ArrowDownLeft02Icon](/?provider=hugeicons&icon=arrow-down-left-02) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-left-02`
+- [ArrowDownNarrowWideIcon](/?provider=hugeicons&icon=arrow-down-narrow-wide) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-narrow-wide`
+- [ArrowDownNarrowWide](/?provider=lucide&icon=arrow-down-narrow-wide) - lucide; `@sketchicon/lucide/icons/arrow-down-narrow-wide`
+- [ArrowDownOneZeroIcon](/?provider=hugeicons&icon=arrow-down-one-zero) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-one-zero`
+- [ArrowDownRight](/?provider=lucide&icon=arrow-down-right) - lucide; `@sketchicon/lucide/icons/arrow-down-right`
+- [ArrowDownRight01Icon](/?provider=hugeicons&icon=arrow-down-right-01) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-right-01`; aliases: `ArrowDownRightIcon`
+- [ArrowDownRight02Icon](/?provider=hugeicons&icon=arrow-down-right-02) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-right-02`
+- [ArrowDownToDotIcon](/?provider=hugeicons&icon=arrow-down-to-dot) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-to-dot`
+- [ArrowDownToDot](/?provider=lucide&icon=arrow-down-to-dot) - lucide; `@sketchicon/lucide/icons/arrow-down-to-dot`
+- [ArrowDownToLineIcon](/?provider=hugeicons&icon=arrow-down-to-line) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-to-line`
+- [ArrowDownToLine](/?provider=lucide&icon=arrow-down-to-line) - lucide; `@sketchicon/lucide/icons/arrow-down-to-line`
+- [ArrowDownUp](/?provider=lucide&icon=arrow-down-up) - lucide; `@sketchicon/lucide/icons/arrow-down-up`
+- [ArrowDownWideNarrowIcon](/?provider=hugeicons&icon=arrow-down-wide-narrow) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-wide-narrow`
+- [ArrowDownWideNarrow](/?provider=lucide&icon=arrow-down-wide-narrow) - lucide; `@sketchicon/lucide/icons/arrow-down-wide-narrow`; aliases: `SortDesc`
+- [ArrowDownZA](/?provider=lucide&icon=arrow-down-z-a) - lucide; `@sketchicon/lucide/icons/arrow-down-z-a`; aliases: `ArrowDownZa`
+- [ArrowDownZeroOneIcon](/?provider=hugeicons&icon=arrow-down-zero-one) - hugeicons; `@sketchicon/hugeicons/icons/arrow-down-zero-one`
+- [ArrowExpandIcon](/?provider=hugeicons&icon=arrow-expand) - hugeicons; `@sketchicon/hugeicons/icons/arrow-expand`
+- [ArrowExpand01Icon](/?provider=hugeicons&icon=arrow-expand-01) - hugeicons; `@sketchicon/hugeicons/icons/arrow-expand-01`
+- [ArrowExpand02Icon](/?provider=hugeicons&icon=arrow-expand-02) - hugeicons; `@sketchicon/hugeicons/icons/arrow-expand-02`
+- [ArrowExpandDiagonal01Icon](/?provider=hugeicons&icon=arrow-expand-diagonal-01) - hugeicons; `@sketchicon/hugeicons/icons/arrow-expand-diagonal-01`; aliases: `ArrowExpandDiagonalIcon`
+- [ArrowExpandDiagonal02Icon](/?provider=hugeicons&icon=arrow-expand-diagonal-02) - hugeicons; `@sketchicon/hugeicons/icons/arrow-expand-diagonal-02`
+- [ArrowHorizontalIcon](/?provider=hugeicons&icon=arrow-horizontal) - hugeicons; `@sketchicon/hugeicons/icons/arrow-horizontal`
+- [ArrowLeft](/?provider=lucide&icon=arrow-left) - lucide; `@sketchicon/lucide/icons/arrow-left`
+- [ArrowLeft01Icon](/?provider=hugeicons&icon=arrow-left-01) - hugeicons; `@sketchicon/hugeicons/icons/arrow-left-01`; aliases: `ArrowLeftIcon`
+- [ArrowLeft02Icon](/?provider=hugeicons&icon=arrow-left-02) - hugeicons; `@sketchicon/hugeicons/icons/arrow-left-02`
+- [ArrowLeft03Icon](/?provider=hugeicons&icon=arrow-left-03) - hugeicons; `@sketchicon/hugeicons/icons/arrow-left-03`
+- [ArrowLeft04Icon](/?provider=hugeicons&icon=arrow-left-04) - hugeicons; `@sketchicon/hugeicons/icons/arrow-left-04`
+- [ArrowLeft05Icon](/?provider=hugeicons&icon=arrow-left-05) - hugeicons; `@sketchicon/hugeicons/icons/arrow-left-05`
+- [ArrowLeftBigIcon](/?provider=hugeicons&icon=arrow-left-big) - hugeicons; `@sketchicon/hugeicons/icons/arrow-left-big`
+- [ArrowLeftDoubleIcon](/?provider=hugeicons&icon=arrow-left-double) - hugeicons; `@sketchicon/hugeicons/icons/arrow-left-double`
+- [ArrowLeftFromLineIcon](/?provider=hugeicons&icon=arrow-left-from-line) - hugeicons; `@sketchicon/hugeicons/icons/arrow-left-from-line`
+- [ArrowLeftFromLine](/?provider=lucide&icon=arrow-left-from-line) - lucide; `@sketchicon/lucide/icons/arrow-left-from-line`
+- [ArrowLeftRightIcon](/?provider=hugeicons&icon=arrow-left-right) - hugeicons; `@sketchicon/hugeicons/icons/arrow-left-right`
+- [ArrowLeftRight](/?provider=lucide&icon=arrow-left-right) - lucide; `@sketchicon/lucide/icons/arrow-left-right`
+- [ArrowLeftToLineIcon](/?provider=hugeicons&icon=arrow-left-to-line) - hugeicons; `@sketchicon/hugeicons/icons/arrow-left-to-line`
+- [ArrowLeftToLine](/?provider=lucide&icon=arrow-left-to-line) - lucide; `@sketchicon/lucide/icons/arrow-left-to-line`
+- [ArrowMoveDownLeftIcon](/?provider=hugeicons&icon=arrow-move-down-left) - hugeicons; `@sketchicon/hugeicons/icons/arrow-move-down-left`
+- [ArrowMoveDownRightIcon](/?provider=hugeicons&icon=arrow-move-down-right) - hugeicons; `@sketchicon/hugeicons/icons/arrow-move-down-right`
+- [ArrowMoveLeftDownIcon](/?provider=hugeicons&icon=arrow-move-left-down) - hugeicons; `@sketchicon/hugeicons/icons/arrow-move-left-down`
+- [ArrowMoveRightDownIcon](/?provider=hugeicons&icon=arrow-move-right-down) - hugeicons; `@sketchicon/hugeicons/icons/arrow-move-right-down`
+- [ArrowMoveUpLeftIcon](/?provider=hugeicons&icon=arrow-move-up-left) - hugeicons; `@sketchicon/hugeicons/icons/arrow-move-up-left`
+- [ArrowMoveUpRightIcon](/?provider=hugeicons&icon=arrow-move-up-right) - hugeicons; `@sketchicon/hugeicons/icons/arrow-move-up-right`
+- [ArrowReloadHorizontalIcon](/?provider=hugeicons&icon=arrow-reload-horizontal) - hugeicons; `@sketchicon/hugeicons/icons/arrow-reload-horizontal`
+- [ArrowReloadVerticalIcon](/?provider=hugeicons&icon=arrow-reload-vertical) - hugeicons; `@sketchicon/hugeicons/icons/arrow-reload-vertical`
+- [ArrowRight](/?provider=lucide&icon=arrow-right) - lucide; `@sketchicon/lucide/icons/arrow-right`
+- [ArrowRight01Icon](/?provider=hugeicons&icon=arrow-right-01) - hugeicons; `@sketchicon/hugeicons/icons/arrow-right-01`; aliases: `ArrowRightIcon`
+- [ArrowRight02Icon](/?provider=hugeicons&icon=arrow-right-02) - hugeicons; `@sketchicon/hugeicons/icons/arrow-right-02`
+- [ArrowRight03Icon](/?provider=hugeicons&icon=arrow-right-03) - hugeicons; `@sketchicon/hugeicons/icons/arrow-right-03`
+- [ArrowRight04Icon](/?provider=hugeicons&icon=arrow-right-04) - hugeicons; `@sketchicon/hugeicons/icons/arrow-right-04`
+- [ArrowRight05Icon](/?provider=hugeicons&icon=arrow-right-05) - hugeicons; `@sketchicon/hugeicons/icons/arrow-right-05`
+- [ArrowRightBigIcon](/?provider=hugeicons&icon=arrow-right-big) - hugeicons; `@sketchicon/hugeicons/icons/arrow-right-big`
+- [ArrowRightDoubleIcon](/?provider=hugeicons&icon=arrow-right-double) - hugeicons; `@sketchicon/hugeicons/icons/arrow-right-double`
+- [ArrowRightFromLineIcon](/?provider=hugeicons&icon=arrow-right-from-line) - hugeicons; `@sketchicon/hugeicons/icons/arrow-right-from-line`
+- [ArrowRightFromLine](/?provider=lucide&icon=arrow-right-from-line) - lucide; `@sketchicon/lucide/icons/arrow-right-from-line`
+- [ArrowRightLeft](/?provider=lucide&icon=arrow-right-left) - lucide; `@sketchicon/lucide/icons/arrow-right-left`
+- [ArrowRightToLine](/?provider=lucide&icon=arrow-right-to-line) - lucide; `@sketchicon/lucide/icons/arrow-right-to-line`
+- [ArrowShrinkIcon](/?provider=hugeicons&icon=arrow-shrink) - hugeicons; `@sketchicon/hugeicons/icons/arrow-shrink`
+- [ArrowShrink01Icon](/?provider=hugeicons&icon=arrow-shrink-01) - hugeicons; `@sketchicon/hugeicons/icons/arrow-shrink-01`
+- [ArrowShrink02Icon](/?provider=hugeicons&icon=arrow-shrink-02) - hugeicons; `@sketchicon/hugeicons/icons/arrow-shrink-02`
+- [ArrowTurnBackwardIcon](/?provider=hugeicons&icon=arrow-turn-backward) - hugeicons; `@sketchicon/hugeicons/icons/arrow-turn-backward`
+- [ArrowTurnDownIcon](/?provider=hugeicons&icon=arrow-turn-down) - hugeicons; `@sketchicon/hugeicons/icons/arrow-turn-down`
+- [ArrowTurnForwardIcon](/?provider=hugeicons&icon=arrow-turn-forward) - hugeicons; `@sketchicon/hugeicons/icons/arrow-turn-forward`
+- [ArrowTurnUpIcon](/?provider=hugeicons&icon=arrow-turn-up) - hugeicons; `@sketchicon/hugeicons/icons/arrow-turn-up`
+- [ArrowUp](/?provider=lucide&icon=arrow-up) - lucide; `@sketchicon/lucide/icons/arrow-up`
+- [ArrowUp01](/?provider=lucide&icon=arrow-up-0-1) - lucide; `@sketchicon/lucide/icons/arrow-up-0-1`
+- [ArrowUp01Icon](/?provider=hugeicons&icon=arrow-up-01) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-01`; aliases: `ArrowUpIcon`
+- [ArrowUp02Icon](/?provider=hugeicons&icon=arrow-up-02) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-02`
+- [ArrowUp03Icon](/?provider=hugeicons&icon=arrow-up-03) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-03`
+- [ArrowUp04Icon](/?provider=hugeicons&icon=arrow-up-04) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-04`
+- [ArrowUp05Icon](/?provider=hugeicons&icon=arrow-up-05) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-05`
+- [ArrowUp10](/?provider=lucide&icon=arrow-up-1-0) - lucide; `@sketchicon/lucide/icons/arrow-up-1-0`
+- [ArrowUpAZ](/?provider=lucide&icon=arrow-up-a-z) - lucide; `@sketchicon/lucide/icons/arrow-up-a-z`; aliases: `ArrowUpAz`
+- [ArrowUpBigIcon](/?provider=hugeicons&icon=arrow-up-big) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-big`
+- [ArrowUpDoubleIcon](/?provider=hugeicons&icon=arrow-up-double) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-double`
+- [ArrowUpDownIcon](/?provider=hugeicons&icon=arrow-up-down) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-down`
+- [ArrowUpDown](/?provider=lucide&icon=arrow-up-down) - lucide; `@sketchicon/lucide/icons/arrow-up-down`
+- [ArrowUpFromDotIcon](/?provider=hugeicons&icon=arrow-up-from-dot) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-from-dot`
+- [ArrowUpFromDot](/?provider=lucide&icon=arrow-up-from-dot) - lucide; `@sketchicon/lucide/icons/arrow-up-from-dot`
+- [ArrowUpFromLineIcon](/?provider=hugeicons&icon=arrow-up-from-line) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-from-line`
+- [ArrowUpFromLine](/?provider=lucide&icon=arrow-up-from-line) - lucide; `@sketchicon/lucide/icons/arrow-up-from-line`
+- [ArrowUpLeft](/?provider=lucide&icon=arrow-up-left) - lucide; `@sketchicon/lucide/icons/arrow-up-left`
+- [ArrowUpLeft01Icon](/?provider=hugeicons&icon=arrow-up-left-01) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-left-01`; aliases: `ArrowUpLeftIcon`
+- [ArrowUpLeft02Icon](/?provider=hugeicons&icon=arrow-up-left-02) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-left-02`
+- [ArrowUpNarrowWideIcon](/?provider=hugeicons&icon=arrow-up-narrow-wide) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-narrow-wide`
+- [ArrowUpNarrowWide](/?provider=lucide&icon=arrow-up-narrow-wide) - lucide; `@sketchicon/lucide/icons/arrow-up-narrow-wide`; aliases: `SortAsc`
+- [ArrowUpOneZeroIcon](/?provider=hugeicons&icon=arrow-up-one-zero) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-one-zero`
+- [ArrowUpRight](/?provider=lucide&icon=arrow-up-right) - lucide; `@sketchicon/lucide/icons/arrow-up-right`
+- [ArrowUpRight01Icon](/?provider=hugeicons&icon=arrow-up-right-01) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-right-01`; aliases: `ArrowUpRightIcon`
+- [ArrowUpRight02Icon](/?provider=hugeicons&icon=arrow-up-right-02) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-right-02`
+- [ArrowUpRight03Icon](/?provider=hugeicons&icon=arrow-up-right-03) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-right-03`
+- [ArrowUpRightStackIcon](/?provider=hugeicons&icon=arrow-up-right-stack) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-right-stack`
+- [ArrowUpToLineIcon](/?provider=hugeicons&icon=arrow-up-to-line) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-to-line`
+- [ArrowUpToLine](/?provider=lucide&icon=arrow-up-to-line) - lucide; `@sketchicon/lucide/icons/arrow-up-to-line`
+- [ArrowUpWideNarrowIcon](/?provider=hugeicons&icon=arrow-up-wide-narrow) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-wide-narrow`
+- [ArrowUpWideNarrow](/?provider=lucide&icon=arrow-up-wide-narrow) - lucide; `@sketchicon/lucide/icons/arrow-up-wide-narrow`
+- [ArrowUpZA](/?provider=lucide&icon=arrow-up-z-a) - lucide; `@sketchicon/lucide/icons/arrow-up-z-a`; aliases: `ArrowUpZa`
+- [ArrowUpZeroOneIcon](/?provider=hugeicons&icon=arrow-up-zero-one) - hugeicons; `@sketchicon/hugeicons/icons/arrow-up-zero-one`
+- [ArrowVerticalIcon](/?provider=hugeicons&icon=arrow-vertical) - hugeicons; `@sketchicon/hugeicons/icons/arrow-vertical`
+- [ArrowsUpFromLineIcon](/?provider=hugeicons&icon=arrows-up-from-line) - hugeicons; `@sketchicon/hugeicons/icons/arrows-up-from-line`
+- [ArrowsUpFromLine](/?provider=lucide&icon=arrows-up-from-line) - lucide; `@sketchicon/lucide/icons/arrows-up-from-line`
+- [ArtboardIcon](/?provider=hugeicons&icon=artboard) - hugeicons; `@sketchicon/hugeicons/icons/artboard`
+- [ArtboardToolIcon](/?provider=hugeicons&icon=artboard-tool) - hugeicons; `@sketchicon/hugeicons/icons/artboard-tool`
+- [ArtificialIntelligence01Icon](/?provider=hugeicons&icon=artificial-intelligence-01) - hugeicons; `@sketchicon/hugeicons/icons/artificial-intelligence-01`; aliases: `ArtificialIntelligenceIcon`
+- [ArtificialIntelligence02Icon](/?provider=hugeicons&icon=artificial-intelligence-02) - hugeicons; `@sketchicon/hugeicons/icons/artificial-intelligence-02`
+- [ArtificialIntelligence03Icon](/?provider=hugeicons&icon=artificial-intelligence-03) - hugeicons; `@sketchicon/hugeicons/icons/artificial-intelligence-03`
+- [ArtificialIntelligence04Icon](/?provider=hugeicons&icon=artificial-intelligence-04) - hugeicons; `@sketchicon/hugeicons/icons/artificial-intelligence-04`
+- [ArtificialIntelligence05Icon](/?provider=hugeicons&icon=artificial-intelligence-05) - hugeicons; `@sketchicon/hugeicons/icons/artificial-intelligence-05`
+- [ArtificialIntelligence06Icon](/?provider=hugeicons&icon=artificial-intelligence-06) - hugeicons; `@sketchicon/hugeicons/icons/artificial-intelligence-06`
+- [ArtificialIntelligence07Icon](/?provider=hugeicons&icon=artificial-intelligence-07) - hugeicons; `@sketchicon/hugeicons/icons/artificial-intelligence-07`
+- [ArtificialIntelligence08Icon](/?provider=hugeicons&icon=artificial-intelligence-08) - hugeicons; `@sketchicon/hugeicons/icons/artificial-intelligence-08`
+- [AspectRatioIcon](/?provider=hugeicons&icon=aspect-ratio) - hugeicons; `@sketchicon/hugeicons/icons/aspect-ratio`
+- [AssignmentsIcon](/?provider=hugeicons&icon=assignments) - hugeicons; `@sketchicon/hugeicons/icons/assignments`
+- [AsteriskIcon](/?provider=hugeicons&icon=asterisk) - hugeicons; `@sketchicon/hugeicons/icons/asterisk`
+- [Asterisk](/?provider=lucide&icon=asterisk) - lucide; `@sketchicon/lucide/icons/asterisk`
+- [Asterisk02Icon](/?provider=hugeicons&icon=asterisk-02) - hugeicons; `@sketchicon/hugeicons/icons/asterisk-02`
+- [Asteroid01Icon](/?provider=hugeicons&icon=asteroid-01) - hugeicons; `@sketchicon/hugeicons/icons/asteroid-01`; aliases: `AsteroidIcon`
+- [Asteroid02Icon](/?provider=hugeicons&icon=asteroid-02) - hugeicons; `@sketchicon/hugeicons/icons/asteroid-02`
+- [Astroid](/?provider=lucide&icon=astroid) - lucide; `@sketchicon/lucide/icons/astroid`
+- [Astronaut01Icon](/?provider=hugeicons&icon=astronaut-01) - hugeicons; `@sketchicon/hugeicons/icons/astronaut-01`; aliases: `AstronautIcon`
+- [Astronaut02Icon](/?provider=hugeicons&icon=astronaut-02) - hugeicons; `@sketchicon/hugeicons/icons/astronaut-02`
+- [AtIcon](/?provider=hugeicons&icon=at) - hugeicons; `@sketchicon/hugeicons/icons/at`
+- [AtSignIcon](/?provider=hugeicons&icon=at-sign) - hugeicons; `@sketchicon/hugeicons/icons/at-sign`
+- [AtSign](/?provider=lucide&icon=at-sign) - lucide; `@sketchicon/lucide/icons/at-sign`
+- [Atm01Icon](/?provider=hugeicons&icon=atm-01) - hugeicons; `@sketchicon/hugeicons/icons/atm-01`; aliases: `AtmIcon`
+- [Atm02Icon](/?provider=hugeicons&icon=atm-02) - hugeicons; `@sketchicon/hugeicons/icons/atm-02`
+- [Atom](/?provider=lucide&icon=atom) - lucide; `@sketchicon/lucide/icons/atom`
+- [Atom01Icon](/?provider=hugeicons&icon=atom-01) - hugeicons; `@sketchicon/hugeicons/icons/atom-01`; aliases: `AtomIcon`
+- [Atom02Icon](/?provider=hugeicons&icon=atom-02) - hugeicons; `@sketchicon/hugeicons/icons/atom-02`
+- [AtomicPowerIcon](/?provider=hugeicons&icon=atomic-power) - hugeicons; `@sketchicon/hugeicons/icons/atomic-power`
+- [AttachmentIcon](/?provider=hugeicons&icon=attachment) - hugeicons; `@sketchicon/hugeicons/icons/attachment`
+- [Attachment01Icon](/?provider=hugeicons&icon=attachment-01) - hugeicons; `@sketchicon/hugeicons/icons/attachment-01`
+- [Attachment02Icon](/?provider=hugeicons&icon=attachment-02) - hugeicons; `@sketchicon/hugeicons/icons/attachment-02`
+- [AttachmentCircleIcon](/?provider=hugeicons&icon=attachment-circle) - hugeicons; `@sketchicon/hugeicons/icons/attachment-circle`
+- [AttachmentSquareIcon](/?provider=hugeicons&icon=attachment-square) - hugeicons; `@sketchicon/hugeicons/icons/attachment-square`
+- [AuctionIcon](/?provider=hugeicons&icon=auction) - hugeicons; `@sketchicon/hugeicons/icons/auction`
+- [AudioBook01Icon](/?provider=hugeicons&icon=audio-book-01) - hugeicons; `@sketchicon/hugeicons/icons/audio-book-01`; aliases: `AudioBookIcon`
+- [AudioBook02Icon](/?provider=hugeicons&icon=audio-book-02) - hugeicons; `@sketchicon/hugeicons/icons/audio-book-02`
+- [AudioBook03Icon](/?provider=hugeicons&icon=audio-book-03) - hugeicons; `@sketchicon/hugeicons/icons/audio-book-03`
+- [AudioBook04Icon](/?provider=hugeicons&icon=audio-book-04) - hugeicons; `@sketchicon/hugeicons/icons/audio-book-04`
+- [AudioLinesIcon](/?provider=hugeicons&icon=audio-lines) - hugeicons; `@sketchicon/hugeicons/icons/audio-lines`
+- [AudioLines](/?provider=lucide&icon=audio-lines) - lucide; `@sketchicon/lucide/icons/audio-lines`
+- [AudioWave01Icon](/?provider=hugeicons&icon=audio-wave-01) - hugeicons; `@sketchicon/hugeicons/icons/audio-wave-01`; aliases: `AudioWaveIcon`
+- [AudioWave02Icon](/?provider=hugeicons&icon=audio-wave-02) - hugeicons; `@sketchicon/hugeicons/icons/audio-wave-02`
+- [AudioWaveformIcon](/?provider=hugeicons&icon=audio-waveform) - hugeicons; `@sketchicon/hugeicons/icons/audio-waveform`
+- [AudioWaveform](/?provider=lucide&icon=audio-waveform) - lucide; `@sketchicon/lucide/icons/audio-waveform`
+- [Audit01Icon](/?provider=hugeicons&icon=audit-01) - hugeicons; `@sketchicon/hugeicons/icons/audit-01`; aliases: `AuditIcon`
+- [Audit02Icon](/?provider=hugeicons&icon=audit-02) - hugeicons; `@sketchicon/hugeicons/icons/audit-02`
+- [AugmentedRealityArIcon](/?provider=hugeicons&icon=augmented-reality-ar) - hugeicons; `@sketchicon/hugeicons/icons/augmented-reality-ar`
+- [AuthorizedIcon](/?provider=hugeicons&icon=authorized) - hugeicons; `@sketchicon/hugeicons/icons/authorized`
+- [AutoConversationsIcon](/?provider=hugeicons&icon=auto-conversations) - hugeicons; `@sketchicon/hugeicons/icons/auto-conversations`
+- [AutomotiveBattery01Icon](/?provider=hugeicons&icon=automotive-battery-01) - hugeicons; `@sketchicon/hugeicons/icons/automotive-battery-01`; aliases: `AutomotiveBatteryIcon`
+- [AutomotiveBattery02Icon](/?provider=hugeicons&icon=automotive-battery-02) - hugeicons; `@sketchicon/hugeicons/icons/automotive-battery-02`
+- [AvalancheIcon](/?provider=hugeicons&icon=avalanche) - hugeicons; `@sketchicon/hugeicons/icons/avalanche`
+- [AvocadoIcon](/?provider=hugeicons&icon=avocado) - hugeicons; `@sketchicon/hugeicons/icons/avocado`
+- [Award](/?provider=lucide&icon=award) - lucide; `@sketchicon/lucide/icons/award`
+- [Award01Icon](/?provider=hugeicons&icon=award-01) - hugeicons; `@sketchicon/hugeicons/icons/award-01`; aliases: `AwardIcon`
+- [Award02Icon](/?provider=hugeicons&icon=award-02) - hugeicons; `@sketchicon/hugeicons/icons/award-02`
+- [Award03Icon](/?provider=hugeicons&icon=award-03) - hugeicons; `@sketchicon/hugeicons/icons/award-03`
+- [Award04Icon](/?provider=hugeicons&icon=award-04) - hugeicons; `@sketchicon/hugeicons/icons/award-04`
+- [Award05Icon](/?provider=hugeicons&icon=award-05) - hugeicons; `@sketchicon/hugeicons/icons/award-05`
+- [AwsLambdaIcon](/?provider=hugeicons&icon=aws-lambda) - hugeicons; `@sketchicon/hugeicons/icons/aws-lambda`
+- [AxeIcon](/?provider=hugeicons&icon=axe) - hugeicons; `@sketchicon/hugeicons/icons/axe`
+- [Axe](/?provider=lucide&icon=axe) - lucide; `@sketchicon/lucide/icons/axe`
+- [Axis3d](/?provider=lucide&icon=axis-3d) - lucide; `@sketchicon/lucide/icons/axis-3d`; aliases: `Axis3D`
+- [AxisThreeDIcon](/?provider=hugeicons&icon=axis-three-d) - hugeicons; `@sketchicon/hugeicons/icons/axis-three-d`
 
 [Back to the catalog index](../catalog.md)

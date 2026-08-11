@@ -1,22 +1,108 @@
 # SketchIcon Catalog: N
 
-Each entry shows the canonical React export and direct-import slug. Import a slug from `sketchicon/icons/<slug>`. Aliases refer to the same icon geometry.
+Each entry shows its provider, canonical React export, and direct-import slug.
 
-- [Navigation2Off](/?icon=navigation-2-off) - `navigation-2-off`
-- [Navigation2](/?icon=navigation-2) - `navigation-2`
-- [NavigationOff](/?icon=navigation-off) - `navigation-off`
-- [Navigation](/?icon=navigation) - `navigation`
-- [Network](/?icon=network) - `network`
-- [Newspaper](/?icon=newspaper) - `newspaper`
-- [Nfc](/?icon=nfc) - `nfc`
-- [NonBinary](/?icon=non-binary) - `non-binary`
-- [NotebookPen](/?icon=notebook-pen) - `notebook-pen`
-- [NotebookTabs](/?icon=notebook-tabs) - `notebook-tabs`
-- [NotebookText](/?icon=notebook-text) - `notebook-text`
-- [Notebook](/?icon=notebook) - `notebook`
-- [NotepadTextDashed](/?icon=notepad-text-dashed) - `notepad-text-dashed`
-- [NotepadText](/?icon=notepad-text) - `notepad-text`
-- [NutOff](/?icon=nut-off) - `nut-off`
-- [Nut](/?icon=nut) - `nut`
+- [NThRootIcon](/?provider=hugeicons&icon=n-th-root) - hugeicons; `@sketchicon/hugeicons/icons/n-th-root`
+- [NThRootCircleIcon](/?provider=hugeicons&icon=n-th-root-circle) - hugeicons; `@sketchicon/hugeicons/icons/n-th-root-circle`
+- [NThRootSquareIcon](/?provider=hugeicons&icon=n-th-root-square) - hugeicons; `@sketchicon/hugeicons/icons/n-th-root-square`
+- [NanoTechnologyIcon](/?provider=hugeicons&icon=nano-technology) - hugeicons; `@sketchicon/hugeicons/icons/nano-technology`
+- [Napkins01Icon](/?provider=hugeicons&icon=napkins-01) - hugeicons; `@sketchicon/hugeicons/icons/napkins-01`; aliases: `NapkinsIcon`
+- [Napkins02Icon](/?provider=hugeicons&icon=napkins-02) - hugeicons; `@sketchicon/hugeicons/icons/napkins-02`
+- [NaturalFoodIcon](/?provider=hugeicons&icon=natural-food) - hugeicons; `@sketchicon/hugeicons/icons/natural-food`
+- [NavigationIcon](/?provider=hugeicons&icon=navigation) - hugeicons; `@sketchicon/hugeicons/icons/navigation`
+- [Navigation](/?provider=lucide&icon=navigation) - lucide; `@sketchicon/lucide/icons/navigation`
+- [Navigation01Icon](/?provider=hugeicons&icon=navigation-01) - hugeicons; `@sketchicon/hugeicons/icons/navigation-01`
+- [Navigation02Icon](/?provider=hugeicons&icon=navigation-02) - hugeicons; `@sketchicon/hugeicons/icons/navigation-02`
+- [Navigation03Icon](/?provider=hugeicons&icon=navigation-03) - hugeicons; `@sketchicon/hugeicons/icons/navigation-03`
+- [Navigation04Icon](/?provider=hugeicons&icon=navigation-04) - hugeicons; `@sketchicon/hugeicons/icons/navigation-04`
+- [Navigation06Icon](/?provider=hugeicons&icon=navigation-06) - hugeicons; `@sketchicon/hugeicons/icons/navigation-06`
+- [Navigation2](/?provider=lucide&icon=navigation-2) - lucide; `@sketchicon/lucide/icons/navigation-2`
+- [Navigation2Off](/?provider=lucide&icon=navigation-2-off) - lucide; `@sketchicon/lucide/icons/navigation-2-off`
+- [NavigationOffIcon](/?provider=hugeicons&icon=navigation-off) - hugeicons; `@sketchicon/hugeicons/icons/navigation-off`
+- [NavigationOff](/?provider=lucide&icon=navigation-off) - lucide; `@sketchicon/lucide/icons/navigation-off`
+- [NavigationTwoIcon](/?provider=hugeicons&icon=navigation-two) - hugeicons; `@sketchicon/hugeicons/icons/navigation-two`
+- [NavigationTwoOffIcon](/?provider=hugeicons&icon=navigation-two-off) - hugeicons; `@sketchicon/hugeicons/icons/navigation-two-off`
+- [Navigator01Icon](/?provider=hugeicons&icon=navigator-01) - hugeicons; `@sketchicon/hugeicons/icons/navigator-01`; aliases: `NavigatorIcon`
+- [Navigator02Icon](/?provider=hugeicons&icon=navigator-02) - hugeicons; `@sketchicon/hugeicons/icons/navigator-02`
+- [NecklaceIcon](/?provider=hugeicons&icon=necklace) - hugeicons; `@sketchicon/hugeicons/icons/necklace`
+- [NerdIcon](/?provider=hugeicons&icon=nerd) - hugeicons; `@sketchicon/hugeicons/icons/nerd`
+- [Network](/?provider=lucide&icon=network) - lucide; `@sketchicon/lucide/icons/network`
+- [NeuralNetworkIcon](/?provider=hugeicons&icon=neural-network) - hugeicons; `@sketchicon/hugeicons/icons/neural-network`
+- [NeutralIcon](/?provider=hugeicons&icon=neutral) - hugeicons; `@sketchicon/hugeicons/icons/neutral`
+- [NewJobIcon](/?provider=hugeicons&icon=new-job) - hugeicons; `@sketchicon/hugeicons/icons/new-job`
+- [NewOfficeIcon](/?provider=hugeicons&icon=new-office) - hugeicons; `@sketchicon/hugeicons/icons/new-office`
+- [NewReleasesIcon](/?provider=hugeicons&icon=new-releases) - hugeicons; `@sketchicon/hugeicons/icons/new-releases`
+- [NewTwitterIcon](/?provider=hugeicons&icon=new-twitter) - hugeicons; `@sketchicon/hugeicons/icons/new-twitter`
+- [NewTwitterEllipseIcon](/?provider=hugeicons&icon=new-twitter-ellipse) - hugeicons; `@sketchicon/hugeicons/icons/new-twitter-ellipse`
+- [NewTwitterRectangleIcon](/?provider=hugeicons&icon=new-twitter-rectangle) - hugeicons; `@sketchicon/hugeicons/icons/new-twitter-rectangle`
+- [NewsIcon](/?provider=hugeicons&icon=news) - hugeicons; `@sketchicon/hugeicons/icons/news`
+- [News01Icon](/?provider=hugeicons&icon=news-01) - hugeicons; `@sketchicon/hugeicons/icons/news-01`
+- [Newspaper](/?provider=lucide&icon=newspaper) - lucide; `@sketchicon/lucide/icons/newspaper`
+- [NextIcon](/?provider=hugeicons&icon=next) - hugeicons; `@sketchicon/hugeicons/icons/next`
+- [NextWeekIcon](/?provider=hugeicons&icon=next-week) - hugeicons; `@sketchicon/hugeicons/icons/next-week`
+- [NfcIcon](/?provider=hugeicons&icon=nfc) - hugeicons; `@sketchicon/hugeicons/icons/nfc`
+- [Nfc](/?provider=lucide&icon=nfc) - lucide; `@sketchicon/lucide/icons/nfc`
+- [NikeIcon](/?provider=hugeicons&icon=nike) - hugeicons; `@sketchicon/hugeicons/icons/nike`
+- [NineCircleIcon](/?provider=hugeicons&icon=nine-circle) - hugeicons; `@sketchicon/hugeicons/icons/nine-circle`
+- [NineSquareIcon](/?provider=hugeicons&icon=nine-square) - hugeicons; `@sketchicon/hugeicons/icons/nine-square`
+- [NintendoIcon](/?provider=hugeicons&icon=nintendo) - hugeicons; `@sketchicon/hugeicons/icons/nintendo`
+- [NintendoSwitchIcon](/?provider=hugeicons&icon=nintendo-switch) - hugeicons; `@sketchicon/hugeicons/icons/nintendo-switch`
+- [NiqabIcon](/?provider=hugeicons&icon=niqab) - hugeicons; `@sketchicon/hugeicons/icons/niqab`
+- [NoMeetingRoomIcon](/?provider=hugeicons&icon=no-meeting-room) - hugeicons; `@sketchicon/hugeicons/icons/no-meeting-room`
+- [NoSignalIcon](/?provider=hugeicons&icon=no-signal) - hugeicons; `@sketchicon/hugeicons/icons/no-signal`
+- [NodeAddIcon](/?provider=hugeicons&icon=node-add) - hugeicons; `@sketchicon/hugeicons/icons/node-add`
+- [NodeEditIcon](/?provider=hugeicons&icon=node-edit) - hugeicons; `@sketchicon/hugeicons/icons/node-edit`
+- [NodeMoveDownIcon](/?provider=hugeicons&icon=node-move-down) - hugeicons; `@sketchicon/hugeicons/icons/node-move-down`
+- [NodeMoveUpIcon](/?provider=hugeicons&icon=node-move-up) - hugeicons; `@sketchicon/hugeicons/icons/node-move-up`
+- [NodeRemoveIcon](/?provider=hugeicons&icon=node-remove) - hugeicons; `@sketchicon/hugeicons/icons/node-remove`
+- [NonBinary](/?provider=lucide&icon=non-binary) - lucide; `@sketchicon/lucide/icons/non-binary`
+- [NoodlesIcon](/?provider=hugeicons&icon=noodles) - hugeicons; `@sketchicon/hugeicons/icons/noodles`
+- [NoseIcon](/?provider=hugeicons&icon=nose) - hugeicons; `@sketchicon/hugeicons/icons/nose`
+- [NotEqualSignIcon](/?provider=hugeicons&icon=not-equal-sign) - hugeicons; `@sketchicon/hugeicons/icons/not-equal-sign`
+- [NotEqualSignCircleIcon](/?provider=hugeicons&icon=not-equal-sign-circle) - hugeicons; `@sketchicon/hugeicons/icons/not-equal-sign-circle`
+- [NotEqualSignSquareIcon](/?provider=hugeicons&icon=not-equal-sign-square) - hugeicons; `@sketchicon/hugeicons/icons/not-equal-sign-square`
+- [NoteIcon](/?provider=hugeicons&icon=note) - hugeicons; `@sketchicon/hugeicons/icons/note`
+- [Note01Icon](/?provider=hugeicons&icon=note-01) - hugeicons; `@sketchicon/hugeicons/icons/note-01`
+- [Note02Icon](/?provider=hugeicons&icon=note-02) - hugeicons; `@sketchicon/hugeicons/icons/note-02`
+- [Note03Icon](/?provider=hugeicons&icon=note-03) - hugeicons; `@sketchicon/hugeicons/icons/note-03`
+- [Note04Icon](/?provider=hugeicons&icon=note-04) - hugeicons; `@sketchicon/hugeicons/icons/note-04`
+- [Note05Icon](/?provider=hugeicons&icon=note-05) - hugeicons; `@sketchicon/hugeicons/icons/note-05`
+- [NoteAddIcon](/?provider=hugeicons&icon=note-add) - hugeicons; `@sketchicon/hugeicons/icons/note-add`
+- [NoteDoneIcon](/?provider=hugeicons&icon=note-done) - hugeicons; `@sketchicon/hugeicons/icons/note-done`
+- [NoteEditIcon](/?provider=hugeicons&icon=note-edit) - hugeicons; `@sketchicon/hugeicons/icons/note-edit`
+- [NoteRemoveIcon](/?provider=hugeicons&icon=note-remove) - hugeicons; `@sketchicon/hugeicons/icons/note-remove`
+- [NotebookIcon](/?provider=hugeicons&icon=notebook) - hugeicons; `@sketchicon/hugeicons/icons/notebook`
+- [Notebook](/?provider=lucide&icon=notebook) - lucide; `@sketchicon/lucide/icons/notebook`
+- [Notebook01Icon](/?provider=hugeicons&icon=notebook-01) - hugeicons; `@sketchicon/hugeicons/icons/notebook-01`
+- [Notebook02Icon](/?provider=hugeicons&icon=notebook-02) - hugeicons; `@sketchicon/hugeicons/icons/notebook-02`
+- [NotebookPen](/?provider=lucide&icon=notebook-pen) - lucide; `@sketchicon/lucide/icons/notebook-pen`
+- [NotebookTabs](/?provider=lucide&icon=notebook-tabs) - lucide; `@sketchicon/lucide/icons/notebook-tabs`
+- [NotebookText](/?provider=lucide&icon=notebook-text) - lucide; `@sketchicon/lucide/icons/notebook-text`
+- [NotepadText](/?provider=lucide&icon=notepad-text) - lucide; `@sketchicon/lucide/icons/notepad-text`
+- [NotepadTextDashedIcon](/?provider=hugeicons&icon=notepad-text-dashed) - hugeicons; `@sketchicon/hugeicons/icons/notepad-text-dashed`
+- [NotepadTextDashed](/?provider=lucide&icon=notepad-text-dashed) - lucide; `@sketchicon/lucide/icons/notepad-text-dashed`
+- [Notification01Icon](/?provider=hugeicons&icon=notification-01) - hugeicons; `@sketchicon/hugeicons/icons/notification-01`; aliases: `NotificationIcon`
+- [Notification02Icon](/?provider=hugeicons&icon=notification-02) - hugeicons; `@sketchicon/hugeicons/icons/notification-02`
+- [Notification03Icon](/?provider=hugeicons&icon=notification-03) - hugeicons; `@sketchicon/hugeicons/icons/notification-03`
+- [NotificationBlock01Icon](/?provider=hugeicons&icon=notification-block-01) - hugeicons; `@sketchicon/hugeicons/icons/notification-block-01`; aliases: `NotificationBlockIcon`
+- [NotificationBlock02Icon](/?provider=hugeicons&icon=notification-block-02) - hugeicons; `@sketchicon/hugeicons/icons/notification-block-02`
+- [NotificationBlock03Icon](/?provider=hugeicons&icon=notification-block-03) - hugeicons; `@sketchicon/hugeicons/icons/notification-block-03`
+- [NotificationBubbleIcon](/?provider=hugeicons&icon=notification-bubble) - hugeicons; `@sketchicon/hugeicons/icons/notification-bubble`
+- [NotificationCircleIcon](/?provider=hugeicons&icon=notification-circle) - hugeicons; `@sketchicon/hugeicons/icons/notification-circle`
+- [NotificationOff01Icon](/?provider=hugeicons&icon=notification-off-01) - hugeicons; `@sketchicon/hugeicons/icons/notification-off-01`; aliases: `NotificationOffIcon`
+- [NotificationOff02Icon](/?provider=hugeicons&icon=notification-off-02) - hugeicons; `@sketchicon/hugeicons/icons/notification-off-02`
+- [NotificationOff03Icon](/?provider=hugeicons&icon=notification-off-03) - hugeicons; `@sketchicon/hugeicons/icons/notification-off-03`
+- [NotificationSnooze01Icon](/?provider=hugeicons&icon=notification-snooze-01) - hugeicons; `@sketchicon/hugeicons/icons/notification-snooze-01`; aliases: `NotificationSnoozeIcon`
+- [NotificationSnooze02Icon](/?provider=hugeicons&icon=notification-snooze-02) - hugeicons; `@sketchicon/hugeicons/icons/notification-snooze-02`
+- [NotificationSnooze03Icon](/?provider=hugeicons&icon=notification-snooze-03) - hugeicons; `@sketchicon/hugeicons/icons/notification-snooze-03`
+- [NotificationSquareIcon](/?provider=hugeicons&icon=notification-square) - hugeicons; `@sketchicon/hugeicons/icons/notification-square`
+- [Notion01Icon](/?provider=hugeicons&icon=notion-01) - hugeicons; `@sketchicon/hugeicons/icons/notion-01`; aliases: `NotionIcon`
+- [Notion02Icon](/?provider=hugeicons&icon=notion-02) - hugeicons; `@sketchicon/hugeicons/icons/notion-02`
+- [NpmIcon](/?provider=hugeicons&icon=npm) - hugeicons; `@sketchicon/hugeicons/icons/npm`
+- [NuclearPowerIcon](/?provider=hugeicons&icon=nuclear-power) - hugeicons; `@sketchicon/hugeicons/icons/nuclear-power`
+- [NutIcon](/?provider=hugeicons&icon=nut) - hugeicons; `@sketchicon/hugeicons/icons/nut`
+- [Nut](/?provider=lucide&icon=nut) - lucide; `@sketchicon/lucide/icons/nut`
+- [NutOffIcon](/?provider=hugeicons&icon=nut-off) - hugeicons; `@sketchicon/hugeicons/icons/nut-off`
+- [NutOff](/?provider=lucide&icon=nut-off) - lucide; `@sketchicon/lucide/icons/nut-off`
 
 [Back to the catalog index](../catalog.md)

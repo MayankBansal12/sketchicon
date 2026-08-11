@@ -14,9 +14,13 @@
     "resolveJsonModule": true,
     "paths": {
       "@sketchicon/core": ["packages/core/src/index.ts"],
-      "sketchicon": ["packages/lucide/src/index.ts"],
-      "sketchicon/core": ["packages/lucide/src/core.ts"],
-      "sketchicon/runtime": ["packages/lucide/src/runtime.ts"]
+      "@sketchicon/hugeicons": ["packages/hugeicons/src/index.ts"],
+      "@sketchicon/hugeicons/icons/*": ["packages/hugeicons/src/icons/*"],
+      "@sketchicon/lucide": ["packages/lucide/src/index.ts"],
+      "@sketchicon/lucide/icons/*": ["packages/lucide/src/icons/*"],
+      "sketchicon": ["packages/runtime/src/index.ts"],
+      "sketchicon/core": ["packages/runtime/src/core.ts"],
+      "sketchicon/runtime": ["packages/runtime/src/runtime.ts"]
     },
     "skipLibCheck": true,
     "strict": true,

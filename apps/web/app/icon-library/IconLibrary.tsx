@@ -1,11 +1,11 @@
 import type { SketchGeometry } from "sketchicon/core";
 import { SketchIcon } from "sketchicon/runtime";
-import Check from "sketchicon/icons/check";
-import ChevronDown from "sketchicon/icons/chevron-down";
-import Copy from "sketchicon/icons/copy";
-import Search from "sketchicon/icons/search";
-import SlidersHorizontal from "sketchicon/icons/sliders-horizontal";
-import X from "sketchicon/icons/x";
+import Check from "@sketchicon/lucide/icons/check";
+import ChevronDown from "@sketchicon/lucide/icons/chevron-down";
+import Copy from "@sketchicon/lucide/icons/copy";
+import Search from "@sketchicon/lucide/icons/search";
+import SlidersHorizontal from "@sketchicon/lucide/icons/sliders-horizontal";
+import X from "@sketchicon/lucide/icons/x";
 import {
   memo,
   useDeferredValue,
@@ -20,13 +20,19 @@ import { useSearchParams } from "react-router";
 
 import { RoughBox } from "../components/RoughBox";
 import { inkColors, palette } from "../theme";
-import type { CatalogIconMetadata } from "../generated/catalog";
+import { lucideCatalog, type CatalogIconMetadata } from "../generated/catalog";
 import {
   catalogLoaders,
   initialGeometries,
   type CatalogGeometryChunk,
 } from "../generated/loaders";
-import { filterCatalog, filterCounts, filters } from "./catalog";
+import {
+  filterCatalog,
+  filters,
+  getFilterCounts,
+  providers,
+  type ProviderFilter,
+} from "./catalog";
 
 const DEFAULT_COLUMNS = 6;
 const DEFAULT_ROW_HEIGHT = 134;
@@ -152,7 +158,7 @@ const IconCard = memo(function IconCard({
   return (
     <button
       className={`icon-card${selected ? " selected" : ""}`}
-      id={`icon-card-${item.name}`}
+      id={`icon-card-${item.id}`}
       type="button"
       onClick={() => onSelect(item)}
       onFocus={onFocus}
@@ -200,7 +206,8 @@ function UsageDrawer({
 
   if (!icon || !geometry) return null;
 
-  const snippet = `import { ${icon.name}, SketchIcon } from "sketchicon";\n\n<SketchIcon\n  icon={${icon.name}}\n  size={${size}}\n  roughness={${roughness.toFixed(1)}}\n  strokeWidth={${strokeWidth.toFixed(1)}}\n  color="${color}"\n/>`;
+  const iconImport = `import ${icon.name} from "@sketchicon/${icon.provider}/icons/${icon.label}";\nimport { SketchIcon } from "sketchicon";`;
+  const snippet = `${iconImport}\n\n<SketchIcon\n  icon={${icon.name}}\n  size={${size}}\n  roughness={${roughness.toFixed(1)}}\n  strokeWidth={${strokeWidth.toFixed(1)}}\n  color="${color}"\n/>`;
 
   async function copySnippet() {
     try {
@@ -224,6 +231,7 @@ function UsageDrawer({
           <SketchIcon icon={geometry} size={size} roughness={roughness} strokeWidth={strokeWidth} title={icon.label} />
         </div>
         <div>
+          <p className="drawer-kicker">{icon.provider === "hugeicons" ? "Hugeicons Core Free" : "Lucide"}</p>
           <h3 id="usage-drawer-title">{icon.label}</h3>
           <p className="drawer-import-name">Import name: <code>{icon.name}</code></p>
         </div>
@@ -242,6 +250,9 @@ function UsageDrawer({
 export default function IconLibrary() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState("");
+  const [activeProvider, setActiveProvider] = useState<ProviderFilter>("lucide");
+  const [availableCatalog, setAvailableCatalog] = useState<readonly CatalogIconMetadata[]>(lucideCatalog);
+  const [hugeiconsLoading, setHugeiconsLoading] = useState(false);
   const [activeFilter, setActiveFilter] = useState("all");
   const [roughness, setRoughness] = useState(1.5);
   const [size, setSize] = useState(42);
@@ -259,15 +270,45 @@ export default function IconLibrary() {
   const deferredSize = useDeferredValue(size);
   const deferredStrokeWidth = useDeferredValue(strokeWidth);
   const selectedIconSlug = searchParams.get("icon") ?? "";
+  const selectedIconProvider = searchParams.get("provider") === "hugeicons"
+    ? "hugeicons"
+    : "lucide";
+
+  const needsHugeicons = activeProvider !== "lucide" || selectedIconProvider === "hugeicons";
+
+  useEffect(() => {
+    if (!needsHugeicons || availableCatalog.some((icon) => icon.provider === "hugeicons")) {
+      setHugeiconsLoading(false);
+      return;
+    }
+    let active = true;
+    setHugeiconsLoading(true);
+    import("../generated/hugeicons-catalog.js").then(({ hugeiconsCatalog }) => {
+      if (!active) return;
+      setAvailableCatalog([...lucideCatalog, ...hugeiconsCatalog]);
+      setHugeiconsLoading(false);
+    }).catch(() => {
+      if (active) setHugeiconsLoading(false);
+    });
+    return () => {
+      active = false;
+    };
+  }, [availableCatalog, needsHugeicons]);
 
   const filteredIcons = useMemo(() => {
-    return filterCatalog(deferredQuery, activeFilter);
-  }, [activeFilter, deferredQuery]);
+    return filterCatalog(availableCatalog, deferredQuery, activeFilter, activeProvider);
+  }, [activeFilter, activeProvider, availableCatalog, deferredQuery]);
+
+  const filterCounts = useMemo(
+    () => getFilterCounts(availableCatalog, activeProvider),
+    [activeProvider, availableCatalog],
+  );
 
   const selectedIcon = useMemo(() => {
     if (!selectedIconSlug) return null;
-    return filterCatalog("", "all").find((item) => item.label === selectedIconSlug) ?? null;
-  }, [selectedIconSlug]);
+    return filterCatalog(availableCatalog, "", "all", selectedIconProvider)
+      .find((item) => item.label === selectedIconSlug) ?? null;
+  }, [availableCatalog, selectedIconProvider, selectedIconSlug]);
 
   const { columns, endRow, gridRef, rowHeight, startRow } = useVirtualGrid(filteredIcons.length);
   const visibleIcons = filteredIcons.slice(startRow * columns, endRow * columns);
@@ -316,24 +357,26 @@ export default function IconLibrary() {
   function selectIcon(item: CatalogIconMetadata) {
     const nextParams = new URLSearchParams(searchParams);
     nextParams.set("icon", item.label);
+    nextParams.set("provider", item.provider);
     setSearchParams(nextParams, { preventScrollReset: true });
   }
 
   function closeSelectedIcon() {
     const nextParams = new URLSearchParams(searchParams);
     nextParams.delete("icon");
+    nextParams.delete("provider");
     setSearchParams(nextParams, { preventScrollReset: true });
   }
 
   useEffect(() => {
     setActiveIconIndex(0);
-  }, [activeFilter, deferredQuery]);
+  }, [activeFilter, activeProvider, deferredQuery]);
 
   useEffect(() => {
     const pendingIndex = pendingFocusIndex.current;
     if (pendingIndex === null) return;
     const item = filteredIcons[pendingIndex];
-    const target = item ? document.getElementById(`icon-card-${item.name}`) : null;
+    const target = item ? document.getElementById(`icon-card-${item.id}`) : null;
     if (target instanceof HTMLButtonElement) {
       target.focus();
       pendingFocusIndex.current = null;
@@ -414,9 +457,9 @@ export default function IconLibrary() {
       >
         {rowIcons.map((item, columnIndex) => {
           const itemIndex = rowIndex * columns + columnIndex;
-          const geometry = geometries[item.name];
+          const geometry = geometries[item.id];
           return (
-            <div className="icon-card-cell" key={item.name} role="gridcell">
+            <div className="icon-card-cell" key={item.id} role="gridcell">
               {geometry ? (
                 <IconCard
                   geometry={geometry}
@@ -425,7 +468,7 @@ export default function IconLibrary() {
                   onKeyDown={(event) => handleIconKeyDown(event, itemIndex)}
                   onSelect={selectIcon}
                   roughness={renderedRoughness}
-                  selected={selectedIcon?.name === item.name}
+                  selected={selectedIcon?.id === item.id}
                   size={deferredSize}
                   strokeWidth={deferredStrokeWidth}
                   tabIndex={itemIndex === tabStopIndex ? 0 : -1}
@@ -531,12 +574,30 @@ export default function IconLibrary() {
 
         <div className="catalog-panel">
           <div className="catalog-toolbar">
-            <label className="search-field">
-              <SketchIcon icon={Search} size={20} roughness={0.8} />
-              <span className="visually-hidden">Search icons</span>
-              <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search icons..." />
-            </label>
-            <p><strong>{filteredIcons.length}</strong> icons</p>
+            <div className="catalog-tools">
+              <div className="provider-tabs" role="group" aria-label="Icon provider">
+                {providers.map((provider) => (
+                  <button
+                    className={activeProvider === provider.id ? "active" : ""}
+                    key={provider.id}
+                    type="button"
+                    onClick={() => setActiveProvider(provider.id)}
+                    aria-pressed={activeProvider === provider.id}
+                  >
+                    {provider.label}
+                  </button>
+                ))}
+              </div>
+              <label className="search-field">
+                <SketchIcon icon={Search} size={20} roughness={0.8} />
+                <span className="visually-hidden">Search icons</span>
+                <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search 7,000+ icons..." />
+              </label>
+            </div>
+            <p>
+              <strong>{filteredIcons.length}</strong> icons
+              {hugeiconsLoading ? " + loading Hugeicons" : ""}
+            </p>
           </div>
 
           {filteredIcons.length > 0 ? (
@@ -567,14 +628,14 @@ export default function IconLibrary() {
           ) : (
             <div className="empty-state">
               <SketchIcon icon={Search} size={44} roughness={1.4} />
-              <h3>No icon hiding here.</h3>
-              <p>Try another word or reset the filter.</p>
+              <h3>{hugeiconsLoading ? "Loading Hugeicons..." : "No icon hiding here."}</h3>
+              <p>{hugeiconsLoading ? "Bringing in the free core collection." : "Try another word or reset the filter."}</p>
             </div>
           )}
 
           <UsageDrawer
             color={color}
-            geometry={selectedIcon ? geometries[selectedIcon.name] : undefined}
+            geometry={selectedIcon ? geometries[selectedIcon.id] : undefined}
             icon={selectedIcon}
             onClose={closeSelectedIcon}
             roughness={roughness}
