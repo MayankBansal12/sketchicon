@@ -9,6 +9,9 @@ import {
   applyMigrationPlan,
   detectPackageManager,
   findProjectRoot,
+  formatMigrationDiff,
+  hasSketchiconV1,
+  includeMigrationPacks,
   installCommand,
   installedPacks,
   packNames,
@@ -81,7 +84,12 @@ async function main(): Promise<void> {
 
   const projectRoot = await findProjectRoot(options.cwd ? path.resolve(options.cwd) : process.cwd());
   const manifest = JSON.parse(await readFile(path.join(projectRoot, "package.json"), "utf8")) as Record<string, unknown>;
-  const migration = options.migrate ? await planMigration(projectRoot) : { edits: [], packs: new Set<IconPack>() };
+  const detectedV1 = hasSketchiconV1(manifest);
+  const shouldMigrate = options.migrate || detectedV1;
+  if (detectedV1 && !options.migrate) {
+    process.stdout.write("SketchIcon 0.1 detected; existing imports will be migrated automatically.\n");
+  }
+  const migration = shouldMigrate ? await planMigration(projectRoot) : { edits: [], packs: new Set<IconPack>() };
   const existing = installedPacks(manifest);
   const defaults = [...new Set([...existing, ...migration.packs])];
 
@@ -92,29 +100,48 @@ async function main(): Promise<void> {
     else throw new Error("Non-interactive use requires --packs or --yes.");
   }
 
+  const selectedPacks = packs;
+  packs = includeMigrationPacks(selectedPacks, migration.packs);
+  const addedMigrationPacks = packs.filter((pack) => !selectedPacks.includes(pack));
+  const retainedPacks = existing.filter((pack) => !packs.includes(pack));
+
   const manager = options.packageManager ?? await detectPackageManager(projectRoot, manifest);
   const [command, args] = installCommand(manager, packs);
 
   process.stdout.write(`\nSketchIcon project: ${projectRoot}\n`);
   process.stdout.write(`Icon packs: ${packs.join(", ")}\n`);
+  if (addedMigrationPacks.length > 0) {
+    process.stdout.write(`Required by migration: ${addedMigrationPacks.join(", ")}\n`);
+    process.stdout.write("Existing icons keep their current provider; migration does not substitute icons between packs.\n");
+  }
+  if (retainedPacks.length > 0) {
+    process.stdout.write(`Already installed and not removed: ${retainedPacks.join(", ")}\n`);
+  }
   process.stdout.write(`Install: ${command} ${args.join(" ")}\n`);
-  if (options.migrate) {
+  if (shouldMigrate) {
     process.stdout.write(`Migration: ${migration.edits.length} source file${migration.edits.length === 1 ? "" : "s"}\n`);
   }
 
   if (options.dryRun) {
-    migration.edits.forEach((edit) => process.stdout.write(`Would update ${path.relative(projectRoot, edit.file)}\n`));
+    migration.edits.forEach((edit) => {
+      const relativeFile = path.relative(projectRoot, edit.file);
+      process.stdout.write(`\nWould update ${relativeFile}\n`);
+      process.stdout.write(`${formatMigrationDiff(edit, relativeFile)}\n`);
+    });
     process.stdout.write("\nDry run complete; no files were changed.\n");
     return;
   }
 
   await run(command, args, projectRoot);
-  if (options.migrate) await applyMigrationPlan(migration);
+  if (shouldMigrate) await applyMigrationPlan(migration);
 
   process.stdout.write("\nSketchIcon is ready.\n\n");
   process.stdout.write('import { SketchIcon } from "sketchicon";\n');
   if (packs.includes("lucide")) process.stdout.write('import Search from "@sketchicon/lucide/icons/search";\n');
   if (packs.includes("hugeicons")) process.stdout.write('import Home01Icon from "@sketchicon/hugeicons/icons/home-01";\n');
+  if (addedMigrationPacks.includes("lucide") && selectedPacks.includes("hugeicons")) {
+    process.stdout.write("\nTo use only Hugeicons, replace the migrated Lucide icons, then remove @sketchicon/lucide with your package manager.\n");
+  }
 }
 
 main().catch((error: unknown) => {

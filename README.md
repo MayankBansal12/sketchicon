@@ -99,6 +99,11 @@ The migration installs the detected providers and rewrites catalog imports. Use 
 ```
 
 Consumers using `^0.1.5` remain on the `0.1` release line until they intentionally upgrade.
+The initializer detects a `0.1` dependency and automatically includes migration even when it is run without `--migrate`.
+
+Existing Lucide icons remain Lucide during migration. Choosing Hugeicons does not guess replacements for them: the initializer installs both providers so the project keeps working. To finish a Hugeicons-only conversion, replace the migrated Lucide icons and then remove `@sketchicon/lucide` with your package manager.
+
+The initializer adds the selected providers but does not remove provider packages that are already installed. It reports those packages so dependency removal remains an explicit choice.
 
 ## Packages
 

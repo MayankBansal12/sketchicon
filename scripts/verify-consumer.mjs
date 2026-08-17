@@ -162,7 +162,7 @@ try {
 
   const cliRoot = path.join(temporaryRoot, "initializer");
   await mkdir(cliRoot);
-  await writeFile(path.join(cliRoot, "package.json"), '{"private":true,"type":"module"}\n');
+  await writeFile(path.join(cliRoot, "package.json"), '{"private":true,"type":"module","dependencies":{"sketchicon":"^0.1.5"}}\n');
   await writeFile(
     path.join(cliRoot, "fixture.tsx"),
     'import { Search, SketchIcon } from "sketchicon";\nimport Home from "sketchicon/hugeicons/icons/home-01";\n',
@@ -172,14 +172,19 @@ try {
   const { stdout: helpOutput } = await exec(cliBin, ["--help"], { cwd: cliRoot });
   assert.match(helpOutput, /--migrate/);
   const { stdout: dryRunOutput } = await exec(cliBin, [
-    "--migrate",
     "--dry-run",
     "--packs",
-    "lucide,hugeicons",
+    "hugeicons",
     "--package-manager",
     "npm",
   ], { cwd: cliRoot });
+  assert.match(dryRunOutput, /SketchIcon 0\.1 detected; existing imports will be migrated automatically/);
   assert.match(dryRunOutput, /Would update fixture\.tsx/);
+  assert.match(dryRunOutput, /-import \{ Search, SketchIcon \} from "sketchicon"/);
+  assert.match(dryRunOutput, /\+import \{ Search \} from "@sketchicon\/lucide"/);
+  assert.match(dryRunOutput, /Icon packs: hugeicons, lucide/);
+  assert.match(dryRunOutput, /Required by migration: lucide/);
+  assert.match(dryRunOutput, /@sketchicon\/hugeicons @sketchicon\/lucide/);
   assert.match(await readFile(path.join(cliRoot, "fixture.tsx"), "utf8"), /from "sketchicon"/);
 
   console.log("Verified packed runtime-only, Lucide-only, Hugeicons-only, combined, and initializer consumers.");

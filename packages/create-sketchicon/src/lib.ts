@@ -19,12 +19,20 @@ export interface CliOptions {
 
 export interface MigrationEdit {
   file: string;
+  original: string;
   source: string;
 }
 
 export interface MigrationPlan {
   edits: MigrationEdit[];
   packs: Set<IconPack>;
+}
+
+export interface RewriteResult {
+  changed: boolean;
+  issues: string[];
+  packs: Set<IconPack>;
+  source: string;
 }
 
 const runtimeRootExports = new Set(["SketchGeometry", "SketchIcon", "SketchIconProps"]);
@@ -126,9 +134,6 @@ export async function detectPackageManager(
   const declared = packageManagerFrom(typeof manifest.packageManager === "string" ? manifest.packageManager : undefined);
   if (declared) return declared;
 
-  const fromAgent = packageManagerFrom(userAgent);
-  if (fromAgent) return fromAgent;
-
   for (const [file, manager] of [
     ["pnpm-lock.yaml", "pnpm"],
     ["yarn.lock", "yarn"],
@@ -144,6 +149,9 @@ export async function detectPackageManager(
     }
   }
 
+  const fromAgent = packageManagerFrom(userAgent);
+  if (fromAgent) return fromAgent;
+
   return "npm";
 }
 
@@ -152,6 +160,16 @@ export function installedPacks(manifest: Record<string, unknown>): IconPack[] {
     .map((key) => manifest[key])
     .filter((group): group is Record<string, unknown> => Boolean(group) && typeof group === "object");
   return packNames.filter((pack) => dependencyGroups.some((group) => `@sketchicon/${pack}` in group));
+}
+
+export function hasSketchiconV1(manifest: Record<string, unknown>): boolean {
+  const dependencyGroups = ["dependencies", "devDependencies", "optionalDependencies"]
+    .map((key) => manifest[key])
+    .filter((group): group is Record<string, unknown> => Boolean(group) && typeof group === "object");
+  const version = dependencyGroups
+    .map((group) => group.sketchicon)
+    .find((value): value is string => typeof value === "string");
+  return version ? /(^|\D)0\.1(?:\.|\D|$)/.test(version) && !/(^|\D)0\.2(?:\.|\D|$)/.test(version) : false;
 }
 
 export function installCommand(manager: PackageManager, packs: readonly IconPack[]): [string, string[]] {
@@ -168,13 +186,48 @@ export function installCommand(manager: PackageManager, packs: readonly IconPack
   }
 }
 
+export function includeMigrationPacks(
+  selected: readonly IconPack[],
+  required: ReadonlySet<IconPack>,
+): IconPack[] {
+  return [...new Set([...selected, ...required])];
+}
+
+export function formatMigrationDiff(edit: MigrationEdit, relativeFile = edit.file): string {
+  const originalLines = edit.original.trimEnd().split("\n");
+  const sourceLines = edit.source.trimEnd().split("\n");
+  const remainingSource = [...sourceLines];
+  const removed = originalLines.filter((line) => {
+    const index = remainingSource.indexOf(line);
+    if (index < 0) return true;
+    remainingSource.splice(index, 1);
+    return false;
+  });
+  const remainingOriginal = [...originalLines];
+  const added = sourceLines.filter((line) => {
+    const index = remainingOriginal.indexOf(line);
+    if (index < 0) return true;
+    remainingOriginal.splice(index, 1);
+    return false;
+  });
+  return [`--- ${relativeFile}`, `+++ ${relativeFile}`, ...removed.map((line) => `-${line}`), ...added.map((line) => `+${line}`)].join("\n");
+}
+
 function importedName(specifier: string): string {
   return specifier.replace(/^type\s+/, "").trim().split(/\s+as\s+/)[0]?.trim() ?? "";
 }
 
-export function rewriteSource(source: string): { changed: boolean; packs: Set<IconPack>; source: string } {
+export function rewriteSource(source: string): RewriteResult {
   const packs = new Set<IconPack>();
+  const issues: string[] = [];
   let output = source;
+
+  if (/import\s+(?:type\s+)?\*\s+as\s+[$\w]+\s+from\s+(["'])sketchicon\1/.test(output)) {
+    issues.push("namespace import from sketchicon");
+  }
+  if (/export\s+\*\s+as\s+[$\w]+\s+from\s+(["'])sketchicon\1/.test(output)) {
+    issues.push("namespace re-export from sketchicon");
+  }
 
   if (/(["'])sketchicon\/icons\//.test(output)) packs.add("lucide");
   if (/(["'])sketchicon\/hugeicons(?:\/|\1)/.test(output)) packs.add("hugeicons");
@@ -201,7 +254,32 @@ export function rewriteSource(source: string): { changed: boolean; packs: Set<Ic
     },
   );
 
-  return { changed: output !== source, packs, source: output };
+  output = output.replace(
+    /(^|\n)([ \t]*)export\s+(type\s+)?\{([^}]+)\}\s+from\s+(["'])sketchicon\5;?/g,
+    (statement, prefix: string, indent: string, typeKeyword: string | undefined, body: string) => {
+      const specifiers = body.split(",").map((item) => item.trim()).filter(Boolean);
+      const runtime = specifiers.filter((specifier) => runtimeRootExports.has(importedName(specifier)));
+      const lucide = specifiers.filter((specifier) => !runtimeRootExports.has(importedName(specifier)));
+      if (lucide.length === 0) return statement;
+
+      packs.add("lucide");
+      const keyword = typeKeyword ?? "";
+      const lines = [];
+      if (runtime.length > 0) lines.push(`${indent}export ${keyword}{ ${runtime.join(", ")} } from "sketchicon";`);
+      lines.push(`${indent}export ${keyword}{ ${lucide.join(", ")} } from "@sketchicon/lucide";`);
+      return `${prefix}${lines.join("\n")}`;
+    },
+  );
+
+  output = output.replace(
+    /(^|\n)([ \t]*)export\s+\*\s+from\s+(["'])sketchicon\3;?/g,
+    (_statement, prefix: string, indent: string) => {
+      packs.add("lucide");
+      return `${prefix}${indent}export * from "sketchicon";\n${indent}export * from "@sketchicon/lucide";`;
+    },
+  );
+
+  return { changed: output !== source, issues, packs, source: output };
 }
 
 async function sourceFiles(directory: string): Promise<string[]> {
@@ -217,12 +295,20 @@ async function sourceFiles(directory: string): Promise<string[]> {
 
 export async function planMigration(projectRoot: string): Promise<MigrationPlan> {
   const edits: MigrationEdit[] = [];
+  const issues: string[] = [];
   const packs = new Set<IconPack>();
   for (const file of await sourceFiles(projectRoot)) {
     const original = await readFile(file, "utf8");
     const rewritten = rewriteSource(original);
+    rewritten.issues.forEach((issue) => issues.push(`${path.relative(projectRoot, file)}: ${issue}`));
     rewritten.packs.forEach((pack) => packs.add(pack));
-    if (rewritten.changed) edits.push({ file, source: rewritten.source });
+    if (rewritten.changed) edits.push({ file, original, source: rewritten.source });
+  }
+  if (issues.length > 0) {
+    throw new Error(
+      `Cannot safely migrate namespace syntax:\n${issues.map((issue) => `  ${issue}`).join("\n")}\n` +
+      "Replace it with named imports or exports, then rerun the migration.",
+    );
   }
   return { edits, packs };
 }
