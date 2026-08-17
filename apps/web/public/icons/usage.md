@@ -5,7 +5,7 @@
 Choose icon packs interactively:
 
 ```sh
-npm create sketchicon@latest
+npx create-sketchicon@latest
 ```
 
 Or install a provider manually:
@@ -17,16 +17,16 @@ npm install sketchicon @sketchicon/lucide
 ## Lucide
 
 ```tsx
-import Search from "@sketchicon/lucide/icons/search";
+import { Search } from "@sketchicon/lucide";
 import { SketchIcon } from "sketchicon";
 
 <SketchIcon icon={Search} aria-label="Search" />;
 ```
 
-Named imports are also supported:
+For a direct import in startup-sensitive Node.js environments:
 
 ```tsx
-import { Search } from "@sketchicon/lucide";
+import Search from "@sketchicon/lucide/icons/search";
 ```
 
 ## Hugeicons
@@ -83,7 +83,7 @@ import { renderSketch } from "sketchicon/core";
 ## Migrate from 0.1
 
 ```sh
-npm create sketchicon@latest -- --migrate
+npx create-sketchicon@latest --migrate
 ```
 
 Add `--dry-run` to preview the import rewrites.

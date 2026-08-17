@@ -1,87 +1,87 @@
 # SketchIcon Catalog: V
 
-Each entry shows its provider, canonical React export, and direct-import slug.
+Each entry shows its provider and canonical named import.
 
-- [VaccineIcon](/?provider=hugeicons&icon=vaccine) - hugeicons; `@sketchicon/hugeicons/icons/vaccine`
-- [VacuumCleanerIcon](/?provider=hugeicons&icon=vacuum-cleaner) - hugeicons; `@sketchicon/hugeicons/icons/vacuum-cleaner`
-- [ValidationIcon](/?provider=hugeicons&icon=validation) - hugeicons; `@sketchicon/hugeicons/icons/validation`
-- [ValidationApprovalIcon](/?provider=hugeicons&icon=validation-approval) - hugeicons; `@sketchicon/hugeicons/icons/validation-approval`
-- [VanIcon](/?provider=hugeicons&icon=van) - hugeicons; `@sketchicon/hugeicons/icons/van`
-- [Van](/?provider=lucide&icon=van) - lucide; `@sketchicon/lucide/icons/van`
-- [VariableIcon](/?provider=hugeicons&icon=variable) - hugeicons; `@sketchicon/hugeicons/icons/variable`
-- [Variable](/?provider=lucide&icon=variable) - lucide; `@sketchicon/lucide/icons/variable`
-- [VectorSquareIcon](/?provider=hugeicons&icon=vector-square) - hugeicons; `@sketchicon/hugeicons/icons/vector-square`
-- [VectorSquare](/?provider=lucide&icon=vector-square) - lucide; `@sketchicon/lucide/icons/vector-square`
-- [Vegan](/?provider=lucide&icon=vegan) - lucide; `@sketchicon/lucide/icons/vegan`
-- [VegetarianFoodIcon](/?provider=hugeicons&icon=vegetarian-food) - hugeicons; `@sketchicon/hugeicons/icons/vegetarian-food`
-- [VenetianMaskIcon](/?provider=hugeicons&icon=venetian-mask) - hugeicons; `@sketchicon/hugeicons/icons/venetian-mask`
-- [VenetianMask](/?provider=lucide&icon=venetian-mask) - lucide; `@sketchicon/lucide/icons/venetian-mask`
-- [Venus](/?provider=lucide&icon=venus) - lucide; `@sketchicon/lucide/icons/venus`
-- [VenusAndMars](/?provider=lucide&icon=venus-and-mars) - lucide; `@sketchicon/lucide/icons/venus-and-mars`
-- [VersusIcon](/?provider=hugeicons&icon=versus) - hugeicons; `@sketchicon/hugeicons/icons/versus`
-- [VerticalResizeIcon](/?provider=hugeicons&icon=vertical-resize) - hugeicons; `@sketchicon/hugeicons/icons/vertical-resize`
-- [VerticalScrollPointIcon](/?provider=hugeicons&icon=vertical-scroll-point) - hugeicons; `@sketchicon/hugeicons/icons/vertical-scroll-point`
-- [VestIcon](/?provider=hugeicons&icon=vest) - hugeicons; `@sketchicon/hugeicons/icons/vest`
-- [ViberIcon](/?provider=hugeicons&icon=viber) - hugeicons; `@sketchicon/hugeicons/icons/viber`
-- [VibrateIcon](/?provider=hugeicons&icon=vibrate) - hugeicons; `@sketchicon/hugeicons/icons/vibrate`
-- [Vibrate](/?provider=lucide&icon=vibrate) - lucide; `@sketchicon/lucide/icons/vibrate`
-- [VibrateOff](/?provider=lucide&icon=vibrate-off) - lucide; `@sketchicon/lucide/icons/vibrate-off`
-- [VictoryFinger01Icon](/?provider=hugeicons&icon=victory-finger-01) - hugeicons; `@sketchicon/hugeicons/icons/victory-finger-01`; aliases: `VictoryFingerIcon`
-- [VictoryFinger02Icon](/?provider=hugeicons&icon=victory-finger-02) - hugeicons; `@sketchicon/hugeicons/icons/victory-finger-02`
-- [VictoryFinger03Icon](/?provider=hugeicons&icon=victory-finger-03) - hugeicons; `@sketchicon/hugeicons/icons/victory-finger-03`
-- [Video](/?provider=lucide&icon=video) - lucide; `@sketchicon/lucide/icons/video`
-- [Video01Icon](/?provider=hugeicons&icon=video-01) - hugeicons; `@sketchicon/hugeicons/icons/video-01`; aliases: `VideoIcon`
-- [Video02Icon](/?provider=hugeicons&icon=video-02) - hugeicons; `@sketchicon/hugeicons/icons/video-02`
-- [VideoAiIcon](/?provider=hugeicons&icon=video-ai) - hugeicons; `@sketchicon/hugeicons/icons/video-ai`
-- [VideoConsoleIcon](/?provider=hugeicons&icon=video-console) - hugeicons; `@sketchicon/hugeicons/icons/video-console`
-- [VideoOffIcon](/?provider=hugeicons&icon=video-off) - hugeicons; `@sketchicon/hugeicons/icons/video-off`
-- [VideoOff](/?provider=lucide&icon=video-off) - lucide; `@sketchicon/lucide/icons/video-off`
-- [VideoReplayIcon](/?provider=hugeicons&icon=video-replay) - hugeicons; `@sketchicon/hugeicons/icons/video-replay`
-- [VideotapeIcon](/?provider=hugeicons&icon=videotape) - hugeicons; `@sketchicon/hugeicons/icons/videotape`
-- [Videotape](/?provider=lucide&icon=videotape) - lucide; `@sketchicon/lucide/icons/videotape`
-- [ViewIcon](/?provider=hugeicons&icon=view) - hugeicons; `@sketchicon/hugeicons/icons/view`
-- [View](/?provider=lucide&icon=view) - lucide; `@sketchicon/lucide/icons/view`
-- [ViewAgendaIcon](/?provider=hugeicons&icon=view-agenda) - hugeicons; `@sketchicon/hugeicons/icons/view-agenda`
-- [ViewOffIcon](/?provider=hugeicons&icon=view-off) - hugeicons; `@sketchicon/hugeicons/icons/view-off`
-- [ViewOffSlashIcon](/?provider=hugeicons&icon=view-off-slash) - hugeicons; `@sketchicon/hugeicons/icons/view-off-slash`
-- [ViewSidebarLeftIcon](/?provider=hugeicons&icon=view-sidebar-left) - hugeicons; `@sketchicon/hugeicons/icons/view-sidebar-left`
-- [ViewSidebarRightIcon](/?provider=hugeicons&icon=view-sidebar-right) - hugeicons; `@sketchicon/hugeicons/icons/view-sidebar-right`
-- [Villa01Icon](/?provider=hugeicons&icon=villa-01) - hugeicons; `@sketchicon/hugeicons/icons/villa-01`; aliases: `VillaIcon`
-- [Villa02Icon](/?provider=hugeicons&icon=villa-02) - hugeicons; `@sketchicon/hugeicons/icons/villa-02`
-- [VimeoIcon](/?provider=hugeicons&icon=vimeo) - hugeicons; `@sketchicon/hugeicons/icons/vimeo`
-- [VineIcon](/?provider=hugeicons&icon=vine) - hugeicons; `@sketchicon/hugeicons/icons/vine`
-- [VineSquareIcon](/?provider=hugeicons&icon=vine-square) - hugeicons; `@sketchicon/hugeicons/icons/vine-square`
-- [VintageClockIcon](/?provider=hugeicons&icon=vintage-clock) - hugeicons; `@sketchicon/hugeicons/icons/vintage-clock`
-- [VirtualRealityVr01Icon](/?provider=hugeicons&icon=virtual-reality-vr-01) - hugeicons; `@sketchicon/hugeicons/icons/virtual-reality-vr-01`; aliases: `VirtualRealityVrIcon`
-- [VirtualRealityVr02Icon](/?provider=hugeicons&icon=virtual-reality-vr-02) - hugeicons; `@sketchicon/hugeicons/icons/virtual-reality-vr-02`
-- [VisionIcon](/?provider=hugeicons&icon=vision) - hugeicons; `@sketchicon/hugeicons/icons/vision`
-- [VisualStudioCodeIcon](/?provider=hugeicons&icon=visual-studio-code) - hugeicons; `@sketchicon/hugeicons/icons/visual-studio-code`
-- [VkIcon](/?provider=hugeicons&icon=vk) - hugeicons; `@sketchicon/hugeicons/icons/vk`
-- [VkSquareIcon](/?provider=hugeicons&icon=vk-square) - hugeicons; `@sketchicon/hugeicons/icons/vk-square`
-- [VoiceIcon](/?provider=hugeicons&icon=voice) - hugeicons; `@sketchicon/hugeicons/icons/voice`
-- [VoiceIdIcon](/?provider=hugeicons&icon=voice-id) - hugeicons; `@sketchicon/hugeicons/icons/voice-id`
-- [Voicemail](/?provider=lucide&icon=voicemail) - lucide; `@sketchicon/lucide/icons/voicemail`
-- [VolleyballIcon](/?provider=hugeicons&icon=volleyball) - hugeicons; `@sketchicon/hugeicons/icons/volleyball`
-- [Volleyball](/?provider=lucide&icon=volleyball) - lucide; `@sketchicon/lucide/icons/volleyball`
-- [Volume](/?provider=lucide&icon=volume) - lucide; `@sketchicon/lucide/icons/volume`
-- [Volume1](/?provider=lucide&icon=volume-1) - lucide; `@sketchicon/lucide/icons/volume-1`
-- [Volume2](/?provider=lucide&icon=volume-2) - lucide; `@sketchicon/lucide/icons/volume-2`
-- [VolumeHighIcon](/?provider=hugeicons&icon=volume-high) - hugeicons; `@sketchicon/hugeicons/icons/volume-high`
-- [VolumeLowIcon](/?provider=hugeicons&icon=volume-low) - hugeicons; `@sketchicon/hugeicons/icons/volume-low`
-- [VolumeMinusIcon](/?provider=hugeicons&icon=volume-minus) - hugeicons; `@sketchicon/hugeicons/icons/volume-minus`
-- [VolumeMute01Icon](/?provider=hugeicons&icon=volume-mute-01) - hugeicons; `@sketchicon/hugeicons/icons/volume-mute-01`; aliases: `VolumeMuteIcon`
-- [VolumeMute02Icon](/?provider=hugeicons&icon=volume-mute-02) - hugeicons; `@sketchicon/hugeicons/icons/volume-mute-02`
-- [VolumeOffIcon](/?provider=hugeicons&icon=volume-off) - hugeicons; `@sketchicon/hugeicons/icons/volume-off`
-- [VolumeOff](/?provider=lucide&icon=volume-off) - lucide; `@sketchicon/lucide/icons/volume-off`
-- [VolumeUpIcon](/?provider=hugeicons&icon=volume-up) - hugeicons; `@sketchicon/hugeicons/icons/volume-up`
-- [VolumeX](/?provider=lucide&icon=volume-x) - lucide; `@sketchicon/lucide/icons/volume-x`
-- [VomitingIcon](/?provider=hugeicons&icon=vomiting) - hugeicons; `@sketchicon/hugeicons/icons/vomiting`
-- [Vote](/?provider=lucide&icon=vote) - lucide; `@sketchicon/lucide/icons/vote`
-- [VoucherIcon](/?provider=hugeicons&icon=voucher) - hugeicons; `@sketchicon/hugeicons/icons/voucher`
-- [VrIcon](/?provider=hugeicons&icon=vr) - hugeicons; `@sketchicon/hugeicons/icons/vr`
-- [VrGlassesIcon](/?provider=hugeicons&icon=vr-glasses) - hugeicons; `@sketchicon/hugeicons/icons/vr-glasses`
-- [Vynil01Icon](/?provider=hugeicons&icon=vynil-01) - hugeicons; `@sketchicon/hugeicons/icons/vynil-01`; aliases: `VynilIcon`
-- [Vynil02Icon](/?provider=hugeicons&icon=vynil-02) - hugeicons; `@sketchicon/hugeicons/icons/vynil-02`
-- [Vynil03Icon](/?provider=hugeicons&icon=vynil-03) - hugeicons; `@sketchicon/hugeicons/icons/vynil-03`
+- [VaccineIcon](/?provider=hugeicons&icon=vaccine) - hugeicons; `import { VaccineIcon } from "@sketchicon/hugeicons";`
+- [VacuumCleanerIcon](/?provider=hugeicons&icon=vacuum-cleaner) - hugeicons; `import { VacuumCleanerIcon } from "@sketchicon/hugeicons";`
+- [ValidationIcon](/?provider=hugeicons&icon=validation) - hugeicons; `import { ValidationIcon } from "@sketchicon/hugeicons";`
+- [ValidationApprovalIcon](/?provider=hugeicons&icon=validation-approval) - hugeicons; `import { ValidationApprovalIcon } from "@sketchicon/hugeicons";`
+- [VanIcon](/?provider=hugeicons&icon=van) - hugeicons; `import { VanIcon } from "@sketchicon/hugeicons";`
+- [Van](/?provider=lucide&icon=van) - lucide; `import { Van } from "@sketchicon/lucide";`
+- [VariableIcon](/?provider=hugeicons&icon=variable) - hugeicons; `import { VariableIcon } from "@sketchicon/hugeicons";`
+- [Variable](/?provider=lucide&icon=variable) - lucide; `import { Variable } from "@sketchicon/lucide";`
+- [VectorSquareIcon](/?provider=hugeicons&icon=vector-square) - hugeicons; `import { VectorSquareIcon } from "@sketchicon/hugeicons";`
+- [VectorSquare](/?provider=lucide&icon=vector-square) - lucide; `import { VectorSquare } from "@sketchicon/lucide";`
+- [Vegan](/?provider=lucide&icon=vegan) - lucide; `import { Vegan } from "@sketchicon/lucide";`
+- [VegetarianFoodIcon](/?provider=hugeicons&icon=vegetarian-food) - hugeicons; `import { VegetarianFoodIcon } from "@sketchicon/hugeicons";`
+- [VenetianMaskIcon](/?provider=hugeicons&icon=venetian-mask) - hugeicons; `import { VenetianMaskIcon } from "@sketchicon/hugeicons";`
+- [VenetianMask](/?provider=lucide&icon=venetian-mask) - lucide; `import { VenetianMask } from "@sketchicon/lucide";`
+- [Venus](/?provider=lucide&icon=venus) - lucide; `import { Venus } from "@sketchicon/lucide";`
+- [VenusAndMars](/?provider=lucide&icon=venus-and-mars) - lucide; `import { VenusAndMars } from "@sketchicon/lucide";`
+- [VersusIcon](/?provider=hugeicons&icon=versus) - hugeicons; `import { VersusIcon } from "@sketchicon/hugeicons";`
+- [VerticalResizeIcon](/?provider=hugeicons&icon=vertical-resize) - hugeicons; `import { VerticalResizeIcon } from "@sketchicon/hugeicons";`
+- [VerticalScrollPointIcon](/?provider=hugeicons&icon=vertical-scroll-point) - hugeicons; `import { VerticalScrollPointIcon } from "@sketchicon/hugeicons";`
+- [VestIcon](/?provider=hugeicons&icon=vest) - hugeicons; `import { VestIcon } from "@sketchicon/hugeicons";`
+- [ViberIcon](/?provider=hugeicons&icon=viber) - hugeicons; `import { ViberIcon } from "@sketchicon/hugeicons";`
+- [VibrateIcon](/?provider=hugeicons&icon=vibrate) - hugeicons; `import { VibrateIcon } from "@sketchicon/hugeicons";`
+- [Vibrate](/?provider=lucide&icon=vibrate) - lucide; `import { Vibrate } from "@sketchicon/lucide";`
+- [VibrateOff](/?provider=lucide&icon=vibrate-off) - lucide; `import { VibrateOff } from "@sketchicon/lucide";`
+- [VictoryFinger01Icon](/?provider=hugeicons&icon=victory-finger-01) - hugeicons; `import { VictoryFinger01Icon } from "@sketchicon/hugeicons";`; aliases: `VictoryFingerIcon`
+- [VictoryFinger02Icon](/?provider=hugeicons&icon=victory-finger-02) - hugeicons; `import { VictoryFinger02Icon } from "@sketchicon/hugeicons";`
+- [VictoryFinger03Icon](/?provider=hugeicons&icon=victory-finger-03) - hugeicons; `import { VictoryFinger03Icon } from "@sketchicon/hugeicons";`
+- [Video](/?provider=lucide&icon=video) - lucide; `import { Video } from "@sketchicon/lucide";`
+- [Video01Icon](/?provider=hugeicons&icon=video-01) - hugeicons; `import { Video01Icon } from "@sketchicon/hugeicons";`; aliases: `VideoIcon`
+- [Video02Icon](/?provider=hugeicons&icon=video-02) - hugeicons; `import { Video02Icon } from "@sketchicon/hugeicons";`
+- [VideoAiIcon](/?provider=hugeicons&icon=video-ai) - hugeicons; `import { VideoAiIcon } from "@sketchicon/hugeicons";`
+- [VideoConsoleIcon](/?provider=hugeicons&icon=video-console) - hugeicons; `import { VideoConsoleIcon } from "@sketchicon/hugeicons";`
+- [VideoOffIcon](/?provider=hugeicons&icon=video-off) - hugeicons; `import { VideoOffIcon } from "@sketchicon/hugeicons";`
+- [VideoOff](/?provider=lucide&icon=video-off) - lucide; `import { VideoOff } from "@sketchicon/lucide";`
+- [VideoReplayIcon](/?provider=hugeicons&icon=video-replay) - hugeicons; `import { VideoReplayIcon } from "@sketchicon/hugeicons";`
+- [VideotapeIcon](/?provider=hugeicons&icon=videotape) - hugeicons; `import { VideotapeIcon } from "@sketchicon/hugeicons";`
+- [Videotape](/?provider=lucide&icon=videotape) - lucide; `import { Videotape } from "@sketchicon/lucide";`
+- [ViewIcon](/?provider=hugeicons&icon=view) - hugeicons; `import { ViewIcon } from "@sketchicon/hugeicons";`
+- [View](/?provider=lucide&icon=view) - lucide; `import { View } from "@sketchicon/lucide";`
+- [ViewAgendaIcon](/?provider=hugeicons&icon=view-agenda) - hugeicons; `import { ViewAgendaIcon } from "@sketchicon/hugeicons";`
+- [ViewOffIcon](/?provider=hugeicons&icon=view-off) - hugeicons; `import { ViewOffIcon } from "@sketchicon/hugeicons";`
+- [ViewOffSlashIcon](/?provider=hugeicons&icon=view-off-slash) - hugeicons; `import { ViewOffSlashIcon } from "@sketchicon/hugeicons";`
+- [ViewSidebarLeftIcon](/?provider=hugeicons&icon=view-sidebar-left) - hugeicons; `import { ViewSidebarLeftIcon } from "@sketchicon/hugeicons";`
+- [ViewSidebarRightIcon](/?provider=hugeicons&icon=view-sidebar-right) - hugeicons; `import { ViewSidebarRightIcon } from "@sketchicon/hugeicons";`
+- [Villa01Icon](/?provider=hugeicons&icon=villa-01) - hugeicons; `import { Villa01Icon } from "@sketchicon/hugeicons";`; aliases: `VillaIcon`
+- [Villa02Icon](/?provider=hugeicons&icon=villa-02) - hugeicons; `import { Villa02Icon } from "@sketchicon/hugeicons";`
+- [VimeoIcon](/?provider=hugeicons&icon=vimeo) - hugeicons; `import { VimeoIcon } from "@sketchicon/hugeicons";`
+- [VineIcon](/?provider=hugeicons&icon=vine) - hugeicons; `import { VineIcon } from "@sketchicon/hugeicons";`
+- [VineSquareIcon](/?provider=hugeicons&icon=vine-square) - hugeicons; `import { VineSquareIcon } from "@sketchicon/hugeicons";`
+- [VintageClockIcon](/?provider=hugeicons&icon=vintage-clock) - hugeicons; `import { VintageClockIcon } from "@sketchicon/hugeicons";`
+- [VirtualRealityVr01Icon](/?provider=hugeicons&icon=virtual-reality-vr-01) - hugeicons; `import { VirtualRealityVr01Icon } from "@sketchicon/hugeicons";`; aliases: `VirtualRealityVrIcon`
+- [VirtualRealityVr02Icon](/?provider=hugeicons&icon=virtual-reality-vr-02) - hugeicons; `import { VirtualRealityVr02Icon } from "@sketchicon/hugeicons";`
+- [VisionIcon](/?provider=hugeicons&icon=vision) - hugeicons; `import { VisionIcon } from "@sketchicon/hugeicons";`
+- [VisualStudioCodeIcon](/?provider=hugeicons&icon=visual-studio-code) - hugeicons; `import { VisualStudioCodeIcon } from "@sketchicon/hugeicons";`
+- [VkIcon](/?provider=hugeicons&icon=vk) - hugeicons; `import { VkIcon } from "@sketchicon/hugeicons";`
+- [VkSquareIcon](/?provider=hugeicons&icon=vk-square) - hugeicons; `import { VkSquareIcon } from "@sketchicon/hugeicons";`
+- [VoiceIcon](/?provider=hugeicons&icon=voice) - hugeicons; `import { VoiceIcon } from "@sketchicon/hugeicons";`
+- [VoiceIdIcon](/?provider=hugeicons&icon=voice-id) - hugeicons; `import { VoiceIdIcon } from "@sketchicon/hugeicons";`
+- [Voicemail](/?provider=lucide&icon=voicemail) - lucide; `import { Voicemail } from "@sketchicon/lucide";`
+- [VolleyballIcon](/?provider=hugeicons&icon=volleyball) - hugeicons; `import { VolleyballIcon } from "@sketchicon/hugeicons";`
+- [Volleyball](/?provider=lucide&icon=volleyball) - lucide; `import { Volleyball } from "@sketchicon/lucide";`
+- [Volume](/?provider=lucide&icon=volume) - lucide; `import { Volume } from "@sketchicon/lucide";`
+- [Volume1](/?provider=lucide&icon=volume-1) - lucide; `import { Volume1 } from "@sketchicon/lucide";`
+- [Volume2](/?provider=lucide&icon=volume-2) - lucide; `import { Volume2 } from "@sketchicon/lucide";`
+- [VolumeHighIcon](/?provider=hugeicons&icon=volume-high) - hugeicons; `import { VolumeHighIcon } from "@sketchicon/hugeicons";`
+- [VolumeLowIcon](/?provider=hugeicons&icon=volume-low) - hugeicons; `import { VolumeLowIcon } from "@sketchicon/hugeicons";`
+- [VolumeMinusIcon](/?provider=hugeicons&icon=volume-minus) - hugeicons; `import { VolumeMinusIcon } from "@sketchicon/hugeicons";`
+- [VolumeMute01Icon](/?provider=hugeicons&icon=volume-mute-01) - hugeicons; `import { VolumeMute01Icon } from "@sketchicon/hugeicons";`; aliases: `VolumeMuteIcon`
+- [VolumeMute02Icon](/?provider=hugeicons&icon=volume-mute-02) - hugeicons; `import { VolumeMute02Icon } from "@sketchicon/hugeicons";`
+- [VolumeOffIcon](/?provider=hugeicons&icon=volume-off) - hugeicons; `import { VolumeOffIcon } from "@sketchicon/hugeicons";`
+- [VolumeOff](/?provider=lucide&icon=volume-off) - lucide; `import { VolumeOff } from "@sketchicon/lucide";`
+- [VolumeUpIcon](/?provider=hugeicons&icon=volume-up) - hugeicons; `import { VolumeUpIcon } from "@sketchicon/hugeicons";`
+- [VolumeX](/?provider=lucide&icon=volume-x) - lucide; `import { VolumeX } from "@sketchicon/lucide";`
+- [VomitingIcon](/?provider=hugeicons&icon=vomiting) - hugeicons; `import { VomitingIcon } from "@sketchicon/hugeicons";`
+- [Vote](/?provider=lucide&icon=vote) - lucide; `import { Vote } from "@sketchicon/lucide";`
+- [VoucherIcon](/?provider=hugeicons&icon=voucher) - hugeicons; `import { VoucherIcon } from "@sketchicon/hugeicons";`
+- [VrIcon](/?provider=hugeicons&icon=vr) - hugeicons; `import { VrIcon } from "@sketchicon/hugeicons";`
+- [VrGlassesIcon](/?provider=hugeicons&icon=vr-glasses) - hugeicons; `import { VrGlassesIcon } from "@sketchicon/hugeicons";`
+- [Vynil01Icon](/?provider=hugeicons&icon=vynil-01) - hugeicons; `import { Vynil01Icon } from "@sketchicon/hugeicons";`; aliases: `VynilIcon`
+- [Vynil02Icon](/?provider=hugeicons&icon=vynil-02) - hugeicons; `import { Vynil02Icon } from "@sketchicon/hugeicons";`
+- [Vynil03Icon](/?provider=hugeicons&icon=vynil-03) - hugeicons; `import { Vynil03Icon } from "@sketchicon/hugeicons";`
 
 [Back to the catalog index](../catalog.md)

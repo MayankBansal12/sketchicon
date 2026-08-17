@@ -29,6 +29,7 @@ import {
 import {
   filterCatalog,
   filters,
+  formatIconImport,
   getFilterCounts,
   providers,
   type ProviderFilter,
@@ -206,7 +207,7 @@ function UsageDrawer({
 
   if (!icon || !geometry) return null;
 
-  const iconImport = `import ${icon.name} from "@sketchicon/${icon.provider}/icons/${icon.label}";\nimport { SketchIcon } from "sketchicon";`;
+  const iconImport = `${formatIconImport(icon)}\nimport { SketchIcon } from "sketchicon";`;
   const snippet = `${iconImport}\n\n<SketchIcon\n  icon={${icon.name}}\n  size={${size}}\n  roughness={${roughness.toFixed(1)}}\n  strokeWidth={${strokeWidth.toFixed(1)}}\n  color="${color}"\n/>`;
 
   async function copySnippet() {

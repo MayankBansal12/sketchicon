@@ -33,7 +33,7 @@ Filled SVG elements are not supported. Source icons containing fills or other in
 Provider geometry and the universal renderer are the primary API:
 
 ```tsx
-import Search from "@sketchicon/lucide/icons/search";
+import { Search } from "@sketchicon/lucide";
 import { SketchIcon } from "sketchicon";
 
 <SketchIcon icon={Search} size={24} aria-label="Search" />;

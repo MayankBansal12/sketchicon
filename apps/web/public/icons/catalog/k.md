@@ -1,60 +1,60 @@
 # SketchIcon Catalog: K
 
-Each entry shows its provider, canonical React export, and direct-import slug.
+Each entry shows its provider and canonical named import.
 
-- [Kaaba01Icon](/?provider=hugeicons&icon=kaaba-01) - hugeicons; `@sketchicon/hugeicons/icons/kaaba-01`; aliases: `KaabaIcon`
-- [Kaaba02Icon](/?provider=hugeicons&icon=kaaba-02) - hugeicons; `@sketchicon/hugeicons/icons/kaaba-02`
-- [KanbanIcon](/?provider=hugeicons&icon=kanban) - hugeicons; `@sketchicon/hugeicons/icons/kanban`
-- [Kanban](/?provider=lucide&icon=kanban) - lucide; `@sketchicon/lucide/icons/kanban`
-- [KayakIcon](/?provider=hugeicons&icon=kayak) - hugeicons; `@sketchicon/hugeicons/icons/kayak`
-- [Kayak](/?provider=lucide&icon=kayak) - lucide; `@sketchicon/lucide/icons/kayak`
-- [KeffiyehIcon](/?provider=hugeicons&icon=keffiyeh) - hugeicons; `@sketchicon/hugeicons/icons/keffiyeh`
-- [KettleIcon](/?provider=hugeicons&icon=kettle) - hugeicons; `@sketchicon/hugeicons/icons/kettle`
-- [Kettle01Icon](/?provider=hugeicons&icon=kettle-01) - hugeicons; `@sketchicon/hugeicons/icons/kettle-01`
-- [KettlebellIcon](/?provider=hugeicons&icon=kettlebell) - hugeicons; `@sketchicon/hugeicons/icons/kettlebell`
-- [KetupatIcon](/?provider=hugeicons&icon=ketupat) - hugeicons; `@sketchicon/hugeicons/icons/ketupat`
-- [Key](/?provider=lucide&icon=key) - lucide; `@sketchicon/lucide/icons/key`
-- [Key01Icon](/?provider=hugeicons&icon=key-01) - hugeicons; `@sketchicon/hugeicons/icons/key-01`; aliases: `KeyIcon`
-- [Key02Icon](/?provider=hugeicons&icon=key-02) - hugeicons; `@sketchicon/hugeicons/icons/key-02`
-- [KeyGeneratorFobIcon](/?provider=hugeicons&icon=key-generator-fob) - hugeicons; `@sketchicon/hugeicons/icons/key-generator-fob`
-- [KeySquare](/?provider=lucide&icon=key-square) - lucide; `@sketchicon/lucide/icons/key-square`
-- [KeyboardIcon](/?provider=hugeicons&icon=keyboard) - hugeicons; `@sketchicon/hugeicons/icons/keyboard`
-- [Keyboard](/?provider=lucide&icon=keyboard) - lucide; `@sketchicon/lucide/icons/keyboard`
-- [KeyboardMusic](/?provider=lucide&icon=keyboard-music) - lucide; `@sketchicon/lucide/icons/keyboard-music`
-- [KeyboardOff](/?provider=lucide&icon=keyboard-off) - lucide; `@sketchicon/lucide/icons/keyboard-off`
-- [KeyframeIcon](/?provider=hugeicons&icon=keyframe) - hugeicons; `@sketchicon/hugeicons/icons/keyframe`
-- [KeyframeAddIcon](/?provider=hugeicons&icon=keyframe-add) - hugeicons; `@sketchicon/hugeicons/icons/keyframe-add`
-- [KeyframeAlignCenterIcon](/?provider=hugeicons&icon=keyframe-align-center) - hugeicons; `@sketchicon/hugeicons/icons/keyframe-align-center`
-- [KeyframeAlignHorizontalIcon](/?provider=hugeicons&icon=keyframe-align-horizontal) - hugeicons; `@sketchicon/hugeicons/icons/keyframe-align-horizontal`
-- [KeyframeAlignVerticalIcon](/?provider=hugeicons&icon=keyframe-align-vertical) - hugeicons; `@sketchicon/hugeicons/icons/keyframe-align-vertical`
-- [KeyframeBottomIcon](/?provider=hugeicons&icon=keyframe-bottom) - hugeicons; `@sketchicon/hugeicons/icons/keyframe-bottom`
-- [KeyframeLeftIcon](/?provider=hugeicons&icon=keyframe-left) - hugeicons; `@sketchicon/hugeicons/icons/keyframe-left`
-- [KeyframeRemoveIcon](/?provider=hugeicons&icon=keyframe-remove) - hugeicons; `@sketchicon/hugeicons/icons/keyframe-remove`
-- [KeyframeRightIcon](/?provider=hugeicons&icon=keyframe-right) - hugeicons; `@sketchicon/hugeicons/icons/keyframe-right`
-- [KeyframeTopIcon](/?provider=hugeicons&icon=keyframe-top) - hugeicons; `@sketchicon/hugeicons/icons/keyframe-top`
-- [KeyframesDoubleIcon](/?provider=hugeicons&icon=keyframes-double) - hugeicons; `@sketchicon/hugeicons/icons/keyframes-double`
-- [KeyframesDoubleAddIcon](/?provider=hugeicons&icon=keyframes-double-add) - hugeicons; `@sketchicon/hugeicons/icons/keyframes-double-add`
-- [KeyframesDoubleRemoveIcon](/?provider=hugeicons&icon=keyframes-double-remove) - hugeicons; `@sketchicon/hugeicons/icons/keyframes-double-remove`
-- [KeyframesMultipleIcon](/?provider=hugeicons&icon=keyframes-multiple) - hugeicons; `@sketchicon/hugeicons/icons/keyframes-multiple`
-- [KeyframesMultipleAddIcon](/?provider=hugeicons&icon=keyframes-multiple-add) - hugeicons; `@sketchicon/hugeicons/icons/keyframes-multiple-add`
-- [KeyframesMultipleRemoveIcon](/?provider=hugeicons&icon=keyframes-multiple-remove) - hugeicons; `@sketchicon/hugeicons/icons/keyframes-multiple-remove`
-- [Kickstarter01Icon](/?provider=hugeicons&icon=kickstarter-01) - hugeicons; `@sketchicon/hugeicons/icons/kickstarter-01`; aliases: `KickstarterIcon`
-- [Kickstarter02Icon](/?provider=hugeicons&icon=kickstarter-02) - hugeicons; `@sketchicon/hugeicons/icons/kickstarter-02`
-- [KidIcon](/?provider=hugeicons&icon=kid) - hugeicons; `@sketchicon/hugeicons/icons/kid`
-- [KidneysIcon](/?provider=hugeicons&icon=kidneys) - hugeicons; `@sketchicon/hugeicons/icons/kidneys`
-- [KimiAiIcon](/?provider=hugeicons&icon=kimi-ai) - hugeicons; `@sketchicon/hugeicons/icons/kimi-ai`
-- [KitchenUtensilsIcon](/?provider=hugeicons&icon=kitchen-utensils) - hugeicons; `@sketchicon/hugeicons/icons/kitchen-utensils`
-- [KiteIcon](/?provider=hugeicons&icon=kite) - hugeicons; `@sketchicon/hugeicons/icons/kite`
-- [KlarnaIcon](/?provider=hugeicons&icon=klarna) - hugeicons; `@sketchicon/hugeicons/icons/klarna`
-- [Knife01Icon](/?provider=hugeicons&icon=knife-01) - hugeicons; `@sketchicon/hugeicons/icons/knife-01`; aliases: `KnifeIcon`
-- [Knife02Icon](/?provider=hugeicons&icon=knife-02) - hugeicons; `@sketchicon/hugeicons/icons/knife-02`
-- [KnifeBreadIcon](/?provider=hugeicons&icon=knife-bread) - hugeicons; `@sketchicon/hugeicons/icons/knife-bread`
-- [KnightShieldIcon](/?provider=hugeicons&icon=knight-shield) - hugeicons; `@sketchicon/hugeicons/icons/knight-shield`
-- [KnivesIcon](/?provider=hugeicons&icon=knives) - hugeicons; `@sketchicon/hugeicons/icons/knives`
-- [Knowledge01Icon](/?provider=hugeicons&icon=knowledge-01) - hugeicons; `@sketchicon/hugeicons/icons/knowledge-01`; aliases: `KnowledgeIcon`
-- [Knowledge02Icon](/?provider=hugeicons&icon=knowledge-02) - hugeicons; `@sketchicon/hugeicons/icons/knowledge-02`
-- [KoFiIcon](/?provider=hugeicons&icon=ko-fi) - hugeicons; `@sketchicon/hugeicons/icons/ko-fi`
-- [KurtaIcon](/?provider=hugeicons&icon=kurta) - hugeicons; `@sketchicon/hugeicons/icons/kurta`
-- [Kurta01Icon](/?provider=hugeicons&icon=kurta-01) - hugeicons; `@sketchicon/hugeicons/icons/kurta-01`
+- [Kaaba01Icon](/?provider=hugeicons&icon=kaaba-01) - hugeicons; `import { Kaaba01Icon } from "@sketchicon/hugeicons";`; aliases: `KaabaIcon`
+- [Kaaba02Icon](/?provider=hugeicons&icon=kaaba-02) - hugeicons; `import { Kaaba02Icon } from "@sketchicon/hugeicons";`
+- [KanbanIcon](/?provider=hugeicons&icon=kanban) - hugeicons; `import { KanbanIcon } from "@sketchicon/hugeicons";`
+- [Kanban](/?provider=lucide&icon=kanban) - lucide; `import { Kanban } from "@sketchicon/lucide";`
+- [KayakIcon](/?provider=hugeicons&icon=kayak) - hugeicons; `import { KayakIcon } from "@sketchicon/hugeicons";`
+- [Kayak](/?provider=lucide&icon=kayak) - lucide; `import { Kayak } from "@sketchicon/lucide";`
+- [KeffiyehIcon](/?provider=hugeicons&icon=keffiyeh) - hugeicons; `import { KeffiyehIcon } from "@sketchicon/hugeicons";`
+- [KettleIcon](/?provider=hugeicons&icon=kettle) - hugeicons; `import { KettleIcon } from "@sketchicon/hugeicons";`
+- [Kettle01Icon](/?provider=hugeicons&icon=kettle-01) - hugeicons; `import { Kettle01Icon } from "@sketchicon/hugeicons";`
+- [KettlebellIcon](/?provider=hugeicons&icon=kettlebell) - hugeicons; `import { KettlebellIcon } from "@sketchicon/hugeicons";`
+- [KetupatIcon](/?provider=hugeicons&icon=ketupat) - hugeicons; `import { KetupatIcon } from "@sketchicon/hugeicons";`
+- [Key](/?provider=lucide&icon=key) - lucide; `import { Key } from "@sketchicon/lucide";`
+- [Key01Icon](/?provider=hugeicons&icon=key-01) - hugeicons; `import { Key01Icon } from "@sketchicon/hugeicons";`; aliases: `KeyIcon`
+- [Key02Icon](/?provider=hugeicons&icon=key-02) - hugeicons; `import { Key02Icon } from "@sketchicon/hugeicons";`
+- [KeyGeneratorFobIcon](/?provider=hugeicons&icon=key-generator-fob) - hugeicons; `import { KeyGeneratorFobIcon } from "@sketchicon/hugeicons";`
+- [KeySquare](/?provider=lucide&icon=key-square) - lucide; `import { KeySquare } from "@sketchicon/lucide";`
+- [KeyboardIcon](/?provider=hugeicons&icon=keyboard) - hugeicons; `import { KeyboardIcon } from "@sketchicon/hugeicons";`
+- [Keyboard](/?provider=lucide&icon=keyboard) - lucide; `import { Keyboard } from "@sketchicon/lucide";`
+- [KeyboardMusic](/?provider=lucide&icon=keyboard-music) - lucide; `import { KeyboardMusic } from "@sketchicon/lucide";`
+- [KeyboardOff](/?provider=lucide&icon=keyboard-off) - lucide; `import { KeyboardOff } from "@sketchicon/lucide";`
+- [KeyframeIcon](/?provider=hugeicons&icon=keyframe) - hugeicons; `import { KeyframeIcon } from "@sketchicon/hugeicons";`
+- [KeyframeAddIcon](/?provider=hugeicons&icon=keyframe-add) - hugeicons; `import { KeyframeAddIcon } from "@sketchicon/hugeicons";`
+- [KeyframeAlignCenterIcon](/?provider=hugeicons&icon=keyframe-align-center) - hugeicons; `import { KeyframeAlignCenterIcon } from "@sketchicon/hugeicons";`
+- [KeyframeAlignHorizontalIcon](/?provider=hugeicons&icon=keyframe-align-horizontal) - hugeicons; `import { KeyframeAlignHorizontalIcon } from "@sketchicon/hugeicons";`
+- [KeyframeAlignVerticalIcon](/?provider=hugeicons&icon=keyframe-align-vertical) - hugeicons; `import { KeyframeAlignVerticalIcon } from "@sketchicon/hugeicons";`
+- [KeyframeBottomIcon](/?provider=hugeicons&icon=keyframe-bottom) - hugeicons; `import { KeyframeBottomIcon } from "@sketchicon/hugeicons";`
+- [KeyframeLeftIcon](/?provider=hugeicons&icon=keyframe-left) - hugeicons; `import { KeyframeLeftIcon } from "@sketchicon/hugeicons";`
+- [KeyframeRemoveIcon](/?provider=hugeicons&icon=keyframe-remove) - hugeicons; `import { KeyframeRemoveIcon } from "@sketchicon/hugeicons";`
+- [KeyframeRightIcon](/?provider=hugeicons&icon=keyframe-right) - hugeicons; `import { KeyframeRightIcon } from "@sketchicon/hugeicons";`
+- [KeyframeTopIcon](/?provider=hugeicons&icon=keyframe-top) - hugeicons; `import { KeyframeTopIcon } from "@sketchicon/hugeicons";`
+- [KeyframesDoubleIcon](/?provider=hugeicons&icon=keyframes-double) - hugeicons; `import { KeyframesDoubleIcon } from "@sketchicon/hugeicons";`
+- [KeyframesDoubleAddIcon](/?provider=hugeicons&icon=keyframes-double-add) - hugeicons; `import { KeyframesDoubleAddIcon } from "@sketchicon/hugeicons";`
+- [KeyframesDoubleRemoveIcon](/?provider=hugeicons&icon=keyframes-double-remove) - hugeicons; `import { KeyframesDoubleRemoveIcon } from "@sketchicon/hugeicons";`
+- [KeyframesMultipleIcon](/?provider=hugeicons&icon=keyframes-multiple) - hugeicons; `import { KeyframesMultipleIcon } from "@sketchicon/hugeicons";`
+- [KeyframesMultipleAddIcon](/?provider=hugeicons&icon=keyframes-multiple-add) - hugeicons; `import { KeyframesMultipleAddIcon } from "@sketchicon/hugeicons";`
+- [KeyframesMultipleRemoveIcon](/?provider=hugeicons&icon=keyframes-multiple-remove) - hugeicons; `import { KeyframesMultipleRemoveIcon } from "@sketchicon/hugeicons";`
+- [Kickstarter01Icon](/?provider=hugeicons&icon=kickstarter-01) - hugeicons; `import { Kickstarter01Icon } from "@sketchicon/hugeicons";`; aliases: `KickstarterIcon`
+- [Kickstarter02Icon](/?provider=hugeicons&icon=kickstarter-02) - hugeicons; `import { Kickstarter02Icon } from "@sketchicon/hugeicons";`
+- [KidIcon](/?provider=hugeicons&icon=kid) - hugeicons; `import { KidIcon } from "@sketchicon/hugeicons";`
+- [KidneysIcon](/?provider=hugeicons&icon=kidneys) - hugeicons; `import { KidneysIcon } from "@sketchicon/hugeicons";`
+- [KimiAiIcon](/?provider=hugeicons&icon=kimi-ai) - hugeicons; `import { KimiAiIcon } from "@sketchicon/hugeicons";`
+- [KitchenUtensilsIcon](/?provider=hugeicons&icon=kitchen-utensils) - hugeicons; `import { KitchenUtensilsIcon } from "@sketchicon/hugeicons";`
+- [KiteIcon](/?provider=hugeicons&icon=kite) - hugeicons; `import { KiteIcon } from "@sketchicon/hugeicons";`
+- [KlarnaIcon](/?provider=hugeicons&icon=klarna) - hugeicons; `import { KlarnaIcon } from "@sketchicon/hugeicons";`
+- [Knife01Icon](/?provider=hugeicons&icon=knife-01) - hugeicons; `import { Knife01Icon } from "@sketchicon/hugeicons";`; aliases: `KnifeIcon`
+- [Knife02Icon](/?provider=hugeicons&icon=knife-02) - hugeicons; `import { Knife02Icon } from "@sketchicon/hugeicons";`
+- [KnifeBreadIcon](/?provider=hugeicons&icon=knife-bread) - hugeicons; `import { KnifeBreadIcon } from "@sketchicon/hugeicons";`
+- [KnightShieldIcon](/?provider=hugeicons&icon=knight-shield) - hugeicons; `import { KnightShieldIcon } from "@sketchicon/hugeicons";`
+- [KnivesIcon](/?provider=hugeicons&icon=knives) - hugeicons; `import { KnivesIcon } from "@sketchicon/hugeicons";`
+- [Knowledge01Icon](/?provider=hugeicons&icon=knowledge-01) - hugeicons; `import { Knowledge01Icon } from "@sketchicon/hugeicons";`; aliases: `KnowledgeIcon`
+- [Knowledge02Icon](/?provider=hugeicons&icon=knowledge-02) - hugeicons; `import { Knowledge02Icon } from "@sketchicon/hugeicons";`
+- [KoFiIcon](/?provider=hugeicons&icon=ko-fi) - hugeicons; `import { KoFiIcon } from "@sketchicon/hugeicons";`
+- [KurtaIcon](/?provider=hugeicons&icon=kurta) - hugeicons; `import { KurtaIcon } from "@sketchicon/hugeicons";`
+- [Kurta01Icon](/?provider=hugeicons&icon=kurta-01) - hugeicons; `import { Kurta01Icon } from "@sketchicon/hugeicons";`
 
 [Back to the catalog index](../catalog.md)

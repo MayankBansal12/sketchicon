@@ -5,7 +5,7 @@ The lightweight React runtime for deterministic hand-drawn SVG geometry.
 Use the initializer to select optional catalogs:
 
 ```sh
-npm create sketchicon@latest
+npx create-sketchicon@latest
 ```
 
 Or install manually:
@@ -15,7 +15,7 @@ npm install sketchicon @sketchicon/lucide
 ```
 
 ```tsx
-import Search from "@sketchicon/lucide/icons/search";
+import { Search } from "@sketchicon/lucide";
 import { SketchIcon } from "sketchicon";
 
 <SketchIcon icon={Search} aria-label="Search" />;

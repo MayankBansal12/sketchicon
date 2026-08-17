@@ -73,10 +73,11 @@ for (const file of catalogFiles) {
     throw new Error(`Catalog index does not link to ${file}.`);
   }
   const source = await readFile(path.join(iconDocsRoot, "catalog", file), "utf8");
-  for (const match of source.matchAll(/^- \[[^\]]+\]\(\/\?provider=(lucide|hugeicons)&icon=([^\)]+)\) - (lucide|hugeicons); `([^`]+)`/gm)) {
-    const [, linkedProvider, linkedSlug, documentedProvider, importPath] = match;
+  for (const match of source.matchAll(/^- \[([^\]]+)\]\(\/\?provider=(lucide|hugeicons)&icon=([^\)]+)\) - (lucide|hugeicons); `([^`]+)`/gm)) {
+    const [, exportName, linkedProvider, linkedSlug, documentedProvider, iconImport] = match;
     if (linkedProvider !== documentedProvider) throw new Error(`Mismatched catalog provider: ${linkedSlug}.`);
-    if (!importPath.endsWith(`/${linkedSlug}`)) throw new Error(`Mismatched catalog slug: ${linkedSlug}.`);
+    const expectedImport = `import { ${exportName} } from "@sketchicon/${linkedProvider}";`;
+    if (iconImport !== expectedImport) throw new Error(`Mismatched catalog import: ${linkedSlug}.`);
     const id = `${linkedProvider}:${linkedSlug}`;
     if (documentedSlugs.has(id)) throw new Error(`Duplicate catalog icon: ${id}.`);
     documentedSlugs.add(id);

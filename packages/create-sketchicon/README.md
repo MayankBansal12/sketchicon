@@ -3,13 +3,13 @@
 Interactive installer and migration tool for SketchIcon.
 
 ```sh
-npm create sketchicon@latest
+npx create-sketchicon@latest
 ```
 
 ```sh
-npm create sketchicon@latest -- --packs lucide,hugeicons --yes
-npm create sketchicon@latest -- --migrate
-npm create sketchicon@latest -- --migrate --dry-run
+npx create-sketchicon@latest --packs lucide,hugeicons --yes
+npx create-sketchicon@latest --migrate
+npx create-sketchicon@latest --migrate --dry-run
 ```
 
 The command detects npm, pnpm, Yarn, or Bun and updates dependencies through that package manager so its lockfile remains authoritative.

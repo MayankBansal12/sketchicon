@@ -8,7 +8,7 @@ import { hugeiconsCatalog } from "../generated/hugeicons-catalog";
 import { catalogLoaders } from "../generated/loaders";
 import { iconCount, providerCounts } from "../generated/stats";
 import IconLibrary from "./IconLibrary";
-import { filterCatalog, getFilterCounts } from "./catalog";
+import { filterCatalog, formatIconImport, getFilterCounts } from "./catalog";
 
 const iconCatalog = [...lucideCatalog, ...hugeiconsCatalog];
 
@@ -45,6 +45,13 @@ describe("generated website catalog", () => {
 });
 
 describe("catalog filtering", () => {
+  it("formats named imports for both providers", () => {
+    expect(formatIconImport({ name: "Search", provider: "lucide" }))
+      .toBe('import { Search } from "@sketchicon/lucide";');
+    expect(formatIconImport({ name: "Search01Icon", provider: "hugeicons" }))
+      .toBe('import { Search01Icon } from "@sketchicon/hugeicons";');
+  });
+
   it("searches labels, export names, and aliases", () => {
     expect(filterCatalog(iconCatalog, "search", "all").some((icon) => icon.name === "Search")).toBe(true);
     expect(filterCatalog(iconCatalog, "AlarmCheck", "all").some((icon) => icon.label === "alarm-clock-check")).toBe(true);

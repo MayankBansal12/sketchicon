@@ -7,10 +7,10 @@ npm install sketchicon @sketchicon/lucide
 ```
 
 ```tsx
-import Search from "@sketchicon/lucide/icons/search";
+import { Search } from "@sketchicon/lucide";
 import { SketchIcon } from "sketchicon";
 
 <SketchIcon icon={Search} aria-label="Search" />;
 ```
 
-Named imports are available from `@sketchicon/lucide`. Direct icon imports are recommended for startup-sensitive environments.
+Named imports are the recommended default. Startup-sensitive Node.js environments can bypass the provider barrel with `import Search from "@sketchicon/lucide/icons/search"`.

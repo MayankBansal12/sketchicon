@@ -2,7 +2,7 @@
 
 SketchIcon includes 7,042 compatible icons from Lucide and Hugeicons Core Free.
 
-Each entry provides its provider, canonical React export, direct-import path, aliases, and an interactive preview.
+Each entry provides its provider, canonical named import, aliases, and an interactive preview.
 
 ## Alphabetical Index
 

@@ -10,12 +10,14 @@ import {
   detectPackageManager,
   findProjectRoot,
   formatMigrationDiff,
+  gettingStartedImports,
   hasSketchiconV1,
   includeMigrationPacks,
   installCommand,
   installedPacks,
   packNames,
   parseArgs,
+  parsePackSelection,
   planMigration,
   type IconPack,
 } from "./lib.js";
@@ -25,9 +27,9 @@ const help = `create-sketchicon
 Install the lightweight SketchIcon runtime and only the icon packs you choose.
 
 Usage:
-  npm create sketchicon@latest
-  npm create sketchicon@latest -- --packs lucide,hugeicons --yes
-  npm create sketchicon@latest -- --migrate
+  npx create-sketchicon@latest
+  npx create-sketchicon@latest --packs lucide,hugeicons --yes
+  npx create-sketchicon@latest --migrate
 
 Options:
   --packs <names>            Comma-separated lucide and/or hugeicons
@@ -53,23 +55,16 @@ function run(command: string, args: string[], cwd: string): Promise<void> {
 async function choosePacks(defaults: readonly IconPack[]): Promise<IconPack[]> {
   const selected: readonly IconPack[] = defaults.length > 0 ? defaults : ["lucide"];
   const prompt = [
-    "Choose icon packs (comma-separated numbers):",
+    "Which icon packs would you like to install?",
     "  1. Lucide — familiar interface icons",
     "  2. Hugeicons — expressive interface icons",
-    `Selection [${selected.map((pack) => packNames.indexOf(pack) + 1).join(",")}]: `,
+    "  Enter one or more numbers or names (use 'all' for both).",
+    `Selection [${selected.map((pack) => packNames.indexOf(pack) + 1).join(", ")}]: `,
   ].join("\n");
   const readline = createInterface({ input: process.stdin, output: process.stdout });
   try {
     const answer = (await readline.question(prompt)).trim();
-    if (!answer) return [...selected];
-    const packs = [...new Set(answer.split(",").map((choice) => {
-      const index = Number(choice.trim()) - 1;
-      const pack = packNames[index];
-      if (!pack) throw new Error(`Invalid pack selection: ${choice}`);
-      return pack;
-    }))];
-    if (packs.length === 0) throw new Error("Choose at least one icon pack.");
-    return packs;
+    return parsePackSelection(answer, selected);
   } finally {
     readline.close();
   }
@@ -135,10 +130,8 @@ async function main(): Promise<void> {
   await run(command, args, projectRoot);
   if (shouldMigrate) await applyMigrationPlan(migration);
 
-  process.stdout.write("\nSketchIcon is ready.\n\n");
-  process.stdout.write('import { SketchIcon } from "sketchicon";\n');
-  if (packs.includes("lucide")) process.stdout.write('import Search from "@sketchicon/lucide/icons/search";\n');
-  if (packs.includes("hugeicons")) process.stdout.write('import Home01Icon from "@sketchicon/hugeicons/icons/home-01";\n');
+  process.stdout.write("\nSketchIcon is ready. Start with:\n\n");
+  process.stdout.write(`${gettingStartedImports(packs)}\n`);
   if (addedMigrationPacks.includes("lucide") && selectedPacks.includes("hugeicons")) {
     process.stdout.write("\nTo use only Hugeicons, replace the migrated Lucide icons, then remove @sketchicon/lucide with your package manager.\n");
   }

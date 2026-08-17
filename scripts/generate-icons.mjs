@@ -461,17 +461,15 @@ for (const [initial, icons] of [...markdownCatalogGroups].sort(([a], [b]) => a.l
     [
       `# SketchIcon Catalog: ${title}`,
       "",
-      "Each entry shows its provider, canonical React export, and direct-import slug.",
+      "Each entry shows its provider and canonical named import.",
       "",
       ...icons.map(({ aliases, exportName, fileName: slug, provider }) => {
         const alternateAliases = aliases.filter((alias) => alias !== exportName);
         const aliasText = alternateAliases.length
           ? `; aliases: ${alternateAliases.map((alias) => `\`${alias}\``).join(", ")}`
           : "";
-        const importPath = provider === "lucide"
-          ? `@sketchicon/lucide/icons/${slug}`
-          : `@sketchicon/hugeicons/icons/${slug}`;
-        return `- [${exportName}](/?provider=${provider}&icon=${slug}) - ${provider}; \`${importPath}\`${aliasText}`;
+        const iconImport = `import { ${exportName} } from "@sketchicon/${provider}";`;
+        return `- [${exportName}](/?provider=${provider}&icon=${slug}) - ${provider}; \`${iconImport}\`${aliasText}`;
       }),
       "",
       "[Back to the catalog index](../catalog.md)",
@@ -487,7 +485,7 @@ await writeFile(
     "",
     `SketchIcon includes ${catalog.length.toLocaleString("en-US")} compatible icons from Lucide and Hugeicons Core Free.`,
     "",
-    "Each entry provides its provider, canonical React export, direct-import path, aliases, and an interactive preview.",
+    "Each entry provides its provider, canonical named import, aliases, and an interactive preview.",
     "",
     "## Alphabetical Index",
     "",

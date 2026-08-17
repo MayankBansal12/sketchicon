@@ -18,7 +18,7 @@ SketchIcon provides tree-shakeable React icons rendered as accessible inline SVG
 ## Notes
 
 - Import the renderer from `sketchicon`.
-- Import Lucide icons from `@sketchicon/lucide` or `@sketchicon/lucide/icons/<slug>`.
-- Import Hugeicons from `@sketchicon/hugeicons` or `@sketchicon/hugeicons/icons/<slug>`.
+- Import Lucide icons with named imports from `@sketchicon/lucide` by default. Direct `@sketchicon/lucide/icons/<slug>` imports remain available.
+- Import Hugeicons with named imports from `@sketchicon/hugeicons` by default. Direct `@sketchicon/hugeicons/icons/<slug>` imports remain available.
 - Do not reproduce SVG path data. Import the icon geometry supplied by the package.
 - Give meaningful icons an accessible name with `aria-label` or `title`. Hide decorative icons with `aria-hidden="true"`.

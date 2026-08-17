@@ -7,10 +7,12 @@ import {
   applyMigrationPlan,
   detectPackageManager,
   formatMigrationDiff,
+  gettingStartedImports,
   hasSketchiconV1,
   includeMigrationPacks,
   installCommand,
   parseArgs,
+  parsePackSelection,
   planMigration,
   rewriteSource,
 } from "./lib.js";
@@ -19,6 +21,23 @@ describe("create-sketchicon", () => {
   it("parses non-interactive installation flags", () => {
     expect(parseArgs(["--packs", "lucide,hugeicons", "--package-manager", "pnpm", "--yes"]))
       .toMatchObject({ packageManager: "pnpm", packs: ["lucide", "hugeicons"], yes: true });
+  });
+
+  it("parses friendly interactive pack selections", () => {
+    expect(parsePackSelection("", ["lucide"])).toEqual(["lucide"]);
+    expect(parsePackSelection("2, lucide", ["hugeicons"]))
+      .toEqual(["hugeicons", "lucide"]);
+    expect(parsePackSelection("all", ["lucide"])).toEqual(["lucide", "hugeicons"]);
+    expect(() => parsePackSelection("phosphor", ["lucide"]))
+      .toThrow(/Choose 1, 2, lucide, hugeicons, or all/);
+  });
+
+  it("prints simple named imports for the selected packs", () => {
+    expect(gettingStartedImports(["lucide", "hugeicons"])).toBe([
+      'import { SketchIcon } from "sketchicon";',
+      'import { Search } from "@sketchicon/lucide";',
+      'import { Home01Icon } from "@sketchicon/hugeicons";',
+    ].join("\n"));
   });
 
   it("constructs commands for supported package managers", () => {

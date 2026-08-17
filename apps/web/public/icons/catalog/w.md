@@ -1,190 +1,190 @@
 # SketchIcon Catalog: W
 
-Each entry shows its provider, canonical React export, and direct-import slug.
+Each entry shows its provider and canonical named import.
 
-- [WThreeSchoolsIcon](/?provider=hugeicons&icon=w-three-schools) - hugeicons; `@sketchicon/hugeicons/icons/w-three-schools`
-- [WaiterIcon](/?provider=hugeicons&icon=waiter) - hugeicons; `@sketchicon/hugeicons/icons/waiter`
-- [WaitersIcon](/?provider=hugeicons&icon=waiters) - hugeicons; `@sketchicon/hugeicons/icons/waiters`
-- [WalkingIcon](/?provider=hugeicons&icon=walking) - hugeicons; `@sketchicon/hugeicons/icons/walking`
-- [WallLampIcon](/?provider=hugeicons&icon=wall-lamp) - hugeicons; `@sketchicon/hugeicons/icons/wall-lamp`
-- [Wallet](/?provider=lucide&icon=wallet) - lucide; `@sketchicon/lucide/icons/wallet`
-- [Wallet01Icon](/?provider=hugeicons&icon=wallet-01) - hugeicons; `@sketchicon/hugeicons/icons/wallet-01`; aliases: `WalletIcon`
-- [Wallet02Icon](/?provider=hugeicons&icon=wallet-02) - hugeicons; `@sketchicon/hugeicons/icons/wallet-02`
-- [Wallet03Icon](/?provider=hugeicons&icon=wallet-03) - hugeicons; `@sketchicon/hugeicons/icons/wallet-03`
-- [Wallet05Icon](/?provider=hugeicons&icon=wallet-05) - hugeicons; `@sketchicon/hugeicons/icons/wallet-05`
-- [WalletAdd01Icon](/?provider=hugeicons&icon=wallet-add-01) - hugeicons; `@sketchicon/hugeicons/icons/wallet-add-01`; aliases: `WalletAddIcon`
-- [WalletAdd02Icon](/?provider=hugeicons&icon=wallet-add-02) - hugeicons; `@sketchicon/hugeicons/icons/wallet-add-02`
-- [WalletCardsIcon](/?provider=hugeicons&icon=wallet-cards) - hugeicons; `@sketchicon/hugeicons/icons/wallet-cards`
-- [WalletCards](/?provider=lucide&icon=wallet-cards) - lucide; `@sketchicon/lucide/icons/wallet-cards`
-- [WalletDone01Icon](/?provider=hugeicons&icon=wallet-done-01) - hugeicons; `@sketchicon/hugeicons/icons/wallet-done-01`; aliases: `WalletDoneIcon`
-- [WalletDone02Icon](/?provider=hugeicons&icon=wallet-done-02) - hugeicons; `@sketchicon/hugeicons/icons/wallet-done-02`
-- [WalletMinimal](/?provider=lucide&icon=wallet-minimal) - lucide; `@sketchicon/lucide/icons/wallet-minimal`; aliases: `Wallet2`
-- [WalletNotFound01Icon](/?provider=hugeicons&icon=wallet-not-found-01) - hugeicons; `@sketchicon/hugeicons/icons/wallet-not-found-01`; aliases: `WalletNotFoundIcon`
-- [WalletNotFound02Icon](/?provider=hugeicons&icon=wallet-not-found-02) - hugeicons; `@sketchicon/hugeicons/icons/wallet-not-found-02`
-- [WalletRemove01Icon](/?provider=hugeicons&icon=wallet-remove-01) - hugeicons; `@sketchicon/hugeicons/icons/wallet-remove-01`; aliases: `WalletRemoveIcon`
-- [WalletRemove02Icon](/?provider=hugeicons&icon=wallet-remove-02) - hugeicons; `@sketchicon/hugeicons/icons/wallet-remove-02`
-- [Wallpaper](/?provider=lucide&icon=wallpaper) - lucide; `@sketchicon/lucide/icons/wallpaper`
-- [WalpaperIcon](/?provider=hugeicons&icon=walpaper) - hugeicons; `@sketchicon/hugeicons/icons/walpaper`
-- [Wand](/?provider=lucide&icon=wand) - lucide; `@sketchicon/lucide/icons/wand`
-- [WandSparkles](/?provider=lucide&icon=wand-sparkles) - lucide; `@sketchicon/lucide/icons/wand-sparkles`; aliases: `Wand2`
-- [WantedIcon](/?provider=hugeicons&icon=wanted) - hugeicons; `@sketchicon/hugeicons/icons/wanted`
-- [Wardrobe01Icon](/?provider=hugeicons&icon=wardrobe-01) - hugeicons; `@sketchicon/hugeicons/icons/wardrobe-01`; aliases: `WardrobeIcon`
-- [Wardrobe02Icon](/?provider=hugeicons&icon=wardrobe-02) - hugeicons; `@sketchicon/hugeicons/icons/wardrobe-02`
-- [Wardrobe03Icon](/?provider=hugeicons&icon=wardrobe-03) - hugeicons; `@sketchicon/hugeicons/icons/wardrobe-03`
-- [Wardrobe04Icon](/?provider=hugeicons&icon=wardrobe-04) - hugeicons; `@sketchicon/hugeicons/icons/wardrobe-04`
-- [WarehouseIcon](/?provider=hugeicons&icon=warehouse) - hugeicons; `@sketchicon/hugeicons/icons/warehouse`
-- [Warehouse](/?provider=lucide&icon=warehouse) - lucide; `@sketchicon/lucide/icons/warehouse`
-- [WashingMachineIcon](/?provider=hugeicons&icon=washing-machine) - hugeicons; `@sketchicon/hugeicons/icons/washing-machine`
-- [WashingMachine](/?provider=lucide&icon=washing-machine) - lucide; `@sketchicon/lucide/icons/washing-machine`
-- [WashingtonMonumentIcon](/?provider=hugeicons&icon=washington-monument) - hugeicons; `@sketchicon/hugeicons/icons/washington-monument`
-- [WasteIcon](/?provider=hugeicons&icon=waste) - hugeicons; `@sketchicon/hugeicons/icons/waste`
-- [WasteRestoreIcon](/?provider=hugeicons&icon=waste-restore) - hugeicons; `@sketchicon/hugeicons/icons/waste-restore`
-- [Watch](/?provider=lucide&icon=watch) - lucide; `@sketchicon/lucide/icons/watch`
-- [Watch01Icon](/?provider=hugeicons&icon=watch-01) - hugeicons; `@sketchicon/hugeicons/icons/watch-01`; aliases: `WatchIcon`
-- [Watch02Icon](/?provider=hugeicons&icon=watch-02) - hugeicons; `@sketchicon/hugeicons/icons/watch-02`
-- [WaterEnergyIcon](/?provider=hugeicons&icon=water-energy) - hugeicons; `@sketchicon/hugeicons/icons/water-energy`
-- [WaterPoloIcon](/?provider=hugeicons&icon=water-polo) - hugeicons; `@sketchicon/hugeicons/icons/water-polo`
-- [WaterfallDown01Icon](/?provider=hugeicons&icon=waterfall-down-01) - hugeicons; `@sketchicon/hugeicons/icons/waterfall-down-01`; aliases: `WaterfallDownIcon`
-- [WaterfallDown03Icon](/?provider=hugeicons&icon=waterfall-down-03) - hugeicons; `@sketchicon/hugeicons/icons/waterfall-down-03`
-- [WaterfallUp01Icon](/?provider=hugeicons&icon=waterfall-up-01) - hugeicons; `@sketchicon/hugeicons/icons/waterfall-up-01`; aliases: `WaterfallUpIcon`
-- [WaterfallUp02Icon](/?provider=hugeicons&icon=waterfall-up-02) - hugeicons; `@sketchicon/hugeicons/icons/waterfall-up-02`
-- [WatermelonIcon](/?provider=hugeicons&icon=watermelon) - hugeicons; `@sketchicon/hugeicons/icons/watermelon`
-- [WattpadIcon](/?provider=hugeicons&icon=wattpad) - hugeicons; `@sketchicon/hugeicons/icons/wattpad`
-- [WattpadSquareIcon](/?provider=hugeicons&icon=wattpad-square) - hugeicons; `@sketchicon/hugeicons/icons/wattpad-square`
-- [Wav01Icon](/?provider=hugeicons&icon=wav-01) - hugeicons; `@sketchicon/hugeicons/icons/wav-01`; aliases: `WavIcon`
-- [Wav02Icon](/?provider=hugeicons&icon=wav-02) - hugeicons; `@sketchicon/hugeicons/icons/wav-02`
-- [WaveIcon](/?provider=hugeicons&icon=wave) - hugeicons; `@sketchicon/hugeicons/icons/wave`
-- [WaveSquareIcon](/?provider=hugeicons&icon=wave-square) - hugeicons; `@sketchicon/hugeicons/icons/wave-square`
-- [WaveTriangleIcon](/?provider=hugeicons&icon=wave-triangle) - hugeicons; `@sketchicon/hugeicons/icons/wave-triangle`
-- [WavesArrowDown](/?provider=lucide&icon=waves-arrow-down) - lucide; `@sketchicon/lucide/icons/waves-arrow-down`
-- [WavesArrowUp](/?provider=lucide&icon=waves-arrow-up) - lucide; `@sketchicon/lucide/icons/waves-arrow-up`
-- [WavesHorizontal](/?provider=lucide&icon=waves-horizontal) - lucide; `@sketchicon/lucide/icons/waves-horizontal`; aliases: `Waves`
-- [WavesLadder](/?provider=lucide&icon=waves-ladder) - lucide; `@sketchicon/lucide/icons/waves-ladder`
-- [WavesVertical](/?provider=lucide&icon=waves-vertical) - lucide; `@sketchicon/lucide/icons/waves-vertical`
-- [WavingHand01Icon](/?provider=hugeicons&icon=waving-hand-01) - hugeicons; `@sketchicon/hugeicons/icons/waving-hand-01`; aliases: `WavingHandIcon`
-- [WavingHand02Icon](/?provider=hugeicons&icon=waving-hand-02) - hugeicons; `@sketchicon/hugeicons/icons/waving-hand-02`
-- [Waypoints](/?provider=lucide&icon=waypoints) - lucide; `@sketchicon/lucide/icons/waypoints`
-- [WazeIcon](/?provider=hugeicons&icon=waze) - hugeicons; `@sketchicon/hugeicons/icons/waze`
-- [WebDesign01Icon](/?provider=hugeicons&icon=web-design-01) - hugeicons; `@sketchicon/hugeicons/icons/web-design-01`; aliases: `WebDesignIcon`
-- [WebDesign02Icon](/?provider=hugeicons&icon=web-design-02) - hugeicons; `@sketchicon/hugeicons/icons/web-design-02`
-- [WebProgrammingIcon](/?provider=hugeicons&icon=web-programming) - hugeicons; `@sketchicon/hugeicons/icons/web-programming`
-- [WebProtectionIcon](/?provider=hugeicons&icon=web-protection) - hugeicons; `@sketchicon/hugeicons/icons/web-protection`
-- [WebSecurityIcon](/?provider=hugeicons&icon=web-security) - hugeicons; `@sketchicon/hugeicons/icons/web-security`
-- [WebValidationIcon](/?provider=hugeicons&icon=web-validation) - hugeicons; `@sketchicon/hugeicons/icons/web-validation`
-- [Webcam](/?provider=lucide&icon=webcam) - lucide; `@sketchicon/lucide/icons/webcam`
-- [WebcamOff](/?provider=lucide&icon=webcam-off) - lucide; `@sketchicon/lucide/icons/webcam-off`
-- [WebflowIcon](/?provider=hugeicons&icon=webflow) - hugeicons; `@sketchicon/hugeicons/icons/webflow`
-- [WebflowEllipseIcon](/?provider=hugeicons&icon=webflow-ellipse) - hugeicons; `@sketchicon/hugeicons/icons/webflow-ellipse`
-- [WebflowRectangleIcon](/?provider=hugeicons&icon=webflow-rectangle) - hugeicons; `@sketchicon/hugeicons/icons/webflow-rectangle`
-- [WebhookIcon](/?provider=hugeicons&icon=webhook) - hugeicons; `@sketchicon/hugeicons/icons/webhook`
-- [Webhook](/?provider=lucide&icon=webhook) - lucide; `@sketchicon/lucide/icons/webhook`
-- [WebhookOffIcon](/?provider=hugeicons&icon=webhook-off) - hugeicons; `@sketchicon/hugeicons/icons/webhook-off`
-- [WebhookOff](/?provider=lucide&icon=webhook-off) - lucide; `@sketchicon/lucide/icons/webhook-off`
-- [WechatIcon](/?provider=hugeicons&icon=wechat) - hugeicons; `@sketchicon/hugeicons/icons/wechat`
-- [WeddingIcon](/?provider=hugeicons&icon=wedding) - hugeicons; `@sketchicon/hugeicons/icons/wedding`
-- [WeightIcon](/?provider=hugeicons&icon=weight) - hugeicons; `@sketchicon/hugeicons/icons/weight`
-- [Weight](/?provider=lucide&icon=weight) - lucide; `@sketchicon/lucide/icons/weight`
-- [WeightScaleIcon](/?provider=hugeicons&icon=weight-scale) - hugeicons; `@sketchicon/hugeicons/icons/weight-scale`
-- [WeightScale01Icon](/?provider=hugeicons&icon=weight-scale-01) - hugeicons; `@sketchicon/hugeicons/icons/weight-scale-01`
-- [WeightTilde](/?provider=lucide&icon=weight-tilde) - lucide; `@sketchicon/lucide/icons/weight-tilde`
-- [WellnessIcon](/?provider=hugeicons&icon=wellness) - hugeicons; `@sketchicon/hugeicons/icons/wellness`
-- [WhatsappIcon](/?provider=hugeicons&icon=whatsapp) - hugeicons; `@sketchicon/hugeicons/icons/whatsapp`
-- [WhatsappBusinessIcon](/?provider=hugeicons&icon=whatsapp-business) - hugeicons; `@sketchicon/hugeicons/icons/whatsapp-business`
-- [WheatIcon](/?provider=hugeicons&icon=wheat) - hugeicons; `@sketchicon/hugeicons/icons/wheat`
-- [Wheat](/?provider=lucide&icon=wheat) - lucide; `@sketchicon/lucide/icons/wheat`
-- [WheatOffIcon](/?provider=hugeicons&icon=wheat-off) - hugeicons; `@sketchicon/hugeicons/icons/wheat-off`
-- [WheatOff](/?provider=lucide&icon=wheat-off) - lucide; `@sketchicon/lucide/icons/wheat-off`
-- [WheelchairIcon](/?provider=hugeicons&icon=wheelchair) - hugeicons; `@sketchicon/hugeicons/icons/wheelchair`
-- [WhiskIcon](/?provider=hugeicons&icon=whisk) - hugeicons; `@sketchicon/hugeicons/icons/whisk`
-- [WhistleIcon](/?provider=hugeicons&icon=whistle) - hugeicons; `@sketchicon/hugeicons/icons/whistle`
-- [WhiteboardIcon](/?provider=hugeicons&icon=whiteboard) - hugeicons; `@sketchicon/hugeicons/icons/whiteboard`
-- [WholeWord](/?provider=lucide&icon=whole-word) - lucide; `@sketchicon/lucide/icons/whole-word`
-- [Wifi](/?provider=lucide&icon=wifi) - lucide; `@sketchicon/lucide/icons/wifi`
-- [Wifi01Icon](/?provider=hugeicons&icon=wifi-01) - hugeicons; `@sketchicon/hugeicons/icons/wifi-01`; aliases: `WifiIcon`
-- [Wifi02Icon](/?provider=hugeicons&icon=wifi-02) - hugeicons; `@sketchicon/hugeicons/icons/wifi-02`
-- [WifiCircleIcon](/?provider=hugeicons&icon=wifi-circle) - hugeicons; `@sketchicon/hugeicons/icons/wifi-circle`
-- [WifiCog](/?provider=lucide&icon=wifi-cog) - lucide; `@sketchicon/lucide/icons/wifi-cog`
-- [WifiConnected01Icon](/?provider=hugeicons&icon=wifi-connected-01) - hugeicons; `@sketchicon/hugeicons/icons/wifi-connected-01`; aliases: `WifiConnectedIcon`
-- [WifiConnected02Icon](/?provider=hugeicons&icon=wifi-connected-02) - hugeicons; `@sketchicon/hugeicons/icons/wifi-connected-02`
-- [WifiConnected03Icon](/?provider=hugeicons&icon=wifi-connected-03) - hugeicons; `@sketchicon/hugeicons/icons/wifi-connected-03`
-- [WifiDisconnected01Icon](/?provider=hugeicons&icon=wifi-disconnected-01) - hugeicons; `@sketchicon/hugeicons/icons/wifi-disconnected-01`; aliases: `WifiDisconnectedIcon`
-- [WifiDisconnected02Icon](/?provider=hugeicons&icon=wifi-disconnected-02) - hugeicons; `@sketchicon/hugeicons/icons/wifi-disconnected-02`
-- [WifiDisconnected03Icon](/?provider=hugeicons&icon=wifi-disconnected-03) - hugeicons; `@sketchicon/hugeicons/icons/wifi-disconnected-03`
-- [WifiDisconnected04Icon](/?provider=hugeicons&icon=wifi-disconnected-04) - hugeicons; `@sketchicon/hugeicons/icons/wifi-disconnected-04`
-- [WifiError01Icon](/?provider=hugeicons&icon=wifi-error-01) - hugeicons; `@sketchicon/hugeicons/icons/wifi-error-01`; aliases: `WifiErrorIcon`
-- [WifiError02Icon](/?provider=hugeicons&icon=wifi-error-02) - hugeicons; `@sketchicon/hugeicons/icons/wifi-error-02`
-- [WifiFullSignalIcon](/?provider=hugeicons&icon=wifi-full-signal) - hugeicons; `@sketchicon/hugeicons/icons/wifi-full-signal`
-- [WifiHigh](/?provider=lucide&icon=wifi-high) - lucide; `@sketchicon/lucide/icons/wifi-high`
-- [WifiLocationIcon](/?provider=hugeicons&icon=wifi-location) - hugeicons; `@sketchicon/hugeicons/icons/wifi-location`
-- [WifiLow](/?provider=lucide&icon=wifi-low) - lucide; `@sketchicon/lucide/icons/wifi-low`
-- [WifiLowSignalIcon](/?provider=hugeicons&icon=wifi-low-signal) - hugeicons; `@sketchicon/hugeicons/icons/wifi-low-signal`
-- [WifiMediumSignalIcon](/?provider=hugeicons&icon=wifi-medium-signal) - hugeicons; `@sketchicon/hugeicons/icons/wifi-medium-signal`
-- [WifiNoSignalIcon](/?provider=hugeicons&icon=wifi-no-signal) - hugeicons; `@sketchicon/hugeicons/icons/wifi-no-signal`
-- [WifiOff](/?provider=lucide&icon=wifi-off) - lucide; `@sketchicon/lucide/icons/wifi-off`
-- [WifiOff01Icon](/?provider=hugeicons&icon=wifi-off-01) - hugeicons; `@sketchicon/hugeicons/icons/wifi-off-01`; aliases: `WifiOffIcon`
-- [WifiOff02Icon](/?provider=hugeicons&icon=wifi-off-02) - hugeicons; `@sketchicon/hugeicons/icons/wifi-off-02`
-- [WifiPenIcon](/?provider=hugeicons&icon=wifi-pen) - hugeicons; `@sketchicon/hugeicons/icons/wifi-pen`
-- [WifiPen](/?provider=lucide&icon=wifi-pen) - lucide; `@sketchicon/lucide/icons/wifi-pen`
-- [WifiSquareIcon](/?provider=hugeicons&icon=wifi-square) - hugeicons; `@sketchicon/hugeicons/icons/wifi-square`
-- [WifiSyncIcon](/?provider=hugeicons&icon=wifi-sync) - hugeicons; `@sketchicon/hugeicons/icons/wifi-sync`
-- [WifiSync](/?provider=lucide&icon=wifi-sync) - lucide; `@sketchicon/lucide/icons/wifi-sync`
-- [WifiUnlockIcon](/?provider=hugeicons&icon=wifi-unlock) - hugeicons; `@sketchicon/hugeicons/icons/wifi-unlock`
-- [WifiZero](/?provider=lucide&icon=wifi-zero) - lucide; `@sketchicon/lucide/icons/wifi-zero`
-- [WikipediaIcon](/?provider=hugeicons&icon=wikipedia) - hugeicons; `@sketchicon/hugeicons/icons/wikipedia`
-- [Wind](/?provider=lucide&icon=wind) - lucide; `@sketchicon/lucide/icons/wind`
-- [WindArrowDown](/?provider=lucide&icon=wind-arrow-down) - lucide; `@sketchicon/lucide/icons/wind-arrow-down`
-- [WindPowerIcon](/?provider=hugeicons&icon=wind-power) - hugeicons; `@sketchicon/hugeicons/icons/wind-power`
-- [WindPower01Icon](/?provider=hugeicons&icon=wind-power-01) - hugeicons; `@sketchicon/hugeicons/icons/wind-power-01`
-- [WindPower02Icon](/?provider=hugeicons&icon=wind-power-02) - hugeicons; `@sketchicon/hugeicons/icons/wind-power-02`
-- [WindPower03Icon](/?provider=hugeicons&icon=wind-power-03) - hugeicons; `@sketchicon/hugeicons/icons/wind-power-03`
-- [WindSurfIcon](/?provider=hugeicons&icon=wind-surf) - hugeicons; `@sketchicon/hugeicons/icons/wind-surf`
-- [WindTurbineIcon](/?provider=hugeicons&icon=wind-turbine) - hugeicons; `@sketchicon/hugeicons/icons/wind-turbine`
-- [WindowsNewIcon](/?provider=hugeicons&icon=windows-new) - hugeicons; `@sketchicon/hugeicons/icons/windows-new`
-- [WindowsOldIcon](/?provider=hugeicons&icon=windows-old) - hugeicons; `@sketchicon/hugeicons/icons/windows-old`
-- [Wine](/?provider=lucide&icon=wine) - lucide; `@sketchicon/lucide/icons/wine`
-- [WineOff](/?provider=lucide&icon=wine-off) - lucide; `@sketchicon/lucide/icons/wine-off`
-- [WinkIcon](/?provider=hugeicons&icon=wink) - hugeicons; `@sketchicon/hugeicons/icons/wink`
-- [WinkingIcon](/?provider=hugeicons&icon=winking) - hugeicons; `@sketchicon/hugeicons/icons/winking`
-- [WirelessIcon](/?provider=hugeicons&icon=wireless) - hugeicons; `@sketchicon/hugeicons/icons/wireless`
-- [WirelessCloudAccessIcon](/?provider=hugeicons&icon=wireless-cloud-access) - hugeicons; `@sketchicon/hugeicons/icons/wireless-cloud-access`
-- [WiseIcon](/?provider=hugeicons&icon=wise) - hugeicons; `@sketchicon/hugeicons/icons/wise`
-- [WomanIcon](/?provider=hugeicons&icon=woman) - hugeicons; `@sketchicon/hugeicons/icons/woman`
-- [WordpressIcon](/?provider=hugeicons&icon=wordpress) - hugeicons; `@sketchicon/hugeicons/icons/wordpress`
-- [WorkIcon](/?provider=hugeicons&icon=work) - hugeicons; `@sketchicon/hugeicons/icons/work`
-- [WorkAlertIcon](/?provider=hugeicons&icon=work-alert) - hugeicons; `@sketchicon/hugeicons/icons/work-alert`
-- [WorkHistoryIcon](/?provider=hugeicons&icon=work-history) - hugeicons; `@sketchicon/hugeicons/icons/work-history`
-- [WorkUpdateIcon](/?provider=hugeicons&icon=work-update) - hugeicons; `@sketchicon/hugeicons/icons/work-update`
-- [Workflow](/?provider=lucide&icon=workflow) - lucide; `@sketchicon/lucide/icons/workflow`
-- [WorkflowCircle01Icon](/?provider=hugeicons&icon=workflow-circle-01) - hugeicons; `@sketchicon/hugeicons/icons/workflow-circle-01`; aliases: `WorkflowCircleIcon`
-- [WorkflowCircle02Icon](/?provider=hugeicons&icon=workflow-circle-02) - hugeicons; `@sketchicon/hugeicons/icons/workflow-circle-02`
-- [WorkflowCircle03Icon](/?provider=hugeicons&icon=workflow-circle-03) - hugeicons; `@sketchicon/hugeicons/icons/workflow-circle-03`
-- [WorkflowCircle04Icon](/?provider=hugeicons&icon=workflow-circle-04) - hugeicons; `@sketchicon/hugeicons/icons/workflow-circle-04`
-- [WorkflowCircle05Icon](/?provider=hugeicons&icon=workflow-circle-05) - hugeicons; `@sketchicon/hugeicons/icons/workflow-circle-05`
-- [WorkflowCircle06Icon](/?provider=hugeicons&icon=workflow-circle-06) - hugeicons; `@sketchicon/hugeicons/icons/workflow-circle-06`
-- [WorkflowSquare01Icon](/?provider=hugeicons&icon=workflow-square-01) - hugeicons; `@sketchicon/hugeicons/icons/workflow-square-01`; aliases: `WorkflowSquareIcon`
-- [WorkflowSquare02Icon](/?provider=hugeicons&icon=workflow-square-02) - hugeicons; `@sketchicon/hugeicons/icons/workflow-square-02`
-- [WorkflowSquare03Icon](/?provider=hugeicons&icon=workflow-square-03) - hugeicons; `@sketchicon/hugeicons/icons/workflow-square-03`
-- [WorkflowSquare04Icon](/?provider=hugeicons&icon=workflow-square-04) - hugeicons; `@sketchicon/hugeicons/icons/workflow-square-04`
-- [WorkflowSquare05Icon](/?provider=hugeicons&icon=workflow-square-05) - hugeicons; `@sketchicon/hugeicons/icons/workflow-square-05`
-- [WorkflowSquare06Icon](/?provider=hugeicons&icon=workflow-square-06) - hugeicons; `@sketchicon/hugeicons/icons/workflow-square-06`
-- [WorkflowSquare07Icon](/?provider=hugeicons&icon=workflow-square-07) - hugeicons; `@sketchicon/hugeicons/icons/workflow-square-07`
-- [WorkflowSquare08Icon](/?provider=hugeicons&icon=workflow-square-08) - hugeicons; `@sketchicon/hugeicons/icons/workflow-square-08`
-- [WorkflowSquare09Icon](/?provider=hugeicons&icon=workflow-square-09) - hugeicons; `@sketchicon/hugeicons/icons/workflow-square-09`
-- [WorkflowSquare10Icon](/?provider=hugeicons&icon=workflow-square-10) - hugeicons; `@sketchicon/hugeicons/icons/workflow-square-10`
-- [WorkoutBattleRopesIcon](/?provider=hugeicons&icon=workout-battle-ropes) - hugeicons; `@sketchicon/hugeicons/icons/workout-battle-ropes`
-- [WorkoutGymnasticsIcon](/?provider=hugeicons&icon=workout-gymnastics) - hugeicons; `@sketchicon/hugeicons/icons/workout-gymnastics`
-- [WorkoutKickingIcon](/?provider=hugeicons&icon=workout-kicking) - hugeicons; `@sketchicon/hugeicons/icons/workout-kicking`
-- [WorkoutRunIcon](/?provider=hugeicons&icon=workout-run) - hugeicons; `@sketchicon/hugeicons/icons/workout-run`
-- [WorkoutSportIcon](/?provider=hugeicons&icon=workout-sport) - hugeicons; `@sketchicon/hugeicons/icons/workout-sport`
-- [WorkoutSquatsIcon](/?provider=hugeicons&icon=workout-squats) - hugeicons; `@sketchicon/hugeicons/icons/workout-squats`
-- [WorkoutStretchingIcon](/?provider=hugeicons&icon=workout-stretching) - hugeicons; `@sketchicon/hugeicons/icons/workout-stretching`
-- [WorkoutWarmUpIcon](/?provider=hugeicons&icon=workout-warm-up) - hugeicons; `@sketchicon/hugeicons/icons/workout-warm-up`
-- [Worm](/?provider=lucide&icon=worm) - lucide; `@sketchicon/lucide/icons/worm`
-- [WorryIcon](/?provider=hugeicons&icon=worry) - hugeicons; `@sketchicon/hugeicons/icons/worry`
-- [WpsOfficeIcon](/?provider=hugeicons&icon=wps-office) - hugeicons; `@sketchicon/hugeicons/icons/wps-office`
-- [WpsOfficeRectangleIcon](/?provider=hugeicons&icon=wps-office-rectangle) - hugeicons; `@sketchicon/hugeicons/icons/wps-office-rectangle`
-- [Wrench](/?provider=lucide&icon=wrench) - lucide; `@sketchicon/lucide/icons/wrench`
-- [WrenchOff](/?provider=lucide&icon=wrench-off) - lucide; `@sketchicon/lucide/icons/wrench-off`
-- [WuduIcon](/?provider=hugeicons&icon=wudu) - hugeicons; `@sketchicon/hugeicons/icons/wudu`
+- [WThreeSchoolsIcon](/?provider=hugeicons&icon=w-three-schools) - hugeicons; `import { WThreeSchoolsIcon } from "@sketchicon/hugeicons";`
+- [WaiterIcon](/?provider=hugeicons&icon=waiter) - hugeicons; `import { WaiterIcon } from "@sketchicon/hugeicons";`
+- [WaitersIcon](/?provider=hugeicons&icon=waiters) - hugeicons; `import { WaitersIcon } from "@sketchicon/hugeicons";`
+- [WalkingIcon](/?provider=hugeicons&icon=walking) - hugeicons; `import { WalkingIcon } from "@sketchicon/hugeicons";`
+- [WallLampIcon](/?provider=hugeicons&icon=wall-lamp) - hugeicons; `import { WallLampIcon } from "@sketchicon/hugeicons";`
+- [Wallet](/?provider=lucide&icon=wallet) - lucide; `import { Wallet } from "@sketchicon/lucide";`
+- [Wallet01Icon](/?provider=hugeicons&icon=wallet-01) - hugeicons; `import { Wallet01Icon } from "@sketchicon/hugeicons";`; aliases: `WalletIcon`
+- [Wallet02Icon](/?provider=hugeicons&icon=wallet-02) - hugeicons; `import { Wallet02Icon } from "@sketchicon/hugeicons";`
+- [Wallet03Icon](/?provider=hugeicons&icon=wallet-03) - hugeicons; `import { Wallet03Icon } from "@sketchicon/hugeicons";`
+- [Wallet05Icon](/?provider=hugeicons&icon=wallet-05) - hugeicons; `import { Wallet05Icon } from "@sketchicon/hugeicons";`
+- [WalletAdd01Icon](/?provider=hugeicons&icon=wallet-add-01) - hugeicons; `import { WalletAdd01Icon } from "@sketchicon/hugeicons";`; aliases: `WalletAddIcon`
+- [WalletAdd02Icon](/?provider=hugeicons&icon=wallet-add-02) - hugeicons; `import { WalletAdd02Icon } from "@sketchicon/hugeicons";`
+- [WalletCardsIcon](/?provider=hugeicons&icon=wallet-cards) - hugeicons; `import { WalletCardsIcon } from "@sketchicon/hugeicons";`
+- [WalletCards](/?provider=lucide&icon=wallet-cards) - lucide; `import { WalletCards } from "@sketchicon/lucide";`
+- [WalletDone01Icon](/?provider=hugeicons&icon=wallet-done-01) - hugeicons; `import { WalletDone01Icon } from "@sketchicon/hugeicons";`; aliases: `WalletDoneIcon`
+- [WalletDone02Icon](/?provider=hugeicons&icon=wallet-done-02) - hugeicons; `import { WalletDone02Icon } from "@sketchicon/hugeicons";`
+- [WalletMinimal](/?provider=lucide&icon=wallet-minimal) - lucide; `import { WalletMinimal } from "@sketchicon/lucide";`; aliases: `Wallet2`
+- [WalletNotFound01Icon](/?provider=hugeicons&icon=wallet-not-found-01) - hugeicons; `import { WalletNotFound01Icon } from "@sketchicon/hugeicons";`; aliases: `WalletNotFoundIcon`
+- [WalletNotFound02Icon](/?provider=hugeicons&icon=wallet-not-found-02) - hugeicons; `import { WalletNotFound02Icon } from "@sketchicon/hugeicons";`
+- [WalletRemove01Icon](/?provider=hugeicons&icon=wallet-remove-01) - hugeicons; `import { WalletRemove01Icon } from "@sketchicon/hugeicons";`; aliases: `WalletRemoveIcon`
+- [WalletRemove02Icon](/?provider=hugeicons&icon=wallet-remove-02) - hugeicons; `import { WalletRemove02Icon } from "@sketchicon/hugeicons";`
+- [Wallpaper](/?provider=lucide&icon=wallpaper) - lucide; `import { Wallpaper } from "@sketchicon/lucide";`
+- [WalpaperIcon](/?provider=hugeicons&icon=walpaper) - hugeicons; `import { WalpaperIcon } from "@sketchicon/hugeicons";`
+- [Wand](/?provider=lucide&icon=wand) - lucide; `import { Wand } from "@sketchicon/lucide";`
+- [WandSparkles](/?provider=lucide&icon=wand-sparkles) - lucide; `import { WandSparkles } from "@sketchicon/lucide";`; aliases: `Wand2`
+- [WantedIcon](/?provider=hugeicons&icon=wanted) - hugeicons; `import { WantedIcon } from "@sketchicon/hugeicons";`
+- [Wardrobe01Icon](/?provider=hugeicons&icon=wardrobe-01) - hugeicons; `import { Wardrobe01Icon } from "@sketchicon/hugeicons";`; aliases: `WardrobeIcon`
+- [Wardrobe02Icon](/?provider=hugeicons&icon=wardrobe-02) - hugeicons; `import { Wardrobe02Icon } from "@sketchicon/hugeicons";`
+- [Wardrobe03Icon](/?provider=hugeicons&icon=wardrobe-03) - hugeicons; `import { Wardrobe03Icon } from "@sketchicon/hugeicons";`
+- [Wardrobe04Icon](/?provider=hugeicons&icon=wardrobe-04) - hugeicons; `import { Wardrobe04Icon } from "@sketchicon/hugeicons";`
+- [WarehouseIcon](/?provider=hugeicons&icon=warehouse) - hugeicons; `import { WarehouseIcon } from "@sketchicon/hugeicons";`
+- [Warehouse](/?provider=lucide&icon=warehouse) - lucide; `import { Warehouse } from "@sketchicon/lucide";`
+- [WashingMachineIcon](/?provider=hugeicons&icon=washing-machine) - hugeicons; `import { WashingMachineIcon } from "@sketchicon/hugeicons";`
+- [WashingMachine](/?provider=lucide&icon=washing-machine) - lucide; `import { WashingMachine } from "@sketchicon/lucide";`
+- [WashingtonMonumentIcon](/?provider=hugeicons&icon=washington-monument) - hugeicons; `import { WashingtonMonumentIcon } from "@sketchicon/hugeicons";`
+- [WasteIcon](/?provider=hugeicons&icon=waste) - hugeicons; `import { WasteIcon } from "@sketchicon/hugeicons";`
+- [WasteRestoreIcon](/?provider=hugeicons&icon=waste-restore) - hugeicons; `import { WasteRestoreIcon } from "@sketchicon/hugeicons";`
+- [Watch](/?provider=lucide&icon=watch) - lucide; `import { Watch } from "@sketchicon/lucide";`
+- [Watch01Icon](/?provider=hugeicons&icon=watch-01) - hugeicons; `import { Watch01Icon } from "@sketchicon/hugeicons";`; aliases: `WatchIcon`
+- [Watch02Icon](/?provider=hugeicons&icon=watch-02) - hugeicons; `import { Watch02Icon } from "@sketchicon/hugeicons";`
+- [WaterEnergyIcon](/?provider=hugeicons&icon=water-energy) - hugeicons; `import { WaterEnergyIcon } from "@sketchicon/hugeicons";`
+- [WaterPoloIcon](/?provider=hugeicons&icon=water-polo) - hugeicons; `import { WaterPoloIcon } from "@sketchicon/hugeicons";`
+- [WaterfallDown01Icon](/?provider=hugeicons&icon=waterfall-down-01) - hugeicons; `import { WaterfallDown01Icon } from "@sketchicon/hugeicons";`; aliases: `WaterfallDownIcon`
+- [WaterfallDown03Icon](/?provider=hugeicons&icon=waterfall-down-03) - hugeicons; `import { WaterfallDown03Icon } from "@sketchicon/hugeicons";`
+- [WaterfallUp01Icon](/?provider=hugeicons&icon=waterfall-up-01) - hugeicons; `import { WaterfallUp01Icon } from "@sketchicon/hugeicons";`; aliases: `WaterfallUpIcon`
+- [WaterfallUp02Icon](/?provider=hugeicons&icon=waterfall-up-02) - hugeicons; `import { WaterfallUp02Icon } from "@sketchicon/hugeicons";`
+- [WatermelonIcon](/?provider=hugeicons&icon=watermelon) - hugeicons; `import { WatermelonIcon } from "@sketchicon/hugeicons";`
+- [WattpadIcon](/?provider=hugeicons&icon=wattpad) - hugeicons; `import { WattpadIcon } from "@sketchicon/hugeicons";`
+- [WattpadSquareIcon](/?provider=hugeicons&icon=wattpad-square) - hugeicons; `import { WattpadSquareIcon } from "@sketchicon/hugeicons";`
+- [Wav01Icon](/?provider=hugeicons&icon=wav-01) - hugeicons; `import { Wav01Icon } from "@sketchicon/hugeicons";`; aliases: `WavIcon`
+- [Wav02Icon](/?provider=hugeicons&icon=wav-02) - hugeicons; `import { Wav02Icon } from "@sketchicon/hugeicons";`
+- [WaveIcon](/?provider=hugeicons&icon=wave) - hugeicons; `import { WaveIcon } from "@sketchicon/hugeicons";`
+- [WaveSquareIcon](/?provider=hugeicons&icon=wave-square) - hugeicons; `import { WaveSquareIcon } from "@sketchicon/hugeicons";`
+- [WaveTriangleIcon](/?provider=hugeicons&icon=wave-triangle) - hugeicons; `import { WaveTriangleIcon } from "@sketchicon/hugeicons";`
+- [WavesArrowDown](/?provider=lucide&icon=waves-arrow-down) - lucide; `import { WavesArrowDown } from "@sketchicon/lucide";`
+- [WavesArrowUp](/?provider=lucide&icon=waves-arrow-up) - lucide; `import { WavesArrowUp } from "@sketchicon/lucide";`
+- [WavesHorizontal](/?provider=lucide&icon=waves-horizontal) - lucide; `import { WavesHorizontal } from "@sketchicon/lucide";`; aliases: `Waves`
+- [WavesLadder](/?provider=lucide&icon=waves-ladder) - lucide; `import { WavesLadder } from "@sketchicon/lucide";`
+- [WavesVertical](/?provider=lucide&icon=waves-vertical) - lucide; `import { WavesVertical } from "@sketchicon/lucide";`
+- [WavingHand01Icon](/?provider=hugeicons&icon=waving-hand-01) - hugeicons; `import { WavingHand01Icon } from "@sketchicon/hugeicons";`; aliases: `WavingHandIcon`
+- [WavingHand02Icon](/?provider=hugeicons&icon=waving-hand-02) - hugeicons; `import { WavingHand02Icon } from "@sketchicon/hugeicons";`
+- [Waypoints](/?provider=lucide&icon=waypoints) - lucide; `import { Waypoints } from "@sketchicon/lucide";`
+- [WazeIcon](/?provider=hugeicons&icon=waze) - hugeicons; `import { WazeIcon } from "@sketchicon/hugeicons";`
+- [WebDesign01Icon](/?provider=hugeicons&icon=web-design-01) - hugeicons; `import { WebDesign01Icon } from "@sketchicon/hugeicons";`; aliases: `WebDesignIcon`
+- [WebDesign02Icon](/?provider=hugeicons&icon=web-design-02) - hugeicons; `import { WebDesign02Icon } from "@sketchicon/hugeicons";`
+- [WebProgrammingIcon](/?provider=hugeicons&icon=web-programming) - hugeicons; `import { WebProgrammingIcon } from "@sketchicon/hugeicons";`
+- [WebProtectionIcon](/?provider=hugeicons&icon=web-protection) - hugeicons; `import { WebProtectionIcon } from "@sketchicon/hugeicons";`
+- [WebSecurityIcon](/?provider=hugeicons&icon=web-security) - hugeicons; `import { WebSecurityIcon } from "@sketchicon/hugeicons";`
+- [WebValidationIcon](/?provider=hugeicons&icon=web-validation) - hugeicons; `import { WebValidationIcon } from "@sketchicon/hugeicons";`
+- [Webcam](/?provider=lucide&icon=webcam) - lucide; `import { Webcam } from "@sketchicon/lucide";`
+- [WebcamOff](/?provider=lucide&icon=webcam-off) - lucide; `import { WebcamOff } from "@sketchicon/lucide";`
+- [WebflowIcon](/?provider=hugeicons&icon=webflow) - hugeicons; `import { WebflowIcon } from "@sketchicon/hugeicons";`
+- [WebflowEllipseIcon](/?provider=hugeicons&icon=webflow-ellipse) - hugeicons; `import { WebflowEllipseIcon } from "@sketchicon/hugeicons";`
+- [WebflowRectangleIcon](/?provider=hugeicons&icon=webflow-rectangle) - hugeicons; `import { WebflowRectangleIcon } from "@sketchicon/hugeicons";`
+- [WebhookIcon](/?provider=hugeicons&icon=webhook) - hugeicons; `import { WebhookIcon } from "@sketchicon/hugeicons";`
+- [Webhook](/?provider=lucide&icon=webhook) - lucide; `import { Webhook } from "@sketchicon/lucide";`
+- [WebhookOffIcon](/?provider=hugeicons&icon=webhook-off) - hugeicons; `import { WebhookOffIcon } from "@sketchicon/hugeicons";`
+- [WebhookOff](/?provider=lucide&icon=webhook-off) - lucide; `import { WebhookOff } from "@sketchicon/lucide";`
+- [WechatIcon](/?provider=hugeicons&icon=wechat) - hugeicons; `import { WechatIcon } from "@sketchicon/hugeicons";`
+- [WeddingIcon](/?provider=hugeicons&icon=wedding) - hugeicons; `import { WeddingIcon } from "@sketchicon/hugeicons";`
+- [WeightIcon](/?provider=hugeicons&icon=weight) - hugeicons; `import { WeightIcon } from "@sketchicon/hugeicons";`
+- [Weight](/?provider=lucide&icon=weight) - lucide; `import { Weight } from "@sketchicon/lucide";`
+- [WeightScaleIcon](/?provider=hugeicons&icon=weight-scale) - hugeicons; `import { WeightScaleIcon } from "@sketchicon/hugeicons";`
+- [WeightScale01Icon](/?provider=hugeicons&icon=weight-scale-01) - hugeicons; `import { WeightScale01Icon } from "@sketchicon/hugeicons";`
+- [WeightTilde](/?provider=lucide&icon=weight-tilde) - lucide; `import { WeightTilde } from "@sketchicon/lucide";`
+- [WellnessIcon](/?provider=hugeicons&icon=wellness) - hugeicons; `import { WellnessIcon } from "@sketchicon/hugeicons";`
+- [WhatsappIcon](/?provider=hugeicons&icon=whatsapp) - hugeicons; `import { WhatsappIcon } from "@sketchicon/hugeicons";`
+- [WhatsappBusinessIcon](/?provider=hugeicons&icon=whatsapp-business) - hugeicons; `import { WhatsappBusinessIcon } from "@sketchicon/hugeicons";`
+- [WheatIcon](/?provider=hugeicons&icon=wheat) - hugeicons; `import { WheatIcon } from "@sketchicon/hugeicons";`
+- [Wheat](/?provider=lucide&icon=wheat) - lucide; `import { Wheat } from "@sketchicon/lucide";`
+- [WheatOffIcon](/?provider=hugeicons&icon=wheat-off) - hugeicons; `import { WheatOffIcon } from "@sketchicon/hugeicons";`
+- [WheatOff](/?provider=lucide&icon=wheat-off) - lucide; `import { WheatOff } from "@sketchicon/lucide";`
+- [WheelchairIcon](/?provider=hugeicons&icon=wheelchair) - hugeicons; `import { WheelchairIcon } from "@sketchicon/hugeicons";`
+- [WhiskIcon](/?provider=hugeicons&icon=whisk) - hugeicons; `import { WhiskIcon } from "@sketchicon/hugeicons";`
+- [WhistleIcon](/?provider=hugeicons&icon=whistle) - hugeicons; `import { WhistleIcon } from "@sketchicon/hugeicons";`
+- [WhiteboardIcon](/?provider=hugeicons&icon=whiteboard) - hugeicons; `import { WhiteboardIcon } from "@sketchicon/hugeicons";`
+- [WholeWord](/?provider=lucide&icon=whole-word) - lucide; `import { WholeWord } from "@sketchicon/lucide";`
+- [Wifi](/?provider=lucide&icon=wifi) - lucide; `import { Wifi } from "@sketchicon/lucide";`
+- [Wifi01Icon](/?provider=hugeicons&icon=wifi-01) - hugeicons; `import { Wifi01Icon } from "@sketchicon/hugeicons";`; aliases: `WifiIcon`
+- [Wifi02Icon](/?provider=hugeicons&icon=wifi-02) - hugeicons; `import { Wifi02Icon } from "@sketchicon/hugeicons";`
+- [WifiCircleIcon](/?provider=hugeicons&icon=wifi-circle) - hugeicons; `import { WifiCircleIcon } from "@sketchicon/hugeicons";`
+- [WifiCog](/?provider=lucide&icon=wifi-cog) - lucide; `import { WifiCog } from "@sketchicon/lucide";`
+- [WifiConnected01Icon](/?provider=hugeicons&icon=wifi-connected-01) - hugeicons; `import { WifiConnected01Icon } from "@sketchicon/hugeicons";`; aliases: `WifiConnectedIcon`
+- [WifiConnected02Icon](/?provider=hugeicons&icon=wifi-connected-02) - hugeicons; `import { WifiConnected02Icon } from "@sketchicon/hugeicons";`
+- [WifiConnected03Icon](/?provider=hugeicons&icon=wifi-connected-03) - hugeicons; `import { WifiConnected03Icon } from "@sketchicon/hugeicons";`
+- [WifiDisconnected01Icon](/?provider=hugeicons&icon=wifi-disconnected-01) - hugeicons; `import { WifiDisconnected01Icon } from "@sketchicon/hugeicons";`; aliases: `WifiDisconnectedIcon`
+- [WifiDisconnected02Icon](/?provider=hugeicons&icon=wifi-disconnected-02) - hugeicons; `import { WifiDisconnected02Icon } from "@sketchicon/hugeicons";`
+- [WifiDisconnected03Icon](/?provider=hugeicons&icon=wifi-disconnected-03) - hugeicons; `import { WifiDisconnected03Icon } from "@sketchicon/hugeicons";`
+- [WifiDisconnected04Icon](/?provider=hugeicons&icon=wifi-disconnected-04) - hugeicons; `import { WifiDisconnected04Icon } from "@sketchicon/hugeicons";`
+- [WifiError01Icon](/?provider=hugeicons&icon=wifi-error-01) - hugeicons; `import { WifiError01Icon } from "@sketchicon/hugeicons";`; aliases: `WifiErrorIcon`
+- [WifiError02Icon](/?provider=hugeicons&icon=wifi-error-02) - hugeicons; `import { WifiError02Icon } from "@sketchicon/hugeicons";`
+- [WifiFullSignalIcon](/?provider=hugeicons&icon=wifi-full-signal) - hugeicons; `import { WifiFullSignalIcon } from "@sketchicon/hugeicons";`
+- [WifiHigh](/?provider=lucide&icon=wifi-high) - lucide; `import { WifiHigh } from "@sketchicon/lucide";`
+- [WifiLocationIcon](/?provider=hugeicons&icon=wifi-location) - hugeicons; `import { WifiLocationIcon } from "@sketchicon/hugeicons";`
+- [WifiLow](/?provider=lucide&icon=wifi-low) - lucide; `import { WifiLow } from "@sketchicon/lucide";`
+- [WifiLowSignalIcon](/?provider=hugeicons&icon=wifi-low-signal) - hugeicons; `import { WifiLowSignalIcon } from "@sketchicon/hugeicons";`
+- [WifiMediumSignalIcon](/?provider=hugeicons&icon=wifi-medium-signal) - hugeicons; `import { WifiMediumSignalIcon } from "@sketchicon/hugeicons";`
+- [WifiNoSignalIcon](/?provider=hugeicons&icon=wifi-no-signal) - hugeicons; `import { WifiNoSignalIcon } from "@sketchicon/hugeicons";`
+- [WifiOff](/?provider=lucide&icon=wifi-off) - lucide; `import { WifiOff } from "@sketchicon/lucide";`
+- [WifiOff01Icon](/?provider=hugeicons&icon=wifi-off-01) - hugeicons; `import { WifiOff01Icon } from "@sketchicon/hugeicons";`; aliases: `WifiOffIcon`
+- [WifiOff02Icon](/?provider=hugeicons&icon=wifi-off-02) - hugeicons; `import { WifiOff02Icon } from "@sketchicon/hugeicons";`
+- [WifiPenIcon](/?provider=hugeicons&icon=wifi-pen) - hugeicons; `import { WifiPenIcon } from "@sketchicon/hugeicons";`
+- [WifiPen](/?provider=lucide&icon=wifi-pen) - lucide; `import { WifiPen } from "@sketchicon/lucide";`
+- [WifiSquareIcon](/?provider=hugeicons&icon=wifi-square) - hugeicons; `import { WifiSquareIcon } from "@sketchicon/hugeicons";`
+- [WifiSyncIcon](/?provider=hugeicons&icon=wifi-sync) - hugeicons; `import { WifiSyncIcon } from "@sketchicon/hugeicons";`
+- [WifiSync](/?provider=lucide&icon=wifi-sync) - lucide; `import { WifiSync } from "@sketchicon/lucide";`
+- [WifiUnlockIcon](/?provider=hugeicons&icon=wifi-unlock) - hugeicons; `import { WifiUnlockIcon } from "@sketchicon/hugeicons";`
+- [WifiZero](/?provider=lucide&icon=wifi-zero) - lucide; `import { WifiZero } from "@sketchicon/lucide";`
+- [WikipediaIcon](/?provider=hugeicons&icon=wikipedia) - hugeicons; `import { WikipediaIcon } from "@sketchicon/hugeicons";`
+- [Wind](/?provider=lucide&icon=wind) - lucide; `import { Wind } from "@sketchicon/lucide";`
+- [WindArrowDown](/?provider=lucide&icon=wind-arrow-down) - lucide; `import { WindArrowDown } from "@sketchicon/lucide";`
+- [WindPowerIcon](/?provider=hugeicons&icon=wind-power) - hugeicons; `import { WindPowerIcon } from "@sketchicon/hugeicons";`
+- [WindPower01Icon](/?provider=hugeicons&icon=wind-power-01) - hugeicons; `import { WindPower01Icon } from "@sketchicon/hugeicons";`
+- [WindPower02Icon](/?provider=hugeicons&icon=wind-power-02) - hugeicons; `import { WindPower02Icon } from "@sketchicon/hugeicons";`
+- [WindPower03Icon](/?provider=hugeicons&icon=wind-power-03) - hugeicons; `import { WindPower03Icon } from "@sketchicon/hugeicons";`
+- [WindSurfIcon](/?provider=hugeicons&icon=wind-surf) - hugeicons; `import { WindSurfIcon } from "@sketchicon/hugeicons";`
+- [WindTurbineIcon](/?provider=hugeicons&icon=wind-turbine) - hugeicons; `import { WindTurbineIcon } from "@sketchicon/hugeicons";`
+- [WindowsNewIcon](/?provider=hugeicons&icon=windows-new) - hugeicons; `import { WindowsNewIcon } from "@sketchicon/hugeicons";`
+- [WindowsOldIcon](/?provider=hugeicons&icon=windows-old) - hugeicons; `import { WindowsOldIcon } from "@sketchicon/hugeicons";`
+- [Wine](/?provider=lucide&icon=wine) - lucide; `import { Wine } from "@sketchicon/lucide";`
+- [WineOff](/?provider=lucide&icon=wine-off) - lucide; `import { WineOff } from "@sketchicon/lucide";`
+- [WinkIcon](/?provider=hugeicons&icon=wink) - hugeicons; `import { WinkIcon } from "@sketchicon/hugeicons";`
+- [WinkingIcon](/?provider=hugeicons&icon=winking) - hugeicons; `import { WinkingIcon } from "@sketchicon/hugeicons";`
+- [WirelessIcon](/?provider=hugeicons&icon=wireless) - hugeicons; `import { WirelessIcon } from "@sketchicon/hugeicons";`
+- [WirelessCloudAccessIcon](/?provider=hugeicons&icon=wireless-cloud-access) - hugeicons; `import { WirelessCloudAccessIcon } from "@sketchicon/hugeicons";`
+- [WiseIcon](/?provider=hugeicons&icon=wise) - hugeicons; `import { WiseIcon } from "@sketchicon/hugeicons";`
+- [WomanIcon](/?provider=hugeicons&icon=woman) - hugeicons; `import { WomanIcon } from "@sketchicon/hugeicons";`
+- [WordpressIcon](/?provider=hugeicons&icon=wordpress) - hugeicons; `import { WordpressIcon } from "@sketchicon/hugeicons";`
+- [WorkIcon](/?provider=hugeicons&icon=work) - hugeicons; `import { WorkIcon } from "@sketchicon/hugeicons";`
+- [WorkAlertIcon](/?provider=hugeicons&icon=work-alert) - hugeicons; `import { WorkAlertIcon } from "@sketchicon/hugeicons";`
+- [WorkHistoryIcon](/?provider=hugeicons&icon=work-history) - hugeicons; `import { WorkHistoryIcon } from "@sketchicon/hugeicons";`
+- [WorkUpdateIcon](/?provider=hugeicons&icon=work-update) - hugeicons; `import { WorkUpdateIcon } from "@sketchicon/hugeicons";`
+- [Workflow](/?provider=lucide&icon=workflow) - lucide; `import { Workflow } from "@sketchicon/lucide";`
+- [WorkflowCircle01Icon](/?provider=hugeicons&icon=workflow-circle-01) - hugeicons; `import { WorkflowCircle01Icon } from "@sketchicon/hugeicons";`; aliases: `WorkflowCircleIcon`
+- [WorkflowCircle02Icon](/?provider=hugeicons&icon=workflow-circle-02) - hugeicons; `import { WorkflowCircle02Icon } from "@sketchicon/hugeicons";`
+- [WorkflowCircle03Icon](/?provider=hugeicons&icon=workflow-circle-03) - hugeicons; `import { WorkflowCircle03Icon } from "@sketchicon/hugeicons";`
+- [WorkflowCircle04Icon](/?provider=hugeicons&icon=workflow-circle-04) - hugeicons; `import { WorkflowCircle04Icon } from "@sketchicon/hugeicons";`
+- [WorkflowCircle05Icon](/?provider=hugeicons&icon=workflow-circle-05) - hugeicons; `import { WorkflowCircle05Icon } from "@sketchicon/hugeicons";`
+- [WorkflowCircle06Icon](/?provider=hugeicons&icon=workflow-circle-06) - hugeicons; `import { WorkflowCircle06Icon } from "@sketchicon/hugeicons";`
+- [WorkflowSquare01Icon](/?provider=hugeicons&icon=workflow-square-01) - hugeicons; `import { WorkflowSquare01Icon } from "@sketchicon/hugeicons";`; aliases: `WorkflowSquareIcon`
+- [WorkflowSquare02Icon](/?provider=hugeicons&icon=workflow-square-02) - hugeicons; `import { WorkflowSquare02Icon } from "@sketchicon/hugeicons";`
+- [WorkflowSquare03Icon](/?provider=hugeicons&icon=workflow-square-03) - hugeicons; `import { WorkflowSquare03Icon } from "@sketchicon/hugeicons";`
+- [WorkflowSquare04Icon](/?provider=hugeicons&icon=workflow-square-04) - hugeicons; `import { WorkflowSquare04Icon } from "@sketchicon/hugeicons";`
+- [WorkflowSquare05Icon](/?provider=hugeicons&icon=workflow-square-05) - hugeicons; `import { WorkflowSquare05Icon } from "@sketchicon/hugeicons";`
+- [WorkflowSquare06Icon](/?provider=hugeicons&icon=workflow-square-06) - hugeicons; `import { WorkflowSquare06Icon } from "@sketchicon/hugeicons";`
+- [WorkflowSquare07Icon](/?provider=hugeicons&icon=workflow-square-07) - hugeicons; `import { WorkflowSquare07Icon } from "@sketchicon/hugeicons";`
+- [WorkflowSquare08Icon](/?provider=hugeicons&icon=workflow-square-08) - hugeicons; `import { WorkflowSquare08Icon } from "@sketchicon/hugeicons";`
+- [WorkflowSquare09Icon](/?provider=hugeicons&icon=workflow-square-09) - hugeicons; `import { WorkflowSquare09Icon } from "@sketchicon/hugeicons";`
+- [WorkflowSquare10Icon](/?provider=hugeicons&icon=workflow-square-10) - hugeicons; `import { WorkflowSquare10Icon } from "@sketchicon/hugeicons";`
+- [WorkoutBattleRopesIcon](/?provider=hugeicons&icon=workout-battle-ropes) - hugeicons; `import { WorkoutBattleRopesIcon } from "@sketchicon/hugeicons";`
+- [WorkoutGymnasticsIcon](/?provider=hugeicons&icon=workout-gymnastics) - hugeicons; `import { WorkoutGymnasticsIcon } from "@sketchicon/hugeicons";`
+- [WorkoutKickingIcon](/?provider=hugeicons&icon=workout-kicking) - hugeicons; `import { WorkoutKickingIcon } from "@sketchicon/hugeicons";`
+- [WorkoutRunIcon](/?provider=hugeicons&icon=workout-run) - hugeicons; `import { WorkoutRunIcon } from "@sketchicon/hugeicons";`
+- [WorkoutSportIcon](/?provider=hugeicons&icon=workout-sport) - hugeicons; `import { WorkoutSportIcon } from "@sketchicon/hugeicons";`
+- [WorkoutSquatsIcon](/?provider=hugeicons&icon=workout-squats) - hugeicons; `import { WorkoutSquatsIcon } from "@sketchicon/hugeicons";`
+- [WorkoutStretchingIcon](/?provider=hugeicons&icon=workout-stretching) - hugeicons; `import { WorkoutStretchingIcon } from "@sketchicon/hugeicons";`
+- [WorkoutWarmUpIcon](/?provider=hugeicons&icon=workout-warm-up) - hugeicons; `import { WorkoutWarmUpIcon } from "@sketchicon/hugeicons";`
+- [Worm](/?provider=lucide&icon=worm) - lucide; `import { Worm } from "@sketchicon/lucide";`
+- [WorryIcon](/?provider=hugeicons&icon=worry) - hugeicons; `import { WorryIcon } from "@sketchicon/hugeicons";`
+- [WpsOfficeIcon](/?provider=hugeicons&icon=wps-office) - hugeicons; `import { WpsOfficeIcon } from "@sketchicon/hugeicons";`
+- [WpsOfficeRectangleIcon](/?provider=hugeicons&icon=wps-office-rectangle) - hugeicons; `import { WpsOfficeRectangleIcon } from "@sketchicon/hugeicons";`
+- [Wrench](/?provider=lucide&icon=wrench) - lucide; `import { Wrench } from "@sketchicon/lucide";`
+- [WrenchOff](/?provider=lucide&icon=wrench-off) - lucide; `import { WrenchOff } from "@sketchicon/lucide";`
+- [WuduIcon](/?provider=hugeicons&icon=wudu) - hugeicons; `import { WuduIcon } from "@sketchicon/hugeicons";`
 
 [Back to the catalog index](../catalog.md)

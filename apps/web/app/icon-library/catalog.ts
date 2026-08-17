@@ -30,6 +30,10 @@ export const filters = [
 
 export type FilterId = (typeof filters)[number]["id"];
 
+export function formatIconImport(icon: Pick<CatalogIconMetadata, "name" | "provider">) {
+  return `import { ${icon.name} } from "@sketchicon/${icon.provider}";`;
+}
+
 export function getFilterCounts(
   catalog: readonly CatalogIconMetadata[],
   provider: ProviderFilter,

@@ -11,13 +11,13 @@ The unified browser includes 7,042 compatible icons from Lucide and Hugeicons Co
 Run the initializer and select one or more icon packs:
 
 ```sh
-npm create sketchicon@latest
+npx create-sketchicon@latest
 ```
 
 For CI or other non-interactive environments:
 
 ```sh
-npm create sketchicon@latest -- --packs lucide,hugeicons --yes
+npx create-sketchicon@latest --packs lucide,hugeicons --yes
 ```
 
 The initializer installs the lightweight `sketchicon` React runtime plus only the selected geometry packages:
@@ -34,7 +34,7 @@ npm install sketchicon @sketchicon/lucide
 ## Usage
 
 ```tsx
-import Search from "@sketchicon/lucide/icons/search";
+import { Search } from "@sketchicon/lucide";
 import { SketchIcon } from "sketchicon";
 
 export function SearchButton() {
@@ -45,20 +45,20 @@ export function SearchButton() {
 Hugeicons use the same renderer:
 
 ```tsx
-import Home01Icon from "@sketchicon/hugeicons/icons/home-01";
+import { Home01Icon } from "@sketchicon/hugeicons";
 import { SketchIcon } from "sketchicon";
 
 <SketchIcon icon={Home01Icon} aria-label="Home" />;
 ```
 
-Named provider imports are also available:
+For startup-sensitive Node.js environments, each icon also has a direct entry point:
 
 ```tsx
-import { Search } from "@sketchicon/lucide";
-import { Home01Icon } from "@sketchicon/hugeicons";
+import Search from "@sketchicon/lucide/icons/search";
+import Home01Icon from "@sketchicon/hugeicons/icons/home-01";
 ```
 
-Direct per-icon imports are recommended because they keep native ESM startup work small.
+Named imports are the recommended default and tree-shake in modern application bundlers. Direct imports avoid loading the provider barrel when that startup behavior matters.
 
 `roughness` defaults to `1.5` and is clamped between `0` and `2`. `strokeWidth` defaults to `1.5`. Regular SVG props are supported.
 
@@ -87,7 +87,7 @@ import { renderSketch } from "sketchicon/core";
 Version `0.2.0` moves the built-in Lucide catalog into an optional package. The renderer API and visual output remain compatible.
 
 ```sh
-npm create sketchicon@latest -- --migrate
+npx create-sketchicon@latest --migrate
 ```
 
 The migration installs the detected providers and rewrites catalog imports. Use `--dry-run` to preview its changes.

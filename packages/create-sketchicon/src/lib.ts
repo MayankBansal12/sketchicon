@@ -60,6 +60,35 @@ function parsePacks(value: string): IconPack[] {
   return values as IconPack[];
 }
 
+export function parsePackSelection(value: string, defaults: readonly IconPack[]): IconPack[] {
+  const selection = value.trim().toLowerCase();
+  if (!selection) return [...defaults];
+  if (selection === "all") return [...packNames];
+
+  const choices = selection.split(/[\s,]+/).filter(Boolean);
+  if (choices.length === 0) throw new Error("Choose at least one icon pack.");
+  const packs = choices.map((choice) => {
+    if (packNames.includes(choice as IconPack)) return choice as IconPack;
+    const pack = packNames[Number(choice) - 1];
+    if (pack) return pack;
+    throw new Error(
+      `Invalid pack selection: ${choice}. Choose 1, 2, lucide, hugeicons, or all.`,
+    );
+  });
+
+  return [...new Set(packs)];
+}
+
+export function gettingStartedImports(packs: readonly IconPack[]): string {
+  return [
+    'import { SketchIcon } from "sketchicon";',
+    ...(packs.includes("lucide") ? ['import { Search } from "@sketchicon/lucide";'] : []),
+    ...(packs.includes("hugeicons")
+      ? ['import { Home01Icon } from "@sketchicon/hugeicons";']
+      : []),
+  ].join("\n");
+}
+
 function nextValue(args: readonly string[], index: number, flag: string): string {
   const value = args[index + 1];
   if (!value || value.startsWith("--")) throw new Error(`${flag} requires a value.`);
