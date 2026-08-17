@@ -1,0 +1,846 @@
+{
+  "hugeiconsVersion": "4.2.3",
+  "discoveredExports": 13556,
+  "discoveredIconNames": 6124,
+  "included": 5303,
+  "excluded": [
+    {
+      "icon": "access",
+      "aliases": [
+        "AccessIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "acute",
+      "aliases": [
+        "AcuteIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 1.45"
+    },
+    {
+      "icon": "ai-learning",
+      "aliases": [
+        "AiLearningIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "ampersands",
+      "aliases": [
+        "AmpersandsIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "arrow-big-right-dash",
+      "aliases": [
+        "ArrowBigRightDashIcon"
+      ],
+      "reason": "Unsupported opacity on <path> element"
+    },
+    {
+      "icon": "arrow-down-az",
+      "aliases": [
+        "ArrowDownAZIcon",
+        "ArrowDownAzIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "arrow-down-za",
+      "aliases": [
+        "ArrowDownZaIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "arrow-right-to-line",
+      "aliases": [
+        "ArrowRightToLineIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "arrow-up-az",
+      "aliases": [
+        "ArrowUpAzIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "arrow-up-za",
+      "aliases": [
+        "ArrowUpZAIcon",
+        "ArrowUpZaIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "baseball-bat",
+      "aliases": [
+        "BaseballBatIcon"
+      ],
+      "reason": "Unsupported transformed <circle> element"
+    },
+    {
+      "icon": "baseline",
+      "aliases": [
+        "BaselineIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "bedug-02",
+      "aliases": [
+        "Bedug02Icon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 3"
+    },
+    {
+      "icon": "beer",
+      "aliases": [
+        "BeerIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "bounce-left",
+      "aliases": [
+        "BounceLeftIcon"
+      ],
+      "reason": "Unsupported transformed <circle> element"
+    },
+    {
+      "icon": "cabinet-02",
+      "aliases": [
+        "Cabinet02Icon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "call-end-04",
+      "aliases": [
+        "CallEnd04Icon"
+      ],
+      "reason": "Unsupported per-element strokeLinecap: square"
+    },
+    {
+      "icon": "call-missed-04",
+      "aliases": [
+        "CallMissed04Icon"
+      ],
+      "reason": "Unsupported per-element strokeLinecap: square"
+    },
+    {
+      "icon": "call-ringing-03",
+      "aliases": [
+        "CallRinging03Icon"
+      ],
+      "reason": "Unsupported per-element strokeLinecap: square"
+    },
+    {
+      "icon": "camera-add-03",
+      "aliases": [
+        "CameraAdd03Icon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "camera-ai",
+      "aliases": [
+        "CameraAiIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "camera-automatically-01",
+      "aliases": [
+        "CameraAutomatically01Icon",
+        "CameraAutomaticallyIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "camera-microphone-01",
+      "aliases": [
+        "CameraMicrophone01Icon",
+        "CameraMicrophoneIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "case-sensitive",
+      "aliases": [
+        "CaseSensitiveIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "case-upper",
+      "aliases": [
+        "CaseUpperIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "chart-01",
+      "aliases": [
+        "Chart01Icon"
+      ],
+      "reason": "Unsupported per-element strokeLinecap: square"
+    },
+    {
+      "icon": "chart-02",
+      "aliases": [
+        "Chart02Icon"
+      ],
+      "reason": "Unsupported per-element strokeLinecap: square"
+    },
+    {
+      "icon": "circle-arrow-left-right",
+      "aliases": [
+        "CircleArrowLeftRightIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 1.55"
+    },
+    {
+      "icon": "circle-arrow-up-down",
+      "aliases": [
+        "CircleArrowUpDownIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 1.55"
+    },
+    {
+      "icon": "clipboard-type",
+      "aliases": [
+        "ClipboardTypeIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "cloud-backup",
+      "aliases": [
+        "CloudBackupIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "cloud-saving-done-02",
+      "aliases": [
+        "CloudSavingDone02Icon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "cloud-sync",
+      "aliases": [
+        "CloudSyncIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "cookie",
+      "aliases": [
+        "CookieIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "credit-card-validation",
+      "aliases": [
+        "CreditCardValidationIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "cricket-bat",
+      "aliases": [
+        "CricketBatIcon"
+      ],
+      "reason": "Unsupported transformed <circle> element"
+    },
+    {
+      "icon": "cursor-pointer-01",
+      "aliases": [
+        "CursorPointer01Icon",
+        "CursorPointerIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "cursor-pointer-02",
+      "aliases": [
+        "CursorPointer02Icon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "customer-support",
+      "aliases": [
+        "CustomerSupportIcon"
+      ],
+      "reason": "Unsupported per-element strokeLinecap: square"
+    },
+    {
+      "icon": "dashboard-square-01",
+      "aliases": [
+        "DashboardSquare01Icon",
+        "DashboardSquareIcon"
+      ],
+      "reason": "Unsupported per-element strokeLinecap: square"
+    },
+    {
+      "icon": "dashboard-square-edit",
+      "aliases": [
+        "DashboardSquareEditIcon"
+      ],
+      "reason": "Unsupported per-element strokeLinecap: square"
+    },
+    {
+      "icon": "database-backup",
+      "aliases": [
+        "DatabaseBackupIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "ease-curve-control-points",
+      "aliases": [
+        "EaseCurveControlPointsIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "edit-table",
+      "aliases": [
+        "EditTableIcon"
+      ],
+      "reason": "Unsupported per-element strokeLinecap: square"
+    },
+    {
+      "icon": "fence",
+      "aliases": [
+        "FenceIcon"
+      ],
+      "reason": "Unsupported per-element strokeLinecap: square"
+    },
+    {
+      "icon": "file-braces-corner",
+      "aliases": [
+        "FileBracesCornerIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "file-view",
+      "aliases": [
+        "FileViewIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "flag-triangle-right",
+      "aliases": [
+        "FlagTriangleRightIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "folder-library",
+      "aliases": [
+        "FolderLibraryIcon"
+      ],
+      "reason": "Unsupported per-element strokeLinecap: square"
+    },
+    {
+      "icon": "fold-vertical",
+      "aliases": [
+        "FoldVerticalIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "game-controller-03",
+      "aliases": [
+        "GameController03Icon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "globe",
+      "aliases": [
+        "GlobeIcon"
+      ],
+      "reason": "Unsupported transformed <circle> element"
+    },
+    {
+      "icon": "go-backward-30-sec",
+      "aliases": [
+        "GoBackward30SecIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 1.3"
+    },
+    {
+      "icon": "go-backward-60-sec",
+      "aliases": [
+        "GoBackward60SecIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 1.3"
+    },
+    {
+      "icon": "go-forward-30-sec",
+      "aliases": [
+        "GoForward30SecIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 1.3"
+    },
+    {
+      "icon": "go-forward-60-sec",
+      "aliases": [
+        "GoForward60SecIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 1.3"
+    },
+    {
+      "icon": "hamburger-01",
+      "aliases": [
+        "Hamburger01Icon",
+        "HamburgerIcon"
+      ],
+      "reason": "Unsupported opacity on <path> element"
+    },
+    {
+      "icon": "hanging-clock",
+      "aliases": [
+        "HangingClockIcon"
+      ],
+      "reason": "Unsupported per-element strokeLinejoin: bevel"
+    },
+    {
+      "icon": "hold-04",
+      "aliases": [
+        "Hold04Icon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "hold-phone",
+      "aliases": [
+        "HoldPhoneIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "home-08",
+      "aliases": [
+        "Home08Icon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "id-not-verified",
+      "aliases": [
+        "IdNotVerifiedIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "jumpers",
+      "aliases": [
+        "JumpersIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "kissing",
+      "aliases": [
+        "KissingIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "magic-wand-05",
+      "aliases": [
+        "MagicWand05Icon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "mail-validation-02",
+      "aliases": [
+        "MailValidation02Icon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "menu-10",
+      "aliases": [
+        "Menu10Icon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2.5"
+    },
+    {
+      "icon": "money-not-found-04",
+      "aliases": [
+        "MoneyNotFound04Icon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "mouse-right-click-02",
+      "aliases": [
+        "MouseRightClick02Icon"
+      ],
+      "reason": "Unsupported transformed <circle> element"
+    },
+    {
+      "icon": "move-bottom",
+      "aliases": [
+        "MoveBottomIcon"
+      ],
+      "reason": "Unsupported transformed <circle> element"
+    },
+    {
+      "icon": "move-left",
+      "aliases": [
+        "MoveLeftIcon"
+      ],
+      "reason": "Unsupported transformed <circle> element"
+    },
+    {
+      "icon": "move-top",
+      "aliases": [
+        "MoveTopIcon"
+      ],
+      "reason": "Unsupported transformed <circle> element"
+    },
+    {
+      "icon": "muslim",
+      "aliases": [
+        "MuslimIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "navigation-05",
+      "aliases": [
+        "Navigation05Icon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "no-internet",
+      "aliases": [
+        "NoInternetIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "pen-connect-usb",
+      "aliases": [
+        "PenConnectUsbIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "play-circle-02",
+      "aliases": [
+        "PlayCircle02Icon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "potion",
+      "aliases": [
+        "PotionIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "progress-02",
+      "aliases": [
+        "Progress02Icon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "progress-03",
+      "aliases": [
+        "Progress03Icon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "progress-04",
+      "aliases": [
+        "Progress04Icon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "quiz-04",
+      "aliases": [
+        "Quiz04Icon"
+      ],
+      "reason": "Unsupported per-element strokeLinecap: square"
+    },
+    {
+      "icon": "quiz-05",
+      "aliases": [
+        "Quiz05Icon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "reduce-paragraph",
+      "aliases": [
+        "ReduceParagraphIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "relieved-02",
+      "aliases": [
+        "Relieved02Icon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 1.38889"
+    },
+    {
+      "icon": "right-to-left-list-bullet",
+      "aliases": [
+        "RightToLeftListBulletIcon"
+      ],
+      "reason": "Unsupported opacity on <path> element"
+    },
+    {
+      "icon": "rocket",
+      "aliases": [
+        "RocketIcon"
+      ],
+      "reason": "Unsupported per-element strokeLinecap: square"
+    },
+    {
+      "icon": "root-circle",
+      "aliases": [
+        "RootCircleIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "root-second-bracket",
+      "aliases": [
+        "RootSecondBracketIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "router",
+      "aliases": [
+        "RouterIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "rss-connected-02",
+      "aliases": [
+        "RssConnected02Icon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "shrink-dot",
+      "aliases": [
+        "ShrinkDotIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "soil-temperature-field",
+      "aliases": [
+        "SoilTemperatureFieldIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 1.3"
+    },
+    {
+      "icon": "soil-temperature-global",
+      "aliases": [
+        "SoilTemperatureGlobalIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 1.3"
+    },
+    {
+      "icon": "square-arrow-left-right",
+      "aliases": [
+        "SquareArrowLeftRightIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 1.55"
+    },
+    {
+      "icon": "square-arrow-up-down",
+      "aliases": [
+        "SquareArrowUpDownIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 1.55"
+    },
+    {
+      "icon": "steering",
+      "aliases": [
+        "SteeringIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "store-location-01",
+      "aliases": [
+        "StoreLocation01Icon",
+        "StoreLocationIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "store-verified-02",
+      "aliases": [
+        "StoreVerified02Icon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "swatch",
+      "aliases": [
+        "SwatchIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "tag-01",
+      "aliases": [
+        "Tag01Icon",
+        "TagIcon"
+      ],
+      "reason": "Unsupported transformed <circle> element"
+    },
+    {
+      "icon": "text-superscript",
+      "aliases": [
+        "TextSuperscriptIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "tips",
+      "aliases": [
+        "TipsIcon"
+      ],
+      "reason": "Unsupported per-element strokeLinecap: square"
+    },
+    {
+      "icon": "touch-locked-01",
+      "aliases": [
+        "TouchLocked01Icon",
+        "TouchLockedIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "touch-locked-02",
+      "aliases": [
+        "TouchLocked02Icon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "touchpad-01",
+      "aliases": [
+        "Touchpad01Icon",
+        "TouchpadIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "tv-issue",
+      "aliases": [
+        "TvIssueIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "two-factor-access",
+      "aliases": [
+        "TwoFactorAccessIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "unfold-more-down",
+      "aliases": [
+        "UnfoldMoreDownIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "unfold-more-up",
+      "aliases": [
+        "UnfoldMoreUpIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "usb-error",
+      "aliases": [
+        "UsbErrorIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "video-camera-ai",
+      "aliases": [
+        "VideoCameraAiIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "wallet-04",
+      "aliases": [
+        "Wallet04Icon"
+      ],
+      "reason": "Unsupported per-element strokeLinecap: square"
+    },
+    {
+      "icon": "water-pump",
+      "aliases": [
+        "WaterPumpIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "wifi-lock",
+      "aliases": [
+        "WifiLockIcon"
+      ],
+      "reason": "Unsupported filled <path> element"
+    },
+    {
+      "icon": "wrench-01",
+      "aliases": [
+        "Wrench01Icon",
+        "WrenchIcon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "wrench-02",
+      "aliases": [
+        "Wrench02Icon"
+      ],
+      "reason": "Unsupported per-element strokeWidth: 2"
+    },
+    {
+      "icon": "x-ray",
+      "aliases": [
+        "XRayIcon"
+      ],
+      "reason": "Unsupported transformed <rect> element"
+    }
+  ]
+}

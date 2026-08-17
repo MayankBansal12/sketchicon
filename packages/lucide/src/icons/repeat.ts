@@ -1,6 +1,0 @@
-// Generated from lucide-static. Do not edit by hand.
-import type { SketchGeometry } from "../core.js";
-
-const geometry: SketchGeometry = {"viewBox":"0 0 24 24","primitives":[{"type":"path","d":"m17 2 4 4-4 4"},{"type":"path","d":"M3 11v-1a4 4 0 0 1 4-4h14"},{"type":"path","d":"m7 22-4-4 4-4"},{"type":"path","d":"M21 13v1a4 4 0 0 1-4 4H3"}]};
-
-export default geometry;

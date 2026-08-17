@@ -1,21 +1,22 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import type { MetaFunction } from "react-router";
+import ArrowDown from "@sketchicon/lucide/icons/arrow-down";
+import Check from "@sketchicon/lucide/icons/check";
+import Copy from "@sketchicon/lucide/icons/copy";
+import Search from "@sketchicon/lucide/icons/search";
+import SunMedium from "@sketchicon/lucide/icons/sun-medium";
 import { SketchIcon } from "sketchicon/runtime";
-import ArrowDown from "sketchicon/icons/arrow-down";
-import Check from "sketchicon/icons/check";
-import Copy from "sketchicon/icons/copy";
-import Search from "sketchicon/icons/search";
-import SunMedium from "sketchicon/icons/sun-medium";
 
 import { GithubMark, NpmMark } from "../components/BrandMarks";
 import { RoughBox, RoughTag } from "../components/RoughBox";
 import { palette } from "../theme";
+import { formattedIconCount } from "../generated/stats";
 
 const packageManagers = [
-  { command: "pnpm add sketchicon", id: "pnpm", label: "pnpm" },
-  { command: "npm install sketchicon", id: "npm", label: "npm" },
-  { command: "yarn add sketchicon", id: "yarn", label: "yarn" },
-  { command: "bun add sketchicon", id: "bun", label: "bun" },
+  { command: "pnpm dlx create-sketchicon@latest", id: "pnpm", label: "pnpm" },
+  { command: "npx create-sketchicon@latest", id: "npm", label: "npm" },
+  { command: "yarn dlx create-sketchicon@latest", id: "yarn", label: "yarn" },
+  { command: "bunx create-sketchicon@latest", id: "bun", label: "bun" },
 ] as const;
 
 type PackageManagerId = (typeof packageManagers)[number]["id"];
@@ -26,7 +27,7 @@ export const meta: MetaFunction = () => [
   { title: "SketchIcon: Hand-drawn icons for React" },
   {
     name: "description",
-    content: "1,739 deterministic, customizable hand-drawn SVG icons for React.",
+    content: `${formattedIconCount} deterministic, customizable hand-drawn SVG icons for React.`,
   },
 ];
 
@@ -121,7 +122,7 @@ export default function Home() {
             <SketchIcon icon={SunMedium} size={64} roughness={1.4} />
           </div>
 
-          <p className="hero-note">1,739 icons · For React · in beta</p>
+          <p className="hero-note">{formattedIconCount} icons · Lucide + Hugeicons · For React</p>
           <h1 id="hero-heading">Icons that feel<br />drawn, not generated.</h1>
           <p className="hero-copy">
             Familiar stroke icons with a loose, human line. Deterministic, accessible, and ready for React.
@@ -193,7 +194,7 @@ export default function Home() {
             built by <a className="footer-link" href="https://mayank.fyi" target="_blank" rel="noreferrer">mayank</a> · currently in beta
         </p>
         <p className="attribution">
-          credit to <a className="footer-link" href="https://lucide.dev" target="_blank" rel="noreferrer">Lucide</a> and <a className="footer-link" href="https://feathericons.com" target="_blank" rel="noreferrer">Feather</a> for original icons · inspired from <a className="footer-link" href="https://excalidraw.com/" target="_blank" rel="noreferrer">excalidraw</a>
+          credit to <a className="footer-link" href="https://lucide.dev" target="_blank" rel="noreferrer">Lucide</a>, <a className="footer-link" href="https://hugeicons.com" target="_blank" rel="noreferrer">Hugeicons</a>, and <a className="footer-link" href="https://feathericons.com" target="_blank" rel="noreferrer">Feather</a> · inspired by <a className="footer-link" href="https://excalidraw.com/" target="_blank" rel="noreferrer">Excalidraw</a>
         </p>
       </footer>
     </div>

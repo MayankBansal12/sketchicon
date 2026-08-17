@@ -1,0 +1,54 @@
+{
+  "name": "sketchicon",
+  "version": "0.2.0",
+  "description": "Deterministic hand-drawn SVG icons for React",
+  "keywords": ["icons", "react", "sketch", "hand-drawn", "svg"],
+  "type": "module",
+  "sideEffects": false,
+  "files": ["dist", "README.md", "MIGRATION.md"],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./core": {
+      "types": "./dist/core.d.ts",
+      "import": "./dist/core.js"
+    },
+    "./runtime": {
+      "types": "./dist/runtime.d.ts",
+      "import": "./dist/runtime.js"
+    }
+  },
+  "scripts": {
+    "build": "node ../../scripts/clean-dist.mjs && tsup src/index.ts src/runtime.ts src/core.ts --format esm --dts --splitting --out-dir dist --external react --external react/jsx-runtime --external @sketchicon/core",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sketchicon/core": "0.2.0"
+  },
+  "peerDependencies": {
+    "react": ">=18 <20"
+  },
+  "engines": {
+    "node": ">=20.11.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org",
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MayankBansal12/sketchicon.git",
+    "directory": "packages/runtime"
+  },
+  "homepage": "https://github.com/MayankBansal12/sketchicon#readme",
+  "bugs": {
+    "url": "https://github.com/MayankBansal12/sketchicon/issues"
+  },
+  "license": "MIT"
+}

@@ -5,18 +5,25 @@ import { pathToFileURL } from "node:url";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { SketchIcon } from "../packages/lucide/dist/runtime.js";
+import { SketchIcon } from "../packages/runtime/dist/runtime.js";
 
-const iconsRoot = path.resolve("packages/lucide/dist/icons");
-const files = (await readdir(iconsRoot)).filter((file) => file.endsWith(".js")).sort();
+const iconRoots = [
+  path.resolve("packages/lucide/dist/icons"),
+  path.resolve("packages/hugeicons/dist/icons"),
+];
+let verified = 0;
 
-for (const file of files) {
-  const module = await import(pathToFileURL(path.join(iconsRoot, file)).href);
-  const markup = renderToStaticMarkup(createElement(SketchIcon, { icon: module.default }));
+for (const iconsRoot of iconRoots) {
+  const files = (await readdir(iconsRoot)).filter((file) => file.endsWith(".js")).sort();
+  for (const file of files) {
+    const module = await import(pathToFileURL(path.join(iconsRoot, file)).href);
+    const markup = renderToStaticMarkup(createElement(SketchIcon, { icon: module.default }));
 
-  if (!markup.startsWith("<svg") || /(?:NaN|Infinity)/.test(markup)) {
-    throw new Error(`Invalid rendered output for ${file}`);
+    if (!markup.startsWith("<svg") || /(?:NaN|Infinity)/.test(markup)) {
+      throw new Error(`Invalid rendered output for ${file}`);
+    }
+    verified += 1;
   }
 }
 
-console.log(`Rendered and verified ${files.length} generated icons.`);
+console.log(`Rendered and verified ${verified} generated icons.`);

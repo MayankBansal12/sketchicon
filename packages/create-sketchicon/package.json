@@ -1,0 +1,33 @@
+{
+  "name": "create-sketchicon",
+  "version": "0.2.0",
+  "description": "Interactive installer and migration tool for SketchIcon",
+  "keywords": ["icons", "react", "initializer", "cli", "sketchicon"],
+  "type": "module",
+  "files": ["dist", "README.md", "LICENSE"],
+  "bin": {
+    "create-sketchicon": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsup src/cli.ts --format esm --dts --clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20.11.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org",
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MayankBansal12/sketchicon.git",
+    "directory": "packages/create-sketchicon"
+  },
+  "homepage": "https://github.com/MayankBansal12/sketchicon#readme",
+  "bugs": {
+    "url": "https://github.com/MayankBansal12/sketchicon/issues"
+  },
+  "license": "MIT"
+}

@@ -12,20 +12,25 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "npm run generate && npm run build -w @sketchicon/core && npm run build -w sketchicon && npm run build -w @sketchicon/web",
-    "check": "npm run build && npm run typecheck && npm test && npm run verify:catalog && npm run verify:package && npm run verify:consumer && npm run verify:bundle && npm run verify:web",
+    "build": "npm run generate && npm run build -w @sketchicon/core && npm run build -w sketchicon && npm run build -w @sketchicon/lucide && npm run build -w @sketchicon/hugeicons && npm run build -w create-sketchicon && npm run build -w @sketchicon/web",
+    "check": "npm run build && npm run typecheck && npm test && npm run verify:catalog && npm run verify:package && npm run verify:distribution && npm run verify:consumer && npm run verify:bundle && npm run verify:web",
     "dev": "npm run dev -w @sketchicon/web",
-    "generate": "node scripts/generate-lucide.mjs",
+    "generate": "node scripts/generate-icons.mjs",
+    "predev": "npm run generate",
+    "pretest": "npm run generate",
+    "pretypecheck": "npm run generate",
     "release:verify": "node scripts/verify-release.mjs",
     "test": "vitest run",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "verify:catalog": "node scripts/verify-catalog.mjs",
     "verify:package": "node scripts/verify-package.mjs",
     "verify:consumer": "node scripts/verify-consumer.mjs",
+    "verify:distribution": "node scripts/verify-distribution.mjs",
     "verify:bundle": "node scripts/verify-bundle.mjs",
     "verify:web": "node scripts/verify-web.mjs"
   },
   "dependencies": {
+    "@hugeicons/core-free-icons": "^4.2.3",
     "lucide-static": "^1.26.0"
   },
   "devDependencies": {

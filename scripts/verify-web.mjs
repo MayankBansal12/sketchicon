@@ -15,6 +15,11 @@ const catalogIndex = await readFile(path.join(iconDocsRoot, "catalog.md"), "utf8
 const compatibilityReport = JSON.parse(
   await readFile(path.join(root, "packages", "lucide", "compatibility-report.json"), "utf8"),
 );
+const hugeiconsCompatibilityReport = JSON.parse(
+  await readFile(path.join(root, "packages", "hugeicons", "compatibility-report.json"), "utf8"),
+);
+const expectedIconCount = compatibilityReport.included + hugeiconsCompatibilityReport.included;
+const formattedIconCount = expectedIconCount.toLocaleString("en-US");
 const vercelConfig = JSON.parse(
   await readFile(path.join(root, "apps", "web", "vercel.json"), "utf8"),
 );
@@ -26,7 +31,7 @@ const runtimeSources = await Promise.all([
 
 for (const source of runtimeSources) {
   if (/^import\s+(?!type\b)[^;]*\bSketchIcon\b[^;]*from\s+["']sketchicon["']/m.test(source)) {
-    throw new Error("Web runtime imports SketchIcon from the 1,739-icon root barrel.");
+    throw new Error("Web runtime imports SketchIcon from the Lucide root barrel.");
   }
 }
 
@@ -34,7 +39,7 @@ for (const expected of [
   "Icons that feel",
   "Pick one. Make it yours.",
   "Preparing the icon library",
-  "1,739 deterministic, customizable hand-drawn SVG icons for React.",
+  `${formattedIconCount} deterministic, customizable hand-drawn SVG icons for React.`,
 ]) {
   if (!html.includes(expected)) throw new Error(`Prerendered HTML is missing: ${expected}`);
 }
@@ -54,7 +59,7 @@ if (!vercelConfig.rewrites?.some(({ destination }) => destination === "/__spa-fa
 for (const expected of ["/icons/usage.md", "/icons/catalog.md"]) {
   if (!llmsText.includes(expected)) throw new Error(`llms.txt is missing: ${expected}`);
 }
-if (!usageDocs.includes('from "sketchicon"') || !usageDocs.includes("aria-hidden")) {
+if (!usageDocs.includes('from "@sketchicon/hugeicons"') || !usageDocs.includes("aria-hidden")) {
   throw new Error("Icon usage documentation is missing package or accessibility guidance.");
 }
 
@@ -68,17 +73,20 @@ for (const file of catalogFiles) {
     throw new Error(`Catalog index does not link to ${file}.`);
   }
   const source = await readFile(path.join(iconDocsRoot, "catalog", file), "utf8");
-  for (const match of source.matchAll(/^- \[[^\]]+\]\(\/\?icon=([^\)]+)\) - `([^`]+)`/gm)) {
-    const [, linkedSlug, documentedSlug] = match;
-    if (linkedSlug !== documentedSlug) throw new Error(`Mismatched catalog slug: ${linkedSlug}.`);
-    if (documentedSlugs.has(documentedSlug)) throw new Error(`Duplicate catalog slug: ${documentedSlug}.`);
-    documentedSlugs.add(documentedSlug);
+  for (const match of source.matchAll(/^- \[([^\]]+)\]\(\/\?provider=(lucide|hugeicons)&icon=([^\)]+)\) - (lucide|hugeicons); `([^`]+)`/gm)) {
+    const [, exportName, linkedProvider, linkedSlug, documentedProvider, iconImport] = match;
+    if (linkedProvider !== documentedProvider) throw new Error(`Mismatched catalog provider: ${linkedSlug}.`);
+    const expectedImport = `import { ${exportName} } from "@sketchicon/${linkedProvider}";`;
+    if (iconImport !== expectedImport) throw new Error(`Mismatched catalog import: ${linkedSlug}.`);
+    const id = `${linkedProvider}:${linkedSlug}`;
+    if (documentedSlugs.has(id)) throw new Error(`Duplicate catalog icon: ${id}.`);
+    documentedSlugs.add(id);
   }
 }
 
-if (documentedSlugs.size !== compatibilityReport.included) {
+if (documentedSlugs.size !== expectedIconCount) {
   throw new Error(
-    `Documented ${documentedSlugs.size} icons; expected ${compatibilityReport.included}.`,
+    `Documented ${documentedSlugs.size} icons; expected ${expectedIconCount}.`,
   );
 }
 
@@ -96,8 +104,8 @@ if (initialGzip > 130_000) {
 }
 
 const catalogChunks = assets.filter((asset) => /^catalog-\d{3}-.*\.js$/.test(asset));
-if (catalogChunks.length < 10 || catalogChunks.length > 30) {
-  throw new Error(`Expected 10-30 coarse catalog chunks; found ${catalogChunks.length}.`);
+if (catalogChunks.length < 30 || catalogChunks.length > 60) {
+  throw new Error(`Expected 30-60 byte-bounded catalog chunks; found ${catalogChunks.length}.`);
 }
 
 const iconLibraryAsset = assets.find((asset) => asset.startsWith("IconLibrary-") && asset.endsWith(".js"));
@@ -105,10 +113,17 @@ if (!iconLibraryAsset) {
   throw new Error("Icon library was not emitted as a lazy chunk.");
 }
 const iconLibraryGzip = gzipSync(await readFile(path.join(assetsRoot, iconLibraryAsset))).byteLength;
-if (iconLibraryGzip > 25_000) {
-  throw new Error(`Lazy icon library is ${iconLibraryGzip} bytes gzip; expected at most 25000.`);
+if (iconLibraryGzip > 28_000) {
+  throw new Error(`Lazy icon library is ${iconLibraryGzip} bytes gzip; expected at most 28000.`);
+}
+
+const hugeiconsCatalogAsset = assets.find((asset) => asset.startsWith("hugeicons-catalog-") && asset.endsWith(".js"));
+if (!hugeiconsCatalogAsset) throw new Error("Hugeicons metadata was not emitted separately.");
+const hugeiconsCatalogGzip = gzipSync(await readFile(path.join(assetsRoot, hugeiconsCatalogAsset))).byteLength;
+if (hugeiconsCatalogGzip > 60_000) {
+  throw new Error(`Hugeicons metadata is ${hugeiconsCatalogGzip} bytes gzip; expected at most 60000.`);
 }
 
 console.log(
-  `Verified prerendered website: ${initialCode} initial JS bytes (${initialGzip} gzip), ${iconLibraryGzip} gzip lazy library, ${catalogChunks.length} catalog chunks, ${documentedSlugs.size} documented icons.`,
+  `Verified prerendered website: ${initialCode} initial JS bytes (${initialGzip} gzip), ${iconLibraryGzip} gzip lazy library, ${hugeiconsCatalogGzip} gzip Hugeicons metadata, ${catalogChunks.length} catalog chunks, ${documentedSlugs.size} documented icons.`,
 );

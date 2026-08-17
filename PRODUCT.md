@@ -15,24 +15,26 @@ Instead of maintaining a custom sketch icon pack, developers can reuse familiar 
 - Output standard inline SVG suitable for React and server rendering.
 - Keep the rendering engine reusable for future borders, dividers, arrows, shapes, and underlines.
 
-## First Release
+## Product Architecture
 
-The first release serves React applications with a built-in icon catalog. It includes:
+SketchIcon serves React applications through a small runtime and optional icon catalogs. It includes:
 
 - A framework-independent TypeScript rendering engine.
 - A generic React `SketchIcon` component for custom geometry.
-- Generated, tree-shakeable geometry tokens for the complete compatible catalog.
+- Independent, tree-shakeable geometry packages for the compatible Lucide and Hugeicons Core Free catalogs.
+- An interactive initializer that installs only the providers a project selects.
 - A searchable icon library on the main website.
 - Build-time reporting for excluded icons.
 
-Filled SVG elements are not supported. Lucide icons containing fills are excluded during generation rather than rendered incorrectly or silently changed.
+Filled SVG elements are not supported. Source icons containing fills or other incompatible presentation are excluded during generation rather than rendered incorrectly or silently changed.
 
 ## Public API
 
-Generated icon geometry and the universal renderer are the primary API:
+Provider geometry and the universal renderer are the primary API:
 
 ```tsx
-import { Search, SketchIcon } from "sketchicon";
+import { Search } from "@sketchicon/lucide";
+import { SketchIcon } from "sketchicon";
 
 <SketchIcon icon={Search} size={24} aria-label="Search" />;
 ```
@@ -45,7 +47,7 @@ import { SketchIcon } from "sketchicon";
 <SketchIcon icon={geometry} roughness={1.5} />;
 ```
 
-`roughness` is optional, defaults to `1`, and is clamped from `0` to `2`. A value of `0` returns clean geometry. Rendering uses a fixed internal seed, with each primitive salted by its geometry so unrelated icons do not repeat the same wobble.
+`roughness` is optional, defaults to `1.5`, and is clamped from `0` to `2`. A value of `0` returns clean geometry. Rendering uses a fixed internal seed, with each primitive salted by its geometry so unrelated icons do not repeat the same wobble.
 
 ## Technical Principles
 
@@ -63,7 +65,7 @@ The renderer remains SVG-native and does not require Canvas, a browser DOM, or p
 
 ### Library Agnostic
 
-The built-in catalog is generated at publish time rather than loaded as a runtime icon dependency. The engine supports paths, lines, polylines, polygons, circles, ellipses, and rectangles.
+Catalogs are generated at publish time and distributed independently from the runtime. Lucide uses `@sketchicon/lucide`, Hugeicons uses `@sketchicon/hugeicons`, and the website combines both for discovery. The engine supports paths, lines, polylines, polygons, circles, ellipses, and rectangles.
 
 ### Static by Default
 

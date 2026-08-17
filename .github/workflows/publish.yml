@@ -45,3 +45,18 @@ jobs:
         run: npm publish --workspace sketchicon
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish Lucide pack
+        run: npm publish --workspace @sketchicon/lucide
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish Hugeicons pack
+        run: npm publish --workspace @sketchicon/hugeicons
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish initializer
+        run: npm publish --workspace create-sketchicon
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -686,6 +686,39 @@ input[type="range"] {
   font-size: 12px;
 }
 
+.catalog-tools {
+  display: flex;
+  width: min(720px, 100%);
+  align-items: center;
+  gap: 10px;
+}
+
+.provider-tabs {
+  display: inline-flex;
+  flex: none;
+  padding: 3px;
+  gap: 2px;
+  border: 1px solid #d4d1ca;
+  border-radius: 10px 8px 11px 9px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.provider-tabs button {
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 7px;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 11px;
+}
+
+.provider-tabs button.active {
+  color: var(--accent-strong);
+  background: var(--accent-wash);
+}
+
 .search-field {
   display: flex;
   width: min(520px, 100%);
@@ -1040,6 +1073,11 @@ footer p {
 
 .drawer-kicker {
   margin-bottom: 6px;
+  color: var(--muted);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .usage-drawer h3 {
@@ -1397,6 +1435,18 @@ input:focus-visible {
 
   .catalog-toolbar {
     display: block;
+  }
+
+  .catalog-tools {
+    display: grid;
+  }
+
+  .provider-tabs {
+    width: 100%;
+  }
+
+  .provider-tabs button {
+    flex: 1;
   }
 
   .catalog-toolbar > p {
