@@ -1,4 +1,4 @@
-// Generated from Lucide and Hugeicons. Do not edit by hand.
+// Generated from Lucide. Do not edit by hand.
 import type { SketchGeometry } from "sketchicon/core";
 
 export const geometries: Readonly<Record<string, SketchGeometry>> = {

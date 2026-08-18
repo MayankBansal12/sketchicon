@@ -6,6 +6,8 @@ export type CatalogGeometryChunk = Readonly<Record<string, SketchGeometry>>;
 export type CatalogGeometryLoader = () => Promise<CatalogGeometryChunk>;
 export { initialGeometries };
 
+export const catalogChunkProviders = ["lucide","lucide","lucide","lucide","lucide","lucide","lucide","lucide","lucide","lucide","lucide","lucide","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons"] as const;
+
 export const catalogLoaders: readonly CatalogGeometryLoader[] = [
   () => Promise.resolve(initialGeometries),
   () => import("./chunks/catalog-001.js").then((module) => module.geometries),
@@ -46,4 +48,13 @@ export const catalogLoaders: readonly CatalogGeometryLoader[] = [
   () => import("./chunks/catalog-036.js").then((module) => module.geometries),
   () => import("./chunks/catalog-037.js").then((module) => module.geometries),
   () => import("./chunks/catalog-038.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-039.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-040.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-041.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-042.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-043.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-044.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-045.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-046.js").then((module) => module.geometries),
+  () => import("./chunks/catalog-047.js").then((module) => module.geometries),
 ];

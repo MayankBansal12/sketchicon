@@ -2,13 +2,22 @@ import { describe, expect, it } from "vitest";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { MemoryRouter } from "react-router";
+import { gzipSync } from "node:zlib";
 
 import { lucideCatalog } from "../generated/catalog";
 import { hugeiconsCatalog } from "../generated/hugeicons-catalog";
-import { catalogLoaders } from "../generated/loaders";
+import {
+  catalogChunkProviders,
+  catalogLoaders,
+  initialGeometries,
+} from "../generated/loaders";
 import { iconCount, providerCounts } from "../generated/stats";
-import IconLibrary from "./IconLibrary";
-import { filterCatalog, formatIconImport, getFilterCounts } from "./catalog";
+import IconLibrary, {
+  CatalogLoadError,
+  loadCatalogGeometryBatch,
+  loadHugeiconsMetadata,
+} from "./IconLibrary";
+import { filterCatalog, filters, formatIconImport, getFilterCounts } from "./catalog";
 
 const iconCatalog = [...lucideCatalog, ...hugeiconsCatalog];
 
@@ -22,15 +31,80 @@ describe("generated website catalog", () => {
     expect(hugeiconsCatalog.some((icon) => icon.name === "Menu10Icon")).toBe(false);
   });
 
-  it("loads every geometry exactly once from coarse chunks", async () => {
+  it("loads every geometry exactly once from provider-isolated byte-bounded chunks", async () => {
     expect(catalogLoaders.length).toBeGreaterThan(1);
     expect(catalogLoaders.length).toBeLessThan(60);
+    expect(catalogChunkProviders).toHaveLength(catalogLoaders.length);
 
     const chunks = await Promise.all(catalogLoaders.map((loader) => loader()));
     const ids = chunks.flatMap((chunk) => Object.keys(chunk));
     expect(ids).toHaveLength(iconCatalog.length);
     expect(new Set(ids).size).toBe(iconCatalog.length);
     expect(iconCatalog.every((icon) => chunks[icon.chunkId]?.[icon.id])).toBe(true);
+
+    chunks.forEach((chunk, chunkId) => {
+      const provider = catalogChunkProviders[chunkId];
+      expect(Object.keys(chunk).every((id) => id.startsWith(`${provider}:`))).toBe(true);
+      if (chunkId > 0) {
+        const payloadBytes = Object.entries(chunk).reduce(
+          (bytes, [id, geometry]) => bytes + Buffer.byteLength(`${JSON.stringify(id)}:${JSON.stringify(geometry)}`),
+          0,
+        );
+        expect(payloadBytes).toBeLessThanOrEqual(provider === "lucide" ? 48_000 : 120_000);
+      }
+    });
+
+    expect(catalogChunkProviders[0]).toBe("lucide");
+    expect(Object.keys(initialGeometries).every((id) => id.startsWith("lucide:"))).toBe(true);
+    expect(catalogChunkProviders.indexOf("hugeicons")).toBeGreaterThan(0);
+  });
+
+  it("keeps realistic Lucide filter and search viewports within transfer budgets", async () => {
+    const chunks = await Promise.all(catalogLoaders.map((loader) => loader()));
+    const gzipBytes = chunks.map((chunk) => gzipSync(JSON.stringify(chunk)).byteLength);
+    const scenarios = [
+      ...filters.filter((filter) => filter.id !== "all").map((filter) => ({
+        icons: filterCatalog(lucideCatalog, "", filter.id, "lucide"),
+        label: `filter:${filter.id}`,
+      })),
+      ...["arrow", "camera", "home", "search", "user"].map((query) => ({
+        icons: filterCatalog(lucideCatalog, query, "all", "lucide"),
+        label: `search:${query}`,
+      })),
+    ];
+
+    for (const { icons, label } of scenarios) {
+      const chunkIds = [...new Set(icons.slice(0, 48).map((icon) => icon.chunkId))]
+        .filter((chunkId) => chunkId !== 0);
+      const transferBytes = chunkIds.reduce((bytes, chunkId) => {
+        const chunkBytes = gzipBytes[chunkId];
+        expect(chunkBytes, `${label}:chunk-${chunkId}`).toBeDefined();
+        return bytes + (chunkBytes ?? 0);
+      }, 0);
+      expect(chunkIds.length, label).toBeLessThanOrEqual(11);
+      expect(transferBytes, label).toBeLessThanOrEqual(90_000);
+      expect(chunkIds.every((chunkId) => catalogChunkProviders[chunkId] === "lucide"), label).toBe(true);
+    }
+  });
+
+  it("settles a visible geometry batch concurrently and returns one merged result", async () => {
+    const started: number[] = [];
+    const batchPromise = loadCatalogGeometryBatch([1, 2, 3], async (chunkId) => {
+      started.push(chunkId);
+      await Promise.resolve();
+      if (chunkId === 2) throw new Error("temporary chunk failure");
+      return { [`lucide:test-${chunkId}`]: { primitives: [{ type: "circle", cx: 12, cy: 12, r: chunkId }] } };
+    });
+
+    expect(started).toEqual([1, 2, 3]);
+    await expect(batchPromise).resolves.toEqual({
+      chunkIds: [1, 3],
+      failed: true,
+      geometries: {
+        "lucide:test-1": { primitives: [{ type: "circle", cx: 12, cy: 12, r: 1 }] },
+        "lucide:test-3": { primitives: [{ type: "circle", cx: 12, cy: 12, r: 3 }] },
+      },
+    });
   });
 
   it("renders the first bounded catalog window without loading placeholders", () => {
@@ -41,6 +115,28 @@ describe("generated website catalog", () => {
     expect(markup).not.toContain("icon-card-loading");
     expect(markup).toContain(`height:${Math.ceil(lucideCatalog.length / 6) * 134}px`);
     expect(markup).toContain("Hugeicons");
+  });
+
+  it("surfaces Hugeicons metadata failures with an actionable retry", async () => {
+    let attempts = 0;
+    const importer = async () => {
+      attempts += 1;
+      if (attempts === 1) throw new Error("temporary metadata failure");
+      return { hugeiconsCatalog };
+    };
+
+    await expect(loadHugeiconsMetadata(importer)).rejects.toThrow("temporary metadata failure");
+    await expect(loadHugeiconsMetadata(importer)).resolves.toBe(hugeiconsCatalog);
+    expect(attempts).toBe(2);
+
+    const markup = renderToStaticMarkup(createElement(CatalogLoadError, {
+      message: "Hugeicons metadata could not be loaded. Check your connection and try again.",
+      onRetry: () => undefined,
+      retryLabel: "Retry Hugeicons",
+    }));
+    expect(markup).toContain('role="alert"');
+    expect(markup).toContain("Hugeicons metadata could not be loaded");
+    expect(markup).toContain("Retry Hugeicons");
   });
 });
 

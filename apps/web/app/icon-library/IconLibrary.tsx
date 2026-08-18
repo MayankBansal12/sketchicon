@@ -58,6 +58,29 @@ function loadChunk(chunkId: number) {
   return promise;
 }
 
+export async function loadCatalogGeometryBatch(
+  chunkIds: readonly number[],
+  loader: (chunkId: number) => Promise<CatalogGeometryChunk> = loadChunk,
+) {
+  const results = await Promise.allSettled(
+    chunkIds.map(async (chunkId) => ({ chunk: await loader(chunkId), chunkId })),
+  );
+  const loaded = results.flatMap((result) => result.status === "fulfilled" ? [result.value] : []);
+  return {
+    chunkIds: loaded.map(({ chunkId }) => chunkId),
+    failed: results.some((result) => result.status === "rejected"),
+    geometries: Object.assign({}, ...loaded.map(({ chunk }) => chunk)) as CatalogGeometryChunk,
+  };
+}
+
+type HugeiconsCatalogModule = typeof import("../generated/hugeicons-catalog.js");
+
+export async function loadHugeiconsMetadata(
+  importer: () => Promise<HugeiconsCatalogModule> = () => import("../generated/hugeicons-catalog.js"),
+) {
+  return (await importer()).hugeiconsCatalog;
+}
+
 function useDebouncedValue<T>(value: T, delay: number) {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
@@ -67,6 +90,23 @@ function useDebouncedValue<T>(value: T, delay: number) {
   }, [delay, value]);
 
   return debouncedValue;
+}
+
+export function CatalogLoadError({
+  message,
+  onRetry,
+  retryLabel,
+}: {
+  message: string;
+  onRetry: () => void;
+  retryLabel: string;
+}) {
+  return (
+    <div className="catalog-load-error" role="alert">
+      <span>{message}</span>
+      <button type="button" onClick={onRetry}>{retryLabel}</button>
+    </div>
+  );
 }
 
 function columnCountForWidth(width: number) {
@@ -254,6 +294,8 @@ export default function IconLibrary() {
   const [activeProvider, setActiveProvider] = useState<ProviderFilter>("lucide");
   const [availableCatalog, setAvailableCatalog] = useState<readonly CatalogIconMetadata[]>(lucideCatalog);
   const [hugeiconsLoading, setHugeiconsLoading] = useState(false);
+  const [hugeiconsLoadAttempt, setHugeiconsLoadAttempt] = useState(0);
+  const [hugeiconsLoadError, setHugeiconsLoadError] = useState(false);
   const [activeFilter, setActiveFilter] = useState("all");
   const [roughness, setRoughness] = useState(1.5);
   const [size, setSize] = useState(42);
@@ -280,21 +322,25 @@ export default function IconLibrary() {
   useEffect(() => {
     if (!needsHugeicons || availableCatalog.some((icon) => icon.provider === "hugeicons")) {
       setHugeiconsLoading(false);
+      setHugeiconsLoadError(false);
       return;
     }
     let active = true;
     setHugeiconsLoading(true);
-    import("../generated/hugeicons-catalog.js").then(({ hugeiconsCatalog }) => {
+    setHugeiconsLoadError(false);
+    loadHugeiconsMetadata().then((hugeiconsCatalog) => {
       if (!active) return;
       setAvailableCatalog([...lucideCatalog, ...hugeiconsCatalog]);
       setHugeiconsLoading(false);
     }).catch(() => {
-      if (active) setHugeiconsLoading(false);
+      if (!active) return;
+      setHugeiconsLoading(false);
+      setHugeiconsLoadError(true);
     });
     return () => {
       active = false;
     };
-  }, [availableCatalog, needsHugeicons]);
+  }, [availableCatalog, hugeiconsLoadAttempt, needsHugeicons]);
 
   const filteredIcons = useMemo(() => {
     return filterCatalog(availableCatalog, deferredQuery, activeFilter, activeProvider);
@@ -322,14 +368,13 @@ export default function IconLibrary() {
     let active = true;
     setLoadError(false);
 
-    visibleChunkIds.forEach((chunkId) => {
-      loadChunk(chunkId).then((chunk) => {
-        if (!active) return;
-        loadedChunkIds.current.add(chunkId);
-        setGeometries((current) => Object.assign({}, current, chunk));
-      }).catch(() => {
-        if (active) setLoadError(true);
-      });
+    loadCatalogGeometryBatch(visibleChunkIds).then((batch) => {
+      if (!active) return;
+      for (const chunkId of batch.chunkIds) loadedChunkIds.current.add(chunkId);
+      if (batch.chunkIds.length > 0) {
+        setGeometries((current) => Object.assign({}, current, batch.geometries));
+      }
+      setLoadError(batch.failed);
     });
 
     return () => {
@@ -601,6 +646,14 @@ export default function IconLibrary() {
             </p>
           </div>
 
+          {hugeiconsLoadError ? (
+            <CatalogLoadError
+              message="Hugeicons metadata could not be loaded. Check your connection and try again."
+              onRetry={() => setHugeiconsLoadAttempt((attempt) => attempt + 1)}
+              retryLabel="Retry Hugeicons"
+            />
+          ) : null}
+
           {filteredIcons.length > 0 ? (
             <>
               <p className="visually-hidden" id="catalog-keyboard-help">
@@ -620,17 +673,18 @@ export default function IconLibrary() {
               </div>
               {isShowingWholeSet ? <p className="catalog-complete-note">that's the whole set</p> : null}
               {loadError ? (
-                <div className="catalog-load-error" role="status">
-                  Some icons could not be drawn.
-                  <button type="button" onClick={() => setLoadAttempt((attempt) => attempt + 1)}>Retry</button>
-                </div>
+                <CatalogLoadError
+                  message="Some icons could not be drawn."
+                  onRetry={() => setLoadAttempt((attempt) => attempt + 1)}
+                  retryLabel="Retry icons"
+                />
               ) : null}
             </>
           ) : (
             <div className="empty-state">
               <SketchIcon icon={Search} size={44} roughness={1.4} />
-              <h3>{hugeiconsLoading ? "Loading Hugeicons..." : "No icon hiding here."}</h3>
-              <p>{hugeiconsLoading ? "Bringing in the free core collection." : "Try another word or reset the filter."}</p>
+              <h3>{hugeiconsLoading ? "Loading Hugeicons..." : hugeiconsLoadError ? "Hugeicons are unavailable." : "No icon hiding here."}</h3>
+              <p>{hugeiconsLoading ? "Bringing in the free core collection." : hugeiconsLoadError ? "Retry the catalog load above." : "Try another word or reset the filter."}</p>
             </div>
           )}
 
