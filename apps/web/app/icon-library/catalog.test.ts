@@ -7,7 +7,6 @@ import { gzipSync } from "node:zlib";
 import { lucideCatalog } from "../generated/catalog";
 import { hugeiconsCatalog } from "../generated/hugeicons-catalog";
 import {
-  catalogChunkProviders,
   catalogLoaders,
   initialGeometries,
 } from "../generated/loaders";
@@ -34,16 +33,17 @@ describe("generated website catalog", () => {
   it("loads every geometry exactly once from provider-isolated byte-bounded chunks", async () => {
     expect(catalogLoaders.length).toBeGreaterThan(1);
     expect(catalogLoaders.length).toBeLessThan(60);
-    expect(catalogChunkProviders).toHaveLength(catalogLoaders.length);
 
     const chunks = await Promise.all(catalogLoaders.map((loader) => loader()));
+    const chunkProviders = chunks.map((chunk) => Object.keys(chunk)[0]?.split(":")[0]);
     const ids = chunks.flatMap((chunk) => Object.keys(chunk));
     expect(ids).toHaveLength(iconCatalog.length);
     expect(new Set(ids).size).toBe(iconCatalog.length);
     expect(iconCatalog.every((icon) => chunks[icon.chunkId]?.[icon.id])).toBe(true);
 
     chunks.forEach((chunk, chunkId) => {
-      const provider = catalogChunkProviders[chunkId];
+      const provider = chunkProviders[chunkId];
+      expect(provider === "lucide" || provider === "hugeicons").toBe(true);
       expect(Object.keys(chunk).every((id) => id.startsWith(`${provider}:`))).toBe(true);
       if (chunkId > 0) {
         const payloadBytes = Object.entries(chunk).reduce(
@@ -54,9 +54,9 @@ describe("generated website catalog", () => {
       }
     });
 
-    expect(catalogChunkProviders[0]).toBe("lucide");
+    expect(chunkProviders[0]).toBe("lucide");
     expect(Object.keys(initialGeometries).every((id) => id.startsWith("lucide:"))).toBe(true);
-    expect(catalogChunkProviders.indexOf("hugeicons")).toBeGreaterThan(0);
+    expect(chunkProviders.indexOf("hugeicons")).toBeGreaterThan(0);
   });
 
   it("keeps realistic Lucide filter and search viewports within transfer budgets", async () => {
@@ -83,28 +83,38 @@ describe("generated website catalog", () => {
       }, 0);
       expect(chunkIds.length, label).toBeLessThanOrEqual(11);
       expect(transferBytes, label).toBeLessThanOrEqual(90_000);
-      expect(chunkIds.every((chunkId) => catalogChunkProviders[chunkId] === "lucide"), label).toBe(true);
+      expect(chunkIds.every((chunkId) => Object.keys(chunks[chunkId] ?? {})
+        .every((id) => id.startsWith("lucide:"))), label).toBe(true);
     }
   });
 
-  it("settles a visible geometry batch concurrently and returns one merged result", async () => {
+  it("starts a visible geometry batch concurrently and publishes chunks as they resolve", async () => {
     const started: number[] = [];
-    const batchPromise = loadCatalogGeometryBatch([1, 2, 3], async (chunkId) => {
-      started.push(chunkId);
-      await Promise.resolve();
-      if (chunkId === 2) throw new Error("temporary chunk failure");
-      return { [`lucide:test-${chunkId}`]: { primitives: [{ type: "circle", cx: 12, cy: 12, r: chunkId }] } };
+    const published: number[] = [];
+    let releaseSlowChunk!: () => void;
+    const slowChunk = new Promise<void>((resolve) => {
+      releaseSlowChunk = resolve;
     });
+    const batchPromise = loadCatalogGeometryBatch(
+      [1, 2, 3],
+      (chunkId) => published.push(chunkId),
+      async (chunkId) => {
+        started.push(chunkId);
+        if (chunkId === 2) await slowChunk;
+        if (chunkId === 3) throw new Error("temporary chunk failure");
+        return { [`lucide:test-${chunkId}`]: { primitives: [{ type: "circle", cx: 12, cy: 12, r: chunkId }] } };
+      },
+    );
 
     expect(started).toEqual([1, 2, 3]);
+    await Promise.resolve();
+    expect(published).toEqual([1]);
+    releaseSlowChunk();
     await expect(batchPromise).resolves.toEqual({
-      chunkIds: [1, 3],
+      chunkIds: [1, 2],
       failed: true,
-      geometries: {
-        "lucide:test-1": { primitives: [{ type: "circle", cx: 12, cy: 12, r: 1 }] },
-        "lucide:test-3": { primitives: [{ type: "circle", cx: 12, cy: 12, r: 3 }] },
-      },
     });
+    expect(published).toEqual([1, 2]);
   });
 
   it("renders the first bounded catalog window without loading placeholders", () => {

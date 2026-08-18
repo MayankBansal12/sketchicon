@@ -6,8 +6,6 @@ export type CatalogGeometryChunk = Readonly<Record<string, SketchGeometry>>;
 export type CatalogGeometryLoader = () => Promise<CatalogGeometryChunk>;
 export { initialGeometries };
 
-export const catalogChunkProviders = ["lucide","lucide","lucide","lucide","lucide","lucide","lucide","lucide","lucide","lucide","lucide","lucide","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons","hugeicons"] as const;
-
 export const catalogLoaders: readonly CatalogGeometryLoader[] = [
   () => Promise.resolve(initialGeometries),
   () => import("./chunks/catalog-001.js").then((module) => module.geometries),

@@ -60,16 +60,19 @@ function loadChunk(chunkId: number) {
 
 export async function loadCatalogGeometryBatch(
   chunkIds: readonly number[],
+  onChunkLoaded: (chunkId: number, chunk: CatalogGeometryChunk) => void,
   loader: (chunkId: number) => Promise<CatalogGeometryChunk> = loadChunk,
 ) {
   const results = await Promise.allSettled(
-    chunkIds.map(async (chunkId) => ({ chunk: await loader(chunkId), chunkId })),
+    chunkIds.map(async (chunkId) => {
+      const chunk = await loader(chunkId);
+      onChunkLoaded(chunkId, chunk);
+      return chunkId;
+    }),
   );
-  const loaded = results.flatMap((result) => result.status === "fulfilled" ? [result.value] : []);
   return {
-    chunkIds: loaded.map(({ chunkId }) => chunkId),
+    chunkIds: results.flatMap((result) => result.status === "fulfilled" ? [result.value] : []),
     failed: results.some((result) => result.status === "rejected"),
-    geometries: Object.assign({}, ...loaded.map(({ chunk }) => chunk)) as CatalogGeometryChunk,
   };
 }
 
@@ -305,7 +308,8 @@ export default function IconLibrary() {
   const [activeIconIndex, setActiveIconIndex] = useState(0);
   const [geometries, setGeometries] = useState<CatalogGeometryChunk>(initialGeometries);
   const [loadAttempt, setLoadAttempt] = useState(0);
-  const [loadError, setLoadError] = useState(false);
+  const [visibleLoadError, setVisibleLoadError] = useState(false);
+  const [selectedIconLoadError, setSelectedIconLoadError] = useState(false);
   const loadedChunkIds = useRef(new Set([0]));
   const pendingFocusIndex = useRef<number | null>(null);
   const deferredQuery = useDeferredValue(query.trim().toLowerCase());
@@ -364,17 +368,22 @@ export default function IconLibrary() {
   const visibleChunkKey = visibleChunkIds.join(",");
 
   useEffect(() => {
-    if (visibleChunkIds.length === 0) return;
+    if (visibleChunkIds.length === 0) {
+      setVisibleLoadError(false);
+      return;
+    }
     let active = true;
-    setLoadError(false);
+    setVisibleLoadError(false);
 
-    loadCatalogGeometryBatch(visibleChunkIds).then((batch) => {
-      if (!active) return;
-      for (const chunkId of batch.chunkIds) loadedChunkIds.current.add(chunkId);
-      if (batch.chunkIds.length > 0) {
-        setGeometries((current) => Object.assign({}, current, batch.geometries));
-      }
-      setLoadError(batch.failed);
+    loadCatalogGeometryBatch(
+      visibleChunkIds,
+      (chunkId, chunk) => {
+        if (!active) return;
+        loadedChunkIds.current.add(chunkId);
+        setGeometries((current) => Object.assign({}, current, chunk));
+      },
+    ).then((batch) => {
+      if (active) setVisibleLoadError(batch.failed);
     });
 
     return () => {
@@ -383,16 +392,19 @@ export default function IconLibrary() {
   }, [loadAttempt, visibleChunkKey]);
 
   useEffect(() => {
-    if (!selectedIcon || loadedChunkIds.current.has(selectedIcon.chunkId)) return;
+    if (!selectedIcon || loadedChunkIds.current.has(selectedIcon.chunkId)) {
+      setSelectedIconLoadError(false);
+      return;
+    }
     let active = true;
-    setLoadError(false);
+    setSelectedIconLoadError(false);
 
     loadChunk(selectedIcon.chunkId).then((chunk) => {
       if (!active) return;
       loadedChunkIds.current.add(selectedIcon.chunkId);
       setGeometries((current) => Object.assign({}, current, chunk));
     }).catch(() => {
-      if (active) setLoadError(true);
+      if (active) setSelectedIconLoadError(true);
     });
 
     return () => {
@@ -672,7 +684,7 @@ export default function IconLibrary() {
                 {visibleRows}
               </div>
               {isShowingWholeSet ? <p className="catalog-complete-note">that's the whole set</p> : null}
-              {loadError ? (
+              {visibleLoadError || selectedIconLoadError ? (
                 <CatalogLoadError
                   message="Some icons could not be drawn."
                   onRetry={() => setLoadAttempt((attempt) => attempt + 1)}

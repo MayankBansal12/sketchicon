@@ -448,8 +448,6 @@ await writeFile(
     "export type CatalogGeometryLoader = () => Promise<CatalogGeometryChunk>;",
     "export { initialGeometries };",
     "",
-    `export const catalogChunkProviders = ${JSON.stringify(catalogChunks.map((chunk) => chunk[0].provider))} as const;`,
-    "",
     "export const catalogLoaders: readonly CatalogGeometryLoader[] = [",
     ...catalogChunks.map((_, index) => {
       const chunkName = `catalog-${String(index).padStart(3, "0")}`;
