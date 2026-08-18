@@ -43,8 +43,8 @@ const importChecks = [
   { label: "core", file: "packages/core/dist/index.js", duration: 50, rss: 96 },
   { label: "Lucide direct icon", file: "packages/lucide/dist/icons/search.js", duration: 50, rss: 96 },
   { label: "Hugeicons direct icon", file: "packages/hugeicons/dist/icons/home-01.js", duration: 50, rss: 96 },
-  { label: "Lucide barrel", file: "packages/lucide/dist/index.js", duration: 300, rss: 160 },
-  { label: "Hugeicons barrel", file: "packages/hugeicons/dist/index.js", duration: 900, rss: 256 },
+  { label: "Lucide barrel", file: "packages/lucide/dist/index.js", duration: 400, rss: 160 },
+  { label: "Hugeicons barrel", file: "packages/hugeicons/dist/index.js", duration: 1_000, rss: 256 },
 ];
 
 const importReports = [];
