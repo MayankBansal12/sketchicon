@@ -82,9 +82,9 @@ export function parsePackSelection(value: string, defaults: readonly IconPack[])
 export function gettingStartedImports(packs: readonly IconPack[]): string {
   return [
     'import { SketchIcon } from "sketchicon";',
-    ...(packs.includes("lucide") ? ['import { Search } from "@sketchicon/lucide";'] : []),
+    ...(packs.includes("lucide") ? ['import Search from "@sketchicon/lucide/icons/search";'] : []),
     ...(packs.includes("hugeicons")
-      ? ['import { Home01Icon } from "@sketchicon/hugeicons";']
+      ? ['import Home01Icon from "@sketchicon/hugeicons/icons/home-01";']
       : []),
   ].join("\n");
 }

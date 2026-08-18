@@ -34,7 +34,7 @@ npm install sketchicon @sketchicon/lucide
 ## Usage
 
 ```tsx
-import { Search } from "@sketchicon/lucide";
+import Search from "@sketchicon/lucide/icons/search";
 import { SketchIcon } from "sketchicon";
 
 export function SearchButton() {
@@ -45,20 +45,50 @@ export function SearchButton() {
 Hugeicons use the same renderer:
 
 ```tsx
-import { Home01Icon } from "@sketchicon/hugeicons";
+import Home01Icon from "@sketchicon/hugeicons/icons/home-01";
 import { SketchIcon } from "sketchicon";
 
 <SketchIcon icon={Home01Icon} aria-label="Home" />;
 ```
 
-For startup-sensitive Node.js environments, each icon also has a direct entry point:
+Direct icon subpaths are the recommended imports for native ESM, SSR, tests, CLIs,
+and serverless functions. They load one geometry module instead of evaluating the
+provider barrel during process startup:
 
 ```tsx
 import Search from "@sketchicon/lucide/icons/search";
 import Home01Icon from "@sketchicon/hugeicons/icons/home-01";
 ```
 
-Named imports are the recommended default and tree-shake in modern application bundlers. Direct imports avoid loading the provider barrel when that startup behavior matters.
+Named barrel imports remain a convenient option in applications built by a modern
+tree-shaking bundler:
+
+```tsx
+import { Search } from "@sketchicon/lucide";
+import { Home01Icon } from "@sketchicon/hugeicons";
+```
+
+## React Server Components
+
+The default `sketchicon` entry is explicitly a client component so refs and event
+handlers continue to work in React 18 and 19. React Server Component modules can
+avoid that client boundary with the hook-free server entry:
+
+```tsx
+import Search from "@sketchicon/lucide/icons/search";
+import { SketchIcon } from "sketchicon/server";
+
+export function SearchGlyph() {
+  return <SketchIcon icon={Search} title="Search" />;
+}
+```
+
+`sketchicon/server` accepts serializable SVG props but intentionally excludes refs,
+event handlers, children, and `dangerouslySetInnerHTML`. Use `sketchicon` when the
+icon needs client interactivity or a ref. Both entries produce the same deterministic
+SVG markup and work with conventional React 18 or 19 server-side static rendering.
+Stable React Server Components require React 19; React 18's published
+`react-server` condition is explicitly unsupported by React itself.
 
 `roughness` defaults to `1.5` and is clamped between `0` and `2`. `strokeWidth` defaults to `1.5`. Regular SVG props are supported.
 

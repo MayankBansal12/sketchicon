@@ -7,10 +7,12 @@ npm install sketchicon @sketchicon/lucide
 ```
 
 ```tsx
-import { Search } from "@sketchicon/lucide";
+import Search from "@sketchicon/lucide/icons/search";
 import { SketchIcon } from "sketchicon";
 
 <SketchIcon icon={Search} aria-label="Search" />;
 ```
 
-Named imports are the recommended default. Startup-sensitive Node.js environments can bypass the provider barrel with `import Search from "@sketchicon/lucide/icons/search"`.
+Direct subpath imports are recommended for native ESM, SSR, tests, CLIs, and
+serverless cold starts. Modern application bundlers can also use the convenient,
+tree-shakable barrel form: `import { Search } from "@sketchicon/lucide"`.

@@ -20,7 +20,8 @@
       "@sketchicon/lucide/icons/*": ["packages/lucide/src/icons/*"],
       "sketchicon": ["packages/runtime/src/index.ts"],
       "sketchicon/core": ["packages/runtime/src/core.ts"],
-      "sketchicon/runtime": ["packages/runtime/src/runtime.ts"]
+      "sketchicon/runtime": ["packages/runtime/src/runtime.ts"],
+      "sketchicon/server": ["packages/runtime/src/server.ts"]
     },
     "skipLibCheck": true,
     "strict": true,

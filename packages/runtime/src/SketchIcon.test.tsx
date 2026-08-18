@@ -20,6 +20,7 @@ vi.mock("react", async (importOriginal) => {
 });
 
 import { SketchIcon } from "./SketchIcon.js";
+import { SketchIcon as ServerSketchIcon } from "./ServerSketchIcon.js";
 
 const geometry: SketchGeometry = {
   primitives: [{ type: "line", x1: 2, y1: 12, x2: 22, y2: 12 }],
@@ -40,6 +41,13 @@ describe("SketchIcon", () => {
     expect(first).toContain("<title>Divider</title>");
     expect(first).toContain('role="img"');
     expect(first).not.toContain("aria-hidden");
+  });
+
+  it("matches the hook-free server entry output", () => {
+    const props = { icon: geometry, title: "Divider", roughness: 1, seed: 4 };
+
+    expect(renderToStaticMarkup(createElement(ServerSketchIcon, props)))
+      .toBe(renderToStaticMarkup(createElement(SketchIcon, props)));
   });
 
   it("hides unlabeled decorative icons", () => {

@@ -32,11 +32,11 @@ describe("create-sketchicon", () => {
       .toThrow(/Choose 1, 2, lucide, hugeicons, or all/);
   });
 
-  it("prints simple named imports for the selected packs", () => {
+  it("prints startup-safe direct imports for the selected packs", () => {
     expect(gettingStartedImports(["lucide", "hugeicons"])).toBe([
       'import { SketchIcon } from "sketchicon";',
-      'import { Search } from "@sketchicon/lucide";',
-      'import { Home01Icon } from "@sketchicon/hugeicons";',
+      'import Search from "@sketchicon/lucide/icons/search";',
+      'import Home01Icon from "@sketchicon/hugeicons/icons/home-01";',
     ].join("\n"));
   });
 

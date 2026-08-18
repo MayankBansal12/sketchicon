@@ -7,10 +7,12 @@ npm install sketchicon @sketchicon/hugeicons
 ```
 
 ```tsx
-import { Home01Icon } from "@sketchicon/hugeicons";
+import Home01Icon from "@sketchicon/hugeicons/icons/home-01";
 import { SketchIcon } from "sketchicon";
 
 <SketchIcon icon={Home01Icon} aria-label="Home" />;
 ```
 
-Named imports are the recommended default. Startup-sensitive Node.js environments can bypass the provider barrel with `import Home01Icon from "@sketchicon/hugeicons/icons/home-01"`.
+Direct subpath imports are recommended for native ESM, SSR, tests, CLIs, and
+serverless cold starts. Modern application bundlers can also use the convenient,
+tree-shakable barrel form: `import { Home01Icon } from "@sketchicon/hugeicons"`.
