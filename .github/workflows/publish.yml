@@ -79,3 +79,16 @@ jobs:
         run: npm publish --workspace create-sketchicon --tag "${{ steps.dist-tag.outputs.tag }}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Keep prereleases off latest
+        if: steps.dist-tag.outputs.tag != 'latest'
+        shell: bash
+        run: |
+          for package in @sketchicon/core sketchicon @sketchicon/lucide @sketchicon/hugeicons create-sketchicon; do
+            latest="$(npm dist-tag ls "$package" | sed -n 's/^latest: //p')"
+            if [[ "$latest" == *-* ]]; then
+              npm dist-tag rm "$package" latest
+            fi
+          done
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,6 +1,6 @@
 {
   "name": "@sketchicon/core",
-  "version": "0.2.0-beta.2",
+  "version": "0.2.0-beta.3",
   "description": "Deterministic hand-drawn SVG geometry renderer",
   "type": "module",
   "sideEffects": false,

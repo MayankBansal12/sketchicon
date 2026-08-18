@@ -1,6 +1,6 @@
 {
   "name": "sketchicon",
-  "version": "0.2.0-beta.2",
+  "version": "0.2.0-beta.3",
   "description": "Deterministic hand-drawn SVG icons for React",
   "keywords": ["icons", "react", "sketch", "hand-drawn", "svg"],
   "type": "module",
@@ -32,7 +32,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@sketchicon/core": "0.2.0-beta.2"
+    "@sketchicon/core": "0.2.0-beta.3"
   },
   "peerDependencies": {
     "react": ">=18 <20"
