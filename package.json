@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "build": "npm run generate && npm run build -w @sketchicon/core && npm run build -w sketchicon && npm run build -w @sketchicon/lucide && npm run build -w @sketchicon/hugeicons && npm run build -w create-sketchicon && npm run build -w @sketchicon/web",
+    "benchmark:core": "npm run generate && npm run build -w @sketchicon/core && npm run build -w @sketchicon/lucide && npm run build -w @sketchicon/hugeicons && node benchmarks/core-render.mjs",
     "check": "npm run build && npm run typecheck && npm test && npm run verify:catalog && npm run verify:package && npm run verify:distribution && npm run verify:consumer && npm run verify:bundle && npm run verify:web",
     "dev": "npm run dev -w @sketchicon/web",
     "generate": "node scripts/generate-icons.mjs",
