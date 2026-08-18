@@ -23,13 +23,24 @@ describe("create-sketchicon", () => {
       .toMatchObject({ packageManager: "pnpm", packs: ["lucide", "hugeicons"], yes: true });
   });
 
+  it("parses and combines friendly pack shortcut flags", () => {
+    expect(parseArgs(["--hugeicons"])).toMatchObject({ packs: ["hugeicons"] });
+    expect(parseArgs(["--lucide", "--hugeicons"])).toMatchObject({
+      packs: ["lucide", "hugeicons"],
+    });
+    expect(parseArgs(["--hugeicons", "--packs", "lucide"])).toMatchObject({
+      packs: ["hugeicons", "lucide"],
+    });
+    expect(parseArgs(["--all"])).toMatchObject({ packs: ["lucide", "hugeicons"] });
+  });
+
   it("parses friendly interactive pack selections", () => {
     expect(parsePackSelection("", ["lucide"])).toEqual(["lucide"]);
     expect(parsePackSelection("2, lucide", ["hugeicons"]))
       .toEqual(["hugeicons", "lucide"]);
     expect(parsePackSelection("all", ["lucide"])).toEqual(["lucide", "hugeicons"]);
     expect(() => parsePackSelection("phosphor", ["lucide"]))
-      .toThrow(/Choose 1, 2, lucide, hugeicons, or all/);
+      .toThrow(/Choose a number, lucide, hugeicons, or all/);
   });
 
   it("prints startup-safe direct imports for the selected packs", () => {
@@ -41,13 +52,13 @@ describe("create-sketchicon", () => {
   });
 
   it("constructs commands for supported package managers", () => {
-    expect(installCommand("npm", ["lucide"])).toEqual([
+    expect(installCommand("npm", ["lucide"], "0.2.0-beta.3")).toEqual([
       "npm",
-      ["install", "sketchicon", "@sketchicon/lucide"],
+      ["install", "sketchicon@0.2.0-beta.3", "@sketchicon/lucide@0.2.0-beta.3"],
     ]);
-    expect(installCommand("bun", ["hugeicons"])).toEqual([
+    expect(installCommand("bun", ["hugeicons"], "0.2.0-beta.3")).toEqual([
       "bun",
-      ["add", "sketchicon", "@sketchicon/hugeicons"],
+      ["add", "sketchicon@0.2.0-beta.3", "@sketchicon/hugeicons@0.2.0-beta.3"],
     ]);
   });
 

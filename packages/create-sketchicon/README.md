@@ -2,12 +2,21 @@
 
 Interactive installer and migration tool for SketchIcon.
 
+The primary command is now:
+
+```sh
+npx sketchicon@latest
+```
+
+This package remains available as a backward-compatible alias.
+
 ```sh
 npx create-sketchicon@latest
 ```
 
 ```sh
 npx create-sketchicon@latest --packs lucide,hugeicons --yes
+npx create-sketchicon@latest --hugeicons
 npx create-sketchicon@latest --migrate
 npx create-sketchicon@latest --migrate --dry-run
 ```

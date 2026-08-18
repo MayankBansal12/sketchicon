@@ -1,10 +1,24 @@
 import { access, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-export const packNames = ["lucide", "hugeicons"] as const;
+export const packRegistry = {
+  lucide: {
+    description: "familiar interface icons",
+    label: "Lucide",
+    packageName: "@sketchicon/lucide",
+    exampleImport: 'import Search from "@sketchicon/lucide/icons/search";',
+  },
+  hugeicons: {
+    description: "expressive interface icons",
+    label: "Hugeicons",
+    packageName: "@sketchicon/hugeicons",
+    exampleImport: 'import Home01Icon from "@sketchicon/hugeicons/icons/home-01";',
+  },
+} as const;
+export type IconPack = keyof typeof packRegistry;
+export const packNames = Object.keys(packRegistry) as IconPack[];
 export const packageManagers = ["npm", "pnpm", "yarn", "bun"] as const;
 
-export type IconPack = (typeof packNames)[number];
 export type PackageManager = (typeof packageManagers)[number];
 
 export interface CliOptions {
@@ -72,7 +86,7 @@ export function parsePackSelection(value: string, defaults: readonly IconPack[])
     const pack = packNames[Number(choice) - 1];
     if (pack) return pack;
     throw new Error(
-      `Invalid pack selection: ${choice}. Choose 1, 2, lucide, hugeicons, or all.`,
+      `Invalid pack selection: ${choice}. Choose a number, ${packNames.join(", ")}, or all.`,
     );
   });
 
@@ -82,11 +96,12 @@ export function parsePackSelection(value: string, defaults: readonly IconPack[])
 export function gettingStartedImports(packs: readonly IconPack[]): string {
   return [
     'import { SketchIcon } from "sketchicon";',
-    ...(packs.includes("lucide") ? ['import Search from "@sketchicon/lucide/icons/search";'] : []),
-    ...(packs.includes("hugeicons")
-      ? ['import Home01Icon from "@sketchicon/hugeicons/icons/home-01";']
-      : []),
+    ...packs.map((pack) => packRegistry[pack].exampleImport),
   ].join("\n");
+}
+
+function addPacks(current: readonly IconPack[] | undefined, additions: readonly IconPack[]): IconPack[] {
+  return [...new Set([...(current ?? []), ...additions])];
 }
 
 function nextValue(args: readonly string[], index: number, flag: string): string {
@@ -104,7 +119,7 @@ export function parseArgs(args: readonly string[]): CliOptions {
   };
 
   for (let index = 0; index < args.length; index += 1) {
-    const argument = args[index];
+    const argument = args[index]!;
     switch (argument) {
       case "--cwd":
         options.cwd = nextValue(args, index++, argument);
@@ -119,6 +134,9 @@ export function parseArgs(args: readonly string[]): CliOptions {
       case "--migrate":
         options.migrate = true;
         break;
+      case "--all":
+        options.packs = addPacks(options.packs, packNames);
+        break;
       case "--package-manager": {
         const value = nextValue(args, index++, argument);
         const manager = packageManagerFrom(value);
@@ -127,14 +145,20 @@ export function parseArgs(args: readonly string[]): CliOptions {
         break;
       }
       case "--packs":
-        options.packs = parsePacks(nextValue(args, index++, argument));
+        options.packs = addPacks(options.packs, parsePacks(nextValue(args, index++, argument)));
         break;
       case "--yes":
       case "-y":
         options.yes = true;
         break;
-      default:
+      default: {
+        const shortcut = argument.startsWith("--") ? argument.slice(2) : "";
+        if (packNames.includes(shortcut as IconPack)) {
+          options.packs = addPacks(options.packs, [shortcut as IconPack]);
+          break;
+        }
         throw new Error(`Unknown argument: ${argument}`);
+      }
     }
   }
 
@@ -188,7 +212,9 @@ export function installedPacks(manifest: Record<string, unknown>): IconPack[] {
   const dependencyGroups = ["dependencies", "devDependencies", "optionalDependencies"]
     .map((key) => manifest[key])
     .filter((group): group is Record<string, unknown> => Boolean(group) && typeof group === "object");
-  return packNames.filter((pack) => dependencyGroups.some((group) => `@sketchicon/${pack}` in group));
+  return packNames.filter((pack) => dependencyGroups.some(
+    (group) => packRegistry[pack].packageName in group,
+  ));
 }
 
 export function hasSketchiconV1(manifest: Record<string, unknown>): boolean {
@@ -201,8 +227,15 @@ export function hasSketchiconV1(manifest: Record<string, unknown>): boolean {
   return version ? /(^|\D)0\.1(?:\.|\D|$)/.test(version) && !/(^|\D)0\.2(?:\.|\D|$)/.test(version) : false;
 }
 
-export function installCommand(manager: PackageManager, packs: readonly IconPack[]): [string, string[]] {
-  const dependencies = ["sketchicon", ...packs.map((pack) => `@sketchicon/${pack}`)];
+export function installCommand(
+  manager: PackageManager,
+  packs: readonly IconPack[],
+  version: string,
+): [string, string[]] {
+  const dependencies = [
+    `sketchicon@${version}`,
+    ...packs.map((pack) => `${packRegistry[pack].packageName}@${version}`),
+  ];
   switch (manager) {
     case "npm":
       return ["npm", ["install", ...dependencies]];

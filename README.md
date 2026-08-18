@@ -11,14 +11,19 @@ The unified browser includes 7,042 compatible icons from Lucide and Hugeicons Co
 Run the initializer and select one or more icon packs:
 
 ```sh
-npx create-sketchicon@latest
+npx sketchicon@latest
 ```
 
 For CI or other non-interactive environments:
 
 ```sh
-npx create-sketchicon@latest --packs lucide,hugeicons --yes
+npx sketchicon@latest --lucide
+npx sketchicon@latest --hugeicons
+npx sketchicon@latest --all
 ```
+
+The scalable `--packs lucide,hugeicons` syntax is also available. The previous
+`npx create-sketchicon@latest` command remains supported as an alias.
 
 The initializer installs the lightweight `sketchicon` React runtime plus only the selected geometry packages:
 
@@ -117,7 +122,7 @@ import { renderSketch } from "sketchicon/core";
 Version `0.2.0` moves the built-in Lucide catalog into an optional package. The renderer API and visual output remain compatible.
 
 ```sh
-npx create-sketchicon@latest --migrate
+npx sketchicon@latest --migrate
 ```
 
 The migration installs the detected providers and rewrites catalog imports. Use `--dry-run` to preview its changes.
@@ -140,10 +145,10 @@ The initializer adds the selected providers but does not remove provider package
 | Package | Responsibility |
 | --- | --- |
 | `@sketchicon/core` | Framework-independent deterministic renderer |
-| `sketchicon` | Lightweight React component and compatibility subpaths |
+| `sketchicon` | Lightweight React component, compatibility subpaths, and installer command |
 | `@sketchicon/lucide` | Generated Lucide geometry |
 | `@sketchicon/hugeicons` | Generated Hugeicons Core Free geometry |
-| `create-sketchicon` | Interactive installer and 0.1 migration tool |
+| `create-sketchicon` | Backward-compatible alias for the installer command |
 
 The website remains a unified searchable catalog even though npm distribution is modular.
 

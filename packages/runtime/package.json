@@ -9,6 +9,9 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "bin": {
+    "sketchicon": "./dist/cli.js"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -28,7 +31,7 @@
     }
   },
   "scripts": {
-    "build": "node ../../scripts/clean-dist.mjs && tsup src/index.ts src/runtime.ts src/server.ts src/core.ts --format esm --dts --splitting --out-dir dist --external react --external react/jsx-runtime --external @sketchicon/core",
+    "build": "node ../../scripts/clean-dist.mjs && tsup src/index.ts src/runtime.ts src/server.ts src/core.ts src/cli.ts --format esm --dts --splitting --out-dir dist --external react --external react/jsx-runtime --external @sketchicon/core",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
