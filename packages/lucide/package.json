@@ -15,13 +15,13 @@
       "import": "./dist/index.js"
     },
     "./icons/*": {
-      "types": "./dist/icons/*.d.ts",
+      "types": "./dist/icon.d.ts",
       "import": "./dist/icons/*.js"
     }
   },
   "scripts": {
     "prebuild": "node ../../scripts/ensure-generated.mjs",
-    "build": "node ../../scripts/clean-dist.mjs && tsc -p tsconfig.build.json",
+    "build": "node ../../scripts/clean-dist.mjs && tsc -p tsconfig.build.json && node ../../scripts/write-provider-declarations.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

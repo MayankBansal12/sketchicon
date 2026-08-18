@@ -41,18 +41,33 @@ if (manifests.runtime.exports?.["./runtime"]?.import !== "./dist/runtime.js") {
 if (manifests.runtime.exports?.["./core"]?.import !== "./dist/core.js") {
   throw new Error("The sketchicon/core compatibility entry is missing.");
 }
+if (manifests.runtime.exports?.["./server"]?.import !== "./dist/server.js") {
+  throw new Error("The hook-free sketchicon/server entry is missing.");
+}
 if (manifests.runtime.exports?.["./icons/*"] || manifests.runtime.dependencies?.["@sketchicon/lucide"]) {
   throw new Error("The lightweight runtime still includes or depends on Lucide.");
 }
 
 const requiredFiles = {
-  runtime: ["index.js", "index.d.ts", "runtime.js", "runtime.d.ts", "core.js", "core.d.ts"],
-  lucide: ["index.js", "index.d.ts", "icons/search.js", "icons/search.d.ts"],
-  hugeicons: ["index.js", "index.d.ts", "icons/home-01.js", "icons/home-01.d.ts"],
+  runtime: ["index.js", "index.d.ts", "runtime.js", "runtime.d.ts", "server.js", "server.d.ts", "core.js", "core.d.ts"],
+  lucide: ["index.js", "index.d.ts", "icon.d.ts", "icons/search.js"],
+  hugeicons: ["index.js", "index.d.ts", "icon.d.ts", "icons/home-01.js"],
   "create-sketchicon": ["cli.js", "cli.d.ts"],
 };
 for (const [directory, files] of Object.entries(requiredFiles)) {
   for (const file of files) await readFile(path.join(root, "packages", directory, "dist", file));
+}
+
+for (const directory of ["lucide", "hugeicons"]) {
+  const iconExport = manifests[directory].exports?.["./icons/*"];
+  if (iconExport?.types !== "./dist/icon.d.ts" || iconExport?.import !== "./dist/icons/*.js") {
+    throw new Error(`${manifests[directory].name} must map icon types to the shared declaration and JavaScript to direct files.`);
+  }
+  const declarations = (await files(path.join(root, "packages", directory, "dist")))
+    .filter((file) => file.endsWith(".d.ts"));
+  if (declarations.length !== 2) {
+    throw new Error(`${manifests[directory].name} emitted ${declarations.length} declarations; expected its index and one shared icon declaration.`);
+  }
 }
 
 for (const entry of ["index.js", "runtime.js"]) {
@@ -60,6 +75,11 @@ for (const entry of ["index.js", "runtime.js"]) {
   if (!/^(?:#![^\n]+\n)?(["'])use client\1;/.test(runtime)) {
     throw new Error(`The sketchicon ${entry} build is missing its React client boundary.`);
   }
+}
+
+const server = await readFile(path.join(root, "packages", "runtime", "dist", "server.js"), "utf8");
+if (/^["']use client["'];/.test(server) || /from ["']react["']/.test(server)) {
+  throw new Error("The sketchicon/server build introduced a client boundary or hook runtime dependency.");
 }
 
 const cli = await readFile(path.join(root, "packages", "create-sketchicon", "dist", "cli.js"), "utf8");
@@ -85,7 +105,7 @@ for (const directory of ["runtime", "lucide", "hugeicons"]) {
   }
 }
 
-const sizeLimits = { runtime: 200_000, lucide: 15_000_000, hugeicons: 35_000_000 };
+const sizeLimits = { runtime: 10_000, lucide: 900_000, hugeicons: 5_500_000 };
 for (const [directory, limit] of Object.entries(sizeLimits)) {
   const packageFiles = await files(path.join(root, "packages", directory, "dist"));
   const bytes = (await Promise.all(packageFiles.map(async (file) => (await stat(file)).size)))
