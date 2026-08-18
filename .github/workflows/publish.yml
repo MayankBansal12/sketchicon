@@ -33,30 +33,49 @@ jobs:
       - name: Verify release version
         run: npm run release:verify
 
+      - name: Select npm dist-tag
+        id: dist-tag
+        shell: bash
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          dist_tag="latest"
+
+          if [[ "$version" == *-* ]]; then
+            prerelease="${version#*-}"
+            dist_tag="${prerelease%%.*}"
+          fi
+
+          if [[ ! "$dist_tag" =~ ^[A-Za-z][A-Za-z0-9._-]*$ ]]; then
+            dist_tag="next"
+          fi
+
+          echo "tag=$dist_tag" >> "$GITHUB_OUTPUT"
+          echo "Publishing $version with npm dist-tag $dist_tag"
+
       - name: Check packages
         run: npm run check
 
       - name: Publish core
-        run: npm publish --workspace @sketchicon/core
+        run: npm publish --workspace @sketchicon/core --tag "${{ steps.dist-tag.outputs.tag }}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish sketchicon
-        run: npm publish --workspace sketchicon
+        run: npm publish --workspace sketchicon --tag "${{ steps.dist-tag.outputs.tag }}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish Lucide pack
-        run: npm publish --workspace @sketchicon/lucide
+        run: npm publish --workspace @sketchicon/lucide --tag "${{ steps.dist-tag.outputs.tag }}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish Hugeicons pack
-        run: npm publish --workspace @sketchicon/hugeicons
+        run: npm publish --workspace @sketchicon/hugeicons --tag "${{ steps.dist-tag.outputs.tag }}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish initializer
-        run: npm publish --workspace create-sketchicon
+        run: npm publish --workspace create-sketchicon --tag "${{ steps.dist-tag.outputs.tag }}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
