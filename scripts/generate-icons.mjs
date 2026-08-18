@@ -23,7 +23,14 @@ const websiteStatsPath = path.join(websiteCatalogRoot, "stats.ts");
 const websitePublicIconsRoot = path.join(root, "apps", "web", "public", "icons");
 const websiteMarkdownCatalogRoot = path.join(websitePublicIconsRoot, "catalog");
 const websiteMarkdownCatalogPath = path.join(websitePublicIconsRoot, "catalog.md");
-const websiteCatalogChunkTargetBytes = 120_000;
+// These budgets measure the emitted geometry-record source, not an icon count.
+// Lucide gets smaller chunks because first-viewport filters commonly span a wide
+// alphabetical range. Hugeicons is loaded only after an explicit provider access,
+// so its larger budget avoids excessive request fan-out without making it eager.
+const websiteCatalogChunkTargetBytes = {
+  hugeicons: 120_000,
+  lucide: 48_000,
+};
 const webOnly = process.argv.includes("--web-only");
 const supportedTags = new Set([
   "svg",
@@ -311,22 +318,40 @@ if (!webOnly) {
 }
 
 catalog.sort((a, b) => a.fileName.localeCompare(b.fileName) || a.provider.localeCompare(b.provider));
-const initialCatalogChunk = catalog.filter((icon) => icon.provider === "lucide").slice(0, 48);
+const lucideCatalog = catalog.filter((icon) => icon.provider === "lucide");
+const hugeiconsCatalog = catalog.filter((icon) => icon.provider === "hugeicons");
+const initialCatalogChunk = lucideCatalog.slice(0, 48);
 const initialCatalogIds = new Set(initialCatalogChunk.map((icon) => `${icon.provider}:${icon.fileName}`));
 const catalogChunks = [initialCatalogChunk];
-let currentChunk = [];
-let currentChunkBytes = 0;
-for (const icon of catalog.filter((item) => !initialCatalogIds.has(`${item.provider}:${item.fileName}`))) {
-  const bytes = Buffer.byteLength(icon.exportName) + Buffer.byteLength(JSON.stringify(icon.geometry));
-  if (currentChunk.length > 0 && currentChunkBytes + bytes > websiteCatalogChunkTargetBytes) {
-    catalogChunks.push(currentChunk);
-    currentChunk = [];
-    currentChunkBytes = 0;
-  }
-  currentChunk.push(icon);
-  currentChunkBytes += bytes;
+
+function geometryRecord(icon) {
+  return `  ${JSON.stringify(`${icon.provider}:${icon.fileName}`)}: ${JSON.stringify(icon.geometry)}, // ${icon.exportName}`;
 }
-if (currentChunk.length > 0) catalogChunks.push(currentChunk);
+
+function appendProviderChunks(provider, icons) {
+  let currentChunk = [];
+  let currentChunkBytes = 0;
+  for (const icon of icons) {
+    const bytes = Buffer.byteLength(geometryRecord(icon));
+    if (
+      currentChunk.length > 0 &&
+      currentChunkBytes + bytes > websiteCatalogChunkTargetBytes[provider]
+    ) {
+      catalogChunks.push(currentChunk);
+      currentChunk = [];
+      currentChunkBytes = 0;
+    }
+    currentChunk.push(icon);
+    currentChunkBytes += bytes;
+  }
+  if (currentChunk.length > 0) catalogChunks.push(currentChunk);
+}
+
+appendProviderChunks(
+  "lucide",
+  lucideCatalog.filter((icon) => !initialCatalogIds.has(`${icon.provider}:${icon.fileName}`)),
+);
+appendProviderChunks("hugeicons", hugeiconsCatalog);
 for (const [chunkId, chunk] of catalogChunks.entries()) {
   for (const icon of chunk) icon.chunkId = chunkId;
 }
@@ -401,12 +426,11 @@ for (const [index, chunk] of catalogChunks.entries()) {
   await writeFile(
     path.join(websiteCatalogChunksRoot, `${chunkName}.ts`),
     [
-      "// Generated from Lucide and Hugeicons. Do not edit by hand.",
+      `// Generated from ${chunk[0].provider === "lucide" ? "Lucide" : "Hugeicons"}. Do not edit by hand.`,
       'import type { SketchGeometry } from "sketchicon/core";',
       "",
       "export const geometries: Readonly<Record<string, SketchGeometry>> = {",
-      ...chunk.map(({ exportName, fileName, geometry, provider }) =>
-        `  ${JSON.stringify(`${provider}:${fileName}`)}: ${JSON.stringify(geometry)}, // ${exportName}`),
+      ...chunk.map((icon) => geometryRecord(icon)),
       "};",
       "",
     ].join("\n"),
