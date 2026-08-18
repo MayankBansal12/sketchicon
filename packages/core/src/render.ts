@@ -2,7 +2,12 @@ import { SVGPathData, type SVGCommand } from "svg-pathdata";
 
 import { primitiveToPath } from "./primitives.js";
 import { createRandom, hashString } from "./random.js";
-import type { SketchGeometry, SketchOptions, SketchPath } from "./types.js";
+import type {
+  SketchGeometry,
+  SketchOptions,
+  SketchPath,
+  SketchPrimitive,
+} from "./types.js";
 
 const DEFAULT_ROUGHNESS = 1.5;
 const DEFAULT_SEED = 0;
@@ -13,6 +18,14 @@ interface Point {
   x: number;
   y: number;
 }
+
+interface CompiledPrimitive {
+  path: string;
+  cleanPath?: string;
+  commands?: SVGCommand[];
+}
+
+const compiledPrimitiveCache = new WeakMap<SketchPrimitive, CompiledPrimitive>();
 
 function clampRoughness(value: number | undefined): number {
   if (value === undefined) return DEFAULT_ROUGHNESS;
@@ -44,6 +57,18 @@ function normalizedCommands(path: string): SVGCommand[] {
     .normalizeST()
     .qtToC()
     .aToC().commands;
+}
+
+function compiledPrimitive(
+  primitive: SketchPrimitive,
+  path: string,
+): CompiledPrimitive {
+  const cached = compiledPrimitiveCache.get(primitive);
+  if (cached?.path === path) return cached;
+
+  const compiled = { path };
+  compiledPrimitiveCache.set(primitive, compiled);
+  return compiled;
 }
 
 function sketchPass(commands: readonly SVGCommand[], roughness: number, seed: number): string {
@@ -130,18 +155,26 @@ export function renderSketch(
 
   geometry.primitives.forEach((primitive, index) => {
     const path = primitiveToPath(primitive);
-    const normalized = new SVGPathData(path).toAbs().round(PATH_PRECISION).encode();
+    const compiled = compiledPrimitive(primitive, path);
 
     if (roughness === 0) {
-      output.push({ d: normalized });
+      compiled.cleanPath ??= new SVGPathData(path)
+        .toAbs()
+        .round(PATH_PRECISION)
+        .encode();
+      output.push({ d: compiled.cleanPath });
       return;
     }
 
     const primitiveSeed = hashString(`${index}:${path}`, seed);
-    const commands = normalizedCommands(path);
-    output.push({ d: sketchPass(commands, roughness, primitiveSeed) });
+    compiled.commands ??= normalizedCommands(path);
+    output.push({ d: sketchPass(compiled.commands, roughness, primitiveSeed) });
     output.push({
-      d: sketchPass(commands, roughness * 0.72, primitiveSeed ^ 0x9e3779b9),
+      d: sketchPass(
+        compiled.commands,
+        roughness * 0.72,
+        primitiveSeed ^ 0x9e3779b9,
+      ),
       opacity: 0.72,
     });
   });

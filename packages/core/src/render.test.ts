@@ -56,11 +56,53 @@ describe("renderSketch", () => {
     );
   });
 
+  it("preserves exact output across cached roughness and seed variants", () => {
+    renderSketch(geometry, { roughness: 1.8, seed: -42 });
+
+    expect(renderSketch(geometry, { roughness: 0.35, seed: 17 })).toEqual([
+      {
+        d: "M4.04 11.967C6.09 13.905 8.085 15.897 10.025 17.944C13.294 13.946 16.612 9.99 19.98 6.075",
+      },
+      {
+        d: "M4.055 12.023C6 14.086 8.002 16.091 10.063 18.038C13.351 13.975 16.683 9.948 20.058 5.959",
+        opacity: 0.72,
+      },
+      {
+        d: "M1.916 12.003C2.002 6.405 6.37 2.102 12.02 2.049C17.517 1.974 21.924 6.382 22.012 11.978C22.035 17.475 17.588 22.108 11.966 22.047C6.535 22.064 2.077 17.6 1.964 12.007z",
+      },
+      {
+        d: "M1.988 12.05C1.942 6.385 6.441 1.933 11.994 2.027C17.607 1.948 21.971 6.445 21.984 11.955C21.96 17.619 17.507 22.006 12.017 22.05C6.422 21.951 2.072 17.604 2.041 12.023z",
+        opacity: 0.72,
+      },
+    ]);
+  });
+
   it("returns one clean path per primitive at zero roughness", () => {
     const paths = renderSketch(geometry, { roughness: 0 });
 
-    expect(paths).toHaveLength(2);
-    expect(paths.every((path) => path.opacity === undefined)).toBe(true);
+    expect(paths).toEqual([
+      { d: "M4 12L10 18L20 6" },
+      {
+        d: "M2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22C6.477 22 2 17.523 2 12z",
+      },
+    ]);
+  });
+
+  it("invalidates compiled commands when custom geometry is mutated", () => {
+    const primitive = { type: "path" as const, d: "M2 12L22 12" };
+    const mutableGeometry: SketchGeometry = { primitives: [primitive] };
+    const options = { roughness: 0.8, seed: 12 };
+    const before = renderSketch(mutableGeometry, options);
+
+    primitive.d = "M2 2L22 22";
+    const after = renderSketch(mutableGeometry, options);
+    const fresh = renderSketch(
+      { primitives: [{ type: "path", d: primitive.d }] },
+      options,
+    );
+
+    expect(after).not.toEqual(before);
+    expect(after).toEqual(fresh);
   });
 
   it("continues drawing from the subpath start after closing a path", () => {
