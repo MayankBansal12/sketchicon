@@ -196,7 +196,8 @@ try {
 
   const sketchiconBin = path.join(runtimeRoot, "node_modules", ".bin", "sketchicon");
   const { stdout: sketchiconHelp } = await exec(sketchiconBin, ["--help"], { cwd: runtimeRoot });
-  assert.match(sketchiconHelp, /npx sketchicon@latest --hugeicons/);
+  assert.match(sketchiconHelp, new RegExp(`npx sketchicon@${runtimeManifest.version} --hugeicons`));
+  assert.match(sketchiconHelp, new RegExp(`npx --yes sketchicon@${runtimeManifest.version} --lucide`));
   const { stdout: sketchiconDryRun } = await exec(sketchiconBin, [
     "--dry-run",
     "--hugeicons",

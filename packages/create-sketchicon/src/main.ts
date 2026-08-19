@@ -26,9 +26,10 @@ export interface RunCliOptions {
   packageUrl: string;
 }
 
-function help(commandName: string): string {
+function help(commandName: string, version: string): string {
+  const packageSpec = `${commandName}@${version.includes("-") ? version : "latest"}`;
   const packUsage = packNames
-    .map((pack) => `  npx ${commandName}@latest --${pack}`)
+    .map((pack) => `  npx ${packageSpec} --${pack}`)
     .join("\n");
   const packOptions = packNames.map((pack) => {
     const flag = `--${pack}`.padEnd(25);
@@ -39,10 +40,10 @@ function help(commandName: string): string {
 Install the lightweight SketchIcon runtime and only the icon packs you choose.
 
 Usage:
-  npx ${commandName}@latest
+  npx ${packageSpec}
 ${packUsage}
-  npx ${commandName}@latest --packs lucide,hugeicons
-  npx ${commandName}@latest --migrate
+  npx ${packageSpec} --packs lucide,hugeicons
+  npx ${packageSpec} --migrate
 
 Options:
 ${packOptions}
@@ -52,8 +53,11 @@ ${packOptions}
   --cwd <path>              Start package.json discovery from this directory
   --migrate                 Rewrite SketchIcon 0.1 catalog imports
   --dry-run                 Print actions without installing or writing
-  --yes, -y                 Use defaults without prompting
+  --yes, -y                 Use default packs without an installer prompt
   --help, -h                Show this help
+
+For CI, put npx's own --yes before the package name:
+  npx --yes ${packageSpec} --lucide
 `;
 }
 
@@ -100,8 +104,9 @@ async function choosePacks(defaults: readonly IconPack[]): Promise<IconPack[]> {
 
 export async function runCli(args: readonly string[], cli: RunCliOptions): Promise<void> {
   const options = parseArgs(args);
+  const version = await packageVersion(cli.packageUrl);
   if (options.help) {
-    process.stdout.write(help(cli.commandName));
+    process.stdout.write(help(cli.commandName, version));
     return;
   }
 
@@ -129,7 +134,6 @@ export async function runCli(args: readonly string[], cli: RunCliOptions): Promi
   const retainedPacks = existing.filter((pack) => !packs.includes(pack));
 
   const manager = options.packageManager ?? await detectPackageManager(projectRoot, manifest);
-  const version = await packageVersion(cli.packageUrl);
   const [command, installArgs] = installCommand(manager, packs, version);
 
   process.stdout.write(`\nSketchIcon project: ${projectRoot}\n`);

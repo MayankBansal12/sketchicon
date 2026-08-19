@@ -1,8 +1,12 @@
+import { execFile } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const exec = promisify(execFile);
+const npm = process.platform === "win32" ? "npm.cmd" : "npm";
 const tag = process.env.GITHUB_REF_NAME ?? process.argv[2];
 
 if (!tag) throw new Error("Pass a release tag or set GITHUB_REF_NAME (for example, v0.2.0).");
@@ -25,4 +29,23 @@ for (const manifest of manifests.filter(({ name }) => ["sketchicon", "@sketchico
   }
 }
 
-console.log(`Verified release metadata for ${manifests.length} packages at ${tag}.`);
+for (const manifest of manifests) {
+  try {
+    await exec(npm, ["view", `${manifest.name}@${version}`, "version", "--json"], {
+      cwd: root,
+    });
+    throw new Error(`${manifest.name}@${version} is already published and cannot be replaced.`);
+  } catch (error) {
+    if (error instanceof Error && error.message.includes("is already published")) throw error;
+    const stderr = typeof error === "object" && error !== null && "stderr" in error
+      ? String(error.stderr)
+      : "";
+    if (!/E404|404 Not Found/.test(stderr)) {
+      throw new Error(
+        `Could not verify whether ${manifest.name}@${version} is unpublished: ${stderr || String(error)}`,
+      );
+    }
+  }
+}
+
+console.log(`Verified release metadata and unpublished versions for ${manifests.length} packages at ${tag}.`);

@@ -11,19 +11,21 @@ The unified browser includes 7,042 compatible icons from Lucide and Hugeicons Co
 Run the initializer and select one or more icon packs:
 
 ```sh
-npx sketchicon@latest
+npx sketchicon@beta
 ```
 
 For CI or other non-interactive environments:
 
 ```sh
-npx sketchicon@latest --lucide
-npx sketchicon@latest --hugeicons
-npx sketchicon@latest --all
+npx --yes sketchicon@beta --lucide
+npx --yes sketchicon@beta --hugeicons
+npx --yes sketchicon@beta --all
 ```
 
 The scalable `--packs lucide,hugeicons` syntax is also available. The previous
-`npx create-sketchicon@latest` command remains supported as an alias.
+`npx create-sketchicon@beta` command remains supported as an alias. The `beta`
+tag is used while 0.2 is in prerelease; these examples move to `latest` with
+the stable release.
 
 The initializer installs the lightweight `sketchicon` React runtime plus only the selected geometry packages:
 
@@ -33,7 +35,7 @@ The initializer installs the lightweight `sketchicon` React runtime plus only th
 Manual installation also works:
 
 ```sh
-npm install sketchicon @sketchicon/lucide
+npm install sketchicon@beta @sketchicon/lucide@beta
 ```
 
 ## Usage
@@ -122,7 +124,7 @@ import { renderSketch } from "sketchicon/core";
 Version `0.2.0` moves the built-in Lucide catalog into an optional package. The renderer API and visual output remain compatible.
 
 ```sh
-npx sketchicon@latest --migrate
+npx sketchicon@beta --migrate
 ```
 
 The migration installs the detected providers and rewrites catalog imports. Use `--dry-run` to preview its changes.
@@ -163,5 +165,8 @@ npm run dev
 ```
 
 `npm run generate` rebuilds both provider packages, compatibility reports, and the unified website catalog. Filled or otherwise incompatible icons are excluded rather than silently rendered incorrectly.
+
+See [TESTING.md](./TESTING.md) for the packed-package, installer, framework, and
+post-publication verification matrix.
 
 Rendering output is stable within a package version. The renderer does not use Canvas, the browser DOM, or `Math.random()`.

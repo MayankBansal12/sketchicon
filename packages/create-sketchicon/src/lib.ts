@@ -184,22 +184,54 @@ export async function detectPackageManager(
   manifest: Record<string, unknown>,
   userAgent = process.env.npm_config_user_agent,
 ): Promise<PackageManager> {
-  const declared = packageManagerFrom(typeof manifest.packageManager === "string" ? manifest.packageManager : undefined);
-  if (declared) return declared;
-
-  for (const [file, manager] of [
-    ["pnpm-lock.yaml", "pnpm"],
-    ["yarn.lock", "yarn"],
-    ["bun.lock", "bun"],
-    ["bun.lockb", "bun"],
-    ["package-lock.json", "npm"],
-  ] as const) {
-    try {
-      await access(path.join(projectRoot, file));
-      return manager;
-    } catch {
-      // Try the next lockfile.
+  let directory = path.resolve(projectRoot);
+  while (true) {
+    let directoryManifest = directory === path.resolve(projectRoot) ? manifest : undefined;
+    if (!directoryManifest) {
+      try {
+        directoryManifest = JSON.parse(
+          await readFile(path.join(directory, "package.json"), "utf8"),
+        ) as Record<string, unknown>;
+      } catch {
+        // This ancestor is not a package boundary.
+      }
     }
+
+    const declared = packageManagerFrom(
+      typeof directoryManifest?.packageManager === "string"
+        ? directoryManifest.packageManager
+        : undefined,
+    );
+    if (declared) return declared;
+
+    const lockfiles = await Promise.all(([
+      ["pnpm-lock.yaml", "pnpm"],
+      ["yarn.lock", "yarn"],
+      ["bun.lock", "bun"],
+      ["bun.lockb", "bun"],
+      ["package-lock.json", "npm"],
+    ] as const).map(async ([file, manager]) => {
+      try {
+        await access(path.join(directory, file));
+        return manager as PackageManager;
+      } catch {
+        return undefined;
+      }
+    }));
+    const managers = [...new Set(lockfiles.filter(
+      (manager): manager is PackageManager => manager !== undefined,
+    ))];
+    if (managers.length > 1) {
+      throw new Error(
+        `Multiple package-manager lockfiles found in ${directory}: ${managers.join(", ")}. ` +
+        "Remove stale lockfiles or pass --package-manager explicitly.",
+      );
+    }
+    if (managers[0]) return managers[0];
+
+    const parent = path.dirname(directory);
+    if (parent === directory) break;
+    directory = parent;
   }
 
   const fromAgent = packageManagerFrom(userAgent);
@@ -291,13 +323,17 @@ export function rewriteSource(source: string): RewriteResult {
     issues.push("namespace re-export from sketchicon");
   }
 
-  if (/(["'])sketchicon\/icons\//.test(output)) packs.add("lucide");
-  if (/(["'])sketchicon\/hugeicons(?:\/|\1)/.test(output)) packs.add("hugeicons");
-
-  output = output
-    .replace(/(["'])sketchicon\/icons\//g, "$1@sketchicon/lucide/icons/")
-    .replace(/(["'])sketchicon\/hugeicons\/icons\//g, "$1@sketchicon/hugeicons/icons/")
-    .replace(/(["'])sketchicon\/hugeicons\1/g, "$1@sketchicon/hugeicons$1");
+  output = output.replace(
+    /(\bfrom\s*|\bimport\s*(?:\(\s*)?|\brequire\s*\(\s*)(["'])(sketchicon\/(?:icons\/[^"']+|hugeicons(?:\/icons\/[^"']+)?))\2/g,
+    (_statement, prefix: string, quote: string, specifier: string) => {
+      if (specifier.startsWith("sketchicon/icons/")) {
+        packs.add("lucide");
+        return `${prefix}${quote}${specifier.replace("sketchicon/icons/", "@sketchicon/lucide/icons/")}${quote}`;
+      }
+      packs.add("hugeicons");
+      return `${prefix}${quote}${specifier.replace("sketchicon/hugeicons", "@sketchicon/hugeicons")}${quote}`;
+    },
+  );
 
   output = output.replace(
     /(^|\n)([ \t]*)import\s+(type\s+)?\{([^}]+)\}\s+from\s+(["'])sketchicon\5;?/g,
