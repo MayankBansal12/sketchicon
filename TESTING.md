@@ -55,7 +55,5 @@ npm install sketchicon @sketchicon/hugeicons
 The initializer is the convenient path for selecting providers:
 
 ```sh
-npx sketchicon@beta
+npx sketchicon@latest
 ```
-
-During a stable release, documentation changes `beta` to `latest`.

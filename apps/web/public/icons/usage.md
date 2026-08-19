@@ -5,13 +5,13 @@
 Choose icon packs interactively:
 
 ```sh
-npx sketchicon@beta
+npx sketchicon@latest
 ```
 
 Or install a provider manually:
 
 ```sh
-npm install sketchicon@beta @sketchicon/lucide@beta
+npm install sketchicon@latest @sketchicon/lucide@latest
 ```
 
 ## Lucide
@@ -32,7 +32,7 @@ import Search from "@sketchicon/lucide/icons/search";
 ## Hugeicons
 
 ```sh
-npm install sketchicon@beta @sketchicon/hugeicons@beta
+npm install sketchicon@latest @sketchicon/hugeicons@latest
 ```
 
 ```tsx
@@ -83,7 +83,7 @@ import { renderSketch } from "sketchicon/core";
 ## Migrate from 0.1
 
 ```sh
-npx sketchicon@beta --migrate
+npx sketchicon@latest --migrate
 ```
 
 Add `--dry-run` to preview the import rewrites.

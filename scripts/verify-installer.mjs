@@ -174,6 +174,7 @@ try {
     "utf8",
   ));
   const version = runtimeManifest.version;
+  const installerTag = version.includes("-") ? version : "latest";
   const registry = await startCoreRegistry(archives.core, version);
   const localArchives = {
     [`sketchicon@${version}`]: archives.runtime,
@@ -209,7 +210,7 @@ try {
     "sketchicon",
     "--help",
   ], { cwd: runtimeOnlyApp });
-  assert.match(npxHelp, new RegExp(`npx sketchicon@${version}`));
+  assert.match(npxHelp, new RegExp(`npx sketchicon@${installerTag}`));
   await exec(process.execPath, ["--input-type=module", "--eval", [
     'import { createElement } from "react";',
     'import { renderToStaticMarkup } from "react-dom/server";',

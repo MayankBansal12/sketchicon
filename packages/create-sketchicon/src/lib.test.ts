@@ -59,13 +59,13 @@ describe("create-sketchicon", () => {
   });
 
   it("constructs commands for supported package managers", () => {
-    expect(installCommand("npm", ["lucide"], "0.2.0-beta.4")).toEqual([
+    expect(installCommand("npm", ["lucide"], "0.2.0")).toEqual([
       "npm",
-      ["install", "sketchicon@0.2.0-beta.4", "@sketchicon/lucide@0.2.0-beta.4"],
+      ["install", "sketchicon@0.2.0", "@sketchicon/lucide@0.2.0"],
     ]);
-    expect(installCommand("bun", ["hugeicons"], "0.2.0-beta.4")).toEqual([
+    expect(installCommand("bun", ["hugeicons"], "0.2.0")).toEqual([
       "bun",
-      ["add", "sketchicon@0.2.0-beta.4", "@sketchicon/hugeicons@0.2.0-beta.4"],
+      ["add", "sketchicon@0.2.0", "@sketchicon/hugeicons@0.2.0"],
     ]);
   });
 

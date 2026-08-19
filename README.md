@@ -11,21 +11,19 @@ The unified browser includes 7,042 compatible icons from Lucide and Hugeicons Co
 Run the initializer and select one or more icon packs:
 
 ```sh
-npx sketchicon@beta
+npx sketchicon@latest
 ```
 
 For CI or other non-interactive environments:
 
 ```sh
-npx --yes sketchicon@beta --lucide
-npx --yes sketchicon@beta --hugeicons
-npx --yes sketchicon@beta --all
+npx --yes sketchicon@latest --lucide
+npx --yes sketchicon@latest --hugeicons
+npx --yes sketchicon@latest --all
 ```
 
 The scalable `--packs lucide,hugeicons` syntax is also available. The previous
-`npx create-sketchicon@beta` command remains supported as an alias. The `beta`
-tag is used while 0.2 is in prerelease; these examples move to `latest` with
-the stable release.
+`npx create-sketchicon@latest` command remains supported as an alias.
 
 The initializer installs the lightweight `sketchicon` React runtime plus only the selected geometry packages:
 
@@ -35,7 +33,7 @@ The initializer installs the lightweight `sketchicon` React runtime plus only th
 Manual installation also works:
 
 ```sh
-npm install sketchicon@beta @sketchicon/lucide@beta
+npm install sketchicon@latest @sketchicon/lucide@latest
 ```
 
 ## Usage
@@ -124,7 +122,7 @@ import { renderSketch } from "sketchicon/core";
 Version `0.2.0` moves the built-in Lucide catalog into an optional package. The renderer API and visual output remain compatible.
 
 ```sh
-npx sketchicon@beta --migrate
+npx sketchicon@latest --migrate
 ```
 
 The migration installs the detected providers and rewrites catalog imports. Use `--dry-run` to preview its changes.
