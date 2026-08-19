@@ -14,7 +14,7 @@
   "scripts": {
     "build": "npm run generate && npm run build -w @sketchicon/core && npm run build -w sketchicon && npm run build -w @sketchicon/lucide && npm run build -w @sketchicon/hugeicons && npm run build -w create-sketchicon && npm run build -w @sketchicon/web",
     "benchmark:core": "npm run generate && npm run build -w @sketchicon/core && npm run build -w @sketchicon/lucide && npm run build -w @sketchicon/hugeicons && node benchmarks/core-render.mjs",
-    "check": "npm run build && npm run typecheck && npm test && npm run verify:catalog && npm run verify:package && npm run verify:distribution && npm run verify:consumer && npm run verify:bundle && npm run verify:web",
+    "check": "npm run build && npm run typecheck && npm test && npm run verify:catalog && npm run verify:package && npm run verify:distribution && npm run verify:installer && npm run verify:consumer && npm run verify:bundle && npm run verify:frameworks && npm run verify:web",
     "dev": "npm run dev -w @sketchicon/web",
     "generate": "node scripts/generate-icons.mjs",
     "predev": "npm run generate",
@@ -27,7 +27,10 @@
     "verify:package": "node scripts/verify-package.mjs",
     "verify:consumer": "node scripts/verify-consumer.mjs",
     "verify:distribution": "node scripts/verify-distribution.mjs",
+    "verify:installer": "node scripts/verify-installer.mjs",
     "verify:bundle": "node scripts/verify-bundle.mjs",
+    "verify:frameworks": "node scripts/verify-frameworks.mjs",
+    "verify:registry": "node scripts/verify-registry-installer.mjs",
     "verify:web": "node scripts/verify-web.mjs"
   },
   "dependencies": {

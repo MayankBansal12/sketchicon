@@ -44,12 +44,15 @@ if (manifests.runtime.exports?.["./core"]?.import !== "./dist/core.js") {
 if (manifests.runtime.exports?.["./server"]?.import !== "./dist/server.js") {
   throw new Error("The hook-free sketchicon/server entry is missing.");
 }
+if (manifests.runtime.bin?.sketchicon !== "./dist/cli.js") {
+  throw new Error("The sketchicon installer binary is missing.");
+}
 if (manifests.runtime.exports?.["./icons/*"] || manifests.runtime.dependencies?.["@sketchicon/lucide"]) {
   throw new Error("The lightweight runtime still includes or depends on Lucide.");
 }
 
 const requiredFiles = {
-  runtime: ["index.js", "index.d.ts", "runtime.js", "runtime.d.ts", "server.js", "server.d.ts", "core.js", "core.d.ts"],
+  runtime: ["index.js", "index.d.ts", "runtime.js", "runtime.d.ts", "server.js", "server.d.ts", "core.js", "core.d.ts", "cli.js", "cli.d.ts"],
   lucide: ["index.js", "index.d.ts", "icon.d.ts", "icons/search.js"],
   hugeicons: ["index.js", "index.d.ts", "icon.d.ts", "icons/home-01.js"],
   "create-sketchicon": ["cli.js", "cli.d.ts"],
@@ -82,8 +85,10 @@ if (/^["']use client["'];/.test(server) || /from ["']react["']/.test(server)) {
   throw new Error("The sketchicon/server build introduced a client boundary or hook runtime dependency.");
 }
 
-const cli = await readFile(path.join(root, "packages", "create-sketchicon", "dist", "cli.js"), "utf8");
-if (!cli.startsWith("#!/usr/bin/env node")) throw new Error("create-sketchicon is missing its executable shebang.");
+for (const [directory, name] of [["runtime", "sketchicon"], ["create-sketchicon", "create-sketchicon"]]) {
+  const cli = await readFile(path.join(root, "packages", directory, "dist", "cli.js"), "utf8");
+  if (!cli.startsWith("#!/usr/bin/env node")) throw new Error(`${name} is missing its executable shebang.`);
+}
 
 async function files(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -105,7 +110,7 @@ for (const directory of ["runtime", "lucide", "hugeicons"]) {
   }
 }
 
-const sizeLimits = { runtime: 10_000, lucide: 900_000, hugeicons: 5_500_000 };
+const sizeLimits = { runtime: 40_000, lucide: 900_000, hugeicons: 5_500_000 };
 for (const [directory, limit] of Object.entries(sizeLimits)) {
   const packageFiles = await files(path.join(root, "packages", directory, "dist"));
   const bytes = (await Promise.all(packageFiles.map(async (file) => (await stat(file)).size)))

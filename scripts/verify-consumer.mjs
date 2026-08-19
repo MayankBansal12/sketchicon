@@ -11,6 +11,7 @@ import ts from "typescript";
 const exec = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const workspaceManifest = JSON.parse(await readFile(path.join(root, "package.json"), "utf8"));
+const runtimeManifest = JSON.parse(await readFile(path.join(root, "packages", "runtime", "package.json"), "utf8"));
 const temporaryRoot = await mkdtemp(path.join(tmpdir(), "sketchicon-consumer-"));
 const typeScriptBin = path.join(root, "node_modules", "typescript", "bin", "tsc");
 
@@ -193,6 +194,21 @@ try {
   await assert.rejects(access(path.join(runtimeRoot, "node_modules", "@sketchicon", "lucide")));
   await assert.rejects(access(path.join(runtimeRoot, "node_modules", "@sketchicon", "hugeicons")));
 
+  const sketchiconBin = path.join(runtimeRoot, "node_modules", ".bin", "sketchicon");
+  const { stdout: sketchiconHelp } = await exec(sketchiconBin, ["--help"], { cwd: runtimeRoot });
+  assert.match(sketchiconHelp, new RegExp(`npx sketchicon@${runtimeManifest.version} --hugeicons`));
+  assert.match(sketchiconHelp, new RegExp(`npx --yes sketchicon@${runtimeManifest.version} --lucide`));
+  const { stdout: sketchiconDryRun } = await exec(sketchiconBin, [
+    "--dry-run",
+    "--hugeicons",
+    "--package-manager",
+    "npm",
+  ], { cwd: runtimeRoot });
+  assert.match(sketchiconDryRun, /Icon packs: hugeicons/);
+  assert.ok(sketchiconDryRun.includes(
+    `sketchicon@${runtimeManifest.version} @sketchicon/hugeicons@${runtimeManifest.version}`,
+  ));
+
   await createConsumer(
     "runtime-react-18",
     [archives.core, archives.runtime],
@@ -307,7 +323,9 @@ try {
   assert.match(dryRunOutput, /\+import \{ Search \} from "@sketchicon\/lucide"/);
   assert.match(dryRunOutput, /Icon packs: hugeicons, lucide/);
   assert.match(dryRunOutput, /Required by migration: lucide/);
-  assert.match(dryRunOutput, /@sketchicon\/hugeicons @sketchicon\/lucide/);
+  assert.ok(dryRunOutput.includes(
+    `sketchicon@${runtimeManifest.version} @sketchicon/hugeicons@${runtimeManifest.version} @sketchicon/lucide@${runtimeManifest.version}`,
+  ));
   assert.match(await readFile(path.join(cliRoot, "fixture.tsx"), "utf8"), /from "sketchicon"/);
 
   console.log("Verified packed React 18/19, NodeNext, Bundler, editor types, SSR/server, provider, and initializer consumers.");

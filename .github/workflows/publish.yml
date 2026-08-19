@@ -60,11 +60,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish sketchicon
-        run: npm publish --workspace sketchicon --tag "${{ steps.dist-tag.outputs.tag }}"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Publish Lucide pack
         run: npm publish --workspace @sketchicon/lucide --tag "${{ steps.dist-tag.outputs.tag }}"
         env:
@@ -75,7 +70,18 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      # Publish the primary runtime/installer only after its core and provider
+      # packages exist at this exact version.
+      - name: Publish sketchicon
+        run: npm publish --workspace sketchicon --tag "${{ steps.dist-tag.outputs.tag }}"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # The compatibility installer pins the runtime version, so publish it last.
       - name: Publish initializer
         run: npm publish --workspace create-sketchicon --tag "${{ steps.dist-tag.outputs.tag }}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Smoke test public installer
+        run: npm run verify:registry -- "${GITHUB_REF_NAME#v}"

@@ -1,6 +1,6 @@
 {
   "name": "@sketchicon/hugeicons",
-  "version": "0.2.0-beta.3",
+  "version": "0.2.0-beta.4",
   "description": "Hugeicons Core Free geometry for SketchIcon",
   "keywords": ["icons", "hugeicons", "sketch", "hand-drawn", "svg"],
   "type": "module",
@@ -25,7 +25,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@sketchicon/core": "0.2.0-beta.3"
+    "@sketchicon/core": "0.2.0-beta.4"
   },
   "engines": {
     "node": ">=20.11.1"

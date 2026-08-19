@@ -5,13 +5,17 @@ The lightweight React runtime for deterministic hand-drawn SVG geometry.
 Use the initializer to select optional catalogs:
 
 ```sh
-npx create-sketchicon@latest
+npx sketchicon@beta
 ```
+
+Use `--lucide`, `--hugeicons`, or `--all` for a non-interactive one-command setup.
+`npx create-sketchicon@beta` remains available as a compatibility alias while
+0.2 is in prerelease.
 
 Or install manually:
 
 ```sh
-npm install sketchicon @sketchicon/lucide
+npm install sketchicon@beta @sketchicon/lucide@beta
 ```
 
 ```tsx

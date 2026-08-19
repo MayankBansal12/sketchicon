@@ -23,13 +23,24 @@ describe("create-sketchicon", () => {
       .toMatchObject({ packageManager: "pnpm", packs: ["lucide", "hugeicons"], yes: true });
   });
 
+  it("parses and combines friendly pack shortcut flags", () => {
+    expect(parseArgs(["--hugeicons"])).toMatchObject({ packs: ["hugeicons"] });
+    expect(parseArgs(["--lucide", "--hugeicons"])).toMatchObject({
+      packs: ["lucide", "hugeicons"],
+    });
+    expect(parseArgs(["--hugeicons", "--packs", "lucide"])).toMatchObject({
+      packs: ["hugeicons", "lucide"],
+    });
+    expect(parseArgs(["--all"])).toMatchObject({ packs: ["lucide", "hugeicons"] });
+  });
+
   it("parses friendly interactive pack selections", () => {
     expect(parsePackSelection("", ["lucide"])).toEqual(["lucide"]);
     expect(parsePackSelection("2, lucide", ["hugeicons"]))
       .toEqual(["hugeicons", "lucide"]);
     expect(parsePackSelection("all", ["lucide"])).toEqual(["lucide", "hugeicons"]);
     expect(() => parsePackSelection("phosphor", ["lucide"]))
-      .toThrow(/Choose 1, 2, lucide, hugeicons, or all/);
+      .toThrow(/Choose a number, lucide, hugeicons, or all/);
   });
 
   it("prints startup-safe direct imports for the selected packs", () => {
@@ -41,13 +52,13 @@ describe("create-sketchicon", () => {
   });
 
   it("constructs commands for supported package managers", () => {
-    expect(installCommand("npm", ["lucide"])).toEqual([
+    expect(installCommand("npm", ["lucide"], "0.2.0-beta.4")).toEqual([
       "npm",
-      ["install", "sketchicon", "@sketchicon/lucide"],
+      ["install", "sketchicon@0.2.0-beta.4", "@sketchicon/lucide@0.2.0-beta.4"],
     ]);
-    expect(installCommand("bun", ["hugeicons"])).toEqual([
+    expect(installCommand("bun", ["hugeicons"], "0.2.0-beta.4")).toEqual([
       "bun",
-      ["add", "sketchicon", "@sketchicon/hugeicons"],
+      ["add", "sketchicon@0.2.0-beta.4", "@sketchicon/hugeicons@0.2.0-beta.4"],
     ]);
   });
 
@@ -75,6 +86,33 @@ describe("create-sketchicon", () => {
     }
   });
 
+  it("finds the package manager at a monorepo root", async () => {
+    const root = await mkdtemp(path.join(tmpdir(), "create-sketchicon-workspace-manager-test-"));
+    const app = path.join(root, "apps", "web");
+    try {
+      await mkdir(app, { recursive: true });
+      await writeFile(path.join(root, "pnpm-lock.yaml"), "lockfileVersion: '9.0'\n");
+      await writeFile(path.join(root, "package.json"), '{"packageManager":"pnpm@9.15.0"}\n');
+      await writeFile(path.join(app, "package.json"), '{"private":true}\n');
+      expect(await detectPackageManager(app, { private: true }, "npm/10.8.2 node/v22.22.0"))
+        .toBe("pnpm");
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  });
+
+  it("rejects ambiguous package-manager lockfiles", async () => {
+    const root = await mkdtemp(path.join(tmpdir(), "create-sketchicon-manager-conflict-test-"));
+    try {
+      await writeFile(path.join(root, "pnpm-lock.yaml"), "lockfileVersion: '9.0'\n");
+      await writeFile(path.join(root, "yarn.lock"), "# yarn lockfile\n");
+      await expect(detectPackageManager(root, {}, "npm/10.8.2"))
+        .rejects.toThrow(/Multiple package-manager lockfiles/);
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  });
+
   it("migrates root, direct Lucide, and Hugeicons imports", () => {
     const result = rewriteSource([
       'import { Search, SketchIcon, type SketchGeometry } from "sketchicon";',
@@ -89,6 +127,20 @@ describe("create-sketchicon", () => {
     expect(result.source).toContain('from "@sketchicon/lucide/icons/check"');
     expect(result.source).toContain('from "@sketchicon/hugeicons"');
     expect(result.source).toContain('from "@sketchicon/hugeicons/icons/home-01"');
+    expect([...result.packs]).toEqual(["lucide", "hugeicons"]);
+  });
+
+  it("rewrites module specifiers without changing documentation strings", () => {
+    const result = rewriteSource([
+      'const documentation = "sketchicon/icons/search";',
+      'const lazyIcon = import("sketchicon/icons/search");',
+      'const requiredIcon = require("sketchicon/hugeicons/icons/home-01");',
+      "",
+    ].join("\n"));
+
+    expect(result.source).toContain('const documentation = "sketchicon/icons/search";');
+    expect(result.source).toContain('import("@sketchicon/lucide/icons/search")');
+    expect(result.source).toContain('require("@sketchicon/hugeicons/icons/home-01")');
     expect([...result.packs]).toEqual(["lucide", "hugeicons"]);
   });
 

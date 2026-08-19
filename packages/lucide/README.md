@@ -3,7 +3,7 @@
 Generated Lucide geometry for the [`sketchicon`](https://www.npmjs.com/package/sketchicon) deterministic hand-drawn React renderer.
 
 ```sh
-npm install sketchicon @sketchicon/lucide
+npm install sketchicon@beta @sketchicon/lucide@beta
 ```
 
 ```tsx

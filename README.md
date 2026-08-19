@@ -11,14 +11,21 @@ The unified browser includes 7,042 compatible icons from Lucide and Hugeicons Co
 Run the initializer and select one or more icon packs:
 
 ```sh
-npx create-sketchicon@latest
+npx sketchicon@beta
 ```
 
 For CI or other non-interactive environments:
 
 ```sh
-npx create-sketchicon@latest --packs lucide,hugeicons --yes
+npx --yes sketchicon@beta --lucide
+npx --yes sketchicon@beta --hugeicons
+npx --yes sketchicon@beta --all
 ```
+
+The scalable `--packs lucide,hugeicons` syntax is also available. The previous
+`npx create-sketchicon@beta` command remains supported as an alias. The `beta`
+tag is used while 0.2 is in prerelease; these examples move to `latest` with
+the stable release.
 
 The initializer installs the lightweight `sketchicon` React runtime plus only the selected geometry packages:
 
@@ -28,7 +35,7 @@ The initializer installs the lightweight `sketchicon` React runtime plus only th
 Manual installation also works:
 
 ```sh
-npm install sketchicon @sketchicon/lucide
+npm install sketchicon@beta @sketchicon/lucide@beta
 ```
 
 ## Usage
@@ -117,7 +124,7 @@ import { renderSketch } from "sketchicon/core";
 Version `0.2.0` moves the built-in Lucide catalog into an optional package. The renderer API and visual output remain compatible.
 
 ```sh
-npx create-sketchicon@latest --migrate
+npx sketchicon@beta --migrate
 ```
 
 The migration installs the detected providers and rewrites catalog imports. Use `--dry-run` to preview its changes.
@@ -140,10 +147,10 @@ The initializer adds the selected providers but does not remove provider package
 | Package | Responsibility |
 | --- | --- |
 | `@sketchicon/core` | Framework-independent deterministic renderer |
-| `sketchicon` | Lightweight React component and compatibility subpaths |
+| `sketchicon` | Lightweight React component, compatibility subpaths, and installer command |
 | `@sketchicon/lucide` | Generated Lucide geometry |
 | `@sketchicon/hugeicons` | Generated Hugeicons Core Free geometry |
-| `create-sketchicon` | Interactive installer and 0.1 migration tool |
+| `create-sketchicon` | Backward-compatible alias for the installer command |
 
 The website remains a unified searchable catalog even though npm distribution is modular.
 
@@ -158,5 +165,8 @@ npm run dev
 ```
 
 `npm run generate` rebuilds both provider packages, compatibility reports, and the unified website catalog. Filled or otherwise incompatible icons are excluded rather than silently rendered incorrectly.
+
+See [TESTING.md](./TESTING.md) for the packed-package, installer, framework, and
+post-publication verification matrix.
 
 Rendering output is stable within a package version. The renderer does not use Canvas, the browser DOM, or `Math.random()`.

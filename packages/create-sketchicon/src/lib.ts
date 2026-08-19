@@ -1,10 +1,24 @@
 import { access, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-export const packNames = ["lucide", "hugeicons"] as const;
+export const packRegistry = {
+  lucide: {
+    description: "familiar interface icons",
+    label: "Lucide",
+    packageName: "@sketchicon/lucide",
+    exampleImport: 'import Search from "@sketchicon/lucide/icons/search";',
+  },
+  hugeicons: {
+    description: "expressive interface icons",
+    label: "Hugeicons",
+    packageName: "@sketchicon/hugeicons",
+    exampleImport: 'import Home01Icon from "@sketchicon/hugeicons/icons/home-01";',
+  },
+} as const;
+export type IconPack = keyof typeof packRegistry;
+export const packNames = Object.keys(packRegistry) as IconPack[];
 export const packageManagers = ["npm", "pnpm", "yarn", "bun"] as const;
 
-export type IconPack = (typeof packNames)[number];
 export type PackageManager = (typeof packageManagers)[number];
 
 export interface CliOptions {
@@ -72,7 +86,7 @@ export function parsePackSelection(value: string, defaults: readonly IconPack[])
     const pack = packNames[Number(choice) - 1];
     if (pack) return pack;
     throw new Error(
-      `Invalid pack selection: ${choice}. Choose 1, 2, lucide, hugeicons, or all.`,
+      `Invalid pack selection: ${choice}. Choose a number, ${packNames.join(", ")}, or all.`,
     );
   });
 
@@ -82,11 +96,12 @@ export function parsePackSelection(value: string, defaults: readonly IconPack[])
 export function gettingStartedImports(packs: readonly IconPack[]): string {
   return [
     'import { SketchIcon } from "sketchicon";',
-    ...(packs.includes("lucide") ? ['import Search from "@sketchicon/lucide/icons/search";'] : []),
-    ...(packs.includes("hugeicons")
-      ? ['import Home01Icon from "@sketchicon/hugeicons/icons/home-01";']
-      : []),
+    ...packs.map((pack) => packRegistry[pack].exampleImport),
   ].join("\n");
+}
+
+function addPacks(current: readonly IconPack[] | undefined, additions: readonly IconPack[]): IconPack[] {
+  return [...new Set([...(current ?? []), ...additions])];
 }
 
 function nextValue(args: readonly string[], index: number, flag: string): string {
@@ -104,7 +119,7 @@ export function parseArgs(args: readonly string[]): CliOptions {
   };
 
   for (let index = 0; index < args.length; index += 1) {
-    const argument = args[index];
+    const argument = args[index]!;
     switch (argument) {
       case "--cwd":
         options.cwd = nextValue(args, index++, argument);
@@ -119,6 +134,9 @@ export function parseArgs(args: readonly string[]): CliOptions {
       case "--migrate":
         options.migrate = true;
         break;
+      case "--all":
+        options.packs = addPacks(options.packs, packNames);
+        break;
       case "--package-manager": {
         const value = nextValue(args, index++, argument);
         const manager = packageManagerFrom(value);
@@ -127,14 +145,20 @@ export function parseArgs(args: readonly string[]): CliOptions {
         break;
       }
       case "--packs":
-        options.packs = parsePacks(nextValue(args, index++, argument));
+        options.packs = addPacks(options.packs, parsePacks(nextValue(args, index++, argument)));
         break;
       case "--yes":
       case "-y":
         options.yes = true;
         break;
-      default:
+      default: {
+        const shortcut = argument.startsWith("--") ? argument.slice(2) : "";
+        if (packNames.includes(shortcut as IconPack)) {
+          options.packs = addPacks(options.packs, [shortcut as IconPack]);
+          break;
+        }
         throw new Error(`Unknown argument: ${argument}`);
+      }
     }
   }
 
@@ -160,22 +184,54 @@ export async function detectPackageManager(
   manifest: Record<string, unknown>,
   userAgent = process.env.npm_config_user_agent,
 ): Promise<PackageManager> {
-  const declared = packageManagerFrom(typeof manifest.packageManager === "string" ? manifest.packageManager : undefined);
-  if (declared) return declared;
-
-  for (const [file, manager] of [
-    ["pnpm-lock.yaml", "pnpm"],
-    ["yarn.lock", "yarn"],
-    ["bun.lock", "bun"],
-    ["bun.lockb", "bun"],
-    ["package-lock.json", "npm"],
-  ] as const) {
-    try {
-      await access(path.join(projectRoot, file));
-      return manager;
-    } catch {
-      // Try the next lockfile.
+  let directory = path.resolve(projectRoot);
+  while (true) {
+    let directoryManifest = directory === path.resolve(projectRoot) ? manifest : undefined;
+    if (!directoryManifest) {
+      try {
+        directoryManifest = JSON.parse(
+          await readFile(path.join(directory, "package.json"), "utf8"),
+        ) as Record<string, unknown>;
+      } catch {
+        // This ancestor is not a package boundary.
+      }
     }
+
+    const declared = packageManagerFrom(
+      typeof directoryManifest?.packageManager === "string"
+        ? directoryManifest.packageManager
+        : undefined,
+    );
+    if (declared) return declared;
+
+    const lockfiles = await Promise.all(([
+      ["pnpm-lock.yaml", "pnpm"],
+      ["yarn.lock", "yarn"],
+      ["bun.lock", "bun"],
+      ["bun.lockb", "bun"],
+      ["package-lock.json", "npm"],
+    ] as const).map(async ([file, manager]) => {
+      try {
+        await access(path.join(directory, file));
+        return manager as PackageManager;
+      } catch {
+        return undefined;
+      }
+    }));
+    const managers = [...new Set(lockfiles.filter(
+      (manager): manager is PackageManager => manager !== undefined,
+    ))];
+    if (managers.length > 1) {
+      throw new Error(
+        `Multiple package-manager lockfiles found in ${directory}: ${managers.join(", ")}. ` +
+        "Remove stale lockfiles or pass --package-manager explicitly.",
+      );
+    }
+    if (managers[0]) return managers[0];
+
+    const parent = path.dirname(directory);
+    if (parent === directory) break;
+    directory = parent;
   }
 
   const fromAgent = packageManagerFrom(userAgent);
@@ -188,7 +244,9 @@ export function installedPacks(manifest: Record<string, unknown>): IconPack[] {
   const dependencyGroups = ["dependencies", "devDependencies", "optionalDependencies"]
     .map((key) => manifest[key])
     .filter((group): group is Record<string, unknown> => Boolean(group) && typeof group === "object");
-  return packNames.filter((pack) => dependencyGroups.some((group) => `@sketchicon/${pack}` in group));
+  return packNames.filter((pack) => dependencyGroups.some(
+    (group) => packRegistry[pack].packageName in group,
+  ));
 }
 
 export function hasSketchiconV1(manifest: Record<string, unknown>): boolean {
@@ -201,8 +259,15 @@ export function hasSketchiconV1(manifest: Record<string, unknown>): boolean {
   return version ? /(^|\D)0\.1(?:\.|\D|$)/.test(version) && !/(^|\D)0\.2(?:\.|\D|$)/.test(version) : false;
 }
 
-export function installCommand(manager: PackageManager, packs: readonly IconPack[]): [string, string[]] {
-  const dependencies = ["sketchicon", ...packs.map((pack) => `@sketchicon/${pack}`)];
+export function installCommand(
+  manager: PackageManager,
+  packs: readonly IconPack[],
+  version: string,
+): [string, string[]] {
+  const dependencies = [
+    `sketchicon@${version}`,
+    ...packs.map((pack) => `${packRegistry[pack].packageName}@${version}`),
+  ];
   switch (manager) {
     case "npm":
       return ["npm", ["install", ...dependencies]];
@@ -258,13 +323,17 @@ export function rewriteSource(source: string): RewriteResult {
     issues.push("namespace re-export from sketchicon");
   }
 
-  if (/(["'])sketchicon\/icons\//.test(output)) packs.add("lucide");
-  if (/(["'])sketchicon\/hugeicons(?:\/|\1)/.test(output)) packs.add("hugeicons");
-
-  output = output
-    .replace(/(["'])sketchicon\/icons\//g, "$1@sketchicon/lucide/icons/")
-    .replace(/(["'])sketchicon\/hugeicons\/icons\//g, "$1@sketchicon/hugeicons/icons/")
-    .replace(/(["'])sketchicon\/hugeicons\1/g, "$1@sketchicon/hugeicons$1");
+  output = output.replace(
+    /(\bfrom\s*|\bimport\s*(?:\(\s*)?|\brequire\s*\(\s*)(["'])(sketchicon\/(?:icons\/[^"']+|hugeicons(?:\/icons\/[^"']+)?))\2/g,
+    (_statement, prefix: string, quote: string, specifier: string) => {
+      if (specifier.startsWith("sketchicon/icons/")) {
+        packs.add("lucide");
+        return `${prefix}${quote}${specifier.replace("sketchicon/icons/", "@sketchicon/lucide/icons/")}${quote}`;
+      }
+      packs.add("hugeicons");
+      return `${prefix}${quote}${specifier.replace("sketchicon/hugeicons", "@sketchicon/hugeicons")}${quote}`;
+    },
+  );
 
   output = output.replace(
     /(^|\n)([ \t]*)import\s+(type\s+)?\{([^}]+)\}\s+from\s+(["'])sketchicon\5;?/g,
