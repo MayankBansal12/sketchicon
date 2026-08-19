@@ -3,7 +3,7 @@
 Generated Hugeicons Core Free geometry for the [`sketchicon`](https://www.npmjs.com/package/sketchicon) deterministic hand-drawn React renderer.
 
 ```sh
-npm install sketchicon@beta @sketchicon/hugeicons@beta
+npm install sketchicon@latest @sketchicon/hugeicons@latest
 ```
 
 ```tsx

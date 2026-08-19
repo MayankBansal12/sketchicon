@@ -3,7 +3,7 @@
 SketchIcon 0.2 keeps the React runtime and renderer API stable, but moves Lucide geometry into `@sketchicon/lucide`.
 
 ```sh
-npx sketchicon@beta --migrate
+npx sketchicon@latest --migrate
 ```
 
 Preview changes with `--dry-run`.
@@ -11,7 +11,7 @@ Preview changes with `--dry-run`.
 If the project declares `sketchicon` `0.1.x`, the regular initializer also detects it and enables migration automatically:
 
 ```sh
-npx sketchicon@beta
+npx sketchicon@latest
 ```
 
 ```diff

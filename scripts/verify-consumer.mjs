@@ -12,6 +12,7 @@ const exec = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const workspaceManifest = JSON.parse(await readFile(path.join(root, "package.json"), "utf8"));
 const runtimeManifest = JSON.parse(await readFile(path.join(root, "packages", "runtime", "package.json"), "utf8"));
+const installerTag = runtimeManifest.version.includes("-") ? runtimeManifest.version : "latest";
 const temporaryRoot = await mkdtemp(path.join(tmpdir(), "sketchicon-consumer-"));
 const typeScriptBin = path.join(root, "node_modules", "typescript", "bin", "tsc");
 
@@ -196,8 +197,8 @@ try {
 
   const sketchiconBin = path.join(runtimeRoot, "node_modules", ".bin", "sketchicon");
   const { stdout: sketchiconHelp } = await exec(sketchiconBin, ["--help"], { cwd: runtimeRoot });
-  assert.match(sketchiconHelp, new RegExp(`npx sketchicon@${runtimeManifest.version} --hugeicons`));
-  assert.match(sketchiconHelp, new RegExp(`npx --yes sketchicon@${runtimeManifest.version} --lucide`));
+  assert.match(sketchiconHelp, new RegExp(`npx sketchicon@${installerTag} --hugeicons`));
+  assert.match(sketchiconHelp, new RegExp(`npx --yes sketchicon@${installerTag} --lucide`));
   const { stdout: sketchiconDryRun } = await exec(sketchiconBin, [
     "--dry-run",
     "--hugeicons",

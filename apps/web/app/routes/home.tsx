@@ -13,10 +13,10 @@ import { palette } from "../theme";
 import { formattedIconCount } from "../generated/stats";
 
 const packageManagers = [
-  { command: "pnpm dlx sketchicon@beta", id: "pnpm", label: "pnpm" },
-  { command: "npx sketchicon@beta", id: "npm", label: "npm" },
-  { command: "yarn dlx sketchicon@beta", id: "yarn", label: "yarn" },
-  { command: "bunx sketchicon@beta", id: "bun", label: "bun" },
+  { command: "pnpm dlx sketchicon@latest", id: "pnpm", label: "pnpm" },
+  { command: "npx sketchicon@latest", id: "npm", label: "npm" },
+  { command: "yarn dlx sketchicon@latest", id: "yarn", label: "yarn" },
+  { command: "bunx sketchicon@latest", id: "bun", label: "bun" },
 ] as const;
 
 type PackageManagerId = (typeof packageManagers)[number]["id"];

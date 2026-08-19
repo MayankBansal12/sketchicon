@@ -5,20 +5,20 @@ Interactive installer and migration tool for SketchIcon.
 The primary command is now:
 
 ```sh
-npx sketchicon@beta
+npx sketchicon@latest
 ```
 
 This package remains available as a backward-compatible alias.
 
 ```sh
-npx create-sketchicon@beta
+npx create-sketchicon@latest
 ```
 
 ```sh
-npx --yes create-sketchicon@beta --packs lucide,hugeicons
-npx create-sketchicon@beta --hugeicons
-npx create-sketchicon@beta --migrate
-npx create-sketchicon@beta --migrate --dry-run
+npx --yes create-sketchicon@latest --packs lucide,hugeicons
+npx create-sketchicon@latest --hugeicons
+npx create-sketchicon@latest --migrate
+npx create-sketchicon@latest --migrate --dry-run
 ```
 
 The command detects npm, pnpm, Yarn, or Bun and updates dependencies through that package manager so its lockfile remains authoritative.

@@ -13,7 +13,7 @@ const npx = process.platform === "win32" ? "npx.cmd" : "npx";
 const requested = process.argv[2]?.replace(/^v/, "");
 
 if (!requested || !/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(requested)) {
-  throw new Error("Pass the exact published SketchIcon version, for example 0.2.0-beta.4.");
+  throw new Error("Pass the exact published SketchIcon version, for example 0.2.0.");
 }
 
 const temporaryRoot = await mkdtemp(path.join(tmpdir(), "sketchicon-registry-installer-"));
