@@ -61,9 +61,21 @@ For CI, put npx's own --yes before the package name:
 `;
 }
 
+export function packageManagerNeedsShell(platform: NodeJS.Platform = process.platform): boolean {
+  // npm, pnpm, and Yarn are installed as .cmd shims on Windows. Node cannot
+  // execute those shims directly, so use the Windows command shell. The
+  // command and arguments passed here are restricted to package managers,
+  // registered package names, and this package's own version.
+  return platform === "win32";
+}
+
 function run(command: string, args: string[], cwd: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    const child = spawn(command, args, { cwd, stdio: "inherit" });
+    const child = spawn(command, args, {
+      cwd,
+      shell: packageManagerNeedsShell(),
+      stdio: "inherit",
+    });
     child.on("error", reject);
     child.on("exit", (code, signal) => {
       if (code === 0) resolve();
