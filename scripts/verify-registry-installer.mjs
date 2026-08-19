@@ -16,6 +16,9 @@ if (!requested || !/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(requested)) {
   throw new Error("Pass the exact published SketchIcon version, for example 0.2.0.");
 }
 
+const installerTag = requested.includes("-") ? requested : "latest";
+const registryAttempts = 12;
+const registryRetryDelay = 5_000;
 const temporaryRoot = await mkdtemp(path.join(tmpdir(), "sketchicon-registry-installer-"));
 const workspaceManifest = JSON.parse(await readFile(path.join(root, "package.json"), "utf8"));
 
@@ -24,6 +27,36 @@ async function installedManifest(packagePath) {
     path.join(temporaryRoot, "node_modules", ...packagePath.split("/"), "package.json"),
     "utf8",
   ));
+}
+
+async function runPublicInstaller() {
+  for (let attempt = 1; attempt <= registryAttempts; attempt += 1) {
+    try {
+      return await exec(npx, [
+        "--yes",
+        `sketchicon@${requested}`,
+        "--all",
+        "--package-manager",
+        "npm",
+      ], {
+        cwd: temporaryRoot,
+        env: { ...process.env, npm_config_prefer_online: "true" },
+        maxBuffer: 20 * 1024 * 1024,
+      });
+    } catch (error) {
+      const stderr = typeof error === "object" && error !== null && "stderr" in error
+        ? String(error.stderr)
+        : String(error);
+      const versionNotVisible = /ETARGET|E404|No matching version found|404 Not Found/.test(stderr);
+      if (!versionNotVisible || attempt === registryAttempts) throw error;
+      console.log(
+        `Registry has not propagated SketchIcon ${requested}; retrying in ${registryRetryDelay / 1_000}s ` +
+        `(${attempt}/${registryAttempts}).`,
+      );
+      await new Promise((resolve) => setTimeout(resolve, registryRetryDelay));
+    }
+  }
+  throw new Error(`Could not install SketchIcon ${requested} from the public registry.`);
 }
 
 try {
@@ -40,13 +73,7 @@ try {
     cwd: temporaryRoot,
   });
 
-  const { stdout } = await exec(npx, [
-    "--yes",
-    `sketchicon@${requested}`,
-    "--all",
-    "--package-manager",
-    "npm",
-  ], { cwd: temporaryRoot, maxBuffer: 20 * 1024 * 1024 });
+  const { stdout } = await runPublicInstaller();
   assert.match(stdout, /Icon packs: lucide, hugeicons/);
   assert.match(stdout, /SketchIcon is ready/);
 
@@ -81,7 +108,7 @@ try {
 
   const bin = path.join(temporaryRoot, "node_modules", ".bin", "sketchicon");
   const { stdout: help } = await exec(bin, ["--help"], { cwd: temporaryRoot });
-  assert.match(help, new RegExp(`sketchicon@${requested}`));
+  assert.match(help, new RegExp(`sketchicon@${installerTag}`));
 
   console.log(`Verified public npx installation and rendering for SketchIcon ${requested}.`);
 } finally {
