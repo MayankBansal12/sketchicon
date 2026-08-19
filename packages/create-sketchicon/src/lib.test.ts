@@ -16,8 +16,15 @@ import {
   planMigration,
   rewriteSource,
 } from "./lib.js";
+import { packageManagerNeedsShell } from "./main.js";
 
 describe("create-sketchicon", () => {
+  it("uses the command shell for Windows package-manager shims", () => {
+    expect(packageManagerNeedsShell("win32")).toBe(true);
+    expect(packageManagerNeedsShell("linux")).toBe(false);
+    expect(packageManagerNeedsShell("darwin")).toBe(false);
+  });
+
   it("parses non-interactive installation flags", () => {
     expect(parseArgs(["--packs", "lucide,hugeicons", "--package-manager", "pnpm", "--yes"]))
       .toMatchObject({ packageManager: "pnpm", packs: ["lucide", "hugeicons"], yes: true });
