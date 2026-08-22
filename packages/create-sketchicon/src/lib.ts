@@ -26,6 +26,7 @@ export interface CliOptions {
   dryRun: boolean;
   help: boolean;
   migrate: boolean;
+  noTelemetry: boolean;
   packageManager?: PackageManager;
   packs?: IconPack[];
   yes: boolean;
@@ -115,6 +116,7 @@ export function parseArgs(args: readonly string[]): CliOptions {
     dryRun: false,
     help: false,
     migrate: false,
+    noTelemetry: false,
     yes: false,
   };
 
@@ -150,6 +152,9 @@ export function parseArgs(args: readonly string[]): CliOptions {
       case "--yes":
       case "-y":
         options.yes = true;
+        break;
+      case "--no-telemetry":
+        options.noTelemetry = true;
         break;
       default: {
         const shortcut = argument.startsWith("--") ? argument.slice(2) : "";

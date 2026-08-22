@@ -15,6 +15,7 @@
     "@react-router/node": "8.3.0",
     "@sketchicon/hugeicons": "*",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/blob": "^1.1.1",
     "isbot": "^5",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
