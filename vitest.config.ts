@@ -24,6 +24,10 @@ export default defineConfig({
         replacement: new URL("./packages/core/src/index.ts", import.meta.url).pathname,
       },
       {
+        find: "@sketchicon/vue",
+        replacement: new URL("./packages/vue/src/index.ts", import.meta.url).pathname,
+      },
+      {
         find: "sketchicon/core",
         replacement: new URL("./packages/runtime/src/core.ts", import.meta.url).pathname,
       },

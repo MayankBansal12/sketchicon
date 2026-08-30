@@ -7,7 +7,7 @@ const readManifest = async (directory) => JSON.parse(
   await readFile(path.join(root, "packages", directory, "package.json"), "utf8"),
 );
 const manifests = Object.fromEntries(await Promise.all(
-  ["core", "runtime", "lucide", "hugeicons", "create-sketchicon"].map(async (directory) => [directory, await readManifest(directory)]),
+  ["core", "runtime", "vue", "lucide", "hugeicons", "create-sketchicon"].map(async (directory) => [directory, await readManifest(directory)]),
 ));
 const version = manifests.core.version;
 
@@ -20,6 +20,7 @@ for (const [directory, manifest] of Object.entries(manifests)) {
 const expectedNames = {
   core: "@sketchicon/core",
   runtime: "sketchicon",
+  vue: "@sketchicon/vue",
   lucide: "@sketchicon/lucide",
   hugeicons: "@sketchicon/hugeicons",
   "create-sketchicon": "create-sketchicon",
@@ -29,10 +30,16 @@ for (const [directory, name] of Object.entries(expectedNames)) {
 }
 
 const coreDependency = { "@sketchicon/core": version };
-for (const directory of ["runtime", "lucide", "hugeicons"]) {
+for (const directory of ["runtime", "vue", "lucide", "hugeicons"]) {
   if (JSON.stringify(manifests[directory].dependencies) !== JSON.stringify(coreDependency)) {
     throw new Error(`${manifests[directory].name} must depend only on @sketchicon/core@${version}.`);
   }
+}
+
+if (manifests.vue.peerDependencies?.vue !== ">=3.3 <4" ||
+    manifests.vue.peerDependencies?.react ||
+    manifests.vue.dependencies?.react) {
+  throw new Error("@sketchicon/vue must peer-depend on Vue 3 and have no React dependency.");
 }
 
 if (manifests.runtime.exports?.["./runtime"]?.import !== "./dist/runtime.js") {
@@ -53,6 +60,7 @@ if (manifests.runtime.exports?.["./icons/*"] || manifests.runtime.dependencies?.
 
 const requiredFiles = {
   runtime: ["index.js", "index.d.ts", "runtime.js", "runtime.d.ts", "server.js", "server.d.ts", "core.js", "core.d.ts", "cli.js", "cli.d.ts"],
+  vue: ["index.js", "index.d.ts"],
   lucide: ["index.js", "index.d.ts", "icon.d.ts", "icons/search.js"],
   hugeicons: ["index.js", "index.d.ts", "icon.d.ts", "icons/home-01.js"],
   "create-sketchicon": ["cli.js", "cli.d.ts"],
@@ -88,6 +96,9 @@ if (/^["']use client["'];/.test(server) || /from ["']react["']/.test(server)) {
 for (const [directory, name] of [["runtime", "sketchicon"], ["create-sketchicon", "create-sketchicon"]]) {
   const cli = await readFile(path.join(root, "packages", directory, "dist", "cli.js"), "utf8");
   if (!cli.startsWith("#!/usr/bin/env node")) throw new Error(`${name} is missing its executable shebang.`);
+  if (/from ["']react(?:\/jsx-runtime)?["']|import\(["']react(?:\/jsx-runtime)?["']\)|require\(["']react(?:\/jsx-runtime)?["']\)/.test(cli)) {
+    throw new Error(`${name} installer CLI must not load React.`);
+  }
 }
 
 async function files(directory) {
@@ -99,7 +110,7 @@ async function files(directory) {
   return nested.flat();
 }
 
-for (const directory of ["runtime", "lucide", "hugeicons"]) {
+for (const directory of ["runtime", "vue", "lucide", "hugeicons"]) {
   const distRoot = path.join(root, "packages", directory, "dist");
   for (const file of await files(distRoot)) {
     if (!/\.(?:js|d\.ts)$/.test(file)) continue;
@@ -110,7 +121,7 @@ for (const directory of ["runtime", "lucide", "hugeicons"]) {
   }
 }
 
-const sizeLimits = { runtime: 40_000, lucide: 900_000, hugeicons: 5_500_000 };
+const sizeLimits = { runtime: 40_000, vue: 15_000, lucide: 900_000, hugeicons: 5_500_000 };
 for (const [directory, limit] of Object.entries(sizeLimits)) {
   const packageFiles = await files(path.join(root, "packages", directory, "dist"));
   const bytes = (await Promise.all(packageFiles.map(async (file) => (await stat(file)).size)))
@@ -118,4 +129,4 @@ for (const [directory, limit] of Object.entries(sizeLimits)) {
   if (bytes > limit) throw new Error(`${directory} dist is ${bytes} bytes; expected at most ${limit}.`);
 }
 
-console.log("Verified independent runtime, Lucide, Hugeicons, core, and initializer package outputs.");
+console.log("Verified independent React/Vue runtimes, Lucide, Hugeicons, core, and initializer outputs.");

@@ -20,7 +20,7 @@ async function verify(entryName) {
         formats: ["es"],
       },
       rollupOptions: {
-        external: ["react", "react/jsx-runtime"],
+        external: ["react", "react/jsx-runtime", "vue"],
       },
     },
   });
@@ -41,6 +41,7 @@ async function verify(entryName) {
 
 const lucide = await verify("single-icon.js");
 const lucideDirect = await verify("single-icon-direct.js");
+const vue = await verify("single-icon-vue.js");
 const server = await verify("single-icon-server.js");
 const hugeicons = await verify("single-hugeicon.js");
 const hugeiconsDirect = await verify("single-hugeicon-direct.js");
@@ -54,5 +55,5 @@ for (const [provider, barrel, direct] of [
   }
 }
 console.log(
-  `Verified tree-shaken barrel/direct/server bundles: Lucide ${lucide.bytes}/${lucideDirect.bytes} bytes (${lucide.gzipBytes}/${lucideDirect.gzipBytes} gzip), Hugeicons ${hugeicons.bytes}/${hugeiconsDirect.bytes} bytes (${hugeicons.gzipBytes}/${hugeiconsDirect.gzipBytes} gzip), server ${server.bytes} bytes (${server.gzipBytes} gzip).`,
+  `Verified tree-shaken React/Vue barrel/direct/server bundles: Lucide ${lucide.bytes}/${lucideDirect.bytes} bytes (${lucide.gzipBytes}/${lucideDirect.gzipBytes} gzip), Hugeicons ${hugeicons.bytes}/${hugeiconsDirect.bytes} bytes (${hugeicons.gzipBytes}/${hugeiconsDirect.gzipBytes} gzip), Vue ${vue.bytes} bytes (${vue.gzipBytes} gzip), server ${server.bytes} bytes (${server.gzipBytes} gzip).`,
 );

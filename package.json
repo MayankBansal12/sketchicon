@@ -12,7 +12,7 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "npm run generate && npm run build -w @sketchicon/core && npm run build -w sketchicon && npm run build -w @sketchicon/lucide && npm run build -w @sketchicon/hugeicons && npm run build -w create-sketchicon && npm run build -w @sketchicon/web",
+    "build": "npm run generate && npm run build -w @sketchicon/core && npm run build -w sketchicon && npm run build -w @sketchicon/vue && npm run build -w @sketchicon/lucide && npm run build -w @sketchicon/hugeicons && npm run build -w create-sketchicon && npm run build -w @sketchicon/web",
     "benchmark:core": "npm run generate && npm run build -w @sketchicon/core && npm run build -w @sketchicon/lucide && npm run build -w @sketchicon/hugeicons && node benchmarks/core-render.mjs",
     "check": "npm run build && npm run typecheck && npm test && npm run verify:catalog && npm run verify:package && npm run verify:distribution && npm run verify:installer && npm run verify:consumer && npm run verify:bundle && npm run verify:frameworks && npm run verify:web",
     "dev": "npm run dev -w @sketchicon/web",
@@ -41,11 +41,15 @@
     "@types/node": "^22.19.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "@vue/server-renderer": "^3.5.0",
+    "happy-dom": "^20.12.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "tsup": "^8.5.0",
     "typescript": "^5.8.0",
     "vite": "^7.0.0",
-    "vitest": "^4.0.0"
+    "vitest": "^4.0.0",
+    "vue": "^3.5.0"
   }
 }
