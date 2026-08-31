@@ -41,7 +41,7 @@
     "@types/node": "^22.19.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
-    "@vercel/blob": "^1.1.1",
+    "@vercel/blob": "^2.8.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "tsup": "^8.5.0",

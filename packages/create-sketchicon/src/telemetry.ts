@@ -34,9 +34,8 @@ export function isTelemetryAllowed(
   return true;
 }
 
-export function challengeForDate(date: Date): string {
-  const day = date.toISOString().slice(0, 10);
-  return `sketchicon:${day}`;
+export function challengeForPayload(payload: InstallTelemetryPayload, ts: number): string {
+  return `sketchicon:${JSON.stringify([payload.packs, payload.version, payload.migrated, ts])}`;
 }
 
 export function proofOfWorkDigest(challenge: string, nonce: string): string {
@@ -65,7 +64,7 @@ export async function sendInstallTelemetry(
 
   try {
     const ts = Date.now();
-    const challenge = challengeForDate(new Date(ts));
+    const challenge = challengeForPayload(payload, ts);
     const nonce = solveProofOfWork(challenge);
 
     const body = JSON.stringify({

@@ -10,10 +10,44 @@
 import { list } from "@vercel/blob";
 
 const args = process.argv.slice(2);
-const sinceArg = args.find((a) => a.startsWith("--since="))?.split("=")[1] ?? args[args.indexOf("--since") + 1];
-const jsonFlag = args.includes("--json");
+let sinceArg;
+let jsonFlag = false;
+
+for (let index = 0; index < args.length; index += 1) {
+  const argument = args[index];
+  if (argument === "--json") {
+    jsonFlag = true;
+    continue;
+  }
+
+  if (argument === "--since" || argument?.startsWith("--since=")) {
+    if (sinceArg !== undefined) {
+      console.error("--since may only be provided once");
+      process.exit(1);
+    }
+
+    sinceArg = argument === "--since" ? args[++index] : argument.slice("--since=".length);
+    if (!sinceArg || sinceArg.startsWith("--")) {
+      console.error("--since requires a date in YYYY-MM-DD format");
+      process.exit(1);
+    }
+    continue;
+  }
+
+  console.error(`Unknown argument: ${argument}`);
+  process.exit(1);
+}
+
 const since = sinceArg ? new Date(sinceArg) : null;
-if (sinceArg && since && Number.isNaN(since.getTime())) {
+if (
+  sinceArg
+  && since
+  && (
+    !/^\d{4}-\d{2}-\d{2}$/.test(sinceArg)
+    || Number.isNaN(since.getTime())
+    || since.toISOString().slice(0, 10) !== sinceArg
+  )
+) {
   console.error(`Invalid --since date: ${sinceArg} (use YYYY-MM-DD)`);
   process.exit(1);
 }
@@ -36,7 +70,7 @@ do {
   const blobs = result.blobs.filter((b) => b.pathname.endsWith(".json"));
 
   for (const blob of blobs) {
-    // blob.pathname is like installs/2026-08-22/<uuid>.json
+    // blob.pathname is like installs/2026-08-22/<event-hash>.json
     const day = blob.pathname.split("/")[1];
     if (since && day && day < since.toISOString().slice(0, 10)) continue;
 
@@ -44,8 +78,7 @@ do {
       const res = await fetch(blob.url);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      // data: { packs, version, migrated, ts }
-      if (since && typeof data.ts === "number" && new Date(data.ts) < since) continue;
+      // data: { packs, version, migrated }
 
       total += 1;
       byDay.set(day, (byDay.get(day) ?? 0) + 1);

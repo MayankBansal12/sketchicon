@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
 import {
-  challengeForDate,
+  challengeForPayload,
   isTelemetryAllowed,
   powDifficultyPrefix,
   proofOfWorkDigest,
@@ -21,10 +21,13 @@ describe("telemetry", () => {
   });
 
   it("solves proofs of work that meet the difficulty prefix", () => {
-    const challenge = challengeForDate(new Date("2026-08-22T00:00:00Z"));
+    const payload = { migrated: false, packs: ["lucide"], version: "0.2.0" } as const;
+    const challenge = challengeForPayload({ ...payload, packs: [...payload.packs] }, 1_777_777_777_777);
     const nonce = solveProofOfWork(challenge);
     expect(proofOfWorkDigest(challenge, nonce).startsWith(powDifficultyPrefix)).toBe(true);
     expect(proofOfWorkDigest(challenge, `${nonce}x`).startsWith(powDifficultyPrefix)).toBe(false);
+    const changedPayload = { migrated: true, packs: [...payload.packs], version: payload.version };
+    expect(challengeForPayload(changedPayload, 1_777_777_777_777)).not.toBe(challenge);
   });
 
   it("posts a signed install event when allowed", async () => {

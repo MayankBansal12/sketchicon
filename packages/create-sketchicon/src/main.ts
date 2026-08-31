@@ -58,7 +58,7 @@ ${packOptions}
   --no-telemetry            Disable anonymous install telemetry
   --help, -h                Show this help
 
-Telemetry: anonymous install counts (packs, version, migrated). Disabled when
+Telemetry: anonymous install counts (packs, version, whether files were migrated). Disabled when
 CI, DO_NOT_TRACK, or SKETCHICON_NO_TELEMETRY is set, or with --no-telemetry.
 
 For CI, put npx's own --yes before the package name:
@@ -181,7 +181,7 @@ export async function runCli(args: readonly string[], cli: RunCliOptions): Promi
   if (shouldMigrate) await applyMigrationPlan(migration);
 
   await sendInstallTelemetry(
-    { packs, version, migrated: shouldMigrate },
+    { packs, version, migrated: migration.edits.length > 0 },
     { env: process.env, noTelemetry: options.noTelemetry },
   );
 
