@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import {
   challengeForPayload,
+  DEFAULT_TELEMETRY_URL,
   isTelemetryAllowed,
   powDifficultyPrefix,
   proofOfWorkDigest,
@@ -38,12 +39,26 @@ describe("telemetry", () => {
     );
     expect(fetchImpl).toHaveBeenCalledOnce();
     const [url, init] = fetchImpl.mock.calls[0] as unknown as [string, RequestInit];
-    expect(url).toContain("/api/telemetry-install");
+    expect(url).toBe(DEFAULT_TELEMETRY_URL);
     expect(init.method).toBe("POST");
     const payload = JSON.parse(String(init.body)) as Record<string, unknown>;
     expect(payload).toMatchObject({ migrated: true, packs: ["lucide"], version: "0.2.0" });
     expect(typeof payload.ts).toBe("number");
     expect(typeof payload.nonce).toBe("string");
+  });
+
+  it("supports overriding the telemetry receiver URL", async () => {
+    const fetchImpl = vi.fn(async () => new Response(null, { status: 204 }));
+    const telemetryUrl = "https://telemetry.example.test/install";
+
+    await sendInstallTelemetry(
+      { migrated: false, packs: ["hugeicons"], version: "0.2.0" },
+      { env: { SKETCHICON_TELEMETRY_URL: telemetryUrl }, fetchImpl },
+    );
+
+    expect(fetchImpl).toHaveBeenCalledOnce();
+    const [url] = fetchImpl.mock.calls[0] as unknown as [string, RequestInit];
+    expect(url).toBe(telemetryUrl);
   });
 
   it("never sends when opted out", async () => {

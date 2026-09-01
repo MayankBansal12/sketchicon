@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 
 import type { IconPack } from "./lib.js";
 
-export const TELEMETRY_URL = "https://sketchicon.dev/api/telemetry-install";
+export const DEFAULT_TELEMETRY_URL = "https://sketchicon.com/api/telemetry-install";
 export const powDifficultyPrefix = "0000";
 
 export interface InstallTelemetryPayload {
@@ -76,12 +76,13 @@ export async function sendInstallTelemetry(
     });
 
     const fetchImpl = options.fetchImpl ?? fetch;
+    const telemetryUrl = env.SKETCHICON_TELEMETRY_URL?.trim() || DEFAULT_TELEMETRY_URL;
 
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 1500);
 
     try {
-      await fetchImpl(TELEMETRY_URL, {
+      await fetchImpl(telemetryUrl, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body,
