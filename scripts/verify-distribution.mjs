@@ -12,7 +12,7 @@ const packages = [
   { workspace: "sketchicon", packed: 15_000, unpacked: 45_000, files: 15 },
   { workspace: "@sketchicon/lucide", packed: 165_000, unpacked: 900_000, files: 1_750 },
   { workspace: "@sketchicon/hugeicons", packed: 1_450_000, unpacked: 5_500_000, files: 5_320 },
-  { workspace: "create-sketchicon", packed: 8_000, unpacked: 30_000, files: 5 },
+  { workspace: "create-sketchicon", packed: 9_000, unpacked: 30_000, files: 5 },
 ];
 
 const packageReports = [];

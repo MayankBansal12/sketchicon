@@ -11,6 +11,14 @@ npx sketchicon@latest
 Use `--lucide`, `--hugeicons`, or `--all` for a non-interactive one-command setup.
 `npx create-sketchicon@latest` remains available as a compatibility alias.
 
+After a successful, non-dry-run installation, the initializer sends one anonymous
+event containing the selected icon packs, initializer version, whether source files
+were migrated, and a client timestamp used for freshness and replay protection. The
+receiver stores only the pack names, version, migration result, and UTC date. It does
+not receive project paths, package manifests, source code, usernames, or a persistent
+identifier. Set `CI`, `DO_NOT_TRACK`, or `SKETCHICON_NO_TELEMETRY`, or pass
+`--no-telemetry`, to disable the event.
+
 Or install manually:
 
 ```sh

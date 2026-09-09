@@ -145,6 +145,7 @@ async function runInstaller(cli, args, cwd, archives) {
       SKETCHICON_LOCAL_ARCHIVES: JSON.stringify(archives),
       SKETCHICON_ORIGINAL_PATH: originalPath,
       SKETCHICON_REAL_NPM_CLI: realNpmCli,
+      SKETCHICON_NO_TELEMETRY: "1",
     },
     maxBuffer: 16 * 1024 * 1024,
   });

@@ -26,8 +26,14 @@ describe("create-sketchicon", () => {
   });
 
   it("parses non-interactive installation flags", () => {
-    expect(parseArgs(["--packs", "lucide,hugeicons", "--package-manager", "pnpm", "--yes"]))
-      .toMatchObject({ packageManager: "pnpm", packs: ["lucide", "hugeicons"], yes: true });
+    expect(parseArgs([
+      "--packs", "lucide,hugeicons", "--package-manager", "pnpm", "--yes", "--no-telemetry",
+    ])).toMatchObject({
+      noTelemetry: true,
+      packageManager: "pnpm",
+      packs: ["lucide", "hugeicons"],
+      yes: true,
+    });
   });
 
   it("parses and combines friendly pack shortcut flags", () => {

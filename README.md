@@ -30,6 +30,19 @@ The initializer installs the lightweight `sketchicon` React runtime plus only th
 - `@sketchicon/lucide`
 - `@sketchicon/hugeicons`
 
+### Installer telemetry
+
+After a successful, non-dry-run installation, the initializer sends one anonymous
+event containing the selected icon packs, initializer version, whether source files
+were migrated, and a client timestamp used for freshness and replay protection. The
+receiver stores only the pack names, version, migration result, and UTC date. It does
+not receive project paths, package manifests, source code, usernames, or a persistent
+identifier.
+
+Telemetry is disabled when `CI`, `DO_NOT_TRACK`, or
+`SKETCHICON_NO_TELEMETRY` is set to a truthy value. Use `--no-telemetry` to disable it
+for an individual run.
+
 Manual installation also works:
 
 ```sh

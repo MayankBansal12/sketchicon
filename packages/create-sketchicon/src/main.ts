@@ -20,6 +20,7 @@ import {
   planMigration,
   type IconPack,
 } from "./lib.js";
+import { sendInstallTelemetry } from "./telemetry.js";
 
 export interface RunCliOptions {
   commandName: "create-sketchicon" | "sketchicon";
@@ -54,7 +55,11 @@ ${packOptions}
   --migrate                 Rewrite SketchIcon 0.1 catalog imports
   --dry-run                 Print actions without installing or writing
   --yes, -y                 Use default packs without an installer prompt
+  --no-telemetry            Disable anonymous install telemetry
   --help, -h                Show this help
+
+Telemetry: anonymous install counts (packs, version, whether files were migrated). Disabled when
+CI, DO_NOT_TRACK, or SKETCHICON_NO_TELEMETRY is set, or with --no-telemetry.
 
 For CI, put npx's own --yes before the package name:
   npx --yes ${packageSpec} --lucide
@@ -174,6 +179,11 @@ export async function runCli(args: readonly string[], cli: RunCliOptions): Promi
 
   await run(command, installArgs, projectRoot);
   if (shouldMigrate) await applyMigrationPlan(migration);
+
+  await sendInstallTelemetry(
+    { packs, version, migrated: migration.edits.length > 0 },
+    { env: process.env, noTelemetry: options.noTelemetry },
+  );
 
   process.stdout.write("\nSketchIcon is ready. Start with:\n\n");
   process.stdout.write(`${gettingStartedImports(packs)}\n`);
