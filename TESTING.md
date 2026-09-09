@@ -12,7 +12,7 @@ broken contract.
 | `npm run verify:package` | Export maps, client/server boundaries, executable bins, declarations, and dependency isolation |
 | `npm run verify:distribution` | Packed file counts, package sizes, direct-import startup, and provider-barrel startup |
 | `npm run verify:installer` | Packed React/Vue installs plus missing, ambiguous, override, Angular, and monorepo detection flows |
-| `npm run verify:consumer` | Packed TypeScript/NodeNext/Bundler consumers, React 18/19, Vue SSR, RSC, and provider isolation |
+| `npm run verify:consumer` | Packed TypeScript/NodeNext/Bundler consumers, React 18/19, Vue 3.3/3.4/3.5 strict templates and SSR, RSC, and provider isolation |
 | `npm run verify:bundle` | Vite tree-shaking and size budgets for React/Vue barrel and direct imports |
 | `npm run verify:frameworks` | Packed Vue SFC/Vite + SSR, React/Vite, React Router, and Next.js production builds |
 | `npm run verify:web` | The production catalog website, lazy chunks, documentation, and catalog completeness |

@@ -15,6 +15,7 @@ const runtimeManifest = JSON.parse(await readFile(path.join(root, "packages", "r
 const installerTag = runtimeManifest.version.includes("-") ? runtimeManifest.version : "latest";
 const temporaryRoot = await mkdtemp(path.join(tmpdir(), "sketchicon-consumer-"));
 const typeScriptBin = path.join(root, "node_modules", "typescript", "bin", "tsc");
+const vueTypeScriptBin = path.join(root, "node_modules", "vue-tsc", "bin", "vue-tsc.js");
 
 async function pack(workspace) {
   const { stdout } = await exec(
@@ -158,7 +159,8 @@ try {
   };
   await writeFile(path.join(vueRoot, "tsconfig.json"), JSON.stringify({
     compilerOptions: vueCompilerOptions,
-    include: ["consumer.ts"],
+    vueCompilerOptions: { strictTemplates: true },
+    include: ["consumer.ts", "App.vue"],
   }));
   await writeFile(path.join(vueRoot, "tsconfig.bundler.json"), JSON.stringify({
     compilerOptions: {
@@ -166,7 +168,8 @@ try {
       module: "ESNext",
       moduleResolution: "Bundler",
     },
-    include: ["consumer.ts"],
+    vueCompilerOptions: { strictTemplates: true },
+    include: ["consumer.ts", "App.vue"],
   }));
   await writeFile(path.join(vueRoot, "consumer.ts"), [
     'import { h } from "vue";',
@@ -178,6 +181,26 @@ try {
     'h(SketchIcon, { icon: Home01Icon, "aria-label": "Home", onClick: () => undefined });',
     '// @ts-expect-error icon geometry is required',
     'h(SketchIcon, { size: 20 });',
+    '// @ts-expect-error seed must remain a number',
+    'h(SketchIcon, { icon: Search, seed: "invalid" });',
+    '// @ts-expect-error icon must remain valid geometry',
+    'h(SketchIcon, { icon: "search" });',
+    '',
+  ].join("\n"));
+  await writeFile(path.join(vueRoot, "App.vue"), [
+    '<script setup lang="ts">',
+    'import { Search } from "@sketchicon/lucide";',
+    'import DefaultSketchIcon, { SketchIcon } from "@sketchicon/vue";',
+    'const onClick = (event: MouseEvent) => event.preventDefault();',
+    '</script>',
+    '<template>',
+    '  <SketchIcon :icon="Search" stroke="red" fill="none" :width="40" :stroke-width="2" aria-label="Search" @click="onClick" />',
+    '  <DefaultSketchIcon :icon="Search" size="2em" title="Search" />',
+    '  <!-- @vue-expect-error icon geometry is required -->',
+    '  <SketchIcon :size="20" />',
+    '  <!-- @vue-expect-error seed must remain a number -->',
+    '  <SketchIcon :icon="Search" seed="invalid" />',
+    '</template>',
     '',
   ].join("\n"));
   await writeFile(path.join(vueRoot, "consumer.mjs"), [
@@ -194,22 +217,28 @@ try {
     '}',
     '',
   ].join("\n"));
-  await exec("npm", [
-    "install",
-    "--ignore-scripts",
-    "--no-audit",
-    "--no-fund",
-    archives.core,
-    archives.vue,
-    archives.lucide,
-    archives.hugeicons,
-    `vue@${workspaceManifest.devDependencies.vue}`,
-    `@vue/server-renderer@${workspaceManifest.devDependencies["@vue/server-renderer"]}`,
-  ], { cwd: vueRoot });
-  await exec(process.execPath, [typeScriptBin, "-p", "tsconfig.json"], { cwd: vueRoot });
-  await exec(process.execPath, [typeScriptBin, "-p", "tsconfig.bundler.json"], { cwd: vueRoot });
-  await exec(process.execPath, ["consumer.mjs"], { cwd: vueRoot });
-  await assert.rejects(access(path.join(vueRoot, "node_modules", "react")));
+  // Exercise the actual tarball at the supported minimum, minor boundaries,
+  // and current workspace range; declaration inference can change across Vue.
+  for (const vueVersion of ["3.3.0", "3.4.38", "3.5.0", workspaceManifest.devDependencies.vue]) {
+    await exec("npm", [
+      "install",
+      "--ignore-scripts",
+      "--no-audit",
+      "--no-fund",
+      archives.core,
+      archives.vue,
+      archives.lucide,
+      archives.hugeicons,
+      `vue@${vueVersion}`,
+      `@vue/server-renderer@${vueVersion}`,
+    ], { cwd: vueRoot });
+    for (const config of ["tsconfig.json", "tsconfig.bundler.json"]) {
+      await exec(process.execPath, [vueTypeScriptBin, "-p", config], { cwd: vueRoot });
+    }
+    await exec(process.execPath, ["consumer.mjs"], { cwd: vueRoot });
+    await assert.rejects(access(path.join(vueRoot, "node_modules", "react")));
+    console.log(`Verified packed Vue ${vueVersion}: strict templates, NodeNext/Bundler types, and SSR.`);
+  }
 
   const runtimeRoot = await createConsumer(
     "runtime-only",

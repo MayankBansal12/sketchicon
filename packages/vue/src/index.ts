@@ -2,6 +2,7 @@ import { renderSketch, type SketchGeometry } from "@sketchicon/core";
 import {
   defineComponent,
   h,
+  type DefineComponent,
   type PropType,
   type SVGAttributes,
 } from "vue";
@@ -39,7 +40,7 @@ export interface SketchIconProps extends Omit<SVGAttributes, "title"> {
   title?: string;
 }
 
-export const SketchIcon = defineComponent({
+const SketchIconComponent = defineComponent({
   name: "SketchIcon",
   inheritAttrs: false,
   props: {
@@ -82,5 +83,9 @@ export const SketchIcon = defineComponent({
     };
   },
 });
+
+// Keep the public declaration compatible with Vue 3.3 and include the SVG
+// attributes/listeners forwarded through attrs, which runtime props omit.
+export const SketchIcon = SketchIconComponent as DefineComponent<SketchIconProps>;
 
 export default SketchIcon;

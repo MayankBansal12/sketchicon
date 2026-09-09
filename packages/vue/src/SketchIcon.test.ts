@@ -38,23 +38,32 @@ describe("Vue SketchIcon", () => {
     expect(labeled).toContain('data-test="forwarded"');
   });
 
-  it("mounts on the client, forwards listeners, and reacts to prop changes", async () => {
+  it("hydrates SSR markup, forwards listeners, and reacts to prop changes", async () => {
     const state = reactive({ roughness: 1.5, seed: 0, size: 24 });
     const clicked = vi.fn();
     const container = document.createElement("div");
-    const app = createSSRApp({
+    const createIconApp = () => createSSRApp({
       setup: () => () => h(SketchIcon, {
         icon: line,
         roughness: state.roughness,
         seed: state.seed,
         size: state.size,
+        stroke: "red",
         "aria-label": "Line",
         onClick: clicked,
       }),
     });
+    container.innerHTML = await renderToString(createIconApp());
+    const serverSvg = container.querySelector("svg");
+    const app = createIconApp();
+    const warned = vi.fn();
+    app.config.warnHandler = warned;
     app.mount(container);
 
     const svg = container.querySelector("svg");
+    expect(svg).toBe(serverSvg);
+    expect(warned).not.toHaveBeenCalled();
+    expect(svg?.getAttribute("stroke")).toBe("red");
     expect(svg).not.toBeNull();
     expect(svg?.getAttribute("width")).toBe("24");
     expect(svg?.getAttribute("role")).toBe("img");
