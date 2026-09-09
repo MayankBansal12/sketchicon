@@ -8,7 +8,8 @@ The unified browser includes 7,042 compatible icons from Lucide and Hugeicons Co
 
 ## Installation
 
-Run the initializer and select one or more icon packs:
+Run the initializer. It detects React, Vue/Nuxt, or Angular from the target
+package's direct dependencies, then selects one or more icon packs:
 
 ```sh
 npx sketchicon@latest
@@ -22,10 +23,16 @@ npx --yes sketchicon@latest --hugeicons
 npx --yes sketchicon@latest --all
 ```
 
+Non-interactive projects with no detectable framework must pass
+`--framework react|vue|angular`. Use `--framework` to resolve a deliberate
+multi-framework package, or `--cwd` to target one package in a monorepo.
+Angular is detected, but its adapter is not available yet.
+
 The scalable `--packs lucide,hugeicons` syntax is also available. The previous
 `npx create-sketchicon@latest` command remains supported as an alias.
 
-The initializer installs the lightweight `sketchicon` React runtime plus only the selected geometry packages:
+The initializer installs `sketchicon` for React or `@sketchicon/vue` for Vue,
+plus only the selected framework-neutral geometry packages:
 
 - `@sketchicon/lucide`
 - `@sketchicon/hugeicons`
@@ -34,6 +41,7 @@ Manual installation also works:
 
 ```sh
 npm install sketchicon@latest @sketchicon/lucide@latest
+npm install @sketchicon/vue@latest @sketchicon/lucide@latest
 ```
 
 ## Usage
@@ -45,6 +53,18 @@ import { SketchIcon } from "sketchicon";
 export function SearchButton() {
   return <SketchIcon icon={Search} size={20} aria-label="Search" />;
 }
+```
+
+Vue 3 uses the same geometry without Vue-specific icon copies:
+
+```vue
+<script setup>
+import { Search } from "@sketchicon/lucide";
+import { SketchIcon } from "@sketchicon/vue";
+</script>
+<template>
+  <SketchIcon :icon="Search" aria-label="Search" />
+</template>
 ```
 
 Hugeicons use the same renderer:
@@ -146,6 +166,7 @@ The initializer adds the selected providers but does not remove provider package
 | --- | --- |
 | `@sketchicon/core` | Framework-independent deterministic renderer |
 | `sketchicon` | Lightweight React component, compatibility subpaths, and installer command |
+| `@sketchicon/vue` | Lightweight Vue 3 render-function component |
 | `@sketchicon/lucide` | Generated Lucide geometry |
 | `@sketchicon/hugeicons` | Generated Hugeicons Core Free geometry |
 | `create-sketchicon` | Backward-compatible alias for the installer command |

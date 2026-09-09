@@ -1,0 +1,46 @@
+{
+  "name": "@sketchicon/vue",
+  "version": "0.2.0",
+  "description": "Deterministic hand-drawn SVG icon component for Vue 3",
+  "keywords": ["icons", "vue", "vue3", "sketch", "hand-drawn", "svg"],
+  "type": "module",
+  "sideEffects": false,
+  "files": ["dist", "README.md", "LICENSE"],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "node ../../scripts/clean-dist.mjs && tsup src/index.ts --format esm --dts --out-dir dist --external vue --external @sketchicon/core",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sketchicon/core": "0.2.0"
+  },
+  "peerDependencies": {
+    "vue": ">=3.3 <4"
+  },
+  "engines": {
+    "node": ">=20.11.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org",
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MayankBansal12/sketchicon.git",
+    "directory": "packages/vue"
+  },
+  "homepage": "https://github.com/MayankBansal12/sketchicon#readme",
+  "bugs": {
+    "url": "https://github.com/MayankBansal12/sketchicon/issues"
+  },
+  "license": "MIT"
+}

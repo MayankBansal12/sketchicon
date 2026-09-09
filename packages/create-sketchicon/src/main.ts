@@ -6,6 +6,9 @@ import { createInterface } from "node:readline/promises";
 import {
   applyMigrationPlan,
   detectPackageManager,
+  detectFrameworks,
+  detectedFrameworks,
+  formatFrameworkEvidence,
   findProjectRoot,
   formatMigrationDiff,
   gettingStartedImports,
@@ -18,6 +21,8 @@ import {
   parseArgs,
   parsePackSelection,
   planMigration,
+  type Framework,
+  frameworkNames,
   type IconPack,
 } from "./lib.js";
 
@@ -44,10 +49,15 @@ Usage:
 ${packUsage}
   npx ${packageSpec} --packs lucide,hugeicons
   npx ${packageSpec} --migrate
+  npx ${packageSpec} --framework vue --lucide
 
 Options:
 ${packOptions}
   --all                     Install every available icon pack
+  --framework <name>        react, vue, or angular
+  --react                   Select the React adapter
+  --vue                     Select the Vue 3 adapter
+  --angular                 Report Angular adapter availability
   --packs <names>           Comma-separated lucide and/or hugeicons
   --package-manager <name>  npm, pnpm, yarn, or bun
   --cwd <path>              Start package.json discovery from this directory
@@ -93,6 +103,30 @@ async function packageVersion(packageUrl: string): Promise<string> {
   return manifest.version;
 }
 
+async function chooseFramework(): Promise<Framework> {
+  const choices = [
+    "  1. React",
+    "  2. Vue 3 (including Nuxt)",
+    "  3. Angular (adapter not available yet)",
+  ];
+  const prompt = [
+    "Which framework does this project use?",
+    ...choices,
+    "Selection [1]: ",
+  ].join("\n");
+  const readline = createInterface({ input: process.stdin, output: process.stdout });
+  try {
+    const answer = (await readline.question(prompt)).trim().toLowerCase();
+    if (!answer) return "react";
+    const byNumber = frameworkNames[Number(answer) - 1];
+    if (byNumber) return byNumber;
+    if (frameworkNames.includes(answer as Framework)) return answer as Framework;
+    throw new Error("Invalid framework selection. Choose 1, 2, 3, react, vue, or angular.");
+  } finally {
+    readline.close();
+  }
+}
+
 async function choosePacks(defaults: readonly IconPack[]): Promise<IconPack[]> {
   const selected: readonly IconPack[] = defaults.length > 0 ? defaults : ["lucide"];
   const choices = packNames.map((pack, index) => {
@@ -129,6 +163,37 @@ export async function runCli(args: readonly string[], cli: RunCliOptions): Promi
   if (detectedV1 && !options.migrate) {
     process.stdout.write("SketchIcon 0.1 detected; existing imports will be migrated automatically.\n");
   }
+  const evidence = detectFrameworks(manifest);
+  const detected = detectedFrameworks(evidence);
+  let framework = options.framework;
+  if (!framework) {
+    if (detected.length === 1) {
+      framework = detected[0]!;
+    } else if (detected.length > 1) {
+      throw new Error(
+        `Multiple frameworks were detected in ${projectRoot}:\n` +
+        `${formatFrameworkEvidence(evidence)}\n` +
+        "Use --cwd to target a package in a monorepo or --framework to override detection.",
+      );
+    } else if (process.stdin.isTTY && process.stdout.isTTY) {
+      framework = await chooseFramework();
+    } else {
+      throw new Error(
+        "Could not detect React, Vue/Nuxt, or Angular from direct package.json " +
+        "dependencies. Non-interactive use requires --framework react|vue|angular.",
+      );
+    }
+  }
+  if (framework === "angular") {
+    throw new Error(
+      "Angular was detected or selected, but a SketchIcon Angular adapter is not available yet.",
+    );
+  }
+  if (shouldMigrate && framework !== "react") {
+    throw new Error(
+      "SketchIcon 0.1 migration is only available for React projects.",
+    );
+  }
   const migration = shouldMigrate ? await planMigration(projectRoot) : { edits: [], packs: new Set<IconPack>() };
   const existing = installedPacks(manifest);
   const defaults = [...new Set([...existing, ...migration.packs])];
@@ -146,7 +211,7 @@ export async function runCli(args: readonly string[], cli: RunCliOptions): Promi
   const retainedPacks = existing.filter((pack) => !packs.includes(pack));
 
   const manager = options.packageManager ?? await detectPackageManager(projectRoot, manifest);
-  const [command, installArgs] = installCommand(manager, packs, version);
+  const [command, installArgs] = installCommand(manager, packs, version, framework);
 
   process.stdout.write(`\nSketchIcon project: ${projectRoot}\n`);
   process.stdout.write(`Icon packs: ${packs.join(", ")}\n`);
@@ -154,6 +219,7 @@ export async function runCli(args: readonly string[], cli: RunCliOptions): Promi
     process.stdout.write(`Required by migration: ${addedMigrationPacks.join(", ")}\n`);
     process.stdout.write("Existing icons keep their current provider; migration does not substitute icons between packs.\n");
   }
+  process.stdout.write(`Framework: ${framework}\n`);
   if (retainedPacks.length > 0) {
     process.stdout.write(`Already installed and not removed: ${retainedPacks.join(", ")}\n`);
   }
@@ -176,7 +242,7 @@ export async function runCli(args: readonly string[], cli: RunCliOptions): Promi
   if (shouldMigrate) await applyMigrationPlan(migration);
 
   process.stdout.write("\nSketchIcon is ready. Start with:\n\n");
-  process.stdout.write(`${gettingStartedImports(packs)}\n`);
+  process.stdout.write(`${gettingStartedImports(packs, framework)}\n`);
   if (addedMigrationPacks.includes("lucide") && selectedPacks.includes("hugeicons")) {
     process.stdout.write("\nTo use only Hugeicons, replace the migrated Lucide icons, then remove @sketchicon/lucide with your package manager.\n");
   }

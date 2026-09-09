@@ -1,8 +1,8 @@
 {
   "name": "create-sketchicon",
   "version": "0.2.0",
-  "description": "Interactive installer and migration tool for SketchIcon",
-  "keywords": ["icons", "react", "initializer", "cli", "sketchicon"],
+  "description": "Framework-aware React and Vue installer and migration tool for SketchIcon",
+  "keywords": ["icons", "react", "vue", "initializer", "cli", "sketchicon"],
   "type": "module",
   "files": ["dist", "README.md", "LICENSE"],
   "bin": {

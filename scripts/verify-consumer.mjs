@@ -15,6 +15,7 @@ const runtimeManifest = JSON.parse(await readFile(path.join(root, "packages", "r
 const installerTag = runtimeManifest.version.includes("-") ? runtimeManifest.version : "latest";
 const temporaryRoot = await mkdtemp(path.join(tmpdir(), "sketchicon-consumer-"));
 const typeScriptBin = path.join(root, "node_modules", "typescript", "bin", "tsc");
+const vueTypeScriptBin = path.join(root, "node_modules", "vue-tsc", "bin", "vue-tsc.js");
 
 async function pack(workspace) {
   const { stdout } = await exec(
@@ -138,8 +139,106 @@ try {
     runtime: await pack("sketchicon"),
     lucide: await pack("@sketchicon/lucide"),
     hugeicons: await pack("@sketchicon/hugeicons"),
+    vue: await pack("@sketchicon/vue"),
     create: await pack("create-sketchicon"),
   };
+
+  const vueRoot = path.join(temporaryRoot, "vue-consumer");
+  await mkdir(vueRoot);
+  await writeFile(path.join(vueRoot, "package.json"), JSON.stringify({
+    name: "sketchicon-vue-consumer",
+    private: true,
+    type: "module",
+  }));
+  const vueCompilerOptions = {
+    noEmit: true,
+    strict: true,
+    target: "ES2022",
+    module: "NodeNext",
+    moduleResolution: "NodeNext",
+  };
+  await writeFile(path.join(vueRoot, "tsconfig.json"), JSON.stringify({
+    compilerOptions: vueCompilerOptions,
+    vueCompilerOptions: { strictTemplates: true },
+    include: ["consumer.ts", "App.vue"],
+  }));
+  await writeFile(path.join(vueRoot, "tsconfig.bundler.json"), JSON.stringify({
+    compilerOptions: {
+      ...vueCompilerOptions,
+      module: "ESNext",
+      moduleResolution: "Bundler",
+    },
+    vueCompilerOptions: { strictTemplates: true },
+    include: ["consumer.ts", "App.vue"],
+  }));
+  await writeFile(path.join(vueRoot, "consumer.ts"), [
+    'import { h } from "vue";',
+    'import { Search } from "@sketchicon/lucide";',
+    'import { Home01Icon } from "@sketchicon/hugeicons";',
+    'import { SketchIcon, type SketchIconProps } from "@sketchicon/vue";',
+    'const props: SketchIconProps = { icon: Search, size: 32, title: "Search" };',
+    'h(SketchIcon, props);',
+    'h(SketchIcon, { icon: Home01Icon, "aria-label": "Home", onClick: () => undefined });',
+    '// @ts-expect-error icon geometry is required',
+    'h(SketchIcon, { size: 20 });',
+    '// @ts-expect-error seed must remain a number',
+    'h(SketchIcon, { icon: Search, seed: "invalid" });',
+    '// @ts-expect-error icon must remain valid geometry',
+    'h(SketchIcon, { icon: "search" });',
+    '',
+  ].join("\n"));
+  await writeFile(path.join(vueRoot, "App.vue"), [
+    '<script setup lang="ts">',
+    'import { Search } from "@sketchicon/lucide";',
+    'import DefaultSketchIcon, { SketchIcon } from "@sketchicon/vue";',
+    'const onClick = (event: MouseEvent) => event.preventDefault();',
+    '</script>',
+    '<template>',
+    '  <SketchIcon :icon="Search" stroke="red" fill="none" :width="40" :stroke-width="2" aria-label="Search" @click="onClick" />',
+    '  <DefaultSketchIcon :icon="Search" size="2em" title="Search" />',
+    '  <!-- @vue-expect-error icon geometry is required -->',
+    '  <SketchIcon :size="20" />',
+    '  <!-- @vue-expect-error seed must remain a number -->',
+    '  <SketchIcon :icon="Search" seed="invalid" />',
+    '</template>',
+    '',
+  ].join("\n"));
+  await writeFile(path.join(vueRoot, "consumer.mjs"), [
+    'import assert from "node:assert/strict";',
+    'import { createSSRApp, h } from "vue";',
+    'import { renderToString } from "@vue/server-renderer";',
+    'import { Search } from "@sketchicon/lucide";',
+    'import { Home01Icon } from "@sketchicon/hugeicons";',
+    'import { SketchIcon } from "@sketchicon/vue";',
+    'for (const icon of [Search, Home01Icon]) {',
+    '  const html = await renderToString(createSSRApp(() => h(SketchIcon, { icon, "aria-label": "Icon" })));',
+    '  assert.match(html, /^<svg/);',
+    '  assert.match(html, /role="img"/);',
+    '}',
+    '',
+  ].join("\n"));
+  // Exercise the actual tarball at the supported minimum, minor boundaries,
+  // and current workspace range; declaration inference can change across Vue.
+  for (const vueVersion of ["3.3.0", "3.4.38", "3.5.0", workspaceManifest.devDependencies.vue]) {
+    await exec("npm", [
+      "install",
+      "--ignore-scripts",
+      "--no-audit",
+      "--no-fund",
+      archives.core,
+      archives.vue,
+      archives.lucide,
+      archives.hugeicons,
+      `vue@${vueVersion}`,
+      `@vue/server-renderer@${vueVersion}`,
+    ], { cwd: vueRoot });
+    for (const config of ["tsconfig.json", "tsconfig.bundler.json"]) {
+      await exec(process.execPath, [vueTypeScriptBin, "-p", config], { cwd: vueRoot });
+    }
+    await exec(process.execPath, ["consumer.mjs"], { cwd: vueRoot });
+    await assert.rejects(access(path.join(vueRoot, "node_modules", "react")));
+    console.log(`Verified packed Vue ${vueVersion}: strict templates, NodeNext/Bundler types, and SSR.`);
+  }
 
   const runtimeRoot = await createConsumer(
     "runtime-only",
@@ -302,7 +401,7 @@ try {
 
   const cliRoot = path.join(temporaryRoot, "initializer");
   await mkdir(cliRoot);
-  await writeFile(path.join(cliRoot, "package.json"), '{"private":true,"type":"module","dependencies":{"sketchicon":"^0.1.5"}}\n');
+  await writeFile(path.join(cliRoot, "package.json"), '{"private":true,"type":"module","dependencies":{"react":"^19.0.0","sketchicon":"^0.1.5"}}\n');
   await writeFile(
     path.join(cliRoot, "fixture.tsx"),
     'import { Search, SketchIcon } from "sketchicon";\nimport Home from "sketchicon/hugeicons/icons/home-01";\n',
@@ -329,7 +428,7 @@ try {
   ));
   assert.match(await readFile(path.join(cliRoot, "fixture.tsx"), "utf8"), /from "sketchicon"/);
 
-  console.log("Verified packed React 18/19, NodeNext, Bundler, editor types, SSR/server, provider, and initializer consumers.");
+  console.log("Verified packed React 18/19 and Vue, NodeNext, Bundler, editor types, SSR/server, provider, and initializer consumers.");
 } finally {
   await rm(temporaryRoot, { recursive: true, force: true });
 }
