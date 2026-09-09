@@ -20,3 +20,21 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
+
+  consumer:
+    name: CLI install and browser rendering
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium --only-shell
+      - name: Build distributable packages
+        run: npm run build:consumer-packages
+      - name: Test fresh CLI installs in Vite and Next.js
+        run: npm run test:consumer

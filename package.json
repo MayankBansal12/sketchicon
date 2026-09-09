@@ -31,7 +31,9 @@
     "verify:bundle": "node scripts/verify-bundle.mjs",
     "verify:frameworks": "node scripts/verify-frameworks.mjs",
     "verify:registry": "node scripts/verify-registry-installer.mjs",
-    "verify:web": "node scripts/verify-web.mjs"
+    "verify:web": "node scripts/verify-web.mjs",
+    "test:consumer": "node tests/consumer/verify.mjs",
+    "build:consumer-packages": "npm run generate && npm run build -w @sketchicon/core && npm run build -w sketchicon && npm run build -w @sketchicon/lucide && npm run build -w @sketchicon/hugeicons"
   },
   "dependencies": {
     "@hugeicons/core-free-icons": "^4.2.3",
@@ -41,6 +43,7 @@
     "@types/node": "^22.19.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "playwright": "1.63.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "tsup": "^8.5.0",
