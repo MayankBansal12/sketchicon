@@ -99,7 +99,7 @@ npx sketchicon@latest --framework vanilla --hugeicons
 
 The initializer installs `@sketchicon/preact` or `@sketchicon/dom` plus the selected packs. These adapters do not require React. `--framework react` is the default. It does not convert existing components between frameworks; the 0.1 migration requires the React renderer.
 
-Preact uses the same component props and geometry:
+Preact uses the same drawing options and geometry:
 
 ```tsx
 import { SketchIcon } from "@sketchicon/preact";
@@ -108,7 +108,7 @@ import Search from "@sketchicon/lucide/icons/search";
 <SketchIcon icon={Search} size={24} title="Search" />;
 ```
 
-Use Preact's JSX configuration (`jsxImportSource: "preact"`). The adapter supports SVG refs, native events, server rendering, and hydration. See [Preact documentation](https://github.com/MayankBansal12/sketchicon/blob/main/packages/preact/README.md).
+Use Preact's JSX configuration (`jsxImportSource: "preact"`). The adapter supports SVG refs through `svgRef`, native events, server rendering, and hydration. See [Preact documentation](https://github.com/MayankBansal12/sketchicon/blob/main/packages/preact/README.md).
 
 Vanilla JavaScript creates ordinary SVG elements:
 
