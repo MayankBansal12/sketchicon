@@ -87,3 +87,40 @@ npx sketchicon@latest --migrate
 ```
 
 Add `--dry-run` to preview the import rewrites.
+
+## Other renderers
+
+Choose the renderer independently of the icon packs:
+
+```sh
+npx sketchicon@latest --framework preact --lucide
+npx sketchicon@latest --framework vanilla --hugeicons
+```
+
+The initializer installs `@sketchicon/preact` or `@sketchicon/dom` plus the selected packs. These adapters do not require React. `--framework react` is the default. It does not convert existing components between frameworks; the 0.1 migration requires the React renderer.
+
+Preact uses the same component props and geometry:
+
+```tsx
+import { SketchIcon } from "@sketchicon/preact";
+import Search from "@sketchicon/lucide/icons/search";
+
+<SketchIcon icon={Search} size={24} title="Search" />;
+```
+
+Use Preact's JSX configuration (`jsxImportSource: "preact"`). The adapter supports SVG refs, native events, server rendering, and hydration. See [Preact documentation](https://github.com/MayankBansal12/sketchicon/blob/main/packages/preact/README.md).
+
+Vanilla JavaScript creates ordinary SVG elements:
+
+```js
+import { createSketchIcon, updateSketchIcon } from "@sketchicon/dom";
+import Home from "@sketchicon/hugeicons/icons/home-01";
+
+const icon = createSketchIcon(Home, { size: 24, title: "Home" });
+document.body.append(icon);
+updateSketchIcon(icon, Home, { size: 32, roughness: 0.8, title: "Home" });
+```
+
+Updates preserve the SVG element and its listeners. Pass the complete next options; omitted options reset to defaults. Native SVG attributes go in `attributes`, such as `{ class: "icon", "aria-label": "Home" }`.
+
+A self-contained browser build also supports plain HTML without a bundler. See the [vanilla JavaScript and no-build guide](https://github.com/MayankBansal12/sketchicon/blob/main/packages/dom/README.md).

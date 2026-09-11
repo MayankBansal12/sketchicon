@@ -15,7 +15,7 @@ if (!/^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z.-]+))?$/.test(ta
 }
 
 const version = tag.slice(1);
-const directories = ["core", "runtime", "lucide", "hugeicons", "create-sketchicon"];
+const directories = ["core", "runtime", "preact", "dom", "lucide", "hugeicons", "create-sketchicon"];
 const manifests = await Promise.all(directories.map(async (directory) => JSON.parse(
   await readFile(path.join(root, "packages", directory, "package.json"), "utf8"),
 )));
@@ -23,7 +23,7 @@ const manifests = await Promise.all(directories.map(async (directory) => JSON.pa
 for (const manifest of manifests) {
   if (manifest.version !== version) throw new Error(`${manifest.name}@${manifest.version} does not match ${tag}.`);
 }
-for (const manifest of manifests.filter(({ name }) => ["sketchicon", "@sketchicon/lucide", "@sketchicon/hugeicons"].includes(name))) {
+for (const manifest of manifests.filter(({ name }) => ["sketchicon", "@sketchicon/preact", "@sketchicon/dom", "@sketchicon/lucide", "@sketchicon/hugeicons"].includes(name))) {
   if (manifest.dependencies?.["@sketchicon/core"] !== version) {
     throw new Error(`${manifest.name} must depend on @sketchicon/core@${version}.`);
   }

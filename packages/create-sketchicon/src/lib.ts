@@ -21,7 +21,16 @@ export const packageManagers = ["npm", "pnpm", "yarn", "bun"] as const;
 
 export type PackageManager = (typeof packageManagers)[number];
 
+export const frameworks = ["react", "preact", "vanilla"] as const;
+export type Framework = (typeof frameworks)[number];
+export const runtimePackages: Record<Framework, string> = {
+  react: "sketchicon",
+  preact: "@sketchicon/preact",
+  vanilla: "@sketchicon/dom",
+};
+
 export interface CliOptions {
+  framework: Framework;
   cwd?: string;
   dryRun: boolean;
   help: boolean;
@@ -93,9 +102,9 @@ export function parsePackSelection(value: string, defaults: readonly IconPack[])
   return [...new Set(packs)];
 }
 
-export function gettingStartedImports(packs: readonly IconPack[]): string {
+export function gettingStartedImports(packs: readonly IconPack[], framework: Framework = "react"): string {
   return [
-    'import { SketchIcon } from "sketchicon";',
+    `import { ${framework === "vanilla" ? "createSketchIcon" : "SketchIcon"} } from "${runtimePackages[framework]}";`,
     ...packs.map((pack) => packRegistry[pack].exampleImport),
   ].join("\n");
 }
@@ -112,6 +121,7 @@ function nextValue(args: readonly string[], index: number, flag: string): string
 
 export function parseArgs(args: readonly string[]): CliOptions {
   const options: CliOptions = {
+    framework: "react",
     dryRun: false,
     help: false,
     migrate: false,
@@ -121,6 +131,14 @@ export function parseArgs(args: readonly string[]): CliOptions {
   for (let index = 0; index < args.length; index += 1) {
     const argument = args[index]!;
     switch (argument) {
+      case "--framework": {
+        const value = nextValue(args, index++, argument);
+        if (!frameworks.includes(value as Framework)) {
+          throw new Error(`Unsupported framework: ${value}. Choose react, preact, or vanilla.`);
+        }
+        options.framework = value as Framework;
+        break;
+      }
       case "--cwd":
         options.cwd = nextValue(args, index++, argument);
         break;
@@ -263,9 +281,10 @@ export function installCommand(
   manager: PackageManager,
   packs: readonly IconPack[],
   version: string,
+  framework: Framework = "react",
 ): [string, string[]] {
   const dependencies = [
-    `sketchicon@${version}`,
+    `${runtimePackages[framework]}@${version}`,
     ...packs.map((pack) => `${packRegistry[pack].packageName}@${version}`),
   ];
   switch (manager) {

@@ -1,8 +1,8 @@
 # SketchIcon
 
-> Deterministic, customizable hand-drawn SVG icons for React, based on Lucide and Hugeicons Core Free geometry.
+> Deterministic, customizable hand-drawn SVG icons for React, Preact, and vanilla JavaScript, based on Lucide and Hugeicons Core Free geometry.
 
-SketchIcon provides tree-shakeable React icons rendered as accessible inline SVG. Use the documentation below to install the package, render icons, and find canonical icon export names and slugs.
+SketchIcon provides tree-shakeable icons with React, Preact, and vanilla DOM adapters rendered as accessible inline SVG. Use the documentation below to install the package, render icons, and find canonical icon export names and slugs.
 
 ## Documentation
 

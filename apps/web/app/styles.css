@@ -1105,6 +1105,23 @@ footer p {
   background: var(--ink-surface);
 }
 
+.snippet-framework {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.snippet-framework select {
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+
 .snippet-wrap pre {
   max-height: 176px;
   margin: 0;

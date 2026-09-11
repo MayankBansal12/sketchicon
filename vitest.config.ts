@@ -3,6 +3,8 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   resolve: {
     alias: [
+      { find: "@sketchicon/preact", replacement: new URL("./packages/preact/src/index.ts", import.meta.url).pathname },
+      { find: "@sketchicon/dom", replacement: new URL("./packages/dom/src/index.ts", import.meta.url).pathname },
       {
         find: /^@sketchicon\/hugeicons\/icons\/(.+)$/,
         replacement: `${new URL("./packages/hugeicons/src/icons/", import.meta.url).pathname}$1.ts`,

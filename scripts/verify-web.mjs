@@ -39,7 +39,7 @@ for (const expected of [
   "Icons that feel",
   "Pick one. Make it yours.",
   "Preparing the icon library",
-  `${formattedIconCount} deterministic, customizable hand-drawn SVG icons for React.`,
+  `${formattedIconCount} deterministic, customizable hand-drawn SVG icons for React, Preact, and vanilla JavaScript.`,
 ]) {
   if (!html.includes(expected)) throw new Error(`Prerendered HTML is missing: ${expected}`);
 }

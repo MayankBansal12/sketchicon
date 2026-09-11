@@ -69,6 +69,23 @@ describe("create-sketchicon", () => {
     ]);
   });
 
+  it("selects independent adapters and preserves React defaults", () => {
+    for (const framework of ["react", "preact", "vanilla"] as const) {
+      expect(parseArgs(["--framework", framework, "--lucide"]).framework).toBe(framework);
+    }
+    expect(parseArgs([]).framework).toBe("react");
+    expect(() => parseArgs(["--framework", "vue"])).toThrow(/Unsupported framework/);
+    expect(() => parseArgs(["--framework"])).toThrow(/requires a value/);
+    for (const manager of ["npm", "pnpm", "yarn", "bun"] as const) {
+      expect(installCommand(manager, ["lucide"], "0.2.0", "preact")[1])
+        .toContain("@sketchicon/preact@0.2.0");
+      expect(installCommand(manager, ["hugeicons"], "0.2.0", "vanilla")[1])
+        .toEqual([manager === "npm" ? "install" : "add", "@sketchicon/dom@0.2.0", "@sketchicon/hugeicons@0.2.0"]);
+    }
+    expect(gettingStartedImports(["lucide"], "preact")).toContain('from "@sketchicon/preact"');
+    expect(gettingStartedImports(["hugeicons"], "vanilla")).toContain('import { createSketchIcon } from "@sketchicon/dom"');
+  });
+
   it("always includes packs required by migration", () => {
     expect(includeMigrationPacks(["hugeicons"], new Set(["lucide"])))
       .toEqual(["hugeicons", "lucide"]);

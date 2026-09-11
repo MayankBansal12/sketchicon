@@ -29,11 +29,12 @@ import {
 import {
   filterCatalog,
   filters,
-  formatIconImport,
   getFilterCounts,
   providers,
   type ProviderFilter,
 } from "./catalog";
+
+import { formatUsageSnippet, type SnippetFramework } from "./snippets";
 
 const DEFAULT_COLUMNS = 6;
 const DEFAULT_ROW_HEIGHT = 134;
@@ -235,6 +236,7 @@ function UsageDrawer({
   size: number;
   strokeWidth: number;
 }) {
+  const [framework, setFramework] = useState<SnippetFramework>("react");
   const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
 
   useEffect(() => {
@@ -250,8 +252,7 @@ function UsageDrawer({
 
   if (!icon || !geometry) return null;
 
-  const iconImport = `${formatIconImport(icon)}\nimport { SketchIcon } from "sketchicon";`;
-  const snippet = `${iconImport}\n\n<SketchIcon\n  icon={${icon.name}}\n  size={${size}}\n  roughness={${roughness.toFixed(1)}}\n  strokeWidth={${strokeWidth.toFixed(1)}}\n  color="${color}"\n/>`;
+  const snippet = formatUsageSnippet(icon, framework, { size, roughness, strokeWidth, color });
 
   async function copySnippet() {
     try {
@@ -281,6 +282,17 @@ function UsageDrawer({
         </div>
       </div>
         <div className="snippet-wrap">
+          <div className="snippet-framework">
+            <label htmlFor="usage-framework">Framework</label>
+            <select id="usage-framework" value={framework} onChange={(event) => {
+              setFramework(event.target.value as SnippetFramework);
+              setCopyState("idle");
+            }}>
+              <option value="react">React</option>
+              <option value="preact">Preact</option>
+              <option value="vanilla">Vanilla JavaScript</option>
+            </select>
+          </div>
           <pre><code>{snippet}</code></pre>
           <button className="copy-snippet" type="button" onClick={copySnippet} aria-live="polite">
             <SketchIcon icon={copyState === "copied" ? Check : Copy} size={16} roughness={0.8} />
