@@ -66,6 +66,7 @@ test("uses title as a native label and lets explicit accessibility props win", (
 test("supports aria-label on React Native and explicit stroke overrides", () => {
   const svg = mount({ icon: Search, "aria-label": "Search", color: "blue", stroke: "red" });
   expect(svg.props).toMatchObject({ accessible: true, stroke: "red", "aria-label": "Search" });
+  expect(renderer.toJSON().props.accessibilityLabel).toBe("Search");
 });
 
 test("preserves deterministic options and updates after geometry changes", () => {
@@ -88,5 +89,23 @@ test("keeps icons with external accessibility labels visible", () => {
   expect(svg.props).toMatchObject({
     accessible: true, accessibilityElementsHidden: false,
     accessibilityLabelledBy: "search-label", importantForAccessibility: "auto",
+  });
+});
+
+test("normalizes ARIA labels with React Native precedence at the native host", () => {
+  mount({ icon: Search, title: "Title", accessibilityLabel: "Native label", "aria-label": "ARIA label" });
+  expect(renderer.toJSON().props.accessibilityLabel).toBe("ARIA label");
+});
+
+test("normalizes ARIA label references at the native host", () => {
+  mount({ icon: Search, accessibilityLabelledBy: "native-label", "aria-labelledby": "first, second" });
+  expect(renderer.toJSON().props.accessibilityLabelledBy).toEqual(["first", "second"]);
+});
+
+test("honors aria-hidden even when explicit native props would expose the icon", () => {
+  mount({ icon: Search, title: "Search", "aria-hidden": true,
+    accessibilityElementsHidden: false, importantForAccessibility: "yes" });
+  expect(renderer.toJSON().props).toMatchObject({
+    accessibilityElementsHidden: true, importantForAccessibility: "no-hide-descendants",
   });
 });

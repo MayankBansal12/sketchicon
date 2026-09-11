@@ -50,8 +50,10 @@ import Home01Icon from "@sketchicon/hugeicons/icons/home-01";
 
 ## React Native and Expo
 
-Use the `sketchicon/native` entry for native apps. It renders with
-`react-native-svg` and accepts the same Lucide, Hugeicons, and custom geometry.
+Use the `sketchicon/native` entry for React Native 0.79+ and Expo SDK 53+.
+It renders with `react-native-svg` and accepts the same Lucide, Hugeicons, and
+custom geometry. Metro package exports must remain enabled (the default in
+these versions) so the native entry and direct icon imports can resolve.
 
 In an existing Expo app:
 

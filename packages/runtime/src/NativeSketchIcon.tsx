@@ -28,10 +28,12 @@ export const SketchIcon = forwardRef<Svg, SketchIconProps>(
     ref,
   ) {
     const paths = useSketchPaths(icon, roughness, seed);
-    const isLabeled = Boolean(
-      accessibilityLabel || svgProps["aria-label"] ||
-      svgProps.accessibilityLabelledBy || svgProps["aria-labelledby"],
-    );
+    // Svg renders a native host directly, bypassing View's ARIA normalization
+    // on React Native versions without native prop transformations.
+    const label = svgProps["aria-label"] ?? accessibilityLabel;
+    const labelledBy = svgProps["aria-labelledby"]?.split(/\s*,\s*/g)
+      ?? svgProps.accessibilityLabelledBy;
+    const isLabeled = Boolean(label || labelledBy);
 
     return (
       <Svg
@@ -47,10 +49,15 @@ export const SketchIcon = forwardRef<Svg, SketchIconProps>(
         strokeLinejoin="round"
         accessible={isLabeled}
         accessibilityRole={isLabeled ? "image" : undefined}
-        accessibilityLabel={accessibilityLabel}
-        accessibilityElementsHidden={!isLabeled}
-        importantForAccessibility={isLabeled ? "auto" : "no-hide-descendants"}
         {...svgProps}
+        accessibilityLabel={label}
+        accessibilityLabelledBy={labelledBy}
+        accessibilityElementsHidden={
+          svgProps["aria-hidden"] ?? svgProps.accessibilityElementsHidden ?? !isLabeled
+        }
+        importantForAccessibility={svgProps["aria-hidden"] === true
+          ? "no-hide-descendants"
+          : svgProps.importantForAccessibility ?? (isLabeled ? "auto" : "no-hide-descendants")}
       >
         {paths.map((path, index) => (
           <Path key={index} d={path.d} opacity={path.opacity} />

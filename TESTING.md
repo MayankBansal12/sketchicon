@@ -62,19 +62,22 @@ npx sketchicon@latest
 ## Native consumer coverage
 
 `verify:native` copies `tests/native` into a temporary directory and installs npm
-archives of the core, runtime, and both providers. The fixture pins Expo 57,
-React Native 0.86, React 19.2, and react-native-svg 15.15, checking its dependency
-versions against Expo's bundled compatibility manifest. No workspace source
-aliases or SVG component mocks are used. React Native's Jest preset supplies the
-native host mocks required to render in Node. The fixture's Jest configuration
+archives of the core, runtime, and both providers. It covers both the minimum
+supported generation (Expo 53 / React Native 0.79 / React 19.0 / react-native-svg
+15.11) and the current fixture (Expo 57 / React Native 0.86 / React 19.2 /
+react-native-svg 15.15). Each profile is checked against Expo's bundled
+compatibility manifest. No workspace source aliases or SVG component mocks are
+used. React Native's Jest preset supplies the native host mocks required to render
+in Node. The fixture's Jest configuration
 allows Babel to transform the ESM packages `sketchicon`, `@sketchicon/*`, and
 `svg-pathdata`, along with React Native and `react-native-svg`. Consumers using
 Jest should include these in their `transformIgnorePatterns` allowlist too.
 
 Checks cover geometry parity for both catalogs, deterministic options and
-updates, SVG instance refs, native props, color and size overrides, and
-accessibility defaults. Type checks accept native styles and callbacks and reject
-DOM refs, CSS strings, DOM click handlers, and children. Metro exports exercise
+updates, SVG instance refs, native props, color and size overrides, accessibility
+defaults, and ARIA alias normalization at the native host. Type checks accept
+native styles and callbacks and reject DOM refs, CSS strings, DOM click handlers,
+and children. Metro exports exercise
 the packed entry and provider subpaths for Android, iOS, and web.
 
 These are JavaScript rendering and bundling checks, not device or simulator
