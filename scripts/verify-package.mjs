@@ -7,7 +7,7 @@ const readManifest = async (directory) => JSON.parse(
   await readFile(path.join(root, "packages", directory, "package.json"), "utf8"),
 );
 const manifests = Object.fromEntries(await Promise.all(
-  ["core", "runtime", "lucide", "hugeicons", "create-sketchicon"].map(async (directory) => [directory, await readManifest(directory)]),
+  ["core", "runtime", "preact", "dom", "lucide", "hugeicons", "create-sketchicon"].map(async (directory) => [directory, await readManifest(directory)]),
 ));
 const version = manifests.core.version;
 
@@ -19,6 +19,8 @@ for (const [directory, manifest] of Object.entries(manifests)) {
 
 const expectedNames = {
   core: "@sketchicon/core",
+  preact: "@sketchicon/preact",
+  dom: "@sketchicon/dom",
   runtime: "sketchicon",
   lucide: "@sketchicon/lucide",
   hugeicons: "@sketchicon/hugeicons",
@@ -29,7 +31,7 @@ for (const [directory, name] of Object.entries(expectedNames)) {
 }
 
 const coreDependency = { "@sketchicon/core": version };
-for (const directory of ["runtime", "lucide", "hugeicons"]) {
+for (const directory of ["runtime", "preact", "dom", "lucide", "hugeicons"]) {
   if (JSON.stringify(manifests[directory].dependencies) !== JSON.stringify(coreDependency)) {
     throw new Error(`${manifests[directory].name} must depend only on @sketchicon/core@${version}.`);
   }
@@ -52,6 +54,8 @@ if (manifests.runtime.exports?.["./icons/*"] || manifests.runtime.dependencies?.
 }
 
 const requiredFiles = {
+  preact: ["index.js", "index.d.ts"],
+  dom: ["index.js", "index.d.ts", "browser.js"],
   runtime: ["index.js", "index.d.ts", "runtime.js", "runtime.d.ts", "server.js", "server.d.ts", "core.js", "core.d.ts", "cli.js", "cli.d.ts"],
   lucide: ["index.js", "index.d.ts", "icon.d.ts", "icons/search.js"],
   hugeicons: ["index.js", "index.d.ts", "icon.d.ts", "icons/home-01.js"],
@@ -99,7 +103,7 @@ async function files(directory) {
   return nested.flat();
 }
 
-for (const directory of ["runtime", "lucide", "hugeicons"]) {
+for (const directory of ["runtime", "preact", "dom", "lucide", "hugeicons"]) {
   const distRoot = path.join(root, "packages", directory, "dist");
   for (const file of await files(distRoot)) {
     if (!/\.(?:js|d\.ts)$/.test(file)) continue;
@@ -110,7 +114,7 @@ for (const directory of ["runtime", "lucide", "hugeicons"]) {
   }
 }
 
-const sizeLimits = { runtime: 40_000, lucide: 900_000, hugeicons: 5_500_000 };
+const sizeLimits = { preact: 5_000, dom: 35_000, runtime: 40_000, lucide: 900_000, hugeicons: 5_500_000 };
 for (const [directory, limit] of Object.entries(sizeLimits)) {
   const packageFiles = await files(path.join(root, "packages", directory, "dist"));
   const bytes = (await Promise.all(packageFiles.map(async (file) => (await stat(file)).size)))
@@ -118,4 +122,13 @@ for (const [directory, limit] of Object.entries(sizeLimits)) {
   if (bytes > limit) throw new Error(`${directory} dist is ${bytes} bytes; expected at most ${limit}.`);
 }
 
-console.log("Verified independent runtime, Lucide, Hugeicons, core, and initializer package outputs.");
+console.log("Verified independent React, Preact, DOM, Lucide, Hugeicons, core, and initializer package outputs.");
+
+for (const directory of ["preact", "dom"]) {
+  const manifest = manifests[directory];
+  if (manifest.peerDependencies?.react || manifest.dependencies?.react || manifest.dependencies?.sketchicon) {
+    throw new Error(`${manifest.name} must not require React.`);
+  }
+  const declaration = await readFile(path.join(root, "packages", directory, "dist/index.d.ts"), "utf8");
+  if (/from ['"]react(?:\/[^'"]*)?['"]/.test(declaration)) throw new Error(`${manifest.name} exposes React types.`);
+}

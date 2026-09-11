@@ -37,16 +37,19 @@ function help(commandName: string, version: string): string {
   }).join("\n");
   return `${commandName}
 
-Install the lightweight SketchIcon runtime and only the icon packs you choose.
+Install a SketchIcon renderer and only the icon packs you choose.
 
 Usage:
   npx ${packageSpec}
 ${packUsage}
   npx ${packageSpec} --packs lucide,hugeicons
+  npx ${packageSpec} --framework preact --lucide
+  npx ${packageSpec} --framework vanilla --hugeicons
   npx ${packageSpec} --migrate
 
 Options:
 ${packOptions}
+  --framework <name>        react (default), preact, or vanilla
   --all                     Install every available icon pack
   --packs <names>           Comma-separated lucide and/or hugeicons
   --package-manager <name>  npm, pnpm, yarn, or bun
@@ -126,6 +129,9 @@ export async function runCli(args: readonly string[], cli: RunCliOptions): Promi
   const manifest = JSON.parse(await readFile(path.join(projectRoot, "package.json"), "utf8")) as Record<string, unknown>;
   const detectedV1 = hasSketchiconV1(manifest);
   const shouldMigrate = options.migrate || detectedV1;
+  if (shouldMigrate && options.framework !== "react") {
+    throw new Error("SketchIcon 0.1 migration requires --framework react. Migrate first, then convert components to Preact or vanilla JavaScript separately.");
+  }
   if (detectedV1 && !options.migrate) {
     process.stdout.write("SketchIcon 0.1 detected; existing imports will be migrated automatically.\n");
   }
@@ -146,9 +152,10 @@ export async function runCli(args: readonly string[], cli: RunCliOptions): Promi
   const retainedPacks = existing.filter((pack) => !packs.includes(pack));
 
   const manager = options.packageManager ?? await detectPackageManager(projectRoot, manifest);
-  const [command, installArgs] = installCommand(manager, packs, version);
+  const [command, installArgs] = installCommand(manager, packs, version, options.framework);
 
   process.stdout.write(`\nSketchIcon project: ${projectRoot}\n`);
+  process.stdout.write(`Framework: ${options.framework}\n`);
   process.stdout.write(`Icon packs: ${packs.join(", ")}\n`);
   if (addedMigrationPacks.length > 0) {
     process.stdout.write(`Required by migration: ${addedMigrationPacks.join(", ")}\n`);
@@ -176,7 +183,7 @@ export async function runCli(args: readonly string[], cli: RunCliOptions): Promi
   if (shouldMigrate) await applyMigrationPlan(migration);
 
   process.stdout.write("\nSketchIcon is ready. Start with:\n\n");
-  process.stdout.write(`${gettingStartedImports(packs)}\n`);
+  process.stdout.write(`${gettingStartedImports(packs, options.framework)}\n`);
   if (addedMigrationPacks.includes("lucide") && selectedPacks.includes("hugeicons")) {
     process.stdout.write("\nTo use only Hugeicons, replace the migrated Lucide icons, then remove @sketchicon/lucide with your package manager.\n");
   }

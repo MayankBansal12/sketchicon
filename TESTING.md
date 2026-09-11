@@ -15,6 +15,8 @@ broken contract.
 | `npm run verify:consumer` | Packed-package TypeScript, NodeNext, bundler resolution, React 18/19, SSR, RSC, and provider isolation |
 | `npm run verify:bundle` | Vite tree-shaking and bundle-size budgets for barrel and direct imports |
 | `npm run verify:frameworks` | Production builds from packed tarballs in Vite, React Router framework mode, and Next.js App Router |
+| `npm run verify:adapters` | Packed Preact/DOM installs without React, NodeNext/Bundler types, SSR, DOM rendering, browser ESM, and tree shaking |
+| `npm run verify:adapters:browser` | Packed Preact hydration and SVG refs/events, vanilla updates/listeners, and no-build HTML in Chromium |
 | `npm run verify:web` | The production catalog website, lazy chunks, documentation, and catalog completeness |
 | `npm run verify:registry -- <version>` | The literal public `npx sketchicon@<version>` flow after npm publication |
 
@@ -57,3 +59,11 @@ The initializer is the convenient path for selecting providers:
 ```sh
 npx sketchicon@latest
 ```
+
+The CI consumer job also runs `verify:adapters:browser` after installing Chromium.
+Run `npx playwright install chromium --only-shell` once before running it locally.
+The new adapter checks install tarballs outside the workspace and assert that
+React, React DOM, React types, and the React adapter are absent. Vanilla fixtures
+also assert that Preact is absent. Installer verification covers both command
+aliases, explicit framework selection, repeat installs, dry runs, and rejection
+of a non-React 0.1 migration before files or dependencies change.

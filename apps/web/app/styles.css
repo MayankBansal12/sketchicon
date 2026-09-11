@@ -1105,6 +1105,27 @@ footer p {
   background: var(--ink-surface);
 }
 
+.snippet-framework {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px 0;
+  color: var(--ink-surface-text);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+}
+
+.snippet-framework select {
+  min-height: 36px;
+  padding: 6px 8px;
+  border: 1px solid var(--ink-surface-line);
+  border-radius: 6px;
+  color-scheme: dark;
+  background: var(--ink-surface-raised);
+  color: inherit;
+  font: inherit;
+}
+
 .snippet-wrap pre {
   max-height: 176px;
   margin: 0;

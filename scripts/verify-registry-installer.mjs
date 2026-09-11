@@ -22,24 +22,26 @@ const registryRetryDelay = 5_000;
 const temporaryRoot = await mkdtemp(path.join(tmpdir(), "sketchicon-registry-installer-"));
 const workspaceManifest = JSON.parse(await readFile(path.join(root, "package.json"), "utf8"));
 
-async function installedManifest(packagePath) {
+async function installedManifest(packagePath, directory = temporaryRoot) {
   return JSON.parse(await readFile(
-    path.join(temporaryRoot, "node_modules", ...packagePath.split("/"), "package.json"),
+    path.join(directory, "node_modules", ...packagePath.split("/"), "package.json"),
     "utf8",
   ));
 }
 
-async function runPublicInstaller() {
+async function runPublicInstaller(framework = "react", directory = temporaryRoot) {
   for (let attempt = 1; attempt <= registryAttempts; attempt += 1) {
     try {
       return await exec(npx, [
         "--yes",
         `sketchicon@${requested}`,
         "--all",
+        "--framework",
+        framework,
         "--package-manager",
         "npm",
       ], {
-        cwd: temporaryRoot,
+        cwd: directory,
         env: { ...process.env, npm_config_prefer_online: "true" },
         maxBuffer: 20 * 1024 * 1024,
       });
@@ -110,7 +112,24 @@ try {
   const { stdout: help } = await exec(bin, ["--help"], { cwd: temporaryRoot });
   assert.match(help, new RegExp(`sketchicon@${installerTag}`));
 
-  console.log(`Verified public npx installation and rendering for SketchIcon ${requested}.`);
+  for (const [framework, adapter] of [["preact", "@sketchicon/preact"], ["vanilla", "@sketchicon/dom"]]) {
+    const directory = path.join(temporaryRoot, framework);
+    await mkdir(directory);
+    await writeFile(path.join(directory, "package.json"), JSON.stringify({
+      name: `sketchicon-public-${framework}`, private: true, type: "module",
+    }));
+    const result = await runPublicInstaller(framework, directory);
+    assert.ok(result.stdout.includes(`from "${adapter}"`));
+    for (const name of [adapter, "@sketchicon/core", "@sketchicon/lucide", "@sketchicon/hugeicons"]) {
+      assert.equal((await installedManifest(name, directory)).version, requested);
+    }
+    const lock = JSON.parse(await readFile(path.join(directory, "package-lock.json"), "utf8"));
+    assert.ok(!Object.keys(lock.packages).some(name => /node_modules\/(?:react|react-dom|sketchicon)$/.test(name)));
+    await exec(process.execPath, ["--input-type=module", "--eval",
+      `import * as adapter from "${adapter}"; if (!adapter.${framework === "preact" ? "SketchIcon" : "createSketchIcon"}) process.exit(1);`], { cwd: directory });
+  }
+
+  console.log(`Verified public React/Preact/vanilla npx installations and React rendering for SketchIcon ${requested}.`);
 } finally {
   await rm(temporaryRoot, { recursive: true, force: true });
 }

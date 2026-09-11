@@ -12,9 +12,9 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "npm run generate && npm run build -w @sketchicon/core && npm run build -w sketchicon && npm run build -w @sketchicon/lucide && npm run build -w @sketchicon/hugeicons && npm run build -w create-sketchicon && npm run build -w @sketchicon/web",
+    "build": "npm run generate && npm run build -w @sketchicon/core && npm run build -w @sketchicon/preact && npm run build -w @sketchicon/dom && npm run build -w sketchicon && npm run build -w @sketchicon/lucide && npm run build -w @sketchicon/hugeicons && npm run build -w create-sketchicon && npm run build -w @sketchicon/web",
     "benchmark:core": "npm run generate && npm run build -w @sketchicon/core && npm run build -w @sketchicon/lucide && npm run build -w @sketchicon/hugeicons && node benchmarks/core-render.mjs",
-    "check": "npm run build && npm run typecheck && npm test && npm run verify:catalog && npm run verify:package && npm run verify:distribution && npm run verify:installer && npm run verify:consumer && npm run verify:bundle && npm run verify:frameworks && npm run verify:web",
+    "check": "npm run build && npm run typecheck && npm test && npm run verify:catalog && npm run verify:package && npm run verify:distribution && npm run verify:installer && npm run verify:consumer && npm run verify:bundle && npm run verify:frameworks && npm run verify:adapters && npm run verify:web",
     "dev": "npm run dev -w @sketchicon/web",
     "generate": "node scripts/generate-icons.mjs",
     "predev": "npm run generate",
@@ -33,7 +33,9 @@
     "verify:registry": "node scripts/verify-registry-installer.mjs",
     "verify:web": "node scripts/verify-web.mjs",
     "test:consumer": "node tests/consumer/verify.mjs",
-    "build:consumer-packages": "npm run generate && npm run build -w @sketchicon/core && npm run build -w sketchicon && npm run build -w @sketchicon/lucide && npm run build -w @sketchicon/hugeicons"
+    "build:consumer-packages": "npm run generate && npm run build -w @sketchicon/core && npm run build -w @sketchicon/preact && npm run build -w @sketchicon/dom && npm run build -w sketchicon && npm run build -w @sketchicon/lucide && npm run build -w @sketchicon/hugeicons",
+    "verify:adapters": "node scripts/verify-adapters.mjs",
+    "verify:adapters:browser": "node scripts/verify-adapters.mjs --browser"
   },
   "dependencies": {
     "@hugeicons/core-free-icons": "^4.2.3",
@@ -43,7 +45,10 @@
     "@types/node": "^22.19.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "jsdom": "^30.0.1",
     "playwright": "1.63.0",
+    "preact": "^10.29.8",
+    "preact-render-to-string": "^6.7.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "tsup": "^8.5.0",

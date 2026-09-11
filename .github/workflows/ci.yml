@@ -38,3 +38,6 @@ jobs:
         run: npm run build:consumer-packages
       - name: Test fresh CLI installs in Vite and Next.js
         run: npm run test:consumer
+
+      - name: Test Preact and vanilla browser adapters
+        run: npm run verify:adapters:browser

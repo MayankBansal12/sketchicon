@@ -26,3 +26,12 @@ The command detects npm, pnpm, Yarn, or Bun and updates dependencies through tha
 Projects declaring `sketchicon` `0.1.x` are detected and migrated automatically. Dry runs print the dependency command and source-level import changes without writing anything.
 
 Migration preserves the provider of every existing icon. Selecting Hugeicons for a project with old Lucide imports installs both packages; replace those Lucide icons manually before removing `@sketchicon/lucide`. Existing provider dependencies are reported but are not removed automatically.
+
+## Framework selection
+
+```sh
+npx sketchicon@latest --framework preact --lucide
+npx sketchicon@latest --framework vanilla --hugeicons
+```
+
+`--framework` accepts `react` (default), `preact`, or `vanilla`. It selects `sketchicon`, `@sketchicon/preact`, or `@sketchicon/dom` respectively, plus your chosen packs. The compatibility `create-sketchicon` command accepts the same flags. Existing dependencies are retained; this does not convert components between frameworks. Migrate a 0.1 project with `--framework react` first.
