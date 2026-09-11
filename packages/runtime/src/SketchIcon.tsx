@@ -1,34 +1,6 @@
-import {
-  renderSketch,
-  type SketchGeometry,
-} from "@sketchicon/core";
-import { forwardRef, useMemo, type SVGProps } from "react";
-
-interface CachedPaths {
-  signature: string;
-  paths: ReturnType<typeof renderSketch>;
-}
-
-const defaultPathCache = new WeakMap<SketchGeometry, CachedPaths>();
-
-function getPaths(
-  icon: SketchGeometry,
-  roughness: number,
-  seed: number,
-  signature?: string,
-) {
-  if (roughness !== 1.5 || seed !== 0) {
-    return renderSketch(icon, { roughness, seed });
-  }
-
-  const cacheSignature = signature ?? JSON.stringify(icon.primitives);
-  const cached = defaultPathCache.get(icon);
-  if (cached && cached.signature === cacheSignature) return cached.paths;
-
-  const paths = renderSketch(icon, { roughness, seed });
-  defaultPathCache.set(icon, { signature: cacheSignature, paths });
-  return paths;
-}
+import type { SketchGeometry } from "@sketchicon/core";
+import { forwardRef, type SVGProps } from "react";
+import { useSketchPaths } from "./useSketchPaths.js";
 
 export interface SketchIconProps
   extends Omit<SVGProps<SVGSVGElement>, "children"> {
@@ -52,13 +24,7 @@ export const SketchIcon = forwardRef<SVGSVGElement, SketchIconProps>(
     },
     ref,
   ) {
-    const signature = roughness === 1.5 && seed === 0
-      ? JSON.stringify(icon.primitives)
-      : undefined;
-    const paths = useMemo(
-      () => getPaths(icon, roughness, seed, signature),
-      [icon, roughness, seed, signature],
-    );
+    const paths = useSketchPaths(icon, roughness, seed);
     const isLabeled = Boolean(
       title || svgProps["aria-label"] || svgProps["aria-labelledby"],
     );
