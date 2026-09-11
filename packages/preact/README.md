@@ -1,6 +1,6 @@
 # @sketchicon/preact
 
-Hand-drawn SVG icons for Preact 10.29.8 and later in the 10.x release line. Uses Preact's JSX runtime, hooks, types, and ref forwarding. React is not required.
+Hand-drawn SVG icons for Preact 10.29.8 and later in the 10.x release line. Uses Preact's JSX runtime, hooks, and types. React is not required.
 
 ## Install
 
@@ -31,7 +31,7 @@ The same component accepts Hugeicons geometry from `@sketchicon/hugeicons/icons/
 | `strokeWidth` | `1.5` |
 | `title` | None |
 
-Preact SVG attributes, native event handlers, and an SVG `ref` are supported. Supply `title`, `aria-label`, or `aria-labelledby` for meaningful icons; unlabeled icons default to `aria-hidden="true"`. Explicit SVG attributes override defaults. Children and raw HTML are not part of the component API.
+Preact SVG attributes, native event handlers, and an SVG `svgRef` are supported. Supply `title`, `aria-label`, or `aria-labelledby` for meaningful icons; unlabeled icons default to `aria-hidden="true"`. Explicit SVG attributes override defaults. Native hyphenated SVG names and camel-case presentation aliases are supported; native names take precedence when both are provided. Use `svgRef={ref}` to access the SVG element. Preact's ordinary component `ref` retains its native meaning; it does not point to the SVG. This adapter does not install React compatibility hooks. Children and raw HTML are not part of the component API.
 
 The component works with `preact-render-to-string` and Preact hydration using identical geometry, seed, and options on the server and client. Import `SketchIcon` from this package in both places; no separate server entry is needed. React Server Components remain specific to `sketchicon/server`.
 

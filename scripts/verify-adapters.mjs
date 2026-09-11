@@ -72,9 +72,10 @@ async function bundle(directory, source, file = "bundle.js") {
   const code = chunks.map(chunk => chunk.code).join("\n");
   const modules = chunks.flatMap(chunk => Object.entries(chunk.modules).filter(([, module]) => module.renderedLength > 0).map(([name]) => name));
   assert.ok(!modules.some(name => /node_modules\/(?:react|react-dom)\//.test(name)), "React leaked into an adapter bundle");
+  assert.ok(!modules.some(name => /preact\/compat\//.test(name)), "Preact compat global hooks leaked into the native adapter");
   assert.ok(modules.filter(name => /\/icons\/[^/]+\.js$/.test(name)).length <= 2, "Unused icon geometry leaked into bundle");
   const gzipBytes = gzipSync(code).length;
-  const budget = path.basename(directory) === "preact" ? 24_000 : 12_000;
+  const budget = path.basename(directory) === "preact" ? 18_000 : 12_000;
   console.log(`${path.basename(directory)}/${file}: ${Buffer.byteLength(code)} bytes, ${gzipBytes} gzip (budget ${budget}).`);
   assert.ok(gzipBytes < budget, `Adapter fixture bundle is ${gzipBytes} bytes gzip; budget ${budget}.`);
   await write(directory, file, code);
@@ -94,7 +95,7 @@ try {
     import Search from "@sketchicon/lucide/icons/search";
     import Home from "@sketchicon/hugeicons/icons/home-01";
     const ref = createRef<SVGSVGElement>();
-    const icons = [Search, Home].map(icon => <SketchIcon icon={icon} ref={ref} title="Icon"
+    const icons = [Search, Home].map(icon => <SketchIcon icon={icon} svgRef={ref} title="Icon"
       onClick={event => event.currentTarget.setAttribute("data-clicked", "yes")} />);
     // @ts-expect-error: React raw HTML is not part of the Preact icon API
     const invalid = <SketchIcon icon={Search} dangerouslySetInnerHTML={{ __html: "" }} />;
@@ -135,7 +136,7 @@ try {
       const [changed, setChanged] = useState(false);
       return h("div", null,
         h(SketchIcon, { icon: changed ? Home : Search, roughness: changed ? 0 : 1.5,
-          title: "Icon", ref: node => { if (typeof window !== "undefined") window.iconRef = node; } }),
+          title: "Icon", svgRef: node => { if (typeof window !== "undefined") window.iconRef = node; } }),
         h("button", { onClick: () => setChanged(true) }, "Update"));
     }
   `);
