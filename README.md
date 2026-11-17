@@ -24,7 +24,7 @@ npx --yes sketchicon@latest --all
 ```
 
 Non-interactive projects with no detectable framework must pass
-`--framework react|vue|angular`. Use `--framework` to resolve a deliberate
+`--framework react|vue|preact|vanilla|next|react-native|expo`. Use `--framework` to resolve a deliberate
 multi-framework package, or `--cwd` to target one package in a monorepo.
 Angular is detected, but its adapter is not available yet.
 
@@ -92,6 +92,43 @@ tree-shaking bundler:
 import { Search } from "@sketchicon/lucide";
 import { Home01Icon } from "@sketchicon/hugeicons";
 ```
+
+## Preact and vanilla JavaScript
+
+Choose the renderer independently of the icon packs:
+
+```sh
+npx sketchicon@latest --framework preact --lucide
+npx sketchicon@latest --framework vanilla --hugeicons
+```
+
+The initializer installs `@sketchicon/preact` or `@sketchicon/dom` plus the selected packs. These adapters do not require React. Frameworks are detected from direct dependencies. It does not convert existing components between frameworks; the 0.1 migration requires the React renderer.
+
+Preact uses the same drawing options and geometry:
+
+```tsx
+import { SketchIcon } from "@sketchicon/preact";
+import Search from "@sketchicon/lucide/icons/search";
+
+<SketchIcon icon={Search} size={24} title="Search" />;
+```
+
+Use Preact's JSX configuration (`jsxImportSource: "preact"`). The adapter supports SVG refs through `svgRef`, native events, server rendering, and hydration. See [Preact documentation](packages/preact/README.md).
+
+Vanilla JavaScript creates ordinary SVG elements:
+
+```js
+import { createSketchIcon, updateSketchIcon } from "@sketchicon/dom";
+import Home from "@sketchicon/hugeicons/icons/home-01";
+
+const icon = createSketchIcon(Home, { size: 24, title: "Home" });
+document.body.append(icon);
+updateSketchIcon(icon, Home, { size: 32, roughness: 0.8, title: "Home" });
+```
+
+Updates preserve the SVG element and its listeners. Pass the complete next options; omitted options reset to defaults. Native SVG attributes go in `attributes`, such as `{ class: "icon", "aria-label": "Home" }`.
+
+A self-contained browser build also supports plain HTML without a bundler. See the [vanilla JavaScript and no-build guide](packages/dom/README.md).
 
 ## React Native and Expo
 
@@ -232,6 +269,8 @@ The initializer adds the selected providers but does not remove provider package
 | `@sketchicon/core` | Framework-independent deterministic renderer |
 | `sketchicon` | React and React Native components, compatibility subpaths, and installer command |
 | `@sketchicon/vue` | Lightweight Vue 3 render-function component |
+| `@sketchicon/preact` | Preact component and types |
+| `@sketchicon/dom` | Vanilla SVG creation, updates, and browser build |
 | `@sketchicon/lucide` | Generated Lucide geometry |
 | `@sketchicon/hugeicons` | Generated Hugeicons Core Free geometry |
 | `create-sketchicon` | Backward-compatible alias for the installer command |
@@ -254,3 +293,13 @@ See [TESTING.md](./TESTING.md) for the packed-package, installer, framework, and
 post-publication verification matrix.
 
 Rendering output is stable within a package version. The renderer does not use Canvas, the browser DOM, or `Math.random()`.
+
+## Framework-aware installation
+
+Run `npx sketchicon@latest --yes` in an existing app. Direct dependencies identify React, Next.js, Vue/Nuxt, Preact, React Native, or Expo. Next.js and native projects take precedence over their React dependency; Expo takes precedence over React Native. Mixed frameworks require an explicit choice.
+
+Use `--framework react|vue|preact|vanilla|next|react-native|expo` to override detection and `--cwd apps/my-app` to target a workspace. Plain JavaScript projects use `--framework vanilla`. `--dry-run` previews all commands without changing files.
+
+Vue installs `@sketchicon/vue`, Preact installs `@sketchicon/preact`, and vanilla installs `@sketchicon/dom`, without React. React, Next.js, and native apps share `sketchicon`. All use the same separately selected geometry packs. Next.js Server Components can import `sketchicon/server`. Native and Expo apps import `sketchicon/native`; bare React Native installs `react-native-svg` and requires a native rebuild (and pods on iOS). Expo runs `expo install react-native-svg` with the selected package manager to match the SDK.
+
+Angular is detected with an actionable unsupported-adapter error. No dedicated Angular or Svelte component adapter is shipped.

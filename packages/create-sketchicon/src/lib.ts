@@ -18,7 +18,7 @@ export const packRegistry = {
 export type IconPack = keyof typeof packRegistry;
 export const packNames = Object.keys(packRegistry) as IconPack[];
 export const packageManagers = ["npm", "pnpm", "yarn", "bun"] as const;
-export const frameworkNames = ["react", "vue", "angular"] as const;
+export const frameworkNames = ["react", "vue", "preact", "vanilla", "next", "react-native", "expo", "angular"] as const;
 export type Framework = (typeof frameworkNames)[number];
 
 export type DependencyGroup =
@@ -41,12 +41,28 @@ const dependencyGroupNames: readonly DependencyGroup[] = [
 ];
 
 const frameworkPackages: Record<Framework, readonly string[]> = {
-  react: ["react", "react-dom", "next", "@remix-run/react", "react-router"],
+  react: ["react", "react-dom", "@remix-run/react", "react-router"],
   vue: ["vue", "nuxt"],
+  preact: ["preact"],
+  vanilla: [],
+  next: ["next"],
+  "react-native": ["react-native"],
+  expo: ["expo"],
   angular: ["@angular/core", "@angular/cli"],
 };
 
 export type PackageManager = (typeof packageManagers)[number];
+
+export const frameworks = frameworkNames;
+export const runtimePackages: Record<Exclude<Framework, "angular">, string> = {
+  react: "sketchicon",
+  vue: "@sketchicon/vue",
+  next: "sketchicon",
+  "react-native": "sketchicon",
+  expo: "sketchicon",
+  preact: "@sketchicon/preact",
+  vanilla: "@sketchicon/dom",
+};
 
 export interface CliOptions {
   cwd?: string;
@@ -97,7 +113,7 @@ function packageManagerFrom(value: string | undefined): PackageManager | undefin
 function parseFramework(value: string): Framework {
   const framework = value.trim().toLowerCase();
   if (frameworkNames.includes(framework as Framework)) return framework as Framework;
-  throw new Error(`Unsupported framework: ${value}. Choose react, vue, or angular.`);
+  throw new Error(`Unsupported framework: ${value}. Choose ${frameworkNames.join(", ")}.`);
 }
 
 function setFramework(options: CliOptions, framework: Framework): void {
@@ -130,9 +146,11 @@ export function detectFrameworks(
 export function detectedFrameworks(
   evidence: readonly FrameworkEvidence[],
 ): Framework[] {
-  return frameworkNames.filter((framework) =>
-    evidence.some((item) => item.framework === framework)
-  );
+  const found = new Set(evidence.map((item) => item.framework));
+  // Meta-frameworks include React as an implementation dependency.
+  if (found.has("expo")) found.delete("react-native");
+  if (["next", "expo", "react-native"].some((name) => found.has(name as Framework))) found.delete("react");
+  return frameworkNames.filter((framework) => found.has(framework));
 }
 
 export function formatFrameworkEvidence(
@@ -170,14 +188,9 @@ export function parsePackSelection(value: string, defaults: readonly IconPack[])
   return [...new Set(packs)];
 }
 
-export function gettingStartedImports(
-  packs: readonly IconPack[],
-  framework: Exclude<Framework, "angular"> = "react",
-): string {
+export function gettingStartedImports(packs: readonly IconPack[], framework: Exclude<Framework, "angular"> = "react"): string {
   return [
-    framework === "vue"
-      ? 'import { SketchIcon } from "@sketchicon/vue";'
-      : 'import { SketchIcon } from "sketchicon";',
+    `import { ${framework === "vanilla" ? "createSketchIcon" : "SketchIcon"} } from "${framework === "expo" || framework === "react-native" ? "sketchicon/native" : runtimePackages[framework]}";`,
     ...packs.map((pack) => packRegistry[pack].exampleImport),
   ].join("\n");
 }
@@ -360,8 +373,9 @@ export function installCommand(
     );
   }
   const dependencies = [
-    framework === "vue" ? `@sketchicon/vue@${version}` : `sketchicon@${version}`,
+    `${runtimePackages[framework]}@${version}`,
     ...packs.map((pack) => `${packRegistry[pack].packageName}@${version}`),
+    ...(framework === "react-native" ? ["react-native-svg@^15.0.0"] : []),
   ];
   switch (manager) {
     case "npm":

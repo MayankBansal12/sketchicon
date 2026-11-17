@@ -13,6 +13,8 @@
     "noUncheckedIndexedAccess": true,
     "resolveJsonModule": true,
     "paths": {
+      "@sketchicon/preact": ["packages/preact/src/index.ts"],
+      "@sketchicon/dom": ["packages/dom/src/index.ts"],
       "@sketchicon/core": ["packages/core/src/index.ts"],
       "@sketchicon/hugeicons": ["packages/hugeicons/src/index.ts"],
       "@sketchicon/hugeicons/icons/*": ["packages/hugeicons/src/icons/*"],

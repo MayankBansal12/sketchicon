@@ -8,6 +8,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const npm = process.platform === "win32" ? "npm.cmd" : "npm";
 
 const packages = [
+  { workspace: "@sketchicon/preact", packed: 4_500, unpacked: 10_000, files: 5 },
+  { workspace: "@sketchicon/dom", packed: 13_000, unpacked: 38_000, files: 6 },
   { workspace: "@sketchicon/core", packed: 5_000, unpacked: 15_000, files: 4 },
   { workspace: "sketchicon", packed: 15_000, unpacked: 45_000, files: 18 },
   { workspace: "@sketchicon/vue", packed: 8_000, unpacked: 20_000, files: 5 },
@@ -38,6 +40,8 @@ for (const spec of packages) {
 }
 
 const importChecks = [
+  { label: "Preact adapter", file: "packages/preact/dist/index.js", duration: 100, rss: 128 },
+  { label: "DOM adapter", file: "packages/dom/dist/index.js", duration: 100, rss: 128 },
   { label: "runtime root", file: "packages/runtime/dist/index.js", duration: 100, rss: 128 },
   { label: "runtime compatibility", file: "packages/runtime/dist/runtime.js", duration: 100, rss: 128 },
   { label: "runtime server", file: "packages/runtime/dist/server.js", duration: 100, rss: 128 },
@@ -78,5 +82,5 @@ for (const check of importChecks) {
 }
 
 console.log(
-  `Verified six package budgets: ${packageReports.map((report) => `${report.name} ${report.size}B/${report.files.length} files`).join(", ")}; imports: ${importReports.map((report) => `${report.label} ${report.duration.toFixed(1)}ms`).join(", ")}.`,
+  `Verified eight package budgets: ${packageReports.map((report) => `${report.name} ${report.size}B/${report.files.length} files`).join(", ")}; imports: ${importReports.map((report) => `${report.label} ${report.duration.toFixed(1)}ms`).join(", ")}.`,
 );

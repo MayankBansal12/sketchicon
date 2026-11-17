@@ -42,19 +42,21 @@ function help(commandName: string, version: string): string {
   }).join("\n");
   return `${commandName}
 
-Install the lightweight SketchIcon runtime and only the icon packs you choose.
+Install a SketchIcon renderer and only the icon packs you choose.
 
 Usage:
   npx ${packageSpec}
 ${packUsage}
   npx ${packageSpec} --packs lucide,hugeicons
+  npx ${packageSpec} --framework preact --lucide
+  npx ${packageSpec} --framework vanilla --hugeicons
   npx ${packageSpec} --migrate
   npx ${packageSpec} --framework vue --lucide
 
 Options:
 ${packOptions}
   --all                     Install every available icon pack
-  --framework <name>        react, vue, or angular
+  --framework <name>        react, vue, preact, vanilla, next, react-native, expo, angular
   --react                   Select the React adapter
   --vue                     Select the Vue 3 adapter
   --angular                 Report Angular adapter availability
@@ -104,11 +106,7 @@ async function packageVersion(packageUrl: string): Promise<string> {
 }
 
 async function chooseFramework(): Promise<Framework> {
-  const choices = [
-    "  1. React",
-    "  2. Vue 3 (including Nuxt)",
-    "  3. Angular (adapter not available yet)",
-  ];
+  const choices = frameworkNames.map((name, index) => `  ${index + 1}. ${name}`);
   const prompt = [
     "Which framework does this project use?",
     ...choices,
@@ -121,7 +119,7 @@ async function chooseFramework(): Promise<Framework> {
     const byNumber = frameworkNames[Number(answer) - 1];
     if (byNumber) return byNumber;
     if (frameworkNames.includes(answer as Framework)) return answer as Framework;
-    throw new Error("Invalid framework selection. Choose 1, 2, 3, react, vue, or angular.");
+    throw new Error("Invalid framework selection. Choose 1, 2, 3, react, vue, preact, vanilla, next, react-native, expo, angular.");
   } finally {
     readline.close();
   }
@@ -179,8 +177,8 @@ export async function runCli(args: readonly string[], cli: RunCliOptions): Promi
       framework = await chooseFramework();
     } else {
       throw new Error(
-        "Could not detect React, Vue/Nuxt, or Angular from direct package.json " +
-        "dependencies. Non-interactive use requires --framework react|vue|angular.",
+        "Could not detect a supported framework from direct package.json " +
+        "dependencies. Non-interactive use requires --framework react|vue|preact|vanilla|next|react-native|expo.",
       );
     }
   }
@@ -189,9 +187,9 @@ export async function runCli(args: readonly string[], cli: RunCliOptions): Promi
       "Angular was detected or selected, but a SketchIcon Angular adapter is not available yet.",
     );
   }
-  if (shouldMigrate && framework !== "react") {
+  if (shouldMigrate && framework !== "react" && framework !== "next") {
     throw new Error(
-      "SketchIcon 0.1 migration is only available for React projects.",
+      "SketchIcon 0.1 migration requires --framework react or next.",
     );
   }
   const migration = shouldMigrate ? await planMigration(projectRoot) : { edits: [], packs: new Set<IconPack>() };
@@ -224,6 +222,7 @@ export async function runCli(args: readonly string[], cli: RunCliOptions): Promi
     process.stdout.write(`Already installed and not removed: ${retainedPacks.join(", ")}\n`);
   }
   process.stdout.write(`Install: ${command} ${installArgs.join(" ")}\n`);
+  if (framework === "expo") process.stdout.write(`Then: ${manager === "npm" ? "npx" : manager === "pnpm" ? "pnpm exec" : manager === "bun" ? "bunx" : "yarn exec"} expo install react-native-svg --${manager}\n`);
   if (shouldMigrate) {
     process.stdout.write(`Migration: ${migration.edits.length} source file${migration.edits.length === 1 ? "" : "s"}\n`);
   }
@@ -239,7 +238,14 @@ export async function runCli(args: readonly string[], cli: RunCliOptions): Promi
   }
 
   await run(command, installArgs, projectRoot);
+  if (framework === "expo") {
+    const runner = manager === "npm" ? "npx" : manager === "bun" ? "bunx" : manager;
+    const prefix = manager === "pnpm" || manager === "yarn" ? ["exec"] : [];
+    await run(runner, [...prefix, "expo", "install", "react-native-svg", `--${manager}`], projectRoot);
+  }
   if (shouldMigrate) await applyMigrationPlan(migration);
+  if (framework === "next") process.stdout.write('\nUse sketchicon/server in Server Components, or add "use client" for interactive icons.\n');
+  if (framework === "react-native") process.stdout.write("\nFor iOS, install CocoaPods dependencies and rebuild your native app.\n");
 
   process.stdout.write("\nSketchIcon is ready. Start with:\n\n");
   process.stdout.write(`${gettingStartedImports(packs, framework)}\n`);

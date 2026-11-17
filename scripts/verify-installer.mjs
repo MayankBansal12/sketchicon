@@ -68,14 +68,14 @@ process.exit(result.status ?? 1);
   await chmod(proxy, 0o755);
 }
 
-async function prepareReactApp(name) {
+async function prepareReactApp(name, framework = "react") {
   const directory = path.join(temporaryRoot, name);
   await mkdir(directory);
   await writeFile(path.join(directory, "package.json"), `${JSON.stringify({
     name: `sketchicon-${name}`,
     private: true,
     type: "module",
-    dependencies: { react: "^19.2.0", "react-dom": "^19.2.0" },
+    dependencies: framework === "react" ? { react: "^19.2.0", "react-dom": "^19.2.0" } : framework === "preact" ? { preact: "^10.29.8" } : {},
   }, null, 2)}\n`);
   await exec(npm, ["install", "--ignore-scripts", "--no-audit", "--no-fund"], {
     cwd: directory,
@@ -176,6 +176,8 @@ try {
 
   const archives = {
     core: await pack("@sketchicon/core"),
+    preact: await pack("@sketchicon/preact"),
+    dom: await pack("@sketchicon/dom"),
     runtime: await pack("sketchicon"),
     lucide: await pack("@sketchicon/lucide"),
     hugeicons: await pack("@sketchicon/hugeicons"),
@@ -190,6 +192,8 @@ try {
   const installerTag = version.includes("-") ? version : "latest";
   const registry = await startCoreRegistry(archives.core, version);
   const localArchives = {
+    [`@sketchicon/preact@${version}`]: archives.preact,
+    [`@sketchicon/dom@${version}`]: archives.dom,
     [`sketchicon@${version}`]: archives.runtime,
     [`@sketchicon/lucide@${version}`]: archives.lucide,
     [`@sketchicon/vue@${version}`]: archives.vue,
@@ -328,6 +332,11 @@ try {
     "}",
     "",
   ].join("\n"));
+  const unchangedLegacy = await readFile(legacySourcePath, "utf8");
+  await assert.rejects(runInstaller(sketchiconCli,
+    ["--framework", "preact", "--lucide"], legacyApp, localArchives), /migration requires --framework react/);
+  assert.equal(await readFile(legacySourcePath, "utf8"), unchangedLegacy);
+  assert.deepEqual(JSON.parse(await readFile(legacyManifestPath, "utf8")), legacyManifest);
   const legacyResult = await runInstaller(
     createCli,
     ["--hugeicons", "--package-manager", "npm"],
@@ -376,6 +385,23 @@ try {
     'if (!html.startsWith("<svg") || !html.includes("role=\\\"img\\\"")) process.exit(1);',
   ].join("\n")], { cwd: vueApp });
 
+  for (const [framework, dependencies] of [
+    ["next", { react: "^19.0.0", next: "^16.0.0" }],
+    ["react-native", { react: "^19.0.0", "react-native": "0.86.0" }],
+    ["expo", { react: "^19.0.0", "react-native": "0.86.0", expo: "^57.0.0" }],
+    ["preact", { preact: "^10.0.0" }],
+  ]) {
+    const app = await prepareManifestApp(`detect-${framework}`, { dependencies });
+    const before = await readFile(path.join(app, "package.json"), "utf8");
+    for (const cli of [sketchiconCli, createCli]) {
+      const result = await runInstaller(cli, ["--yes", "--dry-run", "--package-manager", "npm"], app, localArchives);
+      assert.match(result.stdout, new RegExp(`Framework: ${framework}`));
+      if (framework === "expo") assert.match(result.stdout, /npx expo install react-native-svg --npm/);
+      if (framework === "react-native") assert.match(result.stdout, /react-native-svg@/);
+      assert.equal(await readFile(path.join(app, "package.json"), "utf8"), before);
+    }
+  }
+
   const noFrameworkApp = await prepareManifestApp("no-framework", {});
   await assert.rejects(
     runInstaller(
@@ -385,8 +411,8 @@ try {
       localArchives,
     ),
     (error) => {
-      assert.match(error.stderr, /Could not detect React, Vue\/Nuxt, or Angular/);
-      assert.match(error.stderr, /--framework react\|vue\|angular/);
+      assert.match(error.stderr, /Could not detect a supported framework/);
+      assert.match(error.stderr, /--framework react\|vue\|preact/);
       return true;
     },
   );
@@ -474,8 +500,30 @@ try {
     ["install", `@sketchicon/vue@${version}`, `@sketchicon/lucide@${version}`],
   ]);
 
+  for (const [framework, adapter] of [["preact", "@sketchicon/preact"], ["vanilla", "@sketchicon/dom"]]) {
+    const app = await prepareReactApp(`${framework}-app`, framework);
+    await configureScopedRegistry(app, registry);
+    const before = await readFile(path.join(app, "package.json"), "utf8");
+    const beforeLog = await readFile(installLog, "utf8");
+    const cli = framework === "preact" ? sketchiconCli : createCli;
+    const dry = await runInstaller(cli, ["--framework", framework, "--lucide", "--dry-run"], app, localArchives);
+    assert.ok(dry.stdout.includes(`${adapter}@${version}`));
+    assert.equal(await readFile(path.join(app, "package.json"), "utf8"), before);
+    assert.equal(await readFile(installLog, "utf8"), beforeLog);
+    for (let repeat = 0; repeat < 2; repeat++) {
+      const result = await runInstaller(cli, ["--framework", framework, "--lucide"], app, localArchives);
+      assert.ok(result.stdout.includes(`from "${adapter}"`));
+    }
+    assert.equal((await installedManifest(app, adapter)).version, version);
+    assert.equal((await installedManifest(app, "@sketchicon/lucide")).version, version);
+    for (const absent of ["react", "react-dom", "sketchicon", "@sketchicon/hugeicons"]) {
+      await assert.rejects(installedManifest(app, absent));
+    }
+    await exec(process.execPath, ["--input-type=module", "--eval", `import * as adapter from "${adapter}"; if (!Object.keys(adapter).length) process.exit(1);`], { cwd: app });
+  }
+
   console.log(
-    "Verified packed React/Vue installers, detection failures, overrides, monorepo targeting, and migration.",
+    "Verified runtime-only npm/npx use and packed installers in fresh, existing-pack, legacy, Preact, and vanilla apps.",
   );
 } finally {
   if (registryServer) {

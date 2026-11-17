@@ -1,6 +1,6 @@
 # SketchIcon
 
-> Deterministic, customizable hand-drawn SVG icons for React, React Native, and Expo, based on Lucide and Hugeicons Core Free geometry.
+> Deterministic, customizable hand-drawn SVG icons for React, Next.js, Vue, Preact, vanilla JavaScript, React Native, and Expo, based on Lucide and Hugeicons Core Free geometry.
 
 SketchIcon provides tree-shakeable icons rendered as accessible inline SVG on the web and native SVG through `sketchicon/native`. Use the documentation below to install the package, render icons, and find canonical icon export names and slugs.
 

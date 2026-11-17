@@ -31,6 +31,15 @@ same SVG markup as the default client entry. The `sketchicon/runtime` and
 SSR is covered on React 18 and 19; the React Server Component condition requires
 React 19 because stable React 18 marks that condition unsupported.
 
+## Framework selection
+
+```sh
+npx sketchicon@latest --framework preact --lucide
+npx sketchicon@latest --framework vanilla --hugeicons
+```
+
+`--framework` accepts `react`, `vue`, `preact`, `vanilla`, `next`, `react-native`, or `expo`. It selects `sketchicon`, `@sketchicon/preact`, or `@sketchicon/dom` respectively, plus your chosen packs. The compatibility `create-sketchicon` command accepts the same flags. Existing dependencies are retained; this does not convert components between frameworks. Migrate a 0.1 project with `--framework react` first.
+
 ## React Native and Expo
 
 Use the `sketchicon/native` entry for React Native 0.79+ and Expo SDK 53+.
@@ -95,3 +104,13 @@ The native entry also works with Expo web. The `sketchicon` and
 `sketchicon/runtime` entries continue to render browser SVG. The initializer
 selects icon packs; install `react-native-svg` separately with the command above.
 Web-only consumers do not need either native peer dependency.
+
+## Framework-aware installation
+
+Run `npx sketchicon@latest --yes` in an existing app. Direct dependencies identify React, Next.js, Vue/Nuxt, Preact, React Native, or Expo. Next.js and native projects take precedence over their React dependency; Expo takes precedence over React Native. Mixed frameworks require an explicit choice.
+
+Use `--framework react|vue|preact|vanilla|next|react-native|expo` to override detection and `--cwd apps/my-app` to target a workspace. Plain JavaScript projects use `--framework vanilla`. `--dry-run` previews all commands without changing files.
+
+Vue installs `@sketchicon/vue`, Preact installs `@sketchicon/preact`, and vanilla installs `@sketchicon/dom`, without React. React, Next.js, and native apps share `sketchicon`. All use the same separately selected geometry packs. Next.js Server Components can import `sketchicon/server`. Native and Expo apps import `sketchicon/native`; bare React Native installs `react-native-svg` and requires a native rebuild (and pods on iOS). Expo runs `expo install react-native-svg` with the selected package manager to match the SDK.
+
+Angular is detected with an actionable unsupported-adapter error. No dedicated Angular or Svelte component adapter is shipped.

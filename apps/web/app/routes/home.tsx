@@ -24,10 +24,10 @@ type PackageManagerId = (typeof packageManagers)[number]["id"];
 const IconLibrary = lazy(() => import("../icon-library/IconLibrary"));
 
 export const meta: MetaFunction = () => [
-  { title: "SketchIcon: Hand-drawn icons for React" },
+  { title: "SketchIcon: Hand-drawn icons for React, Vue, Preact, and Native" },
   {
     name: "description",
-    content: `${formattedIconCount} deterministic, customizable hand-drawn SVG icons for React.`,
+    content: `${formattedIconCount} deterministic, customizable hand-drawn SVG icons for React, Vue, Preact, vanilla JavaScript, and React Native.`,
   },
 ];
 
@@ -122,10 +122,10 @@ export default function Home() {
             <SketchIcon icon={SunMedium} size={64} roughness={1.4} />
           </div>
 
-          <p className="hero-note">{formattedIconCount} icons · Lucide + Hugeicons · For React</p>
+          <p className="hero-note">{formattedIconCount} icons · Lucide + Hugeicons · React · Vue · Preact · Vanilla · Native</p>
           <h1 id="hero-heading">Icons that feel<br />drawn, not generated.</h1>
           <p className="hero-copy">
-            Familiar stroke icons with a loose, human line. Deterministic, accessible, and ready for React.
+            Familiar stroke icons with a loose, human line. Deterministic, accessible, and ready for React, Vue, Preact, and Native.
           </p>
           <div className="install-block">
             <div className="install-tabs" role="group" aria-label="Package manager">
@@ -179,7 +179,7 @@ export default function Home() {
           <div className="section-heading">
             <p className="section-number">01 / The library</p>
             <h2 id="icons-heading">Pick one. Make it yours.</h2>
-            <p>Search the library, customize drawing, click icon for ready-to-paste React.</p>
+            <p>Search the library, customize drawing, click icon for ready-to-paste code.</p>
           </div>
           <IconLibraryBoundary />
         </section>
