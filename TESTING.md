@@ -15,6 +15,7 @@ broken contract.
 | `npm run verify:consumer` | Packed TypeScript/NodeNext/Bundler consumers, React 18/19, Vue 3.3/3.4/3.5 strict templates and SSR, RSC, and provider isolation |
 | `npm run verify:bundle` | Vite tree-shaking and size budgets for React/Vue barrel and direct imports |
 | `npm run verify:frameworks` | Packed Vue SFC/Vite + SSR, React/Vite, React Router, and Next.js production builds |
+| `npm run verify:native` | Packed-package native TypeScript, real `react-native-svg` component rendering with the React Native Jest preset, and Expo Metro production exports for Android, iOS, and web |
 | `npm run verify:web` | The production catalog website, lazy chunks, documentation, and catalog completeness |
 | `npm run verify:registry -- <version>` | The literal public `npx sketchicon@<version>` flow after npm publication |
 
@@ -62,3 +63,28 @@ The initializer is the convenient path for selecting providers:
 ```sh
 npx sketchicon@latest
 ```
+
+## Native consumer coverage
+
+`verify:native` copies `tests/native` into a temporary directory and installs npm
+archives of the core, runtime, and both providers. It covers both the minimum
+supported generation (Expo 53 / React Native 0.79 / React 19.0 / react-native-svg
+15.11) and the current fixture (Expo 57 / React Native 0.86 / React 19.2 /
+react-native-svg 15.15). Each profile is checked against Expo's bundled
+compatibility manifest. No workspace source aliases or SVG component mocks are
+used. React Native's Jest preset supplies the native host mocks required to render
+in Node. The fixture's Jest configuration
+allows Babel to transform the ESM packages `sketchicon`, `@sketchicon/*`, and
+`svg-pathdata`, along with React Native and `react-native-svg`. Consumers using
+Jest should include these in their `transformIgnorePatterns` allowlist too.
+
+Checks cover geometry parity for both catalogs, deterministic options and
+updates, SVG instance refs, native props, color and size overrides, accessibility
+defaults, and ARIA alias normalization at the native host. Type checks accept
+native styles and callbacks and reject DOM refs, CSS strings, DOM click handlers,
+and children. Metro exports exercise
+the packed entry and provider subpaths for Android, iOS, and web.
+
+These are JavaScript rendering and bundling checks, not device or simulator
+launches. Native binary compilation and on-device screen-reader behavior still
+require testing in a consumer's iOS/Android environment.

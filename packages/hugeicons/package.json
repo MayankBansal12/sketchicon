@@ -12,11 +12,13 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./icons/*": {
       "types": "./dist/icon.d.ts",
-      "import": "./dist/icons/*.js"
+      "import": "./dist/icons/*.js",
+      "default": "./dist/icons/*.js"
     }
   },
   "scripts": {
