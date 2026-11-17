@@ -17,8 +17,9 @@ Instead of maintaining a custom sketch icon pack, developers can reuse familiar 
 
 ## Product Architecture
 
-SketchIcon serves React applications through a small runtime and optional icon catalogs. It includes:
+SketchIcon serves React and Vue 3 applications through small adapters and optional icon catalogs. It includes:
 
+- A Vue 3 render-function `SketchIcon` component using the same geometry.
 - A framework-independent TypeScript rendering engine.
 - A generic React `SketchIcon` component for custom geometry.
 - Independent, tree-shakeable geometry packages for the compatible Lucide and Hugeicons Core Free catalogs.
@@ -70,6 +71,7 @@ Catalogs are generated at publish time and distributed independently from the ru
 ### Static by Default
 
 Sketch geometry does not regenerate on hover, click, or rerender. Animation is outside the first-release scope.
+- Vue 3.3 and newer, including client and server rendering.
 
 ## Compatibility
 

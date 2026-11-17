@@ -6,6 +6,9 @@ import { describe, expect, it } from "vitest";
 import {
   applyMigrationPlan,
   detectPackageManager,
+  detectFrameworks,
+  detectedFrameworks,
+  formatFrameworkEvidence,
   formatMigrationDiff,
   gettingStartedImports,
   hasSketchiconV1,
@@ -19,6 +22,28 @@ import {
 import { packageManagerNeedsShell } from "./main.js";
 
 describe("create-sketchicon", () => {
+  it.each([
+    [{ react: "19", next: "16" }, ["next"]],
+    [{ react: "19", "react-native": "0.86" }, ["react-native"]],
+    [{ react: "19", "react-native": "0.86", expo: "57" }, ["expo"]],
+    [{ preact: "10" }, ["preact"]],
+    [{ vue: "3", nuxt: "4" }, ["vue"]],
+    [{ react: "19", preact: "10" }, ["react", "preact"]],
+    [{ next: "16", expo: "57", react: "19" }, ["next", "expo"]],
+  ])("detects framework families without hiding mixed apps: %j", (dependencies, expected) => {
+    expect(detectedFrameworks(detectFrameworks({ dependencies }))).toEqual(expected);
+  });
+
+  it("uses native imports and installs the bare native peer", () => {
+    for (const framework of ["expo", "react-native"] as const) {
+      expect(gettingStartedImports(["lucide"], framework)).toContain('from "sketchicon/native"');
+    }
+    expect(installCommand("npm", ["lucide"], "0.2.0", "react-native")[1]).toContain("react-native-svg@^15.0.0");
+    expect(installCommand("npm", ["lucide"], "0.2.0", "expo")[1]).not.toContain("react-native-svg@^15.0.0");
+    expect(parseArgs([]).framework).toBeUndefined();
+    expect(() => parseArgs(["--framework", "expo", "--react"])).toThrow(/Conflicting/);
+  });
+
   it("uses the command shell for Windows package-manager shims", () => {
     expect(packageManagerNeedsShell("win32")).toBe(true);
     expect(packageManagerNeedsShell("linux")).toBe(false);
@@ -50,6 +75,51 @@ describe("create-sketchicon", () => {
       .toThrow(/Choose a number, lucide, hugeicons, or all/);
   });
 
+  it("detects frameworks only from direct dependency groups", () => {
+    const evidence = detectFrameworks({
+      dependencies: { react: "^19.0.0" },
+      devDependencies: { nuxt: "^4.0.0" },
+      optionalDependencies: { "@angular/core": "^20.0.0" },
+      peerDependencies: { vue: "^3.5.0" },
+      bundledDependencies: ["next"],
+      scripts: { next: "next dev" },
+    });
+    expect(evidence).toEqual([
+      { dependencyGroup: "dependencies", framework: "react", packageName: "react" },
+      { dependencyGroup: "devDependencies", framework: "vue", packageName: "nuxt" },
+      {
+        dependencyGroup: "optionalDependencies",
+        framework: "angular",
+        packageName: "@angular/core",
+      },
+      { dependencyGroup: "peerDependencies", framework: "vue", packageName: "vue" },
+    ]);
+    expect(detectedFrameworks(evidence)).toEqual(["react", "vue", "angular"]);
+    expect(formatFrameworkEvidence(evidence)).toContain(
+      "vue: nuxt in devDependencies",
+    );
+  });
+
+  it("parses framework overrides and friendly shortcuts", () => {
+    expect(parseArgs(["--framework", "vue"])).toMatchObject({ framework: "vue" });
+    expect(parseArgs(["--react"])).toMatchObject({ framework: "react" });
+    expect(parseArgs(["--angular"])).toMatchObject({ framework: "angular" });
+    expect(() => parseArgs(["--vue", "--react"])).toThrow(/Conflicting framework/);
+    expect(() => parseArgs(["--framework", "svelte"])).toThrow(/Unsupported framework/);
+  });
+
+  it("prints Vue startup imports and selects the Vue runtime dependency", () => {
+    expect(gettingStartedImports(["lucide"], "vue")).toContain(
+      'import { SketchIcon } from "@sketchicon/vue";',
+    );
+    expect(installCommand("npm", ["lucide"], "0.2.0", "vue")).toEqual([
+      "npm",
+      ["install", "@sketchicon/vue@0.2.0", "@sketchicon/lucide@0.2.0"],
+    ]);
+    expect(() => installCommand("npm", ["lucide"], "0.2.0", "angular"))
+      .toThrow(/not available yet/);
+  });
+
   it("prints startup-safe direct imports for the selected packs", () => {
     expect(gettingStartedImports(["lucide", "hugeicons"])).toBe([
       'import { SketchIcon } from "sketchicon";',
@@ -69,12 +139,12 @@ describe("create-sketchicon", () => {
     ]);
   });
 
-  it("selects independent adapters and preserves React defaults", () => {
+  it("selects independent adapters and leaves detection to the project", () => {
     for (const framework of ["react", "preact", "vanilla"] as const) {
       expect(parseArgs(["--framework", framework, "--lucide"]).framework).toBe(framework);
     }
-    expect(parseArgs([]).framework).toBe("react");
-    expect(() => parseArgs(["--framework", "vue"])).toThrow(/Unsupported framework/);
+    expect(parseArgs([]).framework).toBeUndefined();
+    expect(parseArgs(["--framework", "vue"]).framework).toBe("vue");
     expect(() => parseArgs(["--framework"])).toThrow(/requires a value/);
     for (const manager of ["npm", "pnpm", "yarn", "bun"] as const) {
       expect(installCommand(manager, ["lucide"], "0.2.0", "preact")[1])

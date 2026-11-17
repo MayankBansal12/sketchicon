@@ -289,6 +289,10 @@ function UsageDrawer({
               setCopyState("idle");
             }}>
               <option value="react">React</option>
+              <option value="vue">Vue / Nuxt</option>
+              <option value="next">Next.js (server)</option>
+              <option value="react-native">React Native</option>
+              <option value="expo">Expo</option>
               <option value="preact">Preact</option>
               <option value="vanilla">Vanilla JavaScript</option>
             </select>

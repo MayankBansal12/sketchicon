@@ -18,23 +18,58 @@ export const packRegistry = {
 export type IconPack = keyof typeof packRegistry;
 export const packNames = Object.keys(packRegistry) as IconPack[];
 export const packageManagers = ["npm", "pnpm", "yarn", "bun"] as const;
+export const frameworkNames = ["react", "vue", "preact", "vanilla", "next", "react-native", "expo", "angular"] as const;
+export type Framework = (typeof frameworkNames)[number];
+
+export type DependencyGroup =
+  | "dependencies"
+  | "devDependencies"
+  | "optionalDependencies"
+  | "peerDependencies";
+
+export interface FrameworkEvidence {
+  dependencyGroup: DependencyGroup;
+  framework: Framework;
+  packageName: string;
+}
+
+const dependencyGroupNames: readonly DependencyGroup[] = [
+  "dependencies",
+  "devDependencies",
+  "optionalDependencies",
+  "peerDependencies",
+];
+
+const frameworkPackages: Record<Framework, readonly string[]> = {
+  react: ["react", "react-dom", "@remix-run/react", "react-router"],
+  vue: ["vue", "nuxt"],
+  preact: ["preact"],
+  vanilla: [],
+  next: ["next"],
+  "react-native": ["react-native"],
+  expo: ["expo"],
+  angular: ["@angular/core", "@angular/cli"],
+};
 
 export type PackageManager = (typeof packageManagers)[number];
 
-export const frameworks = ["react", "preact", "vanilla"] as const;
-export type Framework = (typeof frameworks)[number];
-export const runtimePackages: Record<Framework, string> = {
+export const frameworks = frameworkNames;
+export const runtimePackages: Record<Exclude<Framework, "angular">, string> = {
   react: "sketchicon",
+  vue: "@sketchicon/vue",
+  next: "sketchicon",
+  "react-native": "sketchicon",
+  expo: "sketchicon",
   preact: "@sketchicon/preact",
   vanilla: "@sketchicon/dom",
 };
 
 export interface CliOptions {
-  framework: Framework;
   cwd?: string;
   dryRun: boolean;
   help: boolean;
   migrate: boolean;
+  framework?: Framework;
   packageManager?: PackageManager;
   packs?: IconPack[];
   yes: boolean;
@@ -75,6 +110,57 @@ function packageManagerFrom(value: string | undefined): PackageManager | undefin
   return packageManagers.find((manager) => manager === name);
 }
 
+function parseFramework(value: string): Framework {
+  const framework = value.trim().toLowerCase();
+  if (frameworkNames.includes(framework as Framework)) return framework as Framework;
+  throw new Error(`Unsupported framework: ${value}. Choose ${frameworkNames.join(", ")}.`);
+}
+
+function setFramework(options: CliOptions, framework: Framework): void {
+  if (options.framework && options.framework !== framework) {
+    throw new Error(
+      `Conflicting framework selections: ${options.framework} and ${framework}.`,
+    );
+  }
+  options.framework = framework;
+}
+
+export function detectFrameworks(
+  manifest: Record<string, unknown>,
+): FrameworkEvidence[] {
+  const evidence: FrameworkEvidence[] = [];
+  for (const dependencyGroup of dependencyGroupNames) {
+    const group = manifest[dependencyGroup];
+    if (!group || typeof group !== "object") continue;
+    for (const framework of frameworkNames) {
+      for (const packageName of frameworkPackages[framework]) {
+        if (Object.prototype.hasOwnProperty.call(group, packageName)) {
+          evidence.push({ dependencyGroup, framework, packageName });
+        }
+      }
+    }
+  }
+  return evidence;
+}
+
+export function detectedFrameworks(
+  evidence: readonly FrameworkEvidence[],
+): Framework[] {
+  const found = new Set(evidence.map((item) => item.framework));
+  // Meta-frameworks include React as an implementation dependency.
+  if (found.has("expo")) found.delete("react-native");
+  if (["next", "expo", "react-native"].some((name) => found.has(name as Framework))) found.delete("react");
+  return frameworkNames.filter((framework) => found.has(framework));
+}
+
+export function formatFrameworkEvidence(
+  evidence: readonly FrameworkEvidence[],
+): string {
+  return evidence.map(({ framework, packageName, dependencyGroup }) =>
+    `  ${framework}: ${packageName} in ${dependencyGroup}`
+  ).join("\n");
+}
+
 function parsePacks(value: string): IconPack[] {
   const values = [...new Set(value.split(",").map((pack) => pack.trim()).filter(Boolean))];
   const invalid = values.filter((pack) => !packNames.includes(pack as IconPack));
@@ -102,9 +188,9 @@ export function parsePackSelection(value: string, defaults: readonly IconPack[])
   return [...new Set(packs)];
 }
 
-export function gettingStartedImports(packs: readonly IconPack[], framework: Framework = "react"): string {
+export function gettingStartedImports(packs: readonly IconPack[], framework: Exclude<Framework, "angular"> = "react"): string {
   return [
-    `import { ${framework === "vanilla" ? "createSketchIcon" : "SketchIcon"} } from "${runtimePackages[framework]}";`,
+    `import { ${framework === "vanilla" ? "createSketchIcon" : "SketchIcon"} } from "${framework === "expo" || framework === "react-native" ? "sketchicon/native" : runtimePackages[framework]}";`,
     ...packs.map((pack) => packRegistry[pack].exampleImport),
   ].join("\n");
 }
@@ -121,7 +207,6 @@ function nextValue(args: readonly string[], index: number, flag: string): string
 
 export function parseArgs(args: readonly string[]): CliOptions {
   const options: CliOptions = {
-    framework: "react",
     dryRun: false,
     help: false,
     migrate: false,
@@ -131,14 +216,6 @@ export function parseArgs(args: readonly string[]): CliOptions {
   for (let index = 0; index < args.length; index += 1) {
     const argument = args[index]!;
     switch (argument) {
-      case "--framework": {
-        const value = nextValue(args, index++, argument);
-        if (!frameworks.includes(value as Framework)) {
-          throw new Error(`Unsupported framework: ${value}. Choose react, preact, or vanilla.`);
-        }
-        options.framework = value as Framework;
-        break;
-      }
       case "--cwd":
         options.cwd = nextValue(args, index++, argument);
         break;
@@ -151,6 +228,9 @@ export function parseArgs(args: readonly string[]): CliOptions {
         break;
       case "--migrate":
         options.migrate = true;
+        break;
+      case "--framework":
+        setFramework(options, parseFramework(nextValue(args, index++, argument)));
         break;
       case "--all":
         options.packs = addPacks(options.packs, packNames);
@@ -171,6 +251,10 @@ export function parseArgs(args: readonly string[]): CliOptions {
         break;
       default: {
         const shortcut = argument.startsWith("--") ? argument.slice(2) : "";
+        if (frameworkNames.includes(shortcut as Framework)) {
+          setFramework(options, shortcut as Framework);
+          break;
+        }
         if (packNames.includes(shortcut as IconPack)) {
           options.packs = addPacks(options.packs, [shortcut as IconPack]);
           break;
@@ -283,9 +367,15 @@ export function installCommand(
   version: string,
   framework: Framework = "react",
 ): [string, string[]] {
+  if (framework === "angular") {
+    throw new Error(
+      "Angular was selected, but a SketchIcon Angular adapter is not available yet.",
+    );
+  }
   const dependencies = [
     `${runtimePackages[framework]}@${version}`,
     ...packs.map((pack) => `${packRegistry[pack].packageName}@${version}`),
+    ...(framework === "react-native" ? ["react-native-svg@^15.0.0"] : []),
   ];
   switch (manager) {
     case "npm":

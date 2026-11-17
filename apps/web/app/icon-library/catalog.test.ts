@@ -18,9 +18,26 @@ import IconLibrary, {
 } from "./IconLibrary";
 import { filterCatalog, filters, formatIconImport, getFilterCounts } from "./catalog";
 
+import { formatUsageSnippet } from "./snippets";
+
 const iconCatalog = [...lucideCatalog, ...hugeiconsCatalog];
 
 describe("generated website catalog", () => {
+  it("copies the correct framework entry and Vue template syntax", () => {
+    const icon = lucideCatalog[0]!;
+    const options = { size: 24, roughness: 1.5, strokeWidth: 1.5, color: "#123456" };
+    for (const [framework, entry] of [
+      ["react", "sketchicon"], ["next", "sketchicon/server"],
+      ["vue", "@sketchicon/vue"], ["preact", "@sketchicon/preact"],
+      ["vanilla", "@sketchicon/dom"], ["react-native", "sketchicon/native"], ["expo", "sketchicon/native"],
+    ] as const) {
+      expect(formatUsageSnippet(icon, framework, options)).toContain(`from "${entry}"`);
+    }
+    const vue = formatUsageSnippet(icon, "vue", options);
+    expect(vue).toContain(`<SketchIcon :icon="${icon.name}"`);
+    expect(vue).toContain(':stroke-width="1.5"');
+  });
+
   it("contains unique searchable metadata for every compatible icon", () => {
     expect(iconCatalog).toHaveLength(iconCount);
     expect(providerCounts).toEqual({ lucide: 1739, hugeicons: 5303 });

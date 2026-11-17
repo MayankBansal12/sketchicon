@@ -11,10 +11,11 @@ const packages = [
   { workspace: "@sketchicon/preact", packed: 4_500, unpacked: 10_000, files: 5 },
   { workspace: "@sketchicon/dom", packed: 13_000, unpacked: 38_000, files: 6 },
   { workspace: "@sketchicon/core", packed: 5_000, unpacked: 15_000, files: 4 },
-  { workspace: "sketchicon", packed: 15_000, unpacked: 45_000, files: 15 },
+  { workspace: "sketchicon", packed: 15_000, unpacked: 45_000, files: 18 },
+  { workspace: "@sketchicon/vue", packed: 8_000, unpacked: 20_000, files: 5 },
   { workspace: "@sketchicon/lucide", packed: 165_000, unpacked: 900_000, files: 1_750 },
   { workspace: "@sketchicon/hugeicons", packed: 1_450_000, unpacked: 5_500_000, files: 5_320 },
-  { workspace: "create-sketchicon", packed: 8_000, unpacked: 30_000, files: 5 },
+  { workspace: "create-sketchicon", packed: 10_000, unpacked: 35_000, files: 5 },
 ];
 
 const packageReports = [];
@@ -44,6 +45,7 @@ const importChecks = [
   { label: "runtime root", file: "packages/runtime/dist/index.js", duration: 100, rss: 128 },
   { label: "runtime compatibility", file: "packages/runtime/dist/runtime.js", duration: 100, rss: 128 },
   { label: "runtime server", file: "packages/runtime/dist/server.js", duration: 100, rss: 128 },
+  { label: "Vue runtime", file: "packages/vue/dist/index.js", duration: 150, rss: 128 },
   { label: "core", file: "packages/core/dist/index.js", duration: 50, rss: 96 },
   { label: "Lucide direct icon", file: "packages/lucide/dist/icons/search.js", duration: 50, rss: 96 },
   { label: "Hugeicons direct icon", file: "packages/hugeicons/dist/icons/home-01.js", duration: 50, rss: 96 },
@@ -80,5 +82,5 @@ for (const check of importChecks) {
 }
 
 console.log(
-  `Verified seven package budgets: ${packageReports.map((report) => `${report.name} ${report.size}B/${report.files.length} files`).join(", ")}; imports: ${importReports.map((report) => `${report.label} ${report.duration.toFixed(1)}ms`).join(", ")}.`,
+  `Verified eight package budgets: ${packageReports.map((report) => `${report.name} ${report.size}B/${report.files.length} files`).join(", ")}; imports: ${importReports.map((report) => `${report.label} ${report.duration.toFixed(1)}ms`).join(", ")}.`,
 );

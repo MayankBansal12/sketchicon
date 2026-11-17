@@ -16,6 +16,9 @@ const webManifest = JSON.parse(await readFile(path.join(root, "apps", "web", "pa
 const reactVersion = workspaceManifest.devDependencies.react;
 const reactDomVersion = workspaceManifest.devDependencies["react-dom"];
 const viteVersion = workspaceManifest.devDependencies.vite;
+const vueVersion = workspaceManifest.devDependencies.vue;
+const vueServerVersion = workspaceManifest.devDependencies["@vue/server-renderer"];
+const viteVueVersion = workspaceManifest.devDependencies["@vitejs/plugin-vue"];
 const reactRouterVersion = webManifest.dependencies["react-router"];
 const nextVersion = "16.3.1";
 
@@ -88,6 +91,69 @@ async function verifyVite(archives) {
   });
   const assets = await readdir(path.join(directory, "dist", "assets"));
   assert.ok(assets.some((file) => file.endsWith(".js")), "Vite did not emit JavaScript.");
+}
+
+async function verifyVueVite(archives) {
+  const directory = await createApp("vue-vite-app", [
+    archives.core,
+    archives.vue,
+    archives.lucide,
+    archives.hugeicons,
+    `vue@${vueVersion}`,
+    `@vue/server-renderer@${vueServerVersion}`,
+    `vite@${viteVersion}`,
+    `@vitejs/plugin-vue@${viteVueVersion}`,
+  ]);
+  await write(directory, "vite.config.js", [
+    'import vue from "@vitejs/plugin-vue";',
+    'import { defineConfig } from "vite";',
+    "export default defineConfig({ plugins: [vue()] });",
+    "",
+  ].join("\n"));
+  await write(directory, "index.html", [
+    '<div id="app"></div>',
+    '<script type="module" src="/src/main.js"></script>',
+    "",
+  ].join("\n"));
+  await write(directory, "src/main.js", [
+    'import { createApp } from "vue";',
+    'import App from "./App.vue";',
+    'createApp(App).mount("#app");',
+    "",
+  ].join("\n"));
+  await write(directory, "src/App.vue", [
+    '<script setup>',
+    'import { Search } from "@sketchicon/lucide";',
+    'import { Home01Icon } from "@sketchicon/hugeicons";',
+    'import { SketchIcon } from "@sketchicon/vue";',
+    '</script>',
+    '',
+    '<template>',
+    '  <main>',
+    '    <SketchIcon :icon="Search" aria-label="Search" />',
+    '    <SketchIcon :icon="Home01Icon" title="Home" />',
+    '  </main>',
+    '</template>',
+    '',
+  ].join("\n"));
+  await exec(path.join(directory, "node_modules", ".bin", "vite"), ["build"], {
+    cwd: directory,
+  });
+  const assets = await readdir(path.join(directory, "dist", "assets"));
+  assert.ok(
+    assets.some((file) => file.endsWith(".js")),
+    "Vue Vite did not emit JavaScript.",
+  );
+  await exec(process.execPath, ["--input-type=module", "--eval", [
+    'import { createSSRApp, h } from "vue";',
+    'import { renderToString } from "@vue/server-renderer";',
+    'import { Search } from "@sketchicon/lucide";',
+    'import { SketchIcon } from "@sketchicon/vue";',
+    'const first = await renderToString(createSSRApp(() => h(SketchIcon, { icon: Search, title: "Search" })));',
+    'const second = await renderToString(createSSRApp(() => h(SketchIcon, { icon: Search, title: "Search" })));',
+    'if (first !== second || !first.startsWith("<svg")) process.exit(1);',
+  ].join("\n")], { cwd: directory });
+  await assert.rejects(access(path.join(directory, "node_modules", "react")));
 }
 
 async function verifyReactRouter(archives) {
@@ -178,14 +244,16 @@ try {
   const archives = {
     core: await pack("@sketchicon/core"),
     runtime: await pack("sketchicon"),
+    vue: await pack("@sketchicon/vue"),
     lucide: await pack("@sketchicon/lucide"),
     hugeicons: await pack("@sketchicon/hugeicons"),
   };
   await verifyVite(archives);
+  await verifyVueVite(archives);
   await verifyReactRouter(archives);
   await verifyNext(archives);
   console.log(
-    `Verified packed packages in Vite ${viteVersion}, React Router ${reactRouterVersion}, and Next.js ${nextVersion} production builds.`,
+    `Verified packed Vue/Vite + SSR, React/Vite, React Router ${reactRouterVersion}, and Next.js ${nextVersion} production builds.`,
   );
 } finally {
   await rm(temporaryRoot, { recursive: true, force: true });

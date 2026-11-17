@@ -112,7 +112,7 @@ try {
   const { stdout: help } = await exec(bin, ["--help"], { cwd: temporaryRoot });
   assert.match(help, new RegExp(`sketchicon@${installerTag}`));
 
-  for (const [framework, adapter] of [["preact", "@sketchicon/preact"], ["vanilla", "@sketchicon/dom"]]) {
+  for (const [framework, adapter] of [["vue", "@sketchicon/vue"], ["preact", "@sketchicon/preact"], ["vanilla", "@sketchicon/dom"]]) {
     const directory = path.join(temporaryRoot, framework);
     await mkdir(directory);
     await writeFile(path.join(directory, "package.json"), JSON.stringify({
@@ -126,7 +126,7 @@ try {
     const lock = JSON.parse(await readFile(path.join(directory, "package-lock.json"), "utf8"));
     assert.ok(!Object.keys(lock.packages).some(name => /node_modules\/(?:react|react-dom|sketchicon)$/.test(name)));
     await exec(process.execPath, ["--input-type=module", "--eval",
-      `import * as adapter from "${adapter}"; if (!adapter.${framework === "preact" ? "SketchIcon" : "createSketchIcon"}) process.exit(1);`], { cwd: directory });
+      `import * as adapter from "${adapter}"; if (!adapter.${framework === "vanilla" ? "createSketchIcon" : "SketchIcon"}) process.exit(1);`], { cwd: directory });
   }
 
   console.log(`Verified public React/Preact/vanilla npx installations and React rendering for SketchIcon ${requested}.`);
