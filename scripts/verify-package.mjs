@@ -44,6 +44,18 @@ if (manifests.runtime.exports?.["./core"]?.import !== "./dist/core.js") {
 if (manifests.runtime.exports?.["./server"]?.import !== "./dist/server.js") {
   throw new Error("The hook-free sketchicon/server entry is missing.");
 }
+if (manifests.runtime.exports?.["./native"]?.import !== "./dist/native.js" ||
+    manifests.runtime.exports?.["./native"]?.types !== "./dist/native.d.ts" ||
+    manifests.runtime.exports?.["./native"]?.default !== "./dist/native.js") {
+  throw new Error("The sketchicon/native entry or its declarations are missing.");
+}
+for (const dependency of ["react-native", "react-native-svg"]) {
+  if (!manifests.runtime.peerDependencies?.[dependency] ||
+      manifests.runtime.peerDependenciesMeta?.[dependency]?.optional !== true) {
+    throw new Error(`${dependency} must remain an optional peer for web consumers.`);
+  }
+}
+
 if (manifests.runtime.bin?.sketchicon !== "./dist/cli.js") {
   throw new Error("The sketchicon installer binary is missing.");
 }
@@ -52,7 +64,7 @@ if (manifests.runtime.exports?.["./icons/*"] || manifests.runtime.dependencies?.
 }
 
 const requiredFiles = {
-  runtime: ["index.js", "index.d.ts", "runtime.js", "runtime.d.ts", "server.js", "server.d.ts", "core.js", "core.d.ts", "cli.js", "cli.d.ts"],
+  runtime: ["index.js", "index.d.ts", "runtime.js", "runtime.d.ts", "server.js", "server.d.ts", "native.js", "native.d.ts", "core.js", "core.d.ts", "cli.js", "cli.d.ts"],
   lucide: ["index.js", "index.d.ts", "icon.d.ts", "icons/search.js"],
   hugeicons: ["index.js", "index.d.ts", "icon.d.ts", "icons/home-01.js"],
   "create-sketchicon": ["cli.js", "cli.d.ts"],
@@ -73,7 +85,7 @@ for (const directory of ["lucide", "hugeicons"]) {
   }
 }
 
-for (const entry of ["index.js", "runtime.js"]) {
+for (const entry of ["index.js", "runtime.js", "native.js"]) {
   const runtime = await readFile(path.join(root, "packages", "runtime", "dist", entry), "utf8");
   if (!/^(?:#![^\n]+\n)?(["'])use client\1;/.test(runtime)) {
     throw new Error(`The sketchicon ${entry} build is missing its React client boundary.`);

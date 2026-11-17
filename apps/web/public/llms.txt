@@ -1,8 +1,8 @@
 # SketchIcon
 
-> Deterministic, customizable hand-drawn SVG icons for React, based on Lucide and Hugeicons Core Free geometry.
+> Deterministic, customizable hand-drawn SVG icons for React, React Native, and Expo, based on Lucide and Hugeicons Core Free geometry.
 
-SketchIcon provides tree-shakeable React icons rendered as accessible inline SVG. Use the documentation below to install the package, render icons, and find canonical icon export names and slugs.
+SketchIcon provides tree-shakeable icons rendered as accessible inline SVG on the web and native SVG through `sketchicon/native`. Use the documentation below to install the package, render icons, and find canonical icon export names and slugs.
 
 ## Documentation
 
@@ -17,8 +17,9 @@ SketchIcon provides tree-shakeable React icons rendered as accessible inline SVG
 
 ## Notes
 
-- Import the renderer from `sketchicon`.
+- Import the web renderer from `sketchicon`. For React Native and Expo use `sketchicon/native` with `react-native-svg`; Expo apps should install it with `npx expo install react-native-svg`.
 - Import Lucide icons with named imports from `@sketchicon/lucide` by default. Direct `@sketchicon/lucide/icons/<slug>` imports remain available.
 - Import Hugeicons with named imports from `@sketchicon/hugeicons` by default. Direct `@sketchicon/hugeicons/icons/<slug>` imports remain available.
 - Do not reproduce SVG path data. Import the icon geometry supplied by the package.
-- Give meaningful icons an accessible name with `aria-label` or `title`. Hide decorative icons with `aria-hidden="true"`.
+- Native icons accept `accessibilityLabel`, React Native styles, `onPress`, and SVG component refs. Native color defaults to black; set `color` explicitly.
+- Give meaningful web icons an accessible name with `aria-label` or `title`. Hide decorative icons with `aria-hidden="true"`.

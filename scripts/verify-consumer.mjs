@@ -194,6 +194,8 @@ try {
   );
   await assert.rejects(access(path.join(runtimeRoot, "node_modules", "@sketchicon", "lucide")));
   await assert.rejects(access(path.join(runtimeRoot, "node_modules", "@sketchicon", "hugeicons")));
+  await assert.rejects(access(path.join(runtimeRoot, "node_modules", "react-native")));
+  await assert.rejects(access(path.join(runtimeRoot, "node_modules", "react-native-svg")));
 
   const sketchiconBin = path.join(runtimeRoot, "node_modules", ".bin", "sketchicon");
   const { stdout: sketchiconHelp } = await exec(sketchiconBin, ["--help"], { cwd: runtimeRoot });

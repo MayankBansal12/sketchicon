@@ -21,6 +21,7 @@
       "sketchicon": ["packages/runtime/src/index.ts"],
       "sketchicon/core": ["packages/runtime/src/core.ts"],
       "sketchicon/runtime": ["packages/runtime/src/runtime.ts"],
+      "sketchicon/native": ["packages/runtime/src/native.ts"],
       "sketchicon/server": ["packages/runtime/src/server.ts"]
     },
     "skipLibCheck": true,
