@@ -411,7 +411,7 @@ try {
       localArchives,
     ),
     (error) => {
-      assert.match(error.stderr, /Could not detect React, Vue\/Nuxt, or Angular/);
+      assert.match(error.stderr, /Could not detect a supported framework/);
       assert.match(error.stderr, /--framework react\|vue\|preact/);
       return true;
     },
