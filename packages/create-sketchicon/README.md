@@ -15,11 +15,21 @@ npx create-sketchicon@latest
 ```
 
 ```sh
+npx --yes create-sketchicon@latest --framework vue --lucide
+npx create-sketchicon@latest --cwd apps/web
 npx --yes create-sketchicon@latest --packs lucide,hugeicons
 npx create-sketchicon@latest --hugeicons
 npx create-sketchicon@latest --migrate
 npx create-sketchicon@latest --migrate --dry-run
 ```
+
+It detects React, Vue/Nuxt, and Angular only from direct `dependencies`,
+`devDependencies`, `optionalDependencies`, and `peerDependencies` in the
+target `package.json`. Multiple frameworks produce an evidence list and require
+`--cwd` or `--framework`; missing frameworks are prompted interactively and
+require `--framework react|vue|angular` in non-interactive use. React projects
+install `sketchicon`; Vue projects install `@sketchicon/vue`. Angular is
+recognized but its adapter is not available yet.
 
 The command detects npm, pnpm, Yarn, or Bun and updates dependencies through that package manager so its lockfile remains authoritative.
 

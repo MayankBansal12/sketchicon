@@ -82,6 +82,18 @@ async function prepareReactApp(name) {
   });
   return directory;
 }
+async function prepareManifestApp(name, manifest) {
+  const directory = path.join(temporaryRoot, name);
+  await mkdir(directory, { recursive: true });
+  await writeFile(path.join(directory, "package.json"), `${JSON.stringify({
+    name: `sketchicon-${name}`,
+    private: true,
+    type: "module",
+    ...manifest,
+  }, null, 2)}\n`);
+  return directory;
+}
+
 
 async function startCoreRegistry(archive, version) {
   const tarball = await readFile(archive);
@@ -168,6 +180,7 @@ try {
     lucide: await pack("@sketchicon/lucide"),
     hugeicons: await pack("@sketchicon/hugeicons"),
     create: await pack("create-sketchicon"),
+    vue: await pack("@sketchicon/vue"),
   };
   const runtimeManifest = JSON.parse(await readFile(
     path.join(root, "packages", "runtime", "package.json"),
@@ -179,6 +192,7 @@ try {
   const localArchives = {
     [`sketchicon@${version}`]: archives.runtime,
     [`@sketchicon/lucide@${version}`]: archives.lucide,
+    [`@sketchicon/vue@${version}`]: archives.vue,
     [`@sketchicon/hugeicons@${version}`]: archives.hugeicons,
   };
   const sketchiconCli = await unpack("sketchicon", archives.runtime);
@@ -331,6 +345,118 @@ try {
   assert.match(migratedSource, /import \{ SketchIcon \} from "sketchicon"/);
   assert.match(migratedSource, /from "@sketchicon\/lucide\/icons\/check"/);
 
+  const vueApp = await prepareManifestApp("vue-app", {
+    dependencies: { vue: "^3.5.0" },
+  });
+  await exec(npm, [
+    "install",
+    "--ignore-scripts",
+    "--no-audit",
+    "--no-fund",
+  ], { cwd: vueApp });
+  await configureScopedRegistry(vueApp, registry);
+  const vueResult = await runInstaller(
+    sketchiconCli,
+    ["--yes", "--package-manager", "npm"],
+    vueApp,
+    localArchives,
+  );
+  assert.match(vueResult.stdout, /Framework: vue/);
+  assert.match(vueResult.stdout, /@sketchicon\/vue/);
+  assert.equal((await installedManifest(vueApp, "@sketchicon/vue")).version, version);
+  assert.equal((await installedManifest(vueApp, "@sketchicon/lucide")).version, version);
+  await assert.rejects(readFile(path.join(vueApp, "node_modules", "react", "package.json")));
+  await assert.rejects(readFile(path.join(vueApp, "node_modules", "sketchicon", "package.json")));
+  await exec(process.execPath, ["--input-type=module", "--eval", [
+    'import { createSSRApp, h } from "vue";',
+    'import { renderToString } from "@vue/server-renderer";',
+    'import { Search } from "@sketchicon/lucide";',
+    'import { SketchIcon } from "@sketchicon/vue";',
+    'const html = await renderToString(createSSRApp(() => h(SketchIcon, { icon: Search, "aria-label": "Search" })));',
+    'if (!html.startsWith("<svg") || !html.includes("role=\\\"img\\\"")) process.exit(1);',
+  ].join("\n")], { cwd: vueApp });
+
+  const noFrameworkApp = await prepareManifestApp("no-framework", {});
+  await assert.rejects(
+    runInstaller(
+      createCli,
+      ["--yes", "--dry-run", "--package-manager", "npm"],
+      noFrameworkApp,
+      localArchives,
+    ),
+    (error) => {
+      assert.match(error.stderr, /Could not detect React, Vue\/Nuxt, or Angular/);
+      assert.match(error.stderr, /--framework react\|vue\|angular/);
+      return true;
+    },
+  );
+
+  const multipleApp = await prepareManifestApp("multiple-frameworks", {
+    dependencies: { react: "^19.0.0" },
+    devDependencies: { nuxt: "^4.0.0" },
+  });
+  await assert.rejects(
+    runInstaller(
+      createCli,
+      ["--yes", "--dry-run", "--package-manager", "npm"],
+      multipleApp,
+      localArchives,
+    ),
+    (error) => {
+      assert.match(error.stderr, /Multiple frameworks were detected/);
+      assert.match(error.stderr, /react: react in dependencies/);
+      assert.match(error.stderr, /vue: nuxt in devDependencies/);
+      assert.match(error.stderr, /--cwd/);
+      assert.match(error.stderr, /--framework/);
+      return true;
+    },
+  );
+  const override = await runInstaller(
+    createCli,
+    ["--framework", "react", "--yes", "--dry-run", "--package-manager", "npm"],
+    multipleApp,
+    localArchives,
+  );
+  assert.match(override.stdout, /Framework: react/);
+  assert.match(override.stdout, new RegExp(`sketchicon@${version}`));
+
+  const angularApp = await prepareManifestApp("angular-app", {
+    peerDependencies: { "@angular/core": "^20.0.0" },
+  });
+  await assert.rejects(
+    runInstaller(createCli, ["--yes", "--dry-run"], angularApp, localArchives),
+    (error) => {
+      assert.match(error.stderr, /Angular adapter is not available yet/);
+      return true;
+    },
+  );
+
+  const monorepoRoot = await prepareManifestApp("monorepo", {
+    dependencies: { react: "^19.0.0", vue: "^3.5.0" },
+  });
+  const monorepoVue = path.join(monorepoRoot, "apps", "vue");
+  await mkdir(monorepoVue, { recursive: true });
+  await writeFile(path.join(monorepoVue, "package.json"), JSON.stringify({
+    private: true,
+    devDependencies: { nuxt: "^4.0.0" },
+  }));
+  const cwdResult = await runInstaller(
+    createCli,
+    [
+      "--cwd",
+      monorepoVue,
+      "--yes",
+      "--dry-run",
+      "--package-manager",
+      "pnpm",
+    ],
+    monorepoRoot,
+    localArchives,
+  );
+  assert.match(cwdResult.stdout, new RegExp(`SketchIcon project: ${monorepoVue}`));
+  assert.match(cwdResult.stdout, /Framework: vue/);
+  assert.match(cwdResult.stdout, new RegExp(`pnpm add @sketchicon/vue@${version}`));
+
   const installCommands = (await readFile(installLog, "utf8"))
     .trim()
     .split("\n")
@@ -345,10 +471,11 @@ try {
       `@sketchicon/hugeicons@${version}`,
       `@sketchicon/lucide@${version}`,
     ],
+    ["install", `@sketchicon/vue@${version}`, `@sketchicon/lucide@${version}`],
   ]);
 
   console.log(
-    "Verified runtime-only npm/npx use and packed installers in fresh, existing-pack, and legacy apps.",
+    "Verified packed React/Vue installers, detection failures, overrides, monorepo targeting, and migration.",
   );
 } finally {
   if (registryServer) {

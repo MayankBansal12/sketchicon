@@ -6,6 +6,9 @@ import { describe, expect, it } from "vitest";
 import {
   applyMigrationPlan,
   detectPackageManager,
+  detectFrameworks,
+  detectedFrameworks,
+  formatFrameworkEvidence,
   formatMigrationDiff,
   gettingStartedImports,
   hasSketchiconV1,
@@ -48,6 +51,51 @@ describe("create-sketchicon", () => {
     expect(parsePackSelection("all", ["lucide"])).toEqual(["lucide", "hugeicons"]);
     expect(() => parsePackSelection("phosphor", ["lucide"]))
       .toThrow(/Choose a number, lucide, hugeicons, or all/);
+  });
+
+  it("detects frameworks only from direct dependency groups", () => {
+    const evidence = detectFrameworks({
+      dependencies: { react: "^19.0.0" },
+      devDependencies: { nuxt: "^4.0.0" },
+      optionalDependencies: { "@angular/core": "^20.0.0" },
+      peerDependencies: { vue: "^3.5.0" },
+      bundledDependencies: ["next"],
+      scripts: { next: "next dev" },
+    });
+    expect(evidence).toEqual([
+      { dependencyGroup: "dependencies", framework: "react", packageName: "react" },
+      { dependencyGroup: "devDependencies", framework: "vue", packageName: "nuxt" },
+      {
+        dependencyGroup: "optionalDependencies",
+        framework: "angular",
+        packageName: "@angular/core",
+      },
+      { dependencyGroup: "peerDependencies", framework: "vue", packageName: "vue" },
+    ]);
+    expect(detectedFrameworks(evidence)).toEqual(["react", "vue", "angular"]);
+    expect(formatFrameworkEvidence(evidence)).toContain(
+      "vue: nuxt in devDependencies",
+    );
+  });
+
+  it("parses framework overrides and friendly shortcuts", () => {
+    expect(parseArgs(["--framework", "vue"])).toMatchObject({ framework: "vue" });
+    expect(parseArgs(["--react"])).toMatchObject({ framework: "react" });
+    expect(parseArgs(["--angular"])).toMatchObject({ framework: "angular" });
+    expect(() => parseArgs(["--vue", "--react"])).toThrow(/Conflicting framework/);
+    expect(() => parseArgs(["--framework", "svelte"])).toThrow(/Unsupported framework/);
+  });
+
+  it("prints Vue startup imports and selects the Vue runtime dependency", () => {
+    expect(gettingStartedImports(["lucide"], "vue")).toContain(
+      'import { SketchIcon } from "@sketchicon/vue";',
+    );
+    expect(installCommand("npm", ["lucide"], "0.2.0", "vue")).toEqual([
+      "npm",
+      ["install", "@sketchicon/vue@0.2.0", "@sketchicon/lucide@0.2.0"],
+    ]);
+    expect(() => installCommand("npm", ["lucide"], "0.2.0", "angular"))
+      .toThrow(/not available yet/);
   });
 
   it("prints startup-safe direct imports for the selected packs", () => {
